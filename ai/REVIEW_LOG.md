@@ -155,6 +155,17 @@ All entries below remain **OPEN / PENDING INDEPENDENT VERIFICATION**. “Impleme
 means the builder supplied a repair and a red-at-old/green-at-new regression; it
 does not pre-approve a merge.
 
+Verification-only addendum status:
+
+| ID | Builder status |
+|---|---|
+| F-02 | IMPLEMENTED, EXTERNAL VERIFICATION PENDING |
+| F-04 | IMPLEMENTED, EXTERNAL VERIFICATION PENDING |
+| F-08 | IMPLEMENTED, EXTERNAL VERIFICATION PENDING |
+
+These three statuses remain pending until Fable verifies the exported bytes.
+The status does not alter the original reproduction disposition below.
+
 | ID | Disposition | Reproduction and judgment | Implementation commit(s) | Green regression / remaining limitation |
 |---|---|---|---|---|
 | F-01 | CONFIRMED | Public plotting selectors accepted the invalid scalar because they had no shared guard. | viz `b80192dc20353bf77c36610f315543b57afa908c` | Public plotting, statistics, and embedding guard tests pass. Unknown third-party entry points remain outside inventory. |
