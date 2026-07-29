@@ -87,10 +87,10 @@ profiles:
       moseq2-extract:
         url: "https://github.com/Ctrl-Alt-Karma/moseq2-extract.git"
         branch: "agent/repair-velocity-scalars"
-        sha: "f028801e9a6b54ffa63e22d9e10179ea7419ccc4"
+        sha: "e7f585104ba25b66e5326c88c77a47e33db95635"
         package_version: "1.2.0"
         pr_number: 6
-        status: "draft, open, unmerged, GitHub reported mergeable on 2026-07-29"
+        status: "draft, open, unmerged; supplemental-audit repair committed 2026-07-29"
         provenance:
           record_path: "metadata/extraction/pipeline"
           output_policies:
@@ -138,10 +138,10 @@ profiles:
       moseq2-viz:
         url: "https://github.com/Ctrl-Alt-Karma/moseq2-viz.git"
         branch: "agent/repair-pinhole-provenance"
-        sha: "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e"
+        sha: "b80192dc20353bf77c36610f315543b57afa908c"
         package_version: "1.3.0"
         pr_number: 5
-        status: "draft, open, unmerged, GitHub reported mergeable on 2026-07-29"
+        status: "draft, open, unmerged; supplemental-audit repair committed 2026-07-29"
         provenance:
           required_scalar_pooling_policies:
             - "scalar_px_to_mm"
@@ -151,19 +151,25 @@ profiles:
             - "hampel_filter"
             - "depth_range_detection"
             - "velocity_3d_px"
-          enforcement: "same-package policy conflicts and stamped/unstamped mixes fail; all-unstamped warns; cross-package compatibility is not claimed"
+            - "flip_correction"
+          provenance_paths:
+            - "metadata/extraction/pipeline"
+            - "metadata/pipeline"
+          enforcement: "corrupt/conflicting records hard-fail; app flip state is compared even for unstamped files; same-package policy conflicts and stamped/unstamped mixes fail; all-unstamped warns; cross-package compatibility is not claimed"
           deprecated_scalar_policy: "velocity_3d_px is dropped from legacy loads and rejected by public scalar selectors"
 
       moseq2-app:
         url: "https://github.com/Ctrl-Alt-Karma/moseq2-app.git"
         branch: "agent/repair-flip-processing-journal"
-        sha: "192921f1aff3ea58d3b1f268d71731ed222011d2"
+        sha: "e0b85201226d03e15944473a734f71417698c31e"
         package_version: "1.3.1"
         source_version_literal: "v1.3.1"
         pr_number: 5
-        status: "draft, open, unmerged, GitHub reported mergeable on 2026-07-29"
+        status: "draft, open, unmerged; supplemental-audit repair committed 2026-07-29"
         provenance:
           flip_processing_record: "metadata/processing/flip_classifier"
           journal_record: "metadata/processing/flip_classifier_journal"
-          durable_update_sentinel: "flip_classifier_record_update_in_progress"
+          flushed_update_sentinel: "flip_classifier_record_update_in_progress"
           legacy_latch: "flip_classifier_applied remains true for in_progress, failed, and complete states"
+          extraction_flip_precondition: "refuse app correction when metadata/extraction/flips exists"
+          durability_boundary: "process-death fail-closed after HDF5/OS flush; no power-loss or fsync claim"
