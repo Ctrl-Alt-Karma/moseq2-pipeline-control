@@ -1,0 +1,134 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://github.com/Ctrl-Alt-Karma/moseq2-pipeline-control/validation/DATA_MANIFEST.schema.yaml"
+title: "MoSeq2 external recording validation manifest"
+type: object
+additionalProperties: false
+required:
+  - manifest_version
+  - recording_id
+  - uuid
+  - source
+  - sha256
+  - bytes
+  - captured_at
+  - platform
+  - pipeline_profile
+  - repository_shas
+  - configs
+properties:
+  manifest_version:
+    const: 1
+  recording_id:
+    type: string
+    minLength: 1
+  uuid:
+    type: string
+    format: uuid
+  source:
+    type: object
+    additionalProperties: false
+    required:
+      - storage
+      - reference
+      - git_tracked
+    properties:
+      storage:
+        type: string
+        enum:
+          - home-wsl-external
+          - controlled-external-storage
+          - bounded-fixture
+      reference:
+        type: string
+        minLength: 1
+        description: "Non-secret external reference or repository-relative bounded-fixture path; never a user-specific absolute path."
+      git_tracked:
+        type: boolean
+  sha256:
+    type: string
+    pattern: "^[a-f0-9]{64}$"
+  bytes:
+    type: integer
+    minimum: 1
+  captured_at:
+    type: string
+    format: date-time
+  platform:
+    type: object
+    additionalProperties: false
+    required:
+      - camera
+      - recording_format
+    properties:
+      camera:
+        type: string
+        minLength: 1
+      recording_format:
+        type: string
+        minLength: 1
+      notes:
+        type: string
+  pipeline_profile:
+    type: string
+    enum:
+      - current_release
+      - candidate_drafts
+      - custom_exact_shas
+  repository_shas:
+    type: object
+    additionalProperties: false
+    required:
+      - moseq2-extract
+      - moseq2-pca
+      - moseq2-model
+      - moseq2-viz
+      - moseq2-app
+    properties:
+      moseq2-extract:
+        $ref: "#/$defs/sha"
+      moseq2-pca:
+        $ref: "#/$defs/sha"
+      moseq2-model:
+        $ref: "#/$defs/sha"
+      moseq2-viz:
+        $ref: "#/$defs/sha"
+      moseq2-app:
+        $ref: "#/$defs/sha"
+  configs:
+    type: object
+    additionalProperties: false
+    required:
+      - vanilla
+      - patched
+    properties:
+      vanilla:
+        $ref: "#/$defs/configReference"
+      patched:
+        $ref: "#/$defs/configReference"
+  expected_structural_outputs:
+    type: array
+    items:
+      type: string
+      minLength: 1
+  limitations:
+    type: array
+    items:
+      type: string
+      minLength: 1
+$defs:
+  sha:
+    type: string
+    pattern: "^[a-f0-9]{40}$"
+  configReference:
+    type: object
+    additionalProperties: false
+    required:
+      - path
+      - sha256
+    properties:
+      path:
+        type: string
+        minLength: 1
+      sha256:
+        type: string
+        pattern: "^[a-f0-9]{64}$"

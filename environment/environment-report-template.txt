@@ -1,0 +1,78 @@
+MOSEQ2 ENVIRONMENT REPORT
+=========================
+
+Report ID:
+Captured at (ISO 8601):
+Operator:
+Execution context: home-wsl-linux | work-native-windows | other
+
+OPERATING SYSTEM
+----------------
+OS name/version:
+Architecture:
+Kernel/build:
+Shell:
+WSL distribution (home WSL only; otherwise N/A):
+
+RUNTIME
+-------
+Python version:
+Python implementation:
+Environment manager:
+Environment lock or export checksum:
+
+PINNED PACKAGES
+---------------
+numpy:
+scipy:
+pandas:
+opencv-python:
+scikit-image:
+h5py:
+moseq2-app:
+moseq2-extract:
+moseq2-pca:
+moseq2-model:
+moseq2-viz:
+
+OPTIONAL/EXTERNAL DEPENDENCIES
+------------------------------
+ffmpeg:
+qgrid:
+dtaidistance:
+other:
+
+REPOSITORY LOCKS
+----------------
+moseq2-extract SHA:
+moseq2-pca SHA:
+moseq2-model SHA:
+moseq2-viz SHA:
+moseq2-app SHA:
+pipeline-control SHA:
+
+COMMAND
+-------
+Working directory (use a repository-relative description in committed reports):
+Environment variables:
+Exact command:
+Exit code:
+
+RESULT
+------
+Passed:
+Failed:
+Skipped:
+Errors:
+Duration:
+Log/checksum reference:
+
+FAILURE CLASSIFICATION
+----------------------
+Failure ID:
+Classification: product-defect | missing-fixture | missing-optional-dependency | platform-specific | infrastructure | unknown
+Base behavior:
+Candidate behavior:
+Exact traceback/evidence:
+Owner:
+Next action:
