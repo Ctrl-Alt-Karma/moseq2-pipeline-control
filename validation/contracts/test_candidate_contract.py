@@ -183,3 +183,26 @@ def test_invalid_extract_outputs_match_viz_deprecations():
     }
     deprecated = set(_static_value(viz_util, "DEPRECATED_SCALARS"))
     assert invalid_outputs == deprecated
+
+
+def test_app_storage_claim_stays_within_verified_boundary():
+    app_widget = (
+        _repository_path("moseq2-app")
+        / "moseq2_app"
+        / "flip"
+        / "widget.py"
+    )
+    source = app_widget.read_text(encoding="utf-8")
+    assert "durable" not in source.lower()
+    assert "is not an ``fsync`` barrier" in source
+    assert "power loss" in source
+
+
+def test_dead_viz_provenance_helpers_stay_removed():
+    viz_util = _repository_path("moseq2-viz") / "moseq2_viz" / "util.py"
+    tree = ast.parse(viz_util.read_text(encoding="utf-8"), filename=str(viz_util))
+    function_names = {
+        node.name for node in tree.body if isinstance(node, ast.FunctionDef)
+    }
+    assert "provenance_from_model" not in function_names
+    assert "assert_consistent_provenance" not in function_names
