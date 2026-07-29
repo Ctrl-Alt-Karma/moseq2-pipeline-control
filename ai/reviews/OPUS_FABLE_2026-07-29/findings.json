@@ -1,0 +1,253 @@
+{
+  "audit": {
+    "date_utc": "2026-07-29",
+    "verifier_model": "claude-opus-5",
+    "verdict": "READY FOR ANOTHER CODEX FIX ROUND",
+    "repos": {
+      "moseq2-extract": {
+        "pr": 6,
+        "base": "424d643affb685e1cad145e3c7051b814d11265c",
+        "head": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4"
+      },
+      "moseq2-viz": {
+        "pr": 5,
+        "base": "68ca6a34055987ff22f8651b4dca2aa254380c87",
+        "head": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e"
+      },
+      "moseq2-app": {
+        "pr": 5,
+        "base": "36d40e098a5c4629116b7a4e233573218345bd5d",
+        "head": "192921f1aff3ea58d3b1f268d71731ed222011d2"
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "moseq2-viz",
+      "candidate_sha": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "moseq2_viz/viz.py:351",
+        "moseq2_viz/viz.py:393"
+      ],
+      "summary": "scalar_plot(show_scalars=) and position_plot(centroid_vars=) accept scalar names with no check_scalar_is_usable guard",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && grep -rn 'check_scalar_is_usable\\|drop_deprecated_scalars' viz_head --include=*.py | grep -v tests",
+      "observed": "guards appear only at moseq2_viz/scalars/util.py lines 349, 383, 475, 662, 684, 717; zero hits in moseq2_viz/viz.py"
+    },
+    {
+      "id": "F-02",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "moseq2-viz",
+      "candidate_sha": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "tests/unit_tests/test_provenance.py:28",
+        "moseq2_viz/util.py:455",
+        "../moseq2-extract/moseq2_extract/util.py:31"
+      ],
+      "summary": "test_the_required_key_set_is_what_extract_declares compares viz's tuple against a third hardcoded copy in the test file, never importing EXTRACT_OUTPUT_POLICIES",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && sed -n '/EXTRACT_OUTPUT_POLICIES = {/,/^}/p' extract_head/moseq2_extract/util.py; sed -n '/^SCALAR_POOLING_POLICIES/,/^)/p' viz_head/moseq2_viz/util.py; sed -n '28,36p' viz_head/tests/unit_tests/test_provenance.py",
+      "observed": "three independent copies of the same 7 keys; currently identical, no runtime cross-check exists"
+    },
+    {
+      "id": "F-03",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "moseq2-viz",
+      "candidate_sha": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "moseq2_viz/util.py:411-427",
+        "moseq2_viz/util.py:625-631"
+      ],
+      "summary": "read_pipeline_provenance catches ValueError (superclass of JSONDecodeError) and returns None, conflating CORRUPT with ABSENT; a uniformly corrupt set takes the all-unstamped branch and pools with a warning only",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && sed -n '411,430p' viz_head/moseq2_viz/util.py; grep -n 'def test' viz_head/tests/unit_tests/test_provenance.py | grep -i corrupt",
+      "observed": "except (OSError, ValueError, KeyError): return None; grep for a corrupt-record test returns nothing"
+    },
+    {
+      "id": "F-04",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "moseq2-viz",
+      "candidate_sha": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "tests/unit_tests/test_scalar_utils.py:547",
+        "setup.py:28",
+        "Pipfile"
+      ],
+      "summary": "the only cross-repo numerical agreement test imports moseq2_extract, which is not declared in install_requires, Pipfile [packages], or [dev-packages]",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && grep -n 'moseq2_extract' viz_head/tests/unit_tests/test_scalar_utils.py; grep -n 'moseq2' viz_head/setup.py viz_head/Pipfile",
+      "observed": "test_scalar_utils.py:547 imports it; setup.py and Pipfile list moseq2-viz only, never moseq2-extract"
+    },
+    {
+      "id": "F-05",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "moseq2-app",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+      "path": [
+        "moseq2_app/flip/widget.py:157-200",
+        "moseq2_app/flip/widget.py:583"
+      ],
+      "summary": "read_flip_record raises uncaught AttributeError on a slot whose JSON parses to a non-dict; called before the try block, so it aborts the whole multi-session run with no record written",
+      "evidence_level": 2,
+      "reproduction": "see export section 3.1 part B",
+      "observed": "'null' -> AttributeError: 'NoneType' object has no attribute 'pop'; '123' -> AttributeError: 'int'...; '\"str\"' -> AttributeError: 'str'...; '[\"a\"]' -> correctly reported corrupt via TypeError"
+    },
+    {
+      "id": "F-06",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "moseq2-app",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+      "path": [
+        "tests/controller_tests/test_flip_record.py:94-129"
+      ],
+      "summary": "fault injection raises in-process; the enclosing h5py.File __exit__ then closes cleanly and flushes, producing on-disk state that real process death does not produce",
+      "evidence_level": 2,
+      "reproduction": "see export sections 3.2 and 3.3",
+      "observed": "at after_new_slot_create: in-process raise leaves ['flip_classifier','flip_classifier_journal']; SIGKILL leaves ['flip_classifier']. Design itself is sound: SIGKILL at all 5 checkpoints stayed fail-closed with no unreadable file."
+    },
+    {
+      "id": "F-07",
+      "severity": "P2",
+      "status": "OPEN (reclassified, see section 8)",
+      "repository": "moseq2-app",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+      "path": [
+        "moseq2_app/flip/widget.py:203-260"
+      ],
+      "summary": "write_flip_record calls f.flush() only; no fsync anywhere. 'durable' in the docstring overstates what H5Fflush provides",
+      "evidence_level": 1,
+      "reproduction": "grep -c fsync /tmp/src/app_head/moseq2_app/flip/widget.py",
+      "observed": "0"
+    },
+    {
+      "id": "F-08",
+      "severity": "P2",
+      "status": "OPEN",
+      "repository": "cross-repo",
+      "candidate_sha": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4 + fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "extract: moseq2_extract/util.py:524",
+        "viz: moseq2_viz/scalars/util.py:41"
+      ],
+      "summary": "two independent convert_pxs_to_mm implementations; both correctly fixed, neither consolidated; kept in sync only by a comment and the untestable F-04 test",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && grep -rln 'def convert_pxs_to_mm' extract_head viz_head app_head",
+      "observed": "extract_head/moseq2_extract/util.py and viz_head/moseq2_viz/scalars/util.py"
+    },
+    {
+      "id": "F-09",
+      "severity": "P1",
+      "status": "OPEN",
+      "repository": "cross-repo",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2 + fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "app: moseq2_app/flip/widget.py:20,669",
+        "viz: moseq2_viz/util.py:425,455",
+        "viz: moseq2_viz/viz.py:241-256",
+        "extract: moseq2_extract/extract/extract.py:227"
+      ],
+      "summary": "apply_flip_classifier mutates scalars/angle by +pi and records it at metadata/processing/flip_classifier, which no viz provenance path reads and no SCALAR_POOLING_POLICIES key represents. See section 7 for full downstream trace, including a second and arguably worse defect: stale metadata/extraction/flips causes a 180-degree crowd-movie render error.",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && grep -rn 'metadata/pipeline\\|metadata/extraction/pipeline\\|metadata/processing' extract_head viz_head app_head --include=*.py | grep -v /tests/",
+      "observed": "extract writes metadata/extraction/pipeline; viz reads metadata/pipeline then metadata/extraction/pipeline; app writes metadata/processing/flip_classifier which appears in no reader"
+    },
+    {
+      "id": "F-10",
+      "severity": "P2",
+      "status": "OPEN",
+      "repository": "moseq2-app",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+      "path": [
+        "moseq2_app/flip/widget.py:157-166"
+      ],
+      "summary": "when the sentinel is set, read_flip_record returns 'failed' without inspecting slots, so a fully durable 'complete' record is discarded and check_flip_state demands re-extraction of a session that finished successfully",
+      "evidence_level": 2,
+      "reproduction": "see export section 3.1 part A",
+      "observed": "slots on disk {'flip_classifier':'in_progress','flip_classifier_journal':'complete'}; read_flip_record -> {'state':'failed','error':'flip processing record update was interrupted'}; check_flip_state raises FlipProcessingError"
+    },
+    {
+      "id": "F-11",
+      "severity": "P2",
+      "status": "OPEN",
+      "repository": "moseq2-app",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+      "path": [
+        "moseq2_app/flip/widget.py:678-745"
+      ],
+      "summary": "the video_pipe finalization block sits inside the try; any exception in the batch loop skips it, so communicate() is never called and the ffmpeg subprocess is orphaned. video_pipe is also initialized once outside the session loop, so a stale handle can carry over",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && sed -n '565,745p' app_head/moseq2_app/flip/widget.py",
+      "observed": "'if video_pipe is not None:' is inside try; 'except BaseException' writes the failed record and re-raises without touching video_pipe"
+    },
+    {
+      "id": "F-12",
+      "severity": "P2",
+      "status": "OPEN",
+      "repository": "cross-repo",
+      "candidate_sha": "192921f1aff3ea58d3b1f268d71731ed222011d2 + fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "app: moseq2_app/flip/widget.py:115",
+        "viz: moseq2_viz/util.py:425",
+        "extract: moseq2_extract/util.py:80"
+      ],
+      "summary": "opposite candidate ordering for the same two provenance paths; viz prefers metadata/pipeline, which extract never writes",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && sed -n '115p' app_head/moseq2_app/flip/widget.py; sed -n '425p' viz_head/moseq2_viz/util.py; sed -n '80p' extract_head/moseq2_extract/util.py",
+      "observed": "app: ('metadata/extraction/pipeline','metadata/pipeline'); viz: [h5_path,'metadata/extraction/pipeline'] with h5_path='metadata/pipeline'; extract writer default path='metadata/extraction/pipeline'"
+    },
+    {
+      "id": "F-13",
+      "severity": "P2",
+      "status": "OPEN",
+      "repository": "moseq2-viz",
+      "candidate_sha": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "tests/unit_tests/test_scalar_utils.py:225-232"
+      ],
+      "summary": "df_cols metadata ordering changed from SessionName,SubjectName,StartTime to SessionName,StartTime,SubjectName with no code change in the diff that would cause it; looks like an expectation edited to match observed output",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && diff -u viz_base/tests/unit_tests/test_scalar_utils.py viz_head/tests/unit_tests/test_scalar_utils.py | sed -n '/df_cols/,+12p'",
+      "observed": "reordering plus a comment attributing it to session yaml order; DataFrame.drop(columns=) preserves remaining column order, so this PR should not have caused it",
+      "caveat": "viz suite could not be executed here (python_requires <3.8, data/ fixtures absent); this is diff reasoning, not a failing run"
+    },
+    {
+      "id": "F-14",
+      "severity": "P3",
+      "status": "OPEN",
+      "repository": "cross-repo",
+      "candidate_sha": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4 + fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "extract: moseq2_extract/util.py:566",
+        "viz: moseq2_viz/scalars/util.py:74",
+        "viz: tests/unit_tests/test_scalar_utils.py:44-58"
+      ],
+      "summary": "np.zeros_like(coords) preserves integer dtype and truncates mm output; the revised test now asserts the truncated integers as correct, so it cannot detect a sub-mm regression",
+      "evidence_level": 2,
+      "reproduction": "see export section 3.4",
+      "observed": "exact [-476.581, 388.614]; dtype int64; stored [[-476,-388],[0,0],[476,388]]. Production is unaffected because track_features['centroid'] is float64 (proc.py:435 np.full(...,np.nan))."
+    },
+    {
+      "id": "F-15",
+      "severity": "P3",
+      "status": "OPEN",
+      "repository": "moseq2-viz",
+      "candidate_sha": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+      "path": [
+        "moseq2_viz/util.py:466",
+        "moseq2_viz/util.py:682"
+      ],
+      "summary": "provenance_from_model and assert_consistent_provenance have no production caller; model provenance is never gated anywhere, which the PR does disclose in the scalars_to_dataframe comment",
+      "evidence_level": 1,
+      "reproduction": "cd /tmp/src && grep -rn 'provenance_from_model\\|assert_consistent_provenance' viz_head --include=*.py",
+      "observed": "definitions plus one docstring cross-reference plus test-only call sites; no production caller"
+    }
+  ]
+}
