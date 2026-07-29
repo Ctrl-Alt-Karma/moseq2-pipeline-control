@@ -26,6 +26,20 @@ without guessing when run at home:
     stack.
 11. The explicitly approved real recording, config, classifier, PCA components,
     and stagewise pilot outputs.
+12. Which exact Conda and pip install artifacts remain present in the golden
+    caches, and which are approved for inclusion in the private offline bundle.
+13. Whether every explicit Conda build and pip-only distribution can be
+    preserved as an exact install artifact; any gap keeps the bundle
+    `INCOMPLETE`.
+14. Exact source repositories and bundleable commits for all three floating
+    Git dependencies.
+15. The complete set and hashes of study configuration files required on a
+    future machine.
+16. The golden `moseq-known-answer-v1` deterministic dataset hashes and
+    structural expectations produced through the locked production paths.
+17. Whether a separately provisioned Ubuntu 22.04 machine or imported WSL copy
+    reproduces every fingerprint field and known-answer result exactly. This
+    cannot be claimed from static checks on the work computer.
 
 NumPy 2 incompatibility is already known and remains out-of-scope future work;
 the packet does not attempt to resolve it.

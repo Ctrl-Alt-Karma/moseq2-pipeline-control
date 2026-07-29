@@ -81,6 +81,16 @@ to the preservation and home qualification gates in
 after explicit AJ confirmation, run one bounded pilot. It is not merge
 approval and does not authorize a large model fit.
 
+The home WSL is now defined as the golden reference, not necessarily the final
+analysis host. `validation/home_pilot_packet/deployment/` supplies a
+fail-closed future-machine path: exact offline export or verified WSL import,
+exact fingerprint comparison, a versioned production-path known-answer test,
+and a guarded production launcher. The machinery is statically validated only
+on this work computer. No future-machine bootstrap has been executed, and no
+machine may be called `QUALIFIED` until the golden WSL supplies a complete
+deployment lock and expected-results manifest and that machine passes both
+gates.
+
 ## Reported broader-suite limitations
 
 Codex reported:
@@ -98,6 +108,11 @@ Export and hash the existing WSL distribution; freeze Katya's actual
 environment, classifier, `sitecustomize.py`, and floating dependency evidence;
 then run locked-source qualification in that environment. Inventory real
 recordings read-only before AJ approves one bounded pilot.
+
+After the home environment is fully frozen, establish the golden known-answer
+record and export the exact offline deployment bundle. A future analysis
+machine must then qualify independently; matching version labels are not
+sufficient.
 
 All four PRs remain draft and unmerged. No PR is approved or ready for review,
 and AJ remains the sole merge authority.

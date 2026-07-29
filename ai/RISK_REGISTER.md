@@ -15,5 +15,6 @@ modernization backlog.
 | R-005 | Nine viz tests are blocked by absent repository fixture/data files, leaving legacy metadata behavior insufficiently exercised. | OPEN | Preserve exact collection and failure output in the home qualification run. Recover fixtures only from an authoritative source and hash them. |
 | R-006 | The legacy extract provenance writer is incompatible with NumPy 2 because it calls `np.string_`. | ACCEPTED / OUT OF SCOPE | Katya's supported NumPy is 1.18.3. Do not patch production code or plan modernization under this study. |
 | R-007 | The WSL image is a single point of failure until exported and stored separately. | OPEN | Run the explicit Windows backup script first; record archive bytes and SHA-256. The backup is never part of an automatic run-all command. |
+| R-008 | A future analysis machine could look compatible while differing in exact builds, Git commits, classifier/sitecustomize custody, native libraries, or thread controls. | OPEN | Port only by complete locked offline bundle or verified golden-WSL import. Require exact preflight plus the versioned known-answer fixture, and launch production only through the guarded entry point. Any unresolved or mismatched identity blocks analysis. |
 
 All unresolved custody items must remain explicit in the Fable evidence packet.

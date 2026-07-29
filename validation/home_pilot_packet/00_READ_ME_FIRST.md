@@ -1,17 +1,25 @@
 # MoSeq2 Legacy Preservation and Home Pilot
 
-This packet is for Katya's existing WSL2 Ubuntu 22.04 environment only:
+Katya's existing WSL2 Ubuntu 22.04 environment is the golden reference:
 Python 3.7 and NumPy 1.18.3 in `/home/ajm/miniforge3`, Conda environment
 `moseq2-app`.
+
+The home computer is the preservation and pilot host; it is not assumed to be
+the computer that will run the full analysis. A separate analysis machine is
+supported only after exact offline deployment or verified WSL import and its
+own fail-closed qualification.
 
 The study's supported production target is frozen. Modernization, Python
 migration, NumPy upgrades, and cross-environment equivalence work are out of
 scope.
 
 No script modifies an existing Conda environment or an existing source
-directory. No script installs, upgrades, or removes a package. Locked source is
-cloned into a new directory under `/home/ajm`. Every processing script writes
-only to a new validation output directory and refuses overwrite.
+directory. Home preservation and pilot scripts install nothing. The future
+deployment bootstrap may install only into a new, explicitly named, isolated
+environment from a complete exact offline lock; it refuses an existing name or
+directory. Locked source is cloned into a new directory under `/home/ajm`.
+Every processing script writes only to a new validation output directory and
+refuses overwrite.
 
 There is deliberately no automatic run-all command. The WSL export is always a
 separate, explicit Windows PowerShell action.
@@ -58,6 +66,33 @@ Packaging:
 
 - `collect_evidence.sh`: packages evidence and hashes it. Raw recording bytes
   and HDF5/video payloads are excluded unless explicitly requested.
+
+Golden-reference deployment export:
+
+- `deployment/export_offline_environment_bundle.sh`: inspection/export only on
+  the golden WSL. It copies exact records, approved cache artifacts, custody
+  files, and Git bundles without altering the environment. Any unresolved
+  requirement leaves the bundle `INCOMPLETE`.
+
+Future-machine provisioning and qualification:
+
+- `deployment/bootstrap_qualified_machine.sh`: installs only into a new
+  isolated environment from a `COMPLETE` offline lock. Do not run it on the
+  home machine merely to test it.
+- `deployment/preflight_environment.py`: returns nonzero for every
+  `UNRESOLVED` or `MISMATCH` exact-identity check.
+- `deployment/run_known_answer_qualification.sh`: establishes the golden
+  synthetic baseline or verifies a future machine through real production
+  paths.
+- `deployment/run_pipeline_guarded.sh`: the documented production entry point;
+  it refuses an unqualified machine and embeds the fingerprint in analysis
+  output.
+- `deployment/import_golden_wsl.ps1`: imports a verified golden archive under a
+  new distribution name and runs the same qualification. It never overwrites
+  or unregisters another distribution.
+
+The binding rules are in `deployment/DEPLOYMENT_CONTRACT.md`. Approximate
+version matches are not accepted.
 
 ## Batch 1 — preserve the WSL distribution
 
@@ -116,6 +151,52 @@ model-input handoff data.
 The packet manifest `SHA256SUMS.txt` authenticates every other packet file; the
 manifest necessarily excludes itself. The delivered ZIP has a separate
 SHA-256 receipt.
+
+## Batch 7 — establish the golden deployment record
+
+1. Finish the environment freeze, exact dependency/classifier/sitecustomize
+   custody, and locked-source synthetic run on the home WSL.
+2. Run `deployment/run_known_answer_qualification.sh --mode
+   establish-golden` and review the raw outputs.
+3. Review package redistribution terms and create an explicit cache-artifact
+   allowlist; the export script makes no legal guess.
+
+This batch creates evidence only. It does not change the existing environment.
+
+## Batch 8 — export the offline deployment bundle
+
+1. Read `deployment/export_offline_environment_bundle.sh --help`.
+2. Supply the exact classifier, study configurations, golden known-answer
+   record, and reviewed artifact allowlist.
+3. Accept the bundle only if its deployment lock says `COMPLETE` and every
+   manifest hash verifies.
+
+Artifact gaps, unresolved Git commits, or uncertain custody deliberately stop
+the export from becoming deployable.
+
+## Batch 9 — qualify a future analysis machine
+
+1. Choose either the locked offline bootstrap or verified WSL import route.
+2. Provision under a new environment/distribution name; never reuse or replace
+   an existing MoSeq installation.
+3. Run exact preflight and the known-answer fixture, then review the signed
+   `QUALIFIED` report before any real data.
+
+Do not execute this batch while preparing the packet. Every new machine
+requires independent qualification even if its versions look right.
+
+The preferred Windows route uses a golden WSL archive captured after the
+complete deployment bundle and `records/golden_runtime.env` have been written
+at their locked paths. The initial safety backup is still worth keeping, but it
+does not automatically contain later qualification records.
+
+## Batch 10 — guarded production entry
+
+1. Confirm the machine's report is bound to the current contract and bundle.
+2. Launch real analysis only through
+   `deployment/run_pipeline_guarded.sh`.
+3. Retain the fingerprint and qualification receipt written into each new
+   analysis output.
 
 Facts that can only be resolved on Katya's machine are listed in
 `KNOWN_RUNTIME_DISCOVERIES.md`. The full Fable environment audit and custody
