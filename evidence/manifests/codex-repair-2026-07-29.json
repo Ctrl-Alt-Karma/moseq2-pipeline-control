@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "round": "supplemental-audit-repair-2026-07-29",
+  "control_contract_commit": "43eb14a920c0c01d454e0067ca3ee440b34c2e21",
+  "source_boundary_contract_commit": "20249e42eda3cd674f651c0011dbbd99e62cf774",
+  "evidence": {
+    "supplemental_packet_sha256": "A25D6DA3259C8B523CEEF44267DE7243101FC7D2491CBD2F627D239F209281B7",
+    "audit_export_sha256": "574E31CA93A8A4E43C807F12730939B4ECF9A25CBCA93B19F55F8887B817542C",
+    "findings_sha256": "93EF2EEDEAFEA5915C94BA9DC1488A91B72F222B637C71DFC2BB01D723BE123D",
+    "killtest_sha256": "E32B121299B06DFE6B1D55FEC9F03F657D016FD827F7D0764F81120A4543F933",
+    "child_sha256": "959A50EE157A0B9E6598A9238B0E58EC84465335AA45FB326120D329932B05B0"
+  },
+  "old_heads": {
+    "moseq2-extract": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4",
+    "moseq2-viz": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+    "moseq2-app": "192921f1aff3ea58d3b1f268d71731ed222011d2"
+  },
+  "new_heads": {
+    "moseq2-extract": "e7f585104ba25b66e5326c88c77a47e33db95635",
+    "moseq2-viz": "b80192dc20353bf77c36610f315543b57afa908c",
+    "moseq2-app": "e0b85201226d03e15944473a734f71417698c31e"
+  },
+  "dispositions": {
+    "F-01": "CONFIRMED",
+    "F-02": "CONFIRMED",
+    "F-03": "CONFIRMED",
+    "F-04": "CONFIRMED",
+    "F-05": "CONFIRMED",
+    "F-06": "PARTIALLY CONFIRMED",
+    "F-07": "CONFIRMED",
+    "F-08": "CONFIRMED",
+    "F-09A": "CONFIRMED",
+    "F-09B": "CONFIRMED",
+    "F-10": "PARTIALLY CONFIRMED",
+    "F-11": "CONFIRMED",
+    "F-12": "CONFIRMED",
+    "F-13": "PARTIALLY CONFIRMED",
+    "F-14": "CONFIRMED",
+    "F-15": "CONFIRMED"
+  },
+  "validation": {
+    "environment": "Windows, Python 3.12; Python 3.7 grammar checked",
+    "extract": "3 passed",
+    "viz": "61 passed",
+    "app": "40 passed, 4 process-death subtests passed",
+    "cross_repo_contract": "7 passed"
+  }
+}

@@ -6,11 +6,11 @@ Date: 2026-07-29
 
 | Repository | PR | URL | Base | Base SHA | Head branch | Head SHA | State |
 |---|---:|---|---|---|---|---|---|
-| `moseq2-extract` | #6 | https://github.com/Ctrl-Alt-Karma/moseq2-extract/pull/6 | `release` | `424d643affb685e1cad145e3c7051b814d11265c` | `agent/repair-velocity-scalars` | `f028801e9a6b54ffa63e22d9e10179ea7419ccc4` | Draft, unmerged, GitHub reports mergeable |
-| `moseq2-viz` | #5 | https://github.com/Ctrl-Alt-Karma/moseq2-viz/pull/5 | `release` | `68ca6a34055987ff22f8651b4dca2aa254380c87` | `agent/repair-pinhole-provenance` | `fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e` | Draft, unmerged, GitHub reports mergeable |
-| `moseq2-app` | #5 | https://github.com/Ctrl-Alt-Karma/moseq2-app/pull/5 | `release` | `36d40e098a5c4629116b7a4e233573218345bd5d` | `agent/repair-flip-processing-journal` | `192921f1aff3ea58d3b1f268d71731ed222011d2` | Draft, unmerged, GitHub reports mergeable |
+| `moseq2-extract` | #6 | https://github.com/Ctrl-Alt-Karma/moseq2-extract/pull/6 | `release` | `424d643affb685e1cad145e3c7051b814d11265c` | `agent/repair-velocity-scalars` | `e7f585104ba25b66e5326c88c77a47e33db95635` | Draft, open, unmerged |
+| `moseq2-viz` | #5 | https://github.com/Ctrl-Alt-Karma/moseq2-viz/pull/5 | `release` | `68ca6a34055987ff22f8651b4dca2aa254380c87` | `agent/repair-pinhole-provenance` | `b80192dc20353bf77c36610f315543b57afa908c` | Draft, open, unmerged |
+| `moseq2-app` | #5 | https://github.com/Ctrl-Alt-Karma/moseq2-app/pull/5 | `release` | `36d40e098a5c4629116b7a4e233573218345bd5d` | `agent/repair-flip-processing-journal` | `e0b85201226d03e15944473a734f71417698c31e` | Draft, open, unmerged |
 
-GitHub's current mergeability result is transient metadata, not review evidence.
+GitHub's mergeability result is transient metadata, not review evidence.
 
 ## Other current release heads
 
@@ -29,6 +29,23 @@ Fresh reruns on the candidate heads, using the existing Python 3.7 pinned enviro
 
 Exact invocations are recorded in `ai/implementation_reports/CODEX_2026-07-29_REPLACEMENT_PRS.md`.
 
+## Supplemental-audit repair results
+
+The Fable packet was imported verbatim and its executable findings were
+reproduced against the prior candidate heads before implementation.
+
+Available Windows Python 3.12 validation at the new heads:
+
+- extract: **3 passed**
+- viz: **61 passed**
+- app: **40 passed plus 4 process-death subtests**
+- locked-head cross-repository contract: **7 passed**
+- Python 3.7 grammar parse and `git diff --check`: passed
+
+The pinned Python 3.7 runtime was not available during this continuation.
+Independent Linux SIGKILL verification and real-recording validation remain
+open. Exact dispositions and limitations are in `ai/REVIEW_LOG.md`.
+
 ## Reported broader-suite limitations
 
 Codex reported:
@@ -42,4 +59,6 @@ These reports are classifications to verify, not blanket excuses. Every broader-
 
 ## Current gate
 
-Independent source review of the three candidate PRs is required before any merge. Real-recording validation remains deferred until the structural candidate passes that review.
+Independent source review of the three candidate PRs and control contract is
+required before any merge. All four PRs remain draft and unmerged. Real-recording
+validation remains deferred until the structural candidate passes that review.

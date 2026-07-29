@@ -13,3 +13,5 @@ All decisions below are dated 2026-07-29.
 | D-007 | Unstamped provenance means unknown. | Missing provenance does not justify compatibility claims. |
 | D-008 | Old superseded PRs and branches remain for audit history. | Preserve the record of prior proposals and why they were replaced. |
 | D-009 | No merges without AJ. | AJ is the final merge authority. |
+| D-010 | App flip correction and extraction-time flip correction are alternative workflows, not cumulative passes. | Layering them adds pi twice and can leave extraction flip metadata inconsistent with corrected frames and angles. |
+| D-011 | An uncleared app journal sentinel remains authoritative and fail-closed. | Slot contents are useful diagnostics, but without a power-loss durability guarantee they are not sufficient for automatic recovery. |

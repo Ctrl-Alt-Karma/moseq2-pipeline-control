@@ -20,6 +20,10 @@ Allowed adjudication statuses are `OPEN`, `FIXED`, `REJECTED`, and `NEEDS REAL D
 
 `PENDING INDEPENDENT VERIFICATION` is a verification marker, not an adjudication status. Seeded claims remain `OPEN`; none is `FIXED` until an independent verifier checks current source and the required falsifying regression.
 
+Repair-round dispositions are separate from adjudication status:
+`CONFIRMED`, `PARTIALLY CONFIRMED`, or `REJECTED`. A confirmed finding can be
+implemented while its adjudication remains `OPEN` pending independent review.
+
 ## Seeded findings
 
 ### EXTRACT-001 — mixed-unit velocity scalar
@@ -138,3 +142,34 @@ Allowed adjudication statuses are `OPEN`, `FIXED`, `REJECTED`, and `NEEDS REAL D
 - **required falsifying test:** Exercise success, nonzero exit, and preview-only failure; completion must never be committed before the preview result is known, while frame correction may still complete when preview generation fails.
 - **implementation commit:** not accepted; candidate head only
 - **remaining limitation:** Platform-specific ffmpeg behavior remains broader-suite work.
+
+## Supplemental Fable audit repair round — F-01 through F-15
+
+Source packet:
+`ai/reviews/OPUS_FABLE_2026-07-29/FABLE_AUDIT_EXPORT_2026-07-29.md`.
+Every executable finding was run against the old candidate head before code was
+changed. The defensive reproduction summary is in
+`evidence/summaries/CODEX_2026-07-29_REPAIR_REPRODUCTIONS.md`.
+
+All entries below remain **OPEN / PENDING INDEPENDENT VERIFICATION**. “Implemented”
+means the builder supplied a repair and a red-at-old/green-at-new regression; it
+does not pre-approve a merge.
+
+| ID | Disposition | Reproduction and judgment | Implementation commit(s) | Green regression / remaining limitation |
+|---|---|---|---|---|
+| F-01 | CONFIRMED | Public plotting selectors accepted the invalid scalar because they had no shared guard. | viz `b80192dc20353bf77c36610f315543b57afa908c` | Public plotting, statistics, and embedding guard tests pass. Unknown third-party entry points remain outside inventory. |
+| F-02 | CONFIRMED | The old viz test compared against a third hardcoded policy copy, so it could not detect cross-repo drift. | control contract `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | `test_extract_policy_keys_match_viz_pooling_contract` imports neither package and fails on missing/wrong sibling heads. |
+| F-03 | CONFIRMED | Malformed and non-mapping JSON was treated as absent; an all-corrupt set reached the warning-only unstamped branch. | viz `b80192dc20353bf77c36610f315543b57afa908c` | Corrupt, one-corrupt/one-valid, and conflicting-dual-path tests now hard-fail. |
+| F-04 | CONFIRMED | The old cross-package numerical test required undeclared `moseq2_extract`; a clean viz environment could not collect it. | viz `b80192dc20353bf77c36610f315543b57afa908c`; control `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | Undeclared import removed; source-level cross-repo contract owns equality. |
+| F-05 | CONFIRMED | Valid JSON scalars such as null/number/string raised uncaught attribute errors before the mutation try-block. | app `e0b85201226d03e15944473a734f71417698c31e` | Non-mapping record regressions return fail-closed corrupt state. |
+| F-06 | PARTIALLY CONFIRMED | In-process exceptions were not process-death tests. Real abrupt termination confirmed fail-closed semantics, but Windows did not reproduce the verifier’s exact Linux slot persistence at `after_new_slot_create`. | app `e0b85201226d03e15944473a734f71417698c31e` | Five-checkpoint subprocess-death matrix passes on Windows; independent Linux SIGKILL rerun remains required. |
+| F-07 | CONFIRMED | Source contains HDF5 flushes and no `fsync`; “durable” overstated the guarantee. | app `e0b85201226d03e15944473a734f71417698c31e`; control `20249e42eda3cd674f651c0011dbbd99e62cf774` | Wording now says HDF5/OS-flushed and explicitly excludes power loss, host/kernel failure, network/FUSE semantics, and HDF5 metadata atomicity. No power-loss durability is claimed. |
+| F-08 | CONFIRMED | Extract and viz deliberately retain independent conversion functions, but the old equality check was not executable in viz’s declared environment. | extract `e7f585104ba25b66e5326c88c77a47e33db95635`; viz `b80192dc20353bf77c36610f315543b57afa908c`; control `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | Cross-repo contract checks float and integer inputs at the locked heads. Duplication remains deliberate to avoid a runtime dependency. |
+| F-09A | CONFIRMED | App correction changed angle semantics but viz ignored the processing record, allowing corrected/uncorrected or differently corrected sessions to pool. | viz `b80192dc20353bf77c36610f315543b57afa908c` | Effective `flip_correction` policy is derived from app journal state even for unstamped files; incompatible or ambiguous states refuse pooling. |
+| F-09B | CONFIRMED | Layering app correction on a session with extraction-time flip metadata produced a pi orientation delta while leaving extraction metadata stale for direct consumers. | app `e0b85201226d03e15944473a734f71417698c31e`; control `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | App refuses before mutation whenever `metadata/extraction/flips` exists. Existing already-layered files are detected, not repaired. |
+| F-10 | PARTIALLY CONFIRMED | The old reader did skip slot inspection when the sentinel was set. The packet’s stronger claim that the complete slot was power-loss durable and safe to auto-trust conflicts with F-07 and is not established. | app `e0b85201226d03e15944473a734f71417698c31e` | Reader now inspects and returns slot diagnostics but keeps the authoritative sentinel fail-closed. Recovery still requires restoration/re-extraction; no unsafe auto-repair was added. |
+| F-11 | CONFIRMED | Batch exceptions bypassed preview finalization and the pipe handle lived outside the per-session scope. | app `e0b85201226d03e15944473a734f71417698c31e` | Mid-batch cleanup regression proves the child is finalized while the original processing exception is preserved. |
+| F-12 | CONFIRMED | App and viz preferred opposite provenance paths. | app `e0b85201226d03e15944473a734f71417698c31e`; viz `b80192dc20353bf77c36610f315543b57afa908c`; control `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | Both readers and the cross-repo contract use canonical `metadata/extraction/pipeline` first and reject conflicting dual records. |
+| F-13 | PARTIALLY CONFIRMED | The candidate expectation edit had no causal production change, as reported. A synthetic source-order change did reproduce unstable public column order. | viz `b80192dc20353bf77c36610f315543b57afa908c` | Metadata columns now follow the explicit `include_keys` API order. Absent historical fixture data still blocks the original fixture-backed test. |
+| F-14 | CONFIRMED | `zeros_like` inherited integer dtype and truncated fractional millimetres; the old expectation accepted truncation. | extract `e7f585104ba25b66e5326c88c77a47e33db95635`; viz `b80192dc20353bf77c36610f315543b57afa908c`; control `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | Both functions allocate float64; exact integer-input and cross-repo regressions pass. Production’s usual float input reduced impact but did not excuse the API defect. |
+| F-15 | CONFIRMED | Both provenance helpers had only definitions, docs, and tests—no production caller. | viz `b80192dc20353bf77c36610f315543b57afa908c`; control `20249e42eda3cd674f651c0011dbbd99e62cf774` | Dead helpers/tests removed; the real HDF5 pooling boundary remains gated. Model-provenance gating is still not claimed. |
