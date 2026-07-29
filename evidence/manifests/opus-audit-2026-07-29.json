@@ -1,0 +1,77 @@
+{
+  "audit": {
+    "date_utc": "2026-07-29",
+    "verifier_model": "claude-opus-5",
+    "workflow_marker": "FABLE / INDEPENDENT VERIFIER",
+    "verdict": "READY FOR ANOTHER CODEX FIX ROUND",
+    "source_note": "Imported from user-supplied audit and executable-evidence attachments.",
+    "repositories": {
+      "moseq2-extract": {
+        "pr": 6,
+        "base": "424d643affb685e1cad145e3c7051b814d11265c",
+        "head": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4"
+      },
+      "moseq2-viz": {
+        "pr": 5,
+        "base": "68ca6a34055987ff22f8651b4dca2aa254380c87",
+        "head": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e"
+      },
+      "moseq2-app": {
+        "pr": 5,
+        "base": "36d40e098a5c4629116b7a4e233573218345bd5d",
+        "head": "192921f1aff3ea58d3b1f268d71731ed222011d2"
+      }
+    },
+    "environment": {
+      "python": "3.12.3",
+      "h5py": "3.16.0",
+      "hdf5": "2.0.0",
+      "numpy": "2.4.4",
+      "platform": "Linux-6.18.5-x86_64-with-glibc2.39",
+      "filesystem": "overlayfs",
+      "power_loss_tested": false
+    }
+  },
+  "findings": [
+    {"id": "F-01", "severity": "P1", "repository": "moseq2-viz", "status": "OPEN", "summary": "Public/manual-dataframe scalar entry points are not comprehensively guarded."},
+    {"id": "F-02", "severity": "P1", "repository": "cross-repo", "status": "OPEN", "summary": "Viz policy-key test compares two local snapshots, not extract's contract."},
+    {"id": "F-03", "severity": "P1", "repository": "moseq2-viz", "status": "OPEN", "summary": "Malformed and non-mapping provenance are not distinguished from absence."},
+    {"id": "F-04", "severity": "P1", "repository": "cross-repo", "status": "OPEN", "summary": "Cross-repo conversion test imports an undeclared package."},
+    {"id": "F-05", "severity": "P1", "repository": "moseq2-app", "status": "OPEN", "summary": "Valid non-mapping flip-record JSON can leak AttributeError."},
+    {"id": "F-06", "severity": "P1", "repository": "moseq2-app", "status": "OPEN", "summary": "In-process fault injection does not model abrupt process death."},
+    {"id": "F-07", "severity": "P2", "repository": "moseq2-app", "status": "OPEN", "summary": "Durability wording exceeds HDF5/OS flush and SIGKILL evidence."},
+    {"id": "F-08", "severity": "P2", "repository": "cross-repo", "status": "OPEN", "summary": "Duplicated conversion implementations lack a runnable exact-SHA contract."},
+    {"id": "F-09", "severity": "P1", "repository": "cross-repo", "status": "OPEN", "summary": "App flip correction is invisible to viz pooling provenance."},
+    {"id": "F-10", "severity": "P2", "repository": "moseq2-app", "status": "OPEN", "summary": "Sentinel diagnostics overstate partial correction and ignore valid slots."},
+    {"id": "F-11", "severity": "P2", "repository": "moseq2-app", "status": "OPEN", "summary": "Preview subprocess cleanup is skipped on batch exceptions."},
+    {"id": "F-12", "severity": "P2", "repository": "cross-repo", "status": "OPEN", "summary": "App and viz prefer opposite extraction-provenance paths."},
+    {"id": "F-13", "severity": "P2", "repository": "moseq2-viz", "status": "OPEN", "summary": "Metadata-column expectation was reordered without a traced production cause."},
+    {"id": "F-14", "severity": "P3", "repository": "cross-repo", "status": "OPEN", "summary": "Integer coordinates produce truncated integer millimetre output."},
+    {"id": "F-15", "severity": "P3", "repository": "moseq2-viz", "status": "OPEN", "summary": "Model provenance helpers have no production caller."}
+  ],
+  "sha256": {
+    "scripts": {
+      "killtest.py": "e32b121299b06dfe6b1d55fec9f03f657d016fd827f7d0764f81120a4543f933",
+      "child.py": "959a50ee157a0b9e6598a9238b0e58ec84465335aa45fb326120d329932b05b0",
+      "flipmod.py": "bb29bff760445e63af4da5a4b745954fadbb14e796125055676d3fca52c312e1"
+    },
+    "source_tarballs": {
+      "extract_base.tar.gz": "5c96e8e630c453e75189d959579206b2864ddc850b1e461d4ebf39fb0bc6f436",
+      "extract_head.tar.gz": "8eab256587f01e2d7622d604adf7e4077f575d3be72b53c4ca20a3a46c3af252",
+      "viz_base.tar.gz": "46015e579846c584e264cf6ea3482d893997dcd04c98cbd629fa0fc6bd8bba3b",
+      "viz_head.tar.gz": "269d0cb1fb54264d2495e79da54f2b15ced6b6119d284c702a1b2c3990b74656",
+      "app_base.tar.gz": "68a64e1401d812a0fa7daf6d992885809ee9d691df167e8a73f2e9b41aa676e6",
+      "app_head.tar.gz": "4491f3d32be7895c5b84de1fe8494beb49003d201d40b4afe580f655bf823334"
+    },
+    "generated_h5_fixtures": {
+      "a.h5": "6002f763b55b6b0873f02729287b68f952538f78224c9d7044c5941c6418ea60",
+      "b.h5": "47e360f6f2154709e9677b6f040027323292b0258895cc7118f9ff82d054db69",
+      "inproc.h5": "a607cbf1a7368689db6e9cfba686de2e78f097affc247bdd44abec180b12fe16",
+      "kill_after_sentinel_flush.h5": "316a5cfbbbffa641d8b89819969df08b046a4055db4eb85b92a8f5f12d9901d3",
+      "kill_after_inactive_slot_clear.h5": "316a5cfbbbffa641d8b89819969df08b046a4055db4eb85b92a8f5f12d9901d3",
+      "kill_after_new_slot_create.h5": "c29e49c959fcb26229ea5dfd38e0fe710abe6b35518d618e230ab4fa22b7f28d",
+      "kill_after_new_slot_flush.h5": "0ac12897cb7320c27ac6835aefdfe486a1da31cc422c90ea293c7e4ee0e95d8d",
+      "kill_after_sentinel_clear.h5": "880bdf31b05a2d826fc3a2df120a3a618a464190939268f272ff18e45233a29f"
+    }
+  }
+}
