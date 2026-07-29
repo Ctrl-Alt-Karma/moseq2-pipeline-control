@@ -65,6 +65,22 @@ NumPy 2.5.1 environment because the legacy extract writer calls the removed
 `np.string_` API. The unchanged chain passed in the required isolated
 NumPy 1.26.4/h5py 3.11.0 environment. No production source was changed.
 
+## Frozen production environment and home pilot
+
+Katya's exact existing WSL2 Ubuntu 22.04, Python 3.7, NumPy 1.18.3
+`moseq2-app` Conda environment is the supported production target for this
+study. Modernization and multi-environment comparison are out of scope.
+
+Fable's environment audit is preserved verbatim at
+`ai/reviews/FABLE_ENVIRONMENT_AUDIT_2026-07-29.md`, with custody recorded in
+`evidence/manifests/fable-environment-audit-2026-07-29.json`.
+
+Round 2 is independently cleared for the structural real-data pilot, subject
+to the preservation and home qualification gates in
+`validation/home_pilot_packet/`. This is authorization to prepare and, only
+after explicit AJ confirmation, run one bounded pilot. It is not merge
+approval and does not authorize a large model fit.
+
 ## Reported broader-suite limitations
 
 Codex reported:
@@ -78,6 +94,10 @@ These reports are classifications to verify, not blanket excuses. Every broader-
 
 ## Current gate
 
-Independent source review of the three candidate PRs and control contract is
-required before any merge. All four PRs remain draft and unmerged. Real-recording
-validation remains deferred until the structural candidate passes that review.
+Export and hash the existing WSL distribution; freeze Katya's actual
+environment, classifier, `sitecustomize.py`, and floating dependency evidence;
+then run locked-source qualification in that environment. Inventory real
+recordings read-only before AJ approves one bounded pilot.
+
+All four PRs remain draft and unmerged. No PR is approved or ready for review,
+and AJ remains the sole merge authority.

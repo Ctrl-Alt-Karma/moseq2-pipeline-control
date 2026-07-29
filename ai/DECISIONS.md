@@ -15,3 +15,6 @@ All decisions below are dated 2026-07-29.
 | D-009 | No merges without AJ. | AJ is the final merge authority. |
 | D-010 | App flip correction and extraction-time flip correction are alternative workflows, not cumulative passes. | Layering them adds pi twice and can leave extraction flip metadata inconsistent with corrected frames and angles. |
 | D-011 | An uncleared app journal sentinel remains authoritative and fail-closed. | Slot contents are useful diagnostics, but without a power-loss durability guarantee they are not sufficient for automatic recovery. |
+| D-012 | Katya's exact existing Python 3.7 / NumPy 1.18.3 MoSeq Conda environment is the supported production environment for this study. | It is the environment that produced the study's existing work and is the only approved target for the structural real-data pilot. Preserve it; do not upgrade it in place. |
+| D-013 | Python 3.8/3.11 migration, NumPy upgrades, modernization, and multi-environment equivalence testing are out of scope. | The study has frozen its production target. These subjects are not planned work in this control repository. |
+| D-014 | Legacy preservation precedes real-data processing. | Export the WSL distribution, freeze environment and dependency custody, and verify locked source before an explicitly approved bounded pilot. |

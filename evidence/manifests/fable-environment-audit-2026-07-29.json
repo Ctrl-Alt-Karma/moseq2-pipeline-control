@@ -1,0 +1,10 @@
+{
+  "artifact": "FABLE_ENVIRONMENT_AUDIT_2026-07-29.md",
+  "custody_status": "IMPORTED_VERBATIM",
+  "imported_path": "ai/reviews/FABLE_ENVIRONMENT_AUDIT_2026-07-29.md",
+  "original_path": "C:/Users/ajmitchell/Downloads/FABLE_ENVIRONMENT_AUDIT_2026-07-29.md",
+  "sha256": "4e7afc05238a4d3ba378e2c77dc8a11ec58eba1fcea858b90b715218e37c3d4d",
+  "bytes": 25006,
+  "imported_date": "2026-07-29",
+  "decision_boundary": "Katya's existing Python 3.7 / NumPy 1.18.3 environment is the supported production target; modernization is out of scope."
+}
