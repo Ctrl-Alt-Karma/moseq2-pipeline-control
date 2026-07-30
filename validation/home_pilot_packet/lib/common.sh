@@ -65,10 +65,35 @@ load_locked_source_environment() {
 
 write_process_environment() {
     local output_file="$1"
+    local name
+    local -a safe_environment_names=(
+        PATH
+        PYTHONPATH
+        PYTHONHASHSEED
+        CONDA_PREFIX
+        CONDA_DEFAULT_ENV
+        CONDA_EXE
+        CONDA_SHLVL
+        LD_LIBRARY_PATH
+        OMP_NUM_THREADS
+        MKL_NUM_THREADS
+        OPENBLAS_NUM_THREADS
+        NUMEXPR_NUM_THREADS
+        DASK_NUM_WORKERS
+        LANG
+        LC_ALL
+        TZ
+    )
     {
         printf 'captured_utc=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
         printf 'pwd=%s\n' "$(pwd)"
-        env | LC_ALL=C sort
+        for name in "${safe_environment_names[@]}"; do
+            if [[ -v "${name}" ]]; then
+                printf '%s=%q\n' "${name}" "${!name}"
+            else
+                printf '%s=<UNSET>\n' "${name}"
+            fi
+        done
     } >"${output_file}"
 }
 

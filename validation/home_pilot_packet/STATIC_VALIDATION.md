@@ -1,56 +1,58 @@
-# Packet Static Validation
+# Corrected Packet Static Validation
 
 Date: 2026-07-29
 
-Checks run on the work computer:
+These checks were run against the corrected control-repository packet. No WSL
+backup, environment freeze, machine bootstrap, scientific candidate test,
+real-data processing, or production-repository command was run.
 
-- `bash -n`: passed for all twelve shell files, including the four deployment
-  shell entry points;
-- each user-facing shell script's `--help` path: passed;
-- PowerShell AST parser: passed for `00_export_wsl_backup.ps1` and
-  `deployment/import_golden_wsl.ps1`;
-- Python 3.7 grammar parse: passed for all twelve packet Python files;
-- JSON parse: passed for the Fable custody manifest;
-- YAML parse: passed for `repositories/repos.lock.yaml`;
-- destructive/install command scan: passed;
-- `git diff --check`: passed;
-- verbatim Fable audit SHA-256 and byte count: passed;
-- packet copies of the seven-contract source, real provenance-chain source, and
-  lock file: byte-identical to the control source;
-- `helpers/summarize_pytest.py`: live-checked against the seven contract tests
-  and reported 7 collected, 7 passed, 0 failed/skipped/deselected/blocked;
-- `helpers/inventory_recordings.py`: bounded dry run passed;
-- `helpers/inspect_legacy_environment.py`: disposable-environment dry run
-  passed, including the `pkg_resources`-absent fallback and explicit
-  unresolved dependency records;
-- `helpers/collect_evidence.py`: bounded dry run produced a readable ZIP;
-- `06_run_approved_real_pilot.sh`: refused before output when confirmation was
-  absent.
-- all four deployment shell entry points refused empty invocations before
-  creating output or changing state;
-- `deployment/validate_deployment_static.py`: passed required-control and
-  floating/destructive-command assertions;
-- a fabricated impossible deployment lock produced a nonzero preflight result
-  with `MISMATCH`; no mismatch was downgraded to a warning or `VERIFIED`;
-- executable deployment scripts contain no WSL unregister, `Remove-Item`,
-  Conda update/in-place install, pip upgrade, or floating main/master checkout
-  command;
-- the WSL import helper's PowerShell-to-Bash literal quoting passed paths with
-  spaces and operator names containing an apostrophe;
-- `git diff --check`: passed after deployment additions.
+## Required correction checks
 
-Optional analyzers `shellcheck` and PSScriptAnalyzer were not installed.
+- Shell syntax/static validation: `bash -n` passed for all 13 shell files,
+  including the executable credential-leak regression test.
+- Complete environment-capture scan: passed. No packet script uses an
+  unrestricted process `env`, `printenv`, `dict(os.environ)`,
+  `os.environ.copy()`, or PowerShell environment-provider dump.
+- PowerShell static validation: the Windows PowerShell AST parser accepted
+  both packet `.ps1` files; command-AST and invocation scans found no
+  `Remove-Item`, `Stop-Process`, `Stop-Computer`, WSL `--terminate`,
+  `--shutdown`, or `--unregister` action.
+- Python 3.7 grammar validation: all 12 packet Python files parsed with Python
+  3.7 grammar.
+- `deployment/validate_deployment_static.py`: passed the allowlist, stopped-WSL
+  state, new-validation-root, deployment contract, and destructive/floating
+  reference assertions.
+- Fabricated preflight mismatch: passed. An impossible deployment lock
+  returned nonzero, produced `MISMATCH`, and was not downgraded to a warning or
+  `VERIFIED`.
+- Credential-leak regression: passed after injecting four dummy
+  credential-shaped variables. It scanned three generated
+  process-environment records, the complete collected-evidence staging tree,
+  and every filename and payload in the final evidence ZIP. No injected name
+  or value was present.
+- Internal SHA-256 manifest: regenerated for every corrected packet file other
+  than `SHA256SUMS.txt` itself and verified independently.
+- Locked candidate SHAs: all five hard-coded values remain byte-for-byte
+  unchanged in `02_prepare_locked_worktrees.sh` and both lock-file copies.
+- `git diff --check`: passed.
 
-WSL is not installed on the work computer. The backup script was therefore
-verified to stop at WSL inventory failure before creating its destination; an
-actual `wsl --export` was not and could not be run here.
+## Controls confirmed statically
 
-No production script was executed against Katya's environment or recordings.
-Those runtime results remain home-machine evidence, not static claims.
+- `write_process_environment` records only the explicit 16-variable safe
+  allowlist and writes `<UNSET>` for every missing allowlisted variable.
+- `00_export_wsl_backup.ps1` accepts export only when the exact requested
+  distribution reports `Stopped`. It fails clearly for `Running`, never stops
+  or unregisters WSL, preserves the no-overwrite/free-space checks, and retains
+  any partial archive.
+- `02_prepare_locked_worktrees.sh` requires an explicit new root below
+  `/home/ajm`, rejects every existing root and receipt path, and retains exact
+  detached-SHA verification.
+- The first three PowerShell commands explicitly create and resolve
+  `C:\Users\AJM\Documents\MoSeq2-WSL-Backups`, display it, reject a OneDrive
+  component, and pass the explicit destination and `Ubuntu-22.04` to the
+  backup script.
 
-The offline environment export, isolated-environment bootstrap, WSL import,
-known-answer production-path run, and guarded pipeline launcher were not
-executed on the work computer. Static success does not qualify this machine.
-The exact package artifacts, Git dependency commits, classifier,
-`sitecustomize.py`, configurations, and golden expected hashes can only be
-collected later from Katya's home WSL environment.
+The independently observed golden-machine values are recorded in
+`evidence/GOLDEN_MACHINE_PREFLIGHT_2026-07-29.md`. WSL state and free space are
+point-in-time values; the backup script must recheck them when AJ later runs
+the export after verifier approval.

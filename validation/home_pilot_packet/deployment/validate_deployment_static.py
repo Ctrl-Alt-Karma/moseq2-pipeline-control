@@ -11,6 +11,7 @@ import tempfile
 
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
+PACKET_ROOT = os.path.abspath(os.path.join(ROOT, os.pardir))
 REQUIRED = (
     "DEPLOYMENT_CONTRACT.md",
     "artifact_redistribution_allowlist.example.txt",
@@ -23,10 +24,33 @@ REQUIRED = (
     "run_pipeline_guarded.sh",
     "import_golden_wsl.ps1",
 )
+SAFE_PROCESS_ENVIRONMENT = (
+    "PATH",
+    "PYTHONPATH",
+    "PYTHONHASHSEED",
+    "CONDA_PREFIX",
+    "CONDA_DEFAULT_ENV",
+    "CONDA_EXE",
+    "CONDA_SHLVL",
+    "LD_LIBRARY_PATH",
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+    "DASK_NUM_WORKERS",
+    "LANG",
+    "LC_ALL",
+    "TZ",
+)
 
 
 def text(name):
     with open(os.path.join(ROOT, name), "r", encoding="utf-8") as stream:
+        return stream.read()
+
+
+def packet_text(name):
+    with open(os.path.join(PACKET_ROOT, name), "r", encoding="utf-8") as stream:
         return stream.read()
 
 
@@ -160,8 +184,56 @@ def main():
     require("--unregister" not in import_script, "WSL unregister command found")
     require("remove-item" not in import_script, "destructive PowerShell found")
 
+    common = packet_text(os.path.join("lib", "common.sh"))
+    require("env |" not in common, "unrestricted environment dump found")
+    require("printenv" not in common, "unrestricted printenv capture found")
+    require(
+        "printf '%s=<UNSET>\\n'" in common,
+        "missing allowlisted variables are not recorded as unset",
+    )
+    for name in SAFE_PROCESS_ENVIRONMENT:
+        require(
+            "\n        {}\n".format(name) in common,
+            "safe process-environment variable missing: " + name,
+        )
+
+    backup = packet_text("00_export_wsl_backup.ps1")
+    for phrase in (
+        "is Running",
+        "must be Stopped before export",
+        "Verified WSL state",
+        "does not delete it automatically",
+    ):
+        require(phrase in backup, "backup state control missing: " + phrase)
+    for forbidden in ("--terminate", "--shutdown", "--unregister", "Remove-Item"):
+        require(forbidden not in backup, "destructive backup command found: " + forbidden)
+
+    worktrees = packet_text("02_prepare_locked_worktrees.sh")
+    for phrase in (
+        'ROOT=""',
+        "--root is required",
+        'new_directory_only "${ROOT}"',
+        "refusing to overwrite existing receipt file",
+        "checkout --detach",
+        'observed="$(git -C "${checkout}" rev-parse HEAD)"',
+    ):
+        require(phrase in worktrees, "locked-worktree control missing: " + phrase)
+
+    first_commands = packet_text("FIRST_THREE_POWERSHELL_COMMANDS.md")
+    for phrase in (
+        r"C:\Users\AJM\Documents\MoSeq2-WSL-Backups",
+        "Resolve-Path",
+        "OneDrive",
+        "-DistributionName 'Ubuntu-22.04'",
+    ):
+        require(phrase in first_commands, "first-command control missing: " + phrase)
+
     mismatch_preflight_test()
     print("deployment_static_checks=PASS")
+    print("safe_process_environment_allowlist=PASS")
+    print("backup_stopped_state_controls=PASS")
+    print("new_validation_root_controls=PASS")
+    print("fabricated_preflight_mismatch=PASS")
     print("future_bootstrap_executed=false")
     print("golden_export_executed=false")
 

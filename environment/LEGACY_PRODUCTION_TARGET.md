@@ -4,11 +4,22 @@ Date frozen: 2026-07-29
 
 Supported environment for this study:
 
-- host: existing home WSL2 Ubuntu 22.04 distribution;
+- Windows user: `AJM_LAPTOP\AJM`;
+- WSL: version `2.7.11.0`, exact distribution `Ubuntu-22.04`, observed
+  `Stopped` during the 2026-07-29 read-only preflight;
+- host: existing home WSL2 Ubuntu `22.04.5 LTS` distribution;
+- Linux user and home: `ajm`, `/home/ajm`;
 - Conda root: `/home/ajm/miniforge3`;
 - Conda environment: `moseq2-app`;
-- Python: 3.7;
+- Conda prefix: `/home/ajm/miniforge3/envs/moseq2-app`;
+- Python: 3.7.12;
 - NumPy: 1.18.3.
+
+The confirmed local non-OneDrive backup root is
+`C:\Users\AJM\Documents`; the packet uses
+`C:\Users\AJM\Documents\MoSeq2-WSL-Backups`. Available C: space observed
+during preflight was `549915922432` bytes. State and capacity are
+point-in-time observations and must be rechecked before export.
 
 Locked source:
 

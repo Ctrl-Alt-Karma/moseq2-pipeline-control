@@ -24,22 +24,50 @@ function Stop-Safely {
 $wsl = Get-Command wsl.exe -ErrorAction Stop
 
 Write-Host 'Installed WSL distributions:'
-& $wsl.Source --list --verbose
+$verboseLines = @(
+    & $wsl.Source --list --verbose |
+        ForEach-Object { ($_ -replace "`0", '').TrimEnd() }
+)
 if ($LASTEXITCODE -ne 0) {
     Stop-Safely 'wsl --list --verbose failed.'
 }
+$verboseLines | ForEach-Object { Write-Host $_ }
 
-$installed = @(
-    & $wsl.Source --list --quiet |
-        ForEach-Object { ($_ -replace "`0", '').Trim() } |
-        Where-Object { $_ }
-)
-if ($LASTEXITCODE -ne 0) {
-    Stop-Safely 'wsl --list --quiet failed.'
+$distributionStates = @()
+foreach ($line in $verboseLines) {
+    $parsed = [regex]::Match(
+        $line,
+        '^\s*(?:\*\s*)?(?<Name>\S+)\s+(?<State>\S+)\s+(?<Version>\d+)\s*$'
+    )
+    if (
+        $parsed.Success -and
+        $parsed.Groups['Name'].Value -ceq $DistributionName
+    ) {
+        $distributionStates += $parsed.Groups['State'].Value
+    }
 }
-if ($DistributionName -notin $installed) {
+if ($distributionStates.Count -eq 0) {
     Stop-Safely "Distribution '$DistributionName' was not found. No export was attempted."
 }
+if ($distributionStates.Count -ne 1) {
+    Stop-Safely "Distribution '$DistributionName' appeared more than once. No export was attempted."
+}
+
+$distributionState = $distributionStates[0]
+if ($distributionState -ceq 'Running') {
+    Stop-Safely (
+        "Distribution '$DistributionName' is Running. Stop it manually, confirm " +
+        "it reports Stopped, and rerun. This script will not stop, terminate, " +
+        'shut down, or unregister any distribution.'
+    )
+}
+if ($distributionState -cne 'Stopped') {
+    Stop-Safely (
+        "Distribution '$DistributionName' must be Stopped before export; " +
+        "observed state '$distributionState'. No export was attempted."
+    )
+}
+Write-Host "Verified WSL state: $DistributionName is Stopped."
 
 $destination = [System.IO.Path]::GetFullPath($OutputDestination)
 if (-not (Test-Path -LiteralPath $destination)) {
@@ -49,6 +77,10 @@ $destinationItem = Get-Item -LiteralPath $destination
 if (-not $destinationItem.PSIsContainer) {
     Stop-Safely "OutputDestination must be a directory: $destination"
 }
+if ($destination -match '(?i)(^|[\\/])OneDrive[^\\/]*([\\/]|$)') {
+    Stop-Safely "OutputDestination must not contain a OneDrive component: $destination"
+}
+Write-Host "Resolved non-OneDrive destination: $destination"
 
 $driveRoot = [System.IO.Path]::GetPathRoot($destination)
 $drive = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='$($driveRoot.TrimEnd('\'))'"
@@ -72,7 +104,10 @@ Write-Host "Exporting '$DistributionName' read-only to '$archive'."
 Write-Host 'This script never unregisters, deletes, replaces, imports, or alters a WSL distribution.'
 & $wsl.Source --export $DistributionName $archive --format tar
 if ($LASTEXITCODE -ne 0) {
-    Stop-Safely "wsl --export failed with exit code $LASTEXITCODE"
+    Stop-Safely (
+        "wsl --export failed with exit code $LASTEXITCODE. Any partial archive " +
+        'is retained for inspection; this script does not delete it automatically.'
+    )
 }
 
 $archiveItem = Get-Item -LiteralPath $archive

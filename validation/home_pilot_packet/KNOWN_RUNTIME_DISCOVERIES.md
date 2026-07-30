@@ -16,8 +16,12 @@ without guessing when run at home:
    positional `0` binds to.
 6. Which nine viz fixture/data tests remain blocked and whether authoritative
    fixture bytes exist elsewhere in Katya's project.
-7. The installed WSL distribution name, its export size, destination free
-   space, archive byte count, and archive SHA-256.
+7. The export archive byte count and SHA-256. The exact distribution
+   `Ubuntu-22.04`, its `Stopped` state during preflight, the confirmed
+   non-OneDrive backup root `C:\Users\AJM\Documents`, and observed
+   `549915922432` available C: bytes are now recorded in
+   `evidence/GOLDEN_MACHINE_PREFLIGHT_2026-07-29.md`; state and free space must
+   still be rechecked immediately before export.
 8. The exact OneDrive actual-depth-data location and the smallest scientifically
    representative recording.
 9. Actual Python 3.7 collection/pass/fail/skip/deselection/block counts for the

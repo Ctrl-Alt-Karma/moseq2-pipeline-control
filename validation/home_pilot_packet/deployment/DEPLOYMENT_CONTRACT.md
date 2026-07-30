@@ -4,10 +4,13 @@ Contract ID: `moseq2-legacy-study-2026-07-29-v1`
 
 ## Authority
 
-Katya's existing Ubuntu 22.04 WSL2 distribution, using Python 3.7 and NumPy
-1.18.3 from `/home/ajm/miniforge3/envs/moseq2-app`, is the golden reference
-for this study. The home computer is the preservation and pilot host; it is not
-assumed to be the machine that will run the full analysis.
+Katya's exact `Ubuntu-22.04` WSL2 distribution on WSL `2.7.11.0`, running
+Ubuntu `22.04.5 LTS` as Linux user `ajm` with home `/home/ajm`, is the golden
+reference for this study. Its verified environment is Miniforge
+`/home/ajm/miniforge3`, Conda environment `moseq2-app`, prefix
+`/home/ajm/miniforge3/envs/moseq2-app`, Python `3.7.12`, and NumPy `1.18.3`.
+The home computer is the preservation and pilot host; it is not assumed to be
+the machine that will run the full analysis.
 
 The environment is portable only by one of these routes:
 

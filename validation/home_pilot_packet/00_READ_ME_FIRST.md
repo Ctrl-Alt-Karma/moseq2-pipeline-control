@@ -4,6 +4,32 @@ Katya's existing WSL2 Ubuntu 22.04 environment is the golden reference:
 Python 3.7 and NumPy 1.18.3 in `/home/ajm/miniforge3`, Conda environment
 `moseq2-app`.
 
+## Independently verified golden-machine preflight
+
+The following values were confirmed by read-only inspection on 2026-07-29:
+
+| Check | Verified value |
+|---|---|
+| Windows user | `AJM_LAPTOP\AJM` |
+| WSL distribution | `Ubuntu-22.04` |
+| WSL state during inspection | `Stopped` |
+| WSL version | `2.7.11.0` |
+| Ubuntu | `22.04.5 LTS` |
+| Linux user | `ajm` |
+| Linux home | `/home/ajm` |
+| Miniforge | `/home/ajm/miniforge3` |
+| Conda environment | `moseq2-app` |
+| Conda prefix | `/home/ajm/miniforge3/envs/moseq2-app` |
+| Python | `3.7.12` |
+| NumPy | `1.18.3` |
+| Confirmed local non-OneDrive backup root | `C:\Users\AJM\Documents` |
+| Available C: space observed | `549915922432` bytes |
+
+The WSL state and free-space values are observations, not permanent facts.
+`00_export_wsl_backup.ps1` must recheck both immediately before export. The
+full preflight record is in
+`evidence/GOLDEN_MACHINE_PREFLIGHT_2026-07-29.md`.
+
 The home computer is the preservation and pilot host; it is not assumed to be
 the computer that will run the full analysis. A separate analysis machine is
 supported only after exact offline deployment or verified WSL import and its
@@ -23,6 +49,10 @@ refuses overwrite.
 
 There is deliberately no automatic run-all command. The WSL export is always a
 separate, explicit Windows PowerShell action.
+
+This correction is delivered as
+`MOSEQ_LEGACY_HOME_PILOT_WITH_DEPLOYMENT_CORRECTED_2026-07-29.zip`. It is a
+distinct artifact and does not overwrite or replace the prior packet archive.
 
 ## Locked candidate source
 
@@ -97,9 +127,14 @@ version matches are not accepted.
 ## Batch 1 — preserve the WSL distribution
 
 1. Open Windows PowerShell, not a WSL shell.
-2. Run `00_export_wsl_backup.ps1` with an explicit destination that has at
-   least 20 GiB free.
-3. Copy the resulting TAR and JSON receipt to a second storage device when
+2. Follow `FIRST_THREE_POWERSHELL_COMMANDS.md` exactly. Those commands expand
+   the corrected packet, explicitly create
+   `C:\Users\AJM\Documents\MoSeq2-WSL-Backups`, resolve and display the final
+   path, reject any OneDrive component, and call `00_export_wsl_backup.ps1`
+   with `Ubuntu-22.04`.
+3. The export script must report that `Ubuntu-22.04` is `Stopped`; it never
+   stops, terminates, shuts down, or unregisters a distribution.
+4. Copy the resulting TAR and JSON receipt to a second storage device when
    practical.
 
 Do not put this backup command into a batch file or run-all wrapper.
@@ -108,35 +143,41 @@ Do not put this backup command into a batch file or run-all wrapper.
 
 1. Open Ubuntu 22.04 in WSL and `cd` to this packet.
 2. Run `bash 01_freeze_legacy_environment.sh`.
-3. Run `bash 02_prepare_locked_worktrees.sh`.
+3. Choose a new, nonexistent validation root below `/home/ajm`, then run
+   `bash 02_prepare_locked_worktrees.sh --root /home/ajm/NEW-validation-root`.
 
 The first command is inspection-only. The second writes isolated clones under
-`/home/ajm/moseq2-legacy-validation/worktrees`.
+the new root and refuses any existing root or receipt file. Keep that exact
+root value: every later home-pilot command must receive the same `--root`, and
+deployment commands must receive its `locked_source.env` explicitly.
 
 ## Batch 3 — qualification
 
-1. Run `bash 03_run_legacy_candidate_tests.sh`.
+1. Run `bash 03_run_legacy_candidate_tests.sh --root
+   /home/ajm/NEW-validation-root`.
 2. Review every raw exit code and failure classification.
 3. Only if no unexplained blocker remains, run
-   `bash 04_run_synthetic_pipeline.sh`.
+   `bash 04_run_synthetic_pipeline.sh --root
+   /home/ajm/NEW-validation-root`.
 
 Expected fixture failures remain visible. Nothing converts a failure to a pass.
 
 ## Batch 4 — real-data inventory
 
-1. Run `bash 05_inventory_real_recordings.sh`.
+1. Run `bash 05_inventory_real_recordings.sh --root
+   /home/ajm/NEW-validation-root`.
 2. Review `recording_recommendation.md`.
 3. Record the approved recording, extraction config, classifier, and PCA
    components before continuing.
 
 This batch reads OneDrive-mounted data through `/mnt/c`; it writes only the
-manifest under `/home/ajm/moseq2-legacy-validation`.
+manifest under the new validation root.
 
 ## Batch 5 — explicitly approved pilot
 
 1. Read `06_run_approved_real_pilot.sh --help`.
-2. Run it with the approved recording path, config, PCA components, and the
-   exact confirmation flag.
+2. Run it with `--root /home/ajm/NEW-validation-root`, the approved recording
+   path, config, PCA components, and the exact confirmation flag.
 3. Inspect stage receipts before considering any repeatability work.
 
 The script never starts a model fit. It ends after producing and validating
@@ -144,7 +185,7 @@ model-input handoff data.
 
 ## Batch 6 — package evidence
 
-1. Run `bash collect_evidence.sh`.
+1. Run `bash collect_evidence.sh --root /home/ajm/NEW-validation-root`.
 2. Verify the generated ZIP SHA-256 receipt.
 3. Send the verifier ZIP to Fable without adding raw recording data.
 
@@ -157,7 +198,9 @@ SHA-256 receipt.
 1. Finish the environment freeze, exact dependency/classifier/sitecustomize
    custody, and locked-source synthetic run on the home WSL.
 2. Run `deployment/run_known_answer_qualification.sh --mode
-   establish-golden` and review the raw outputs.
+   establish-golden --locked-source-env
+   /home/ajm/NEW-validation-root/locked_source.env` with its other required
+   arguments, and review the raw outputs.
 3. Review package redistribution terms and create an explicit cache-artifact
    allowlist; the export script makes no legal guess.
 
@@ -167,7 +210,8 @@ This batch creates evidence only. It does not change the existing environment.
 
 1. Read `deployment/export_offline_environment_bundle.sh --help`.
 2. Supply the exact classifier, study configurations, golden known-answer
-   record, and reviewed artifact allowlist.
+   record, reviewed artifact allowlist, and `--locked-source-env
+   /home/ajm/NEW-validation-root/locked_source.env`.
 3. Accept the bundle only if its deployment lock says `COMPLETE` and every
    manifest hash verifies.
 
