@@ -1,6 +1,7 @@
 # Decisions
 
-All decisions below are dated 2026-07-29.
+Decisions D-001 through D-018 are dated 2026-07-29. D-019 is dated
+2026-07-30.
 
 | ID | Decision | Rationale |
 |---|---|---|
@@ -22,3 +23,4 @@ All decisions below are dated 2026-07-29.
 | D-016 | The frozen environment is portable only through a complete locked offline deployment bundle or a SHA-256-verified import of the golden WSL archive. | Approximate version matches, floating references, and opportunistic reinstallations cannot establish equivalence. |
 | D-017 | Every new machine must independently pass exact preflight and the versioned known-answer fixture before real data. | Installation success is not qualification. Any `UNRESOLVED` or `MISMATCH` result is fail-closed. |
 | D-018 | `deployment/run_pipeline_guarded.sh` is the supported production entry point on a separate analysis machine. | It refuses unqualified execution and records the verified fingerprint and qualification binding in each analysis output. |
+| D-019 | One explicit packet-created validation root is reused across all home-pilot phases. | Script 01 alone initializes a versioned root. Every later phase validates the marker, required prior-phase receipt, and absence of its own outputs before adding new child state. Arbitrary roots, partial runs, reruns, and unknown state fail closed. |

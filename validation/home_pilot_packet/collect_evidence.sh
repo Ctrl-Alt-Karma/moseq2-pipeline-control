@@ -14,7 +14,7 @@ Usage:
   bash collect_evidence.sh [options]
 
 Options:
-  --root DIR                    Validation root below /home/ajm.
+  --root DIR                    Required Phase-0-initialized validation root.
   --output DIR                  New verifier-package directory.
   --include-binary-outputs      Include derived HDF5/classifier/Pickle outputs.
   --include-raw-recording FILE  Explicitly include one raw recording file.
@@ -25,7 +25,7 @@ commands, exit codes, and packet source are included and individually hashed.
 EOF
 }
 
-ROOT="${LEGACY_VALIDATION_ROOT_DEFAULT}"
+ROOT=""
 OUTPUT=""
 INCLUDE_BINARY=false
 RAW_RECORDING=""
@@ -39,10 +39,12 @@ while [[ $# -gt 0 ]]; do
         *) die "unknown argument: $1" ;;
     esac
 done
+[[ -n "${ROOT}" ]] || die "--root is required"
+ROOT="$(require_phase0_complete "${ROOT}")"
 if [[ -z "${OUTPUT}" ]]; then
     OUTPUT="${ROOT}/verifier_packages/fable_$(timestamp_utc)"
 fi
-new_directory_only "${OUTPUT}"
+new_directory_below_validation_root "${ROOT}" "${OUTPUT}"
 
 ARGS=(
     --validation-root "${ROOT}"

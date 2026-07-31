@@ -97,6 +97,9 @@ def main():
             )
         )
     for filename in (
+        ".moseq2-home-pilot-root",
+        "PHASE0_FREEZE_RECEIPT.txt",
+        "PHASE0_SHA256SUMS.txt",
         "locked_source.env",
         "locked_worktrees.tsv",
         "LOCKED_WORKTREE_RECEIPT.txt",

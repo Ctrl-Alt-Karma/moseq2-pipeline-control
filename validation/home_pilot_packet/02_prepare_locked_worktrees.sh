@@ -13,37 +13,74 @@ usage() {
 Usage:
   bash 02_prepare_locked_worktrees.sh --root /home/ajm/NEW-validation-root
 
-The root is required, must be below /home/ajm, and must not already exist.
-Partial or prior roots are never resumed or overwritten. Every checkout is
-detached at a hard-coded 40-character commit SHA. No package installation is
-performed.
+The root is required, must be below /home/ajm, and must have been initialized
+by script 01 with a complete, structurally valid Phase 0 receipt. Script 02
+refuses arbitrary roots, unknown state, partial runs, reruns, or any existing
+script-02 output. Every checkout is detached at a hard-coded 40-character
+commit SHA. No package installation is performed.
 EOF
 }
 
 ROOT=""
+VALIDATE_ROOT_ONLY=false
+SYNTHETIC_TEST_HOME=""
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --root) ROOT="${2:?missing --root value}"; shift 2 ;;
+        --validate-root-only) VALIDATE_ROOT_ONLY=true; shift ;;
+        --synthetic-test-home)
+            SYNTHETIC_TEST_HOME="${2:?missing --synthetic-test-home value}"
+            shift 2
+            ;;
         --help|-h) usage; exit 0 ;;
         *) die "unknown argument: $1" ;;
     esac
 done
 
 [[ -n "${ROOT}" ]] || {
-    die "--root is required and must name a new validation root below /home/ajm"
+    die "--root is required and must name the Phase-0-initialized validation root"
 }
-require_command git
-new_directory_only "${ROOT}"
-ROOT="$(cd "${ROOT}" && pwd)"
+
+if [[ -n "${SYNTHETIC_TEST_HOME}" ]]; then
+    [[ "${VALIDATE_ROOT_ONLY}" == true ]] || {
+        die "--synthetic-test-home is allowed only with --validate-root-only"
+    }
+    set_synthetic_validation_home_for_test "${SYNTHETIC_TEST_HOME}"
+fi
+
+ROOT="$(require_phase0_complete "${ROOT}")"
 WORKTREES="${ROOT}/worktrees"
 RECEIPT="${ROOT}/locked_worktrees.tsv"
 ENV_FILE="${ROOT}/locked_source.env"
 CONTROL_RECEIPT="${ROOT}/LOCKED_WORKTREE_RECEIPT.txt"
-for receipt_file in "${RECEIPT}" "${ENV_FILE}" "${CONTROL_RECEIPT}"; do
-    [[ ! -e "${receipt_file}" ]] || {
-        die "refusing to overwrite existing receipt file: ${receipt_file}"
+
+for script02_target in \
+    "${WORKTREES}" \
+    "${RECEIPT}" \
+    "${ENV_FILE}" \
+    "${CONTROL_RECEIPT}"; do
+    [[ ! -e "${script02_target}" ]] || {
+        die "conflicting prior script-02 state; refusing overwrite or rerun: ${script02_target}"
     }
 done
+
+while IFS= read -r -d '' root_entry; do
+    root_name="$(basename "${root_entry}")"
+    case "${root_name}" in
+        "${VALIDATION_ROOT_MARKER_NAME}"|"evidence"|"${PHASE0_RECEIPT_NAME}"|"${PHASE0_MANIFEST_NAME}")
+            ;;
+        *)
+            die "unknown or conflicting validation-root state: ${root_entry}"
+            ;;
+    esac
+done < <(find "${ROOT}" -mindepth 1 -maxdepth 1 -print0)
+
+if [[ "${VALIDATE_ROOT_ONLY}" == true ]]; then
+    printf 'VALID_ROOT_FOR_SCRIPT_02=%s\n' "${ROOT}"
+    exit 0
+fi
+
+require_command git
 mkdir "${WORKTREES}"
 
 declare -A URLS=(
@@ -118,6 +155,8 @@ export PYTHONPATH='${WORKTREES}/moseq2-extract:${WORKTREES}/moseq2-viz:${WORKTRE
 EOF
 
 {
+    printf 'schema=%s\n' "${LOCKED_SOURCE_RECEIPT_SCHEMA}"
+    printf 'status=COMPLETE\n'
     printf 'created_utc=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     printf 'root=%s\n' "${ROOT}"
     printf 'source_mode=PYTHONPATH_ONLY\n'

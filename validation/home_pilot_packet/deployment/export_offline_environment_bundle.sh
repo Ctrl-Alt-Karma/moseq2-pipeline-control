@@ -17,8 +17,7 @@ Usage:
     --config /exact/path/to/config.yaml [--config FILE ...] \
     --artifact-allowlist /exact/path/to/reviewed-allowlist.txt \
     --golden-known-answer /exact/path/to/golden-known-answer.json \
-    [--locked-source-env /home/ajm/moseq2-legacy-validation/locked_source.env] \
-    [--project-root /bounded/project/path] \
+    --root /home/ajm/exact-Phase-0-validation-root \
     [--confirm-sitecustomize-absent]
 
 Run only inside Katya's golden-reference Ubuntu 22.04 WSL2 distribution.
@@ -33,8 +32,7 @@ OUTPUT=""
 CLASSIFIER=""
 ALLOWLIST=""
 GOLDEN_KNOWN_ANSWER=""
-LOCKED_SOURCE_ENV="${LEGACY_VALIDATION_ROOT_DEFAULT}/locked_source.env"
-PROJECT_ROOT=""
+ROOT=""
 SITECUSTOMIZE_ABSENT=false
 CONFIGS=()
 
@@ -45,8 +43,7 @@ while [[ $# -gt 0 ]]; do
         --config) CONFIGS+=("${2:?missing --config value}"); shift 2 ;;
         --artifact-allowlist) ALLOWLIST="${2:?missing --artifact-allowlist value}"; shift 2 ;;
         --golden-known-answer) GOLDEN_KNOWN_ANSWER="${2:?missing --golden-known-answer value}"; shift 2 ;;
-        --locked-source-env) LOCKED_SOURCE_ENV="${2:?missing --locked-source-env value}"; shift 2 ;;
-        --project-root) PROJECT_ROOT="${2:?missing --project-root value}"; shift 2 ;;
+        --root) ROOT="${2:?missing --root value}"; shift 2 ;;
         --confirm-sitecustomize-absent) SITECUSTOMIZE_ABSENT=true; shift ;;
         --help|-h) usage; exit 0 ;;
         *) die "unknown argument: $1" ;;
@@ -54,6 +51,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 [[ -n "${OUTPUT}" ]] || die "--output is required"
+[[ -n "${ROOT}" ]] || die "--root is required"
+ROOT="$(require_locked_source_complete "${ROOT}")"
 [[ -f "${CLASSIFIER}" ]] || die "--classifier must name an existing file"
 [[ -f "${ALLOWLIST}" ]] || die "--artifact-allowlist must name an existing file"
 [[ -f "${GOLDEN_KNOWN_ANSWER}" ]] || {
@@ -80,7 +79,7 @@ grep -qiE '(microsoft|wsl)' /proc/sys/kernel/osrelease || {
 }
 
 activate_legacy_environment
-load_locked_source_environment "${LOCKED_SOURCE_ENV}"
+load_locked_source_environment "${ROOT}/locked_source.env"
 new_directory_only "${OUTPUT}"
 mkdir -p \
     "${OUTPUT}/artifacts/conda" \
@@ -91,11 +90,9 @@ mkdir -p \
     "${OUTPUT}/records" \
     "${OUTPUT}/repositories"
 
-FREEZE_ARGS=(--output "${OUTPUT}/golden_environment")
-if [[ -n "${PROJECT_ROOT}" ]]; then
-    FREEZE_ARGS+=(--project-root "${PROJECT_ROOT}")
-fi
-bash "${PACKET_DIR}/01_freeze_legacy_environment.sh" "${FREEZE_ARGS[@]}"
+PHASE0_OUTPUT="$(record_value "${ROOT}/${PHASE0_RECEIPT_NAME}" output)"
+mkdir "${OUTPUT}/golden_environment"
+cp -a "${PHASE0_OUTPUT}/." "${OUTPUT}/golden_environment/"
 
 conda list --explicit >"${OUTPUT}/records/conda-explicit.txt"
 conda env export --name "${LEGACY_CONDA_ENV}" >"${OUTPUT}/records/environment.yml"

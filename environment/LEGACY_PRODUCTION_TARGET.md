@@ -34,6 +34,28 @@ Locked source:
 The locked source is supplied through `PYTHONPATH` from isolated detached
 worktrees. It is not installed into or over the Conda environment.
 
+## Validation-root and Phase 0 identity contract
+
+Script 01 creates one fresh explicit validation root below `/home/ajm` and
+writes a versioned packet marker, Phase 0 evidence manifest, and Phase 0
+receipt. Script 02 and every later home-pilot phase must reuse that exact root.
+They validate the required prior state before creating any new child path and
+refuse arbitrary roots, unknown state, partial runs, and reruns.
+
+Installed `moseq2-*` source identity is a deterministic aggregate of per-file
+SHA-256 records. Version labels are metadata, not identity. Each installed
+package is classified as exactly one of `VANILLA_MATCH`,
+`FORK_RELEASE_MATCH`, `CANDIDATE_MATCH`, `MULTIPLE_IDENTICAL_MATCHES`,
+`NEITHER`, or `UNRESOLVED`.
+
+Active `sitecustomize.py` custody is `PRESENT_AND_HASHED`,
+`VERIFIED_ABSENT`, or `UNRESOLVED`. A verified absence records the interpreter,
+`sys.path`, candidate locations, and import-system search method. Classifier
+custody is `FOUND_AND_HASHED` or `UNRESOLVED`; an unresolved record includes
+all bounded search locations. Configuration custody is explicitly bounded: it
+hashes discovered and referenced files, records unresolved references, and
+does not claim comprehensive custody.
+
 Modernization, Python migration, NumPy upgrades, and multi-environment
 equivalence testing are out of scope and are not planned work in this control
 repository.

@@ -212,12 +212,36 @@ def main():
     for phrase in (
         'ROOT=""',
         "--root is required",
-        'new_directory_only "${ROOT}"',
-        "refusing to overwrite existing receipt file",
+        'require_phase0_complete "${ROOT}"',
+        "conflicting prior script-02 state",
+        "unknown or conflicting validation-root state",
+        "--validate-root-only",
         "checkout --detach",
         'observed="$(git -C "${checkout}" rev-parse HEAD)"',
     ):
         require(phrase in worktrees, "locked-worktree control missing: " + phrase)
+
+    common = packet_text(os.path.join("lib", "common.sh"))
+    for phrase in (
+        "VALIDATION_ROOT_SCHEMA=",
+        "PHASE0_RECEIPT_SCHEMA=",
+        "require_validation_root_marker",
+        "require_phase0_complete",
+        "require_locked_source_complete",
+        "Phase 0 internal manifest verification failed",
+    ):
+        require(phrase in common, "reusable-root contract missing: " + phrase)
+
+    for script in (
+        "03_run_legacy_candidate_tests.sh",
+        "04_run_synthetic_pipeline.sh",
+        "05_inventory_real_recordings.sh",
+        "06_run_approved_real_pilot.sh",
+        "collect_evidence.sh",
+    ):
+        script_text = packet_text(script)
+        require('ROOT=""' in script_text, script + " has an implicit root")
+        require("--root is required" in script_text, script + " does not require root")
 
     first_commands = packet_text("FIRST_THREE_POWERSHELL_COMMANDS.md")
     for phrase in (
@@ -232,7 +256,7 @@ def main():
     print("deployment_static_checks=PASS")
     print("safe_process_environment_allowlist=PASS")
     print("backup_stopped_state_controls=PASS")
-    print("new_validation_root_controls=PASS")
+    print("reusable_validation_root_controls=PASS")
     print("fabricated_preflight_mismatch=PASS")
     print("future_bootstrap_executed=false")
     print("golden_export_executed=false")

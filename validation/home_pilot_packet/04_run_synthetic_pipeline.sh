@@ -11,7 +11,7 @@ source "${SCRIPT_DIR}/lib/common.sh"
 usage() {
     cat <<'EOF'
 Usage:
-  bash 04_run_synthetic_pipeline.sh [--root DIR] [--output DIR]
+  bash 04_run_synthetic_pipeline.sh --root DIR [--output DIR]
 
 This uses a new synthetic HDF5 file, a deterministic synthetic classifier, and
 real extract/app/PCA/viz/model production interfaces. It never writes into a
@@ -19,7 +19,7 @@ source checkout, Conda environment, or real recording directory.
 EOF
 }
 
-ROOT="${LEGACY_VALIDATION_ROOT_DEFAULT}"
+ROOT=""
 OUTPUT=""
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -29,10 +29,12 @@ while [[ $# -gt 0 ]]; do
         *) die "unknown argument: $1" ;;
     esac
 done
+[[ -n "${ROOT}" ]] || die "--root is required"
+ROOT="$(require_locked_source_complete "${ROOT}")"
 if [[ -z "${OUTPUT}" ]]; then
     OUTPUT="${ROOT}/evidence/synthetic_$(timestamp_utc)"
 fi
-new_directory_only "${OUTPUT}"
+new_directory_below_validation_root "${ROOT}" "${OUTPUT}"
 
 activate_legacy_environment
 load_locked_source_environment "${ROOT}/locked_source.env"

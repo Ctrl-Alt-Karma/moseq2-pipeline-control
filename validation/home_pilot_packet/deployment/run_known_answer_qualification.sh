@@ -15,7 +15,7 @@ Usage, golden-reference baseline:
     --mode establish-golden \
     --output /home/ajm/moseq-known-answer-golden-v1 \
     --signoff-name "AJ" \
-    [--locked-source-env /home/ajm/moseq2-legacy-validation/locked_source.env]
+    --root /home/ajm/exact-Phase-0-validation-root
 
 Usage, candidate-machine qualification:
   bash deployment/run_known_answer_qualification.sh \
@@ -38,7 +38,7 @@ OUTPUT=""
 SIGNOFF_NAME=""
 BUNDLE=""
 RUNTIME_ENV=""
-LOCKED_SOURCE_ENV="${LEGACY_VALIDATION_ROOT_DEFAULT}/locked_source.env"
+ROOT=""
 CONDA_EXE="/home/ajm/miniforge3/bin/conda"
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -47,7 +47,7 @@ while [[ $# -gt 0 ]]; do
         --signoff-name) SIGNOFF_NAME="${2:?missing --signoff-name value}"; shift 2 ;;
         --bundle) BUNDLE="${2:?missing --bundle value}"; shift 2 ;;
         --runtime-env) RUNTIME_ENV="${2:?missing --runtime-env value}"; shift 2 ;;
-        --locked-source-env) LOCKED_SOURCE_ENV="${2:?missing --locked-source-env value}"; shift 2 ;;
+        --root) ROOT="${2:?missing --root value}"; shift 2 ;;
         --conda-executable) CONDA_EXE="${2:?missing --conda-executable value}"; shift 2 ;;
         --help|-h) usage; exit 0 ;;
         *) die "unknown argument: $1" ;;
@@ -59,6 +59,10 @@ done
 }
 [[ -n "${OUTPUT}" ]] || die "--output is required"
 [[ -n "${SIGNOFF_NAME}" ]] || die "--signoff-name is required"
+if [[ "${MODE}" == "establish-golden" ]]; then
+    [[ -n "${ROOT}" ]] || die "--root is required in establish-golden mode"
+    ROOT="$(require_locked_source_complete "${ROOT}")"
+fi
 new_directory_only "${OUTPUT}"
 mkdir -p "${OUTPUT}/commands" "${OUTPUT}/smoke"
 
@@ -84,7 +88,7 @@ if [[ "${MODE}" == "establish-golden" ]]; then
         die "golden known-answer establishment requires WSL2"
     }
     activate_legacy_environment
-    load_locked_source_environment "${LOCKED_SOURCE_ENV}"
+    load_locked_source_environment "${ROOT}/locked_source.env"
     PYTHON_RUN=(python)
     DEPLOYMENT_LOCK=""
 else

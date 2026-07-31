@@ -55,6 +55,17 @@ The offline deployment lock must contain exact values for:
   architecture, and thread-environment identity;
 - the versioned known-answer expected results.
 
+Before locked worktrees or deployment artifacts may be created, Phase 0 must
+complete inside the single packet-created validation root. The Phase 0 receipt
+is valid only when its internal manifest verifies and the installed source,
+sitecustomize, classifier, and bounded configuration evidence is present.
+Installed MoSeq source identity is determined from deterministic per-file
+SHA-256 records and an aggregate source-tree hash, never from package version
+labels. `VERIFIED_ABSENT` is permitted for `sitecustomize.py` only when the
+record includes the interpreter, `sys.path`, candidate locations, and the
+import-system search method. Classifier or configuration uncertainty remains
+`UNRESOLVED` and fails closed.
+
 Locked source:
 
 | Repository | Commit |

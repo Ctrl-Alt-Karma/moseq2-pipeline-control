@@ -43,16 +43,19 @@ No script modifies an existing Conda environment or an existing source
 directory. Home preservation and pilot scripts install nothing. The future
 deployment bootstrap may install only into a new, explicitly named, isolated
 environment from a complete exact offline lock; it refuses an existing name or
-directory. Locked source is cloned into a new directory under `/home/ajm`.
-Every processing script writes only to a new validation output directory and
-refuses overwrite.
+directory. Script 01 creates one explicit validation root below `/home/ajm`.
+Every later home-pilot phase reuses that exact root only after validating its
+packet marker, required prior-phase receipt, and internal manifest. Each phase
+creates new child paths and refuses unknown, partial, repeated, or conflicting
+state.
 
 There is deliberately no automatic run-all command. The WSL export is always a
 separate, explicit Windows PowerShell action.
 
 This correction is delivered as
-`MOSEQ_LEGACY_HOME_PILOT_WITH_DEPLOYMENT_CORRECTED_2026-07-29.zip`. It is a
-distinct artifact and does not overwrite or replace the prior packet archive.
+`MOSEQ_LEGACY_HOME_PILOT_REUSABLE_ROOT_CORRECTED_2026-07-30.zip`. It is a
+distinct artifact and does not overwrite or replace either prior packet
+archive.
 
 ## Locked candidate source
 
@@ -72,15 +75,17 @@ Inspection-only:
   reads the distribution and creates a Windows-side archive but never alters,
   unregisters, replaces, or deletes a distribution.
 - `01_freeze_legacy_environment.sh`: records the active environment, dependency
-  custody, classifier custody, and active `sitecustomize.py`; it changes
-  nothing in Conda or installed packages.
+  custody, deterministic installed MoSeq source identity, classifier and
+  bounded configuration custody, and explicit `sitecustomize.py` state; it
+  changes nothing in Conda or installed packages.
 - `05_inventory_real_recordings.sh`: creates a read-only recording manifest and
   recommendation; it does not process recordings.
 
 Qualification tests using only new validation outputs:
 
-- `02_prepare_locked_worktrees.sh`: creates isolated clones at exact commit
-  SHAs and generates `locked_source.env`; it does not install them.
+- `02_prepare_locked_worktrees.sh`: accepts only a complete
+  Phase-0-initialized root, creates isolated clones at exact commit SHAs, and
+  generates `locked_source.env`; it does not install them.
 - `03_run_legacy_candidate_tests.sh`: runs the real provenance chain, targeted
   tests, and seven cross-repository checks.
 - `04_run_synthetic_pipeline.sh`: runs the bounded synthetic pipeline through
@@ -142,30 +147,58 @@ Do not put this backup command into a batch file or run-all wrapper.
 ## Batch 2 — freeze the environment and source
 
 1. Open Ubuntu 22.04 in WSL and `cd` to this packet.
-2. Run `bash 01_freeze_legacy_environment.sh`.
-3. Choose a new, nonexistent validation root below `/home/ajm`, then run
-   `bash 02_prepare_locked_worktrees.sh --root /home/ajm/NEW-validation-root`.
+2. Choose one explicit path that does not exist, then run script 01 with all
+   bounded custody and source references:
 
-The first command is inspection-only. The second writes isolated clones under
-the new root and refuses any existing root or receipt file. Keep that exact
-root value: every later home-pilot command must receive the same `--root`, and
-deployment commands must receive its `locked_source.env` explicitly.
+   ```bash
+   VALIDATION_ROOT=/home/ajm/moseq2-legacy-validation-YYYYMMDDTHHMMSSZ
+   bash 01_freeze_legacy_environment.sh \
+     --root "${VALIDATION_ROOT}" \
+     --project-root /EXACT/BOUNDED/STUDY/PROJECT \
+     --configuration-file /EXACT/LOAD_BEARING/config.yaml \
+     --classifier-file /EXACT/LOAD_BEARING/flip-classifier.pkl \
+     --vanilla-root /EXACT/PINNED/VANILLA/ROOT \
+     --fork-release-root /EXACT/PINNED/FORK_RELEASE/ROOT \
+     --candidate-root /EXACT/PINNED/CANDIDATE/ROOT
+   ```
+
+3. Review `PHASE0_FREEZE_RECEIPT.txt`; proceed only when `status=COMPLETE`.
+4. Reuse the same shell variable:
+
+   ```bash
+   bash 02_prepare_locked_worktrees.sh --root "${VALIDATION_ROOT}"
+   ```
+
+Script 01 alone may initialize the root. Script 02 requires the versioned root
+marker, a structurally valid complete Phase 0 receipt, and a verified Phase 0
+manifest. It rejects arbitrary directories, unknown root entries, existing
+worktrees or receipts, and every partial or repeated script-02 state. Keep the
+exact `VALIDATION_ROOT`: every later home-pilot and golden-reference deployment
+command must receive it through `--root`.
+
+Phase 0 source identity is derived from deterministic file hashes, never
+version labels. Each installed `moseq2-*` distribution receives exactly one of
+`VANILLA_MATCH`, `FORK_RELEASE_MATCH`, `CANDIDATE_MATCH`,
+`MULTIPLE_IDENTICAL_MATCHES`, `NEITHER`, or `UNRESOLVED`.
+`sitecustomize.py` receives exactly one of `PRESENT_AND_HASHED`,
+`VERIFIED_ABSENT`, or `UNRESOLVED`. Classifier custody is
+`FOUND_AND_HASHED` or `UNRESOLVED`; unresolved classifier evidence lists every
+bounded search location. Configuration evidence hashes only discovered,
+referenced, or load-bearing files, records unresolved references, and never
+claims comprehensive custody from a bounded search.
 
 ## Batch 3 — qualification
 
-1. Run `bash 03_run_legacy_candidate_tests.sh --root
-   /home/ajm/NEW-validation-root`.
+1. Run `bash 03_run_legacy_candidate_tests.sh --root "${VALIDATION_ROOT}"`.
 2. Review every raw exit code and failure classification.
 3. Only if no unexplained blocker remains, run
-   `bash 04_run_synthetic_pipeline.sh --root
-   /home/ajm/NEW-validation-root`.
+   `bash 04_run_synthetic_pipeline.sh --root "${VALIDATION_ROOT}"`.
 
 Expected fixture failures remain visible. Nothing converts a failure to a pass.
 
 ## Batch 4 — real-data inventory
 
-1. Run `bash 05_inventory_real_recordings.sh --root
-   /home/ajm/NEW-validation-root`.
+1. Run `bash 05_inventory_real_recordings.sh --root "${VALIDATION_ROOT}"`.
 2. Review `recording_recommendation.md`.
 3. Record the approved recording, extraction config, classifier, and PCA
    components before continuing.
@@ -176,7 +209,7 @@ manifest under the new validation root.
 ## Batch 5 — explicitly approved pilot
 
 1. Read `06_run_approved_real_pilot.sh --help`.
-2. Run it with `--root /home/ajm/NEW-validation-root`, the approved recording
+2. Run it with `--root "${VALIDATION_ROOT}"`, the approved recording
    path, config, PCA components, and the exact confirmation flag.
 3. Inspect stage receipts before considering any repeatability work.
 
@@ -185,7 +218,7 @@ model-input handoff data.
 
 ## Batch 6 — package evidence
 
-1. Run `bash collect_evidence.sh --root /home/ajm/NEW-validation-root`.
+1. Run `bash collect_evidence.sh --root "${VALIDATION_ROOT}"`.
 2. Verify the generated ZIP SHA-256 receipt.
 3. Send the verifier ZIP to Fable without adding raw recording data.
 
@@ -198,8 +231,7 @@ SHA-256 receipt.
 1. Finish the environment freeze, exact dependency/classifier/sitecustomize
    custody, and locked-source synthetic run on the home WSL.
 2. Run `deployment/run_known_answer_qualification.sh --mode
-   establish-golden --locked-source-env
-   /home/ajm/NEW-validation-root/locked_source.env` with its other required
+   establish-golden --root "${VALIDATION_ROOT}"` with its other required
    arguments, and review the raw outputs.
 3. Review package redistribution terms and create an explicit cache-artifact
    allowlist; the export script makes no legal guess.
@@ -210,8 +242,7 @@ This batch creates evidence only. It does not change the existing environment.
 
 1. Read `deployment/export_offline_environment_bundle.sh --help`.
 2. Supply the exact classifier, study configurations, golden known-answer
-   record, reviewed artifact allowlist, and `--locked-source-env
-   /home/ajm/NEW-validation-root/locked_source.env`.
+   record, reviewed artifact allowlist, and `--root "${VALIDATION_ROOT}"`.
 3. Accept the bundle only if its deployment lock says `COMPLETE` and every
    manifest hash verifies.
 

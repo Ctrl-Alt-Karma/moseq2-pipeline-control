@@ -7,11 +7,16 @@ without guessing when run at home:
    `autoregressive`, or an `UNRESOLVED` disposition with package, metadata,
    editable-tree, and Conda evidence.
 2. The active flip-classifier path, SHA-256, byte count, file type, and config
-   references.
-3. Whether `sitecustomize.py` is active, and if so its exact path, archived
-   bytes, SHA-256, and position on `sys.path`.
+   references. If unresolved, Phase 0 records every bounded search location and
+   fails closed.
+3. Whether `sitecustomize.py` is active. The result is
+   `PRESENT_AND_HASHED`, `VERIFIED_ABSENT`, or `UNRESOLVED`; a verified absence
+   retains the interpreter, `sys.path`, candidate locations, and search method.
 4. Exact Conda package builds, pip records, MoSeq package locations,
    BLAS/LAPACK identity, thread variables, ffmpeg build, kernel, and CPU.
+   Every installed `moseq2-*` source tree receives per-file hashes, an
+   aggregate identity, and exactly one allowed comparison status against the
+   supplied pinned reference trees.
 5. The pinned Dask 2.30.0 `svd_compressed` signature and what the existing
    positional `0` binds to.
 6. Which nine viz fixture/data tests remain blocked and whether authoritative
@@ -37,8 +42,9 @@ without guessing when run at home:
     `INCOMPLETE`.
 14. Exact source repositories and bundleable commits for all three floating
     Git dependencies.
-15. The complete set and hashes of study configuration files required on a
-    future machine.
+15. The explicit load-bearing configuration files and every resolved
+    configuration reference. Bounded discovery is recorded but never described
+    as comprehensive custody.
 16. The golden `moseq-known-answer-v1` deterministic dataset hashes and
     structural expectations produced through the locked production paths.
 17. Whether a separately provisioned Ubuntu 22.04 machine or imported WSL copy

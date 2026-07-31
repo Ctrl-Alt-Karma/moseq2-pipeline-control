@@ -13,6 +13,15 @@ import re
 import subprocess
 import sys
 
+from evidence_identity import (
+    IDENTITY_STATUSES,
+    inspect_classifier,
+    inspect_configurations,
+    inspect_sitecustomize,
+    installed_source_record,
+    write_json,
+)
+
 try:
     import pkg_resources
 except ImportError:
@@ -201,9 +210,43 @@ def distribution_record(name):
     return record
 
 
+def installed_moseq_distribution_names():
+    expected = {
+        "moseq2-extract",
+        "moseq2-viz",
+        "moseq2-app",
+        "moseq2-pca",
+        "moseq2-model",
+    }
+    if pkg_resources is None:
+        return sorted(expected)
+    installed = set()
+    for distribution in pkg_resources.working_set:
+        normalized = distribution.project_name.lower().replace("_", "-")
+        if normalized.startswith("moseq2-"):
+            installed.add(normalized)
+    return sorted(expected | installed)
+
+
+def distribution_module_name(name, metadata):
+    top_levels = metadata.get("top_levels", [])
+    moseq_modules = sorted(
+        item for item in top_levels if item.startswith("moseq2_")
+    )
+    if len(moseq_modules) == 1:
+        return moseq_modules[0]
+    return name.replace("-", "_")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--search-root", action="append", default=[])
+    parser.add_argument("--vanilla-root")
+    parser.add_argument("--fork-release-root")
+    parser.add_argument("--candidate-root")
+    parser.add_argument("--configuration-file", action="append", default=[])
+    parser.add_argument("--classifier-file", action="append", default=[])
     args = parser.parse_args()
     output_dir = os.path.abspath(args.output_dir)
     if not os.path.isdir(output_dir):
@@ -240,34 +283,52 @@ def main():
     except Exception as error:
         versions["linked_hdf5"] = "UNAVAILABLE: {}".format(error)
 
+    reference_roots = {
+        "VANILLA": args.vanilla_root,
+        "FORK_RELEASE": args.fork_release_root,
+        "CANDIDATE": args.candidate_root,
+    }
     moseq_distributions = {}
-    for name, module_name in (
-        ("moseq2-extract", "moseq2_extract"),
-        ("moseq2-viz", "moseq2_viz"),
-        ("moseq2-app", "moseq2_app"),
-        ("moseq2-pca", "moseq2_pca"),
-        ("moseq2-model", "moseq2_model"),
-    ):
-        if pkg_resources is not None:
-            try:
-                dist = pkg_resources.get_distribution(name)
-                moseq_distributions[name] = {
-                    "version": dist.version,
-                    "location": dist.location,
-                    "egg_info": dist.egg_info,
-                }
-                continue
-            except Exception as error:
-                package_error = "{}: {}".format(type(error).__name__, error)
-        else:
-            package_error = "pkg_resources is unavailable"
+    installed_source_identity = {}
+    for name in installed_moseq_distribution_names():
+        package_metadata = distribution_record(name)
+        version = package_metadata.get("version", "UNRESOLVED")
+        module_name = distribution_module_name(name, package_metadata)
         module_record = safe_import_version(module_name)
-        module_record["package_metadata_error"] = package_error
-        module_record["pip_show"] = run(
-            [sys.executable, "-m", "pip", "show", "--verbose", name]
-        )
-        moseq_distributions[name] = module_record
+        moseq_distributions[name] = package_metadata
+        module_path = module_record.get("file")
+        if module_path and os.path.isabs(module_path):
+            package_root = os.path.dirname(module_path)
+            if os.path.basename(module_path) != "__init__.py":
+                package_root = module_path
+            installed_source_identity[name] = installed_source_record(
+                name,
+                module_name,
+                package_root,
+                version,
+                package_metadata,
+                reference_roots,
+            )
+        else:
+            installed_source_identity[name] = {
+                "distribution": name,
+                "module": module_name,
+                "version": version,
+                "metadata": package_metadata,
+                "package_path": "UNRESOLVED",
+                "status": "UNRESOLVED",
+                "error": module_record.get(
+                    "error",
+                    module_record.get("package_metadata_error", "module path unavailable"),
+                ),
+            }
+        if installed_source_identity[name]["status"] not in IDENTITY_STATUSES:
+            raise AssertionError("invalid identity status for " + name)
     versions["moseq_distributions"] = moseq_distributions
+    write_json(
+        os.path.join(output_dir, "installed_moseq_source_identity.json"),
+        installed_source_identity,
+    )
 
     thread_names = (
         "OMP_NUM_THREADS",
@@ -296,28 +357,8 @@ def main():
         with open(os.path.join(output_dir, "numpy_blas_lapack.txt"), "w") as stream:
             stream.write("UNAVAILABLE: {}: {}\n".format(type(error).__name__, error))
 
-    site_record = {
-        "status": "UNRESOLVED",
-        "path": "UNRESOLVED",
-        "sys_path": list(sys.path),
-    }
-    try:
-        import sitecustomize
-
-        path = os.path.abspath(sitecustomize.__file__)
-        site_record.update(
-            {
-                "status": "RESOLVED",
-                "path": path,
-                "bytes": os.path.getsize(path),
-                "sha256": sha256(path),
-            }
-        )
-    except Exception as error:
-        site_record["error"] = "{}: {}".format(type(error).__name__, error)
-    with open(os.path.join(output_dir, "active_sitecustomize.json"), "w") as stream:
-        json.dump(site_record, stream, indent=2, sort_keys=True)
-        stream.write("\n")
+    site_record = inspect_sitecustomize(sys.executable, sys.path)
+    write_json(os.path.join(output_dir, "active_sitecustomize.json"), site_record)
 
     dependencies = {
         name: distribution_record(name)
@@ -328,6 +369,49 @@ def main():
     ) as stream:
         json.dump(dependencies, stream, indent=2, sort_keys=True)
         stream.write("\n")
+
+    classifier = inspect_classifier(
+        args.search_root,
+        explicit_paths=args.classifier_file,
+    )
+    configuration = inspect_configurations(
+        args.search_root,
+        explicit_paths=args.configuration_file,
+    )
+    write_json(os.path.join(output_dir, "classifier_custody.json"), classifier)
+    write_json(
+        os.path.join(output_dir, "configuration_custody.json"),
+        configuration,
+    )
+
+    unresolved = []
+    for name, record in sorted(installed_source_identity.items()):
+        if record["status"] == "UNRESOLVED":
+            unresolved.append("installed source identity: " + name)
+    for name, record in sorted(dependencies.items()):
+        if record.get("status") != "RESOLVED":
+            unresolved.append("floating dependency identity: " + name)
+    if versions["packages"]["dask"].get("version") == "UNAVAILABLE":
+        unresolved.append("dask import/version")
+    if site_record["status"] == "UNRESOLVED":
+        unresolved.append("sitecustomize")
+    if classifier["status"] != "FOUND_AND_HASHED":
+        unresolved.append("classifier")
+    if configuration["status"] != "BOUNDED_HASHED":
+        unresolved.append("configuration custody")
+    summary = {
+        "status": "COMPLETE" if not unresolved else "INCOMPLETE",
+        "unresolved": unresolved,
+        "installed_source_statuses": {
+            name: record["status"]
+            for name, record in sorted(installed_source_identity.items())
+        },
+        "sitecustomize_status": site_record["status"],
+        "classifier_status": classifier["status"],
+        "configuration_status": configuration["status"],
+        "configuration_custody_comprehensive": False,
+    }
+    write_json(os.path.join(output_dir, "phase0_evidence_summary.json"), summary)
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ Usage:
     --classifier /mnt/c/.../flip-classifier.pkl \\
     --pca-components /mnt/c/.../pca.h5 \\
     --confirm ${CONFIRM_TOKEN} \\
-    [--pilot-frames 3000] [--root DIR] [--output DIR]
+    --root DIR [--pilot-frames 3000] [--output DIR]
 
 All four input files are read-only references. Config, classifier, and PCA
 components are copied into a new validation output directory before use.
@@ -28,7 +28,7 @@ application, and model-input loading run; model fitting never starts.
 EOF
 }
 
-ROOT="${LEGACY_VALIDATION_ROOT_DEFAULT}"
+ROOT=""
 OUTPUT=""
 RECORDING=""
 CONFIG=""
@@ -51,6 +51,8 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+[[ -n "${ROOT}" ]] || die "--root is required"
+ROOT="$(require_locked_source_complete "${ROOT}")"
 [[ -n "${RECORDING}" ]] || die "--recording is required"
 [[ "${CONFIRM}" == "${CONFIRM_TOKEN}" ]] || {
     die "explicit --confirm ${CONFIRM_TOKEN} is required"
@@ -73,7 +75,7 @@ esac
 if [[ -z "${OUTPUT}" ]]; then
     OUTPUT="${ROOT}/real_pilot/pilot_$(timestamp_utc)"
 fi
-new_directory_only "${OUTPUT}"
+new_directory_below_validation_root "${ROOT}" "${OUTPUT}"
 mkdir -p \
     "${OUTPUT}/inputs" \
     "${OUTPUT}/logs" \

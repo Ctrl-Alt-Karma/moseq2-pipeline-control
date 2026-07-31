@@ -11,7 +11,7 @@ source "${SCRIPT_DIR}/lib/common.sh"
 usage() {
     cat <<'EOF'
 Usage:
-  bash 03_run_legacy_candidate_tests.sh [--root DIR] [--output DIR]
+  bash 03_run_legacy_candidate_tests.sh --root DIR [--output DIR]
 
 The script runs every suite even if an earlier suite fails, then exits nonzero
 if any collect or test command failed. Raw stdout, stderr, commands, exit codes,
@@ -19,7 +19,7 @@ JUnit XML, collected nodes, and a per-test status manifest are retained.
 EOF
 }
 
-ROOT="${LEGACY_VALIDATION_ROOT_DEFAULT}"
+ROOT=""
 OUTPUT=""
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -29,10 +29,12 @@ while [[ $# -gt 0 ]]; do
         *) die "unknown argument: $1" ;;
     esac
 done
+[[ -n "${ROOT}" ]] || die "--root is required"
+ROOT="$(require_locked_source_complete "${ROOT}")"
 if [[ -z "${OUTPUT}" ]]; then
     OUTPUT="${ROOT}/evidence/tests_$(timestamp_utc)"
 fi
-new_directory_only "${OUTPUT}"
+new_directory_below_validation_root "${ROOT}" "${OUTPUT}"
 mkdir -p "${OUTPUT}/suites" "${OUTPUT}/sitecustomize"
 
 activate_legacy_environment

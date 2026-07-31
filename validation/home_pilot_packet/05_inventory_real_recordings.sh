@@ -17,7 +17,7 @@ Options:
   --data-root DIR       Explicit actual-depth-data directory under /mnt/c.
   --windows-user NAME   Windows profile name used for bounded OneDrive lookup
                         (default: ajmitchell).
-  --root DIR            Validation root under /home/ajm.
+  --root DIR            Required Phase-0-initialized validation root.
   --output DIR          New manifest output directory.
   --hash-max-bytes N    Hash files no larger than N bytes (default: 2147483648).
 
@@ -26,7 +26,7 @@ maximum depth of six, for a directory whose name resembles actual depth data.
 EOF
 }
 
-ROOT="${LEGACY_VALIDATION_ROOT_DEFAULT}"
+ROOT=""
 OUTPUT=""
 DATA_ROOT=""
 WINDOWS_USER="ajmitchell"
@@ -42,11 +42,13 @@ while [[ $# -gt 0 ]]; do
         *) die "unknown argument: $1" ;;
     esac
 done
+[[ -n "${ROOT}" ]] || die "--root is required"
+ROOT="$(require_phase0_complete "${ROOT}")"
 [[ "${HASH_MAX_BYTES}" =~ ^[0-9]+$ ]] || die "--hash-max-bytes must be an integer"
 if [[ -z "${OUTPUT}" ]]; then
     OUTPUT="${ROOT}/evidence/recording_inventory_$(timestamp_utc)"
 fi
-new_directory_only "${OUTPUT}"
+new_directory_below_validation_root "${ROOT}" "${OUTPUT}"
 
 if [[ -z "${DATA_ROOT}" ]]; then
     WINDOWS_HOME="/mnt/c/Users/${WINDOWS_USER}"
