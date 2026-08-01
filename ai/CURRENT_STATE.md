@@ -1,6 +1,6 @@
 # Current State
 
-Date: 2026-07-29
+Date: 2026-07-31
 
 ## Candidate draft PRs
 
@@ -104,15 +104,12 @@ These reports are classifications to verify, not blanket excuses. Every broader-
 
 ## Current gate
 
-Export and hash the existing WSL distribution; freeze Katya's actual
-environment, classifier, `sitecustomize.py`, and floating dependency evidence;
-then run locked-source qualification in that environment. Inventory real
-recordings read-only before AJ approves one bounded pilot.
-
-After the home environment is fully frozen, establish the golden known-answer
-record and export the exact offline deployment bundle. A future analysis
-machine must then qualify independently; matching version labels are not
-sufficient.
+Phase 0 golden-environment freeze is closed with an independent Fable `PASS`.
+The active gate is Phase 1 locked candidate worktree preparation, beginning
+with `02_prepare_locked_worktrees.sh` only against the existing reusable
+validation root. Script 03 and every later packet step remain unauthorized.
+The canonical operational state is `ai/HANDOFF_CURRENT.md`; the immutable
+transition checkpoint is `ai/HANDOFF_2026-07-31_PHASE0_TO_PHASE1.md`.
 
 All four PRs remain draft and unmerged. No PR is approved or ready for review,
 and AJ remains the sole merge authority.
