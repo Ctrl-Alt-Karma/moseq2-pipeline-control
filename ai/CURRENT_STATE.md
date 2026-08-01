@@ -2,126 +2,96 @@
 
 Date: 2026-08-01
 
-## Governed phase status
+## Verdict and phase status
 
-- Phase 0 golden-environment freeze: **CLOSED**, independent Fable `PASS`.
-- Phase 1 locked candidate worktrees: **CLOSED**, attachment-only independent
-  Fable `PASS`; `BLOCKS NEXT GATE: NONE`.
-- Active gate: next packet gate pending script-03 architect authorization.
-- Script 03: **NOT YET AUTHORIZED**.
-- The current Hex chat remains the active architect cockpit; the current Codex
-  chat remains the active operator. No new architect or Codex chat is opened
-  before the next formal phase boundary.
-- Canonical closeout: `ai/PHASE1_CLOSEOUT_2026-08-01.md`.
+- Phase 0, golden-environment freeze: **CLOSED**, independent Fable `PASS`.
+- Phase 1, locked candidate worktrees: **CLOSED**, attachment-only independent
+  Fable `PASS`.
+- Phase 2, fixture-backed candidate qualification: **CLOSED BY ARCHITECT
+  ADJUDICATION**. The formal R1, R2, and R3 results remain **FAIL CLOSED**.
+- Architect adjudication: **SUBSTANTIVE FIXTURE-BACKED CANDIDATE QUALIFICATION
+  COMPLETE.** See `ai/PHASE2_FIXTURE_QUALIFICATION_CLOSEOUT_2026-08-01.md`.
+- Current boundary: a new architect chat must pass the read-only comprehension
+  check in `ai/HANDOFF_CURRENT.md`. No pilot design or execution authority has
+  been granted.
 
-## Candidate draft PRs
+## Frozen production environment
 
-| Repository | PR | URL | Base | Base SHA | Head branch | Head SHA | State |
-|---|---:|---|---|---|---|---|---|
-| `moseq2-extract` | #6 | https://github.com/Ctrl-Alt-Karma/moseq2-extract/pull/6 | `release` | `424d643affb685e1cad145e3c7051b814d11265c` | `agent/repair-velocity-scalars` | `e7f585104ba25b66e5326c88c77a47e33db95635` | Draft, open, unmerged |
-| `moseq2-viz` | #5 | https://github.com/Ctrl-Alt-Karma/moseq2-viz/pull/5 | `release` | `68ca6a34055987ff22f8651b4dca2aa254380c87` | `agent/repair-pinhole-provenance` | `b80192dc20353bf77c36610f315543b57afa908c` | Draft, open, unmerged |
-| `moseq2-app` | #5 | https://github.com/Ctrl-Alt-Karma/moseq2-app/pull/5 | `release` | `36d40e098a5c4629116b7a4e233573218345bd5d` | `agent/repair-flip-processing-journal` | `e0b85201226d03e15944473a734f71417698c31e` | Draft, open, unmerged |
+Katya's existing WSL2 Ubuntu 22.04 `moseq2-app` Conda environment, Python 3.7
+and NumPy 1.18.3, remains the sole supported production target for this study.
+Candidate source is supplied by the locked `PYTHONPATH`; it is not installed
+into the environment. Modernization, in-place package changes, and
+multi-environment equivalence claims remain out of scope.
 
-GitHub's mergeability result is transient metadata, not review evidence.
+## Locked candidate source
 
-## Other current release heads
+| Repository | SHA |
+|---|---|
+| `moseq2-extract` | `e7f585104ba25b66e5326c88c77a47e33db95635` |
+| `moseq2-pca` | `efb6fcfa5d5af5bb4274540c371d0ddf96440b78` |
+| `moseq2-model` | `6e542e3f1db125202d42b59f390c922281e64f39` |
+| `moseq2-viz` | `b80192dc20353bf77c36610f315543b57afa908c` |
+| `moseq2-app` | `e0b85201226d03e15944473a734f71417698c31e` |
 
-- `moseq2-pca` `release`: `efb6fcfa5d5af5bb4274540c371d0ddf96440b78`
-- `moseq2-model` `release`: `6e542e3f1db125202d42b59f390c922281e64f39`
+The existing candidate PR record remains useful audit context:
 
-These SHAs were resolved from the remote `refs/heads/release` on 2026-07-29.
+| Repository | Draft PR | Head SHA | State |
+|---|---|---|---|
+| `moseq2-extract` | [#6](https://github.com/Ctrl-Alt-Karma/moseq2-extract/pull/6) | `e7f585104ba25b66e5326c88c77a47e33db95635` | Open, unmerged |
+| `moseq2-viz` | [#5](https://github.com/Ctrl-Alt-Karma/moseq2-viz/pull/5) | `b80192dc20353bf77c36610f315543b57afa908c` | Open, unmerged |
+| `moseq2-app` | [#5](https://github.com/Ctrl-Alt-Karma/moseq2-app/pull/5) | `e0b85201226d03e15944473a734f71417698c31e` | Open, unmerged |
 
-## Targeted pinned-stack results
+AJ is the sole merge authority. GitHub mergeability metadata is not review
+evidence.
 
-Fresh reruns on the candidate heads, using the existing Python 3.7 pinned environment with pytest cache and bytecode generation disabled:
+## Governed fixture and harness identities
 
-- extract: **10 passed**
-- viz: **43 passed**
-- app: **29 passed**
+| Item | Identity |
+|---|---|
+| Viz fixture archive | `de6c4d30a67c800888fc27ec395ff8e3821b2903248235c972a63b0e72b27728` |
+| Extract fixture archive | `21f9dd7a55a44eae329c76ba48686c36cc26dc2da4264d199c7ccd3b7eb370f9` |
+| Accepted external harness | `/home/ajm/moseq2-test-harnesses/pytest541_cov251_20260801_R2` |
+| Harness evidence | `/home/ajm/moseq2-validation-20260730/evidence/pytest_harness_20260801_R2` |
 
-Exact invocations are recorded in `ai/implementation_reports/CODEX_2026-07-29_REPLACEMENT_PRS.md`.
+The isolated harness binds pytest 5.4.1 and pytest-cov 2.5.1 without changing
+the golden Conda environment.
 
-## Supplemental-audit repair results
+## Formal run record and adjudication
 
-The Fable packet was imported verbatim and its executable findings were
-reproduced against the prior candidate heads before implementation.
+| Evidence | Formal result | Substantive record |
+|---|---|---|
+| Fixture R1 | **FAIL CLOSED** | Archive safety rejected the exact zero-byte root-only `/` directory marker before extraction or testing; later narrowly adjudicated safe without rewriting R1. |
+| Fixture R2 | **FAIL CLOSED** | Nine viz selectors omitted `TestScalarUtils`; collection exited `4`, no test ran. |
+| Fixture R3 | **FAIL CLOSED** | Targeted confirmation passed 10/10 non-vacuously; candidate suites passed 128/128; seven contract tests failed solely because three repository environment variables were omitted; ignored app `.coverage` also changed. |
+| Script-03 R2 | **FAIL CLOSED** | Candidate suites included seven cross-repository contract passes; the immutable run's separate formal failures remain unchanged. |
 
-Available Windows Python 3.12 validation at the new heads:
+The accepted combined evidence is: targeted viz 9/9; extract `test_get_roi`
+1/1 over five real TIFF inputs; R3 provenance 1/1, app 40/40, extract 11/11,
+and viz 76/76; prior script-03 R2 cross-repository contracts 7/7. This supports
+the architect adjudication but does not convert any formal run to `PASS`.
 
-- extract: **3 passed**
-- viz: **61 passed**
-- app: **40 passed plus 4 process-death subtests**
-- locked-head cross-repository contract: **7 passed**
-- Python 3.7 grammar parse and `git diff --check`: passed
+R3's ignored app `.coverage` artifact was preserved, verified, and removed.
+The protected app worktree was touched and then exactly restored. Closeout
+evidence is at:
 
-The pinned Python 3.7 runtime was not available during this continuation.
-Independent Linux SIGKILL verification and real-recording validation remain
-open. Exact dispositions and limitations are in `ai/REVIEW_LOG.md`.
+`/home/ajm/moseq2-validation-20260730/evidence/fixture_qualification_closeout_20260801`
 
-The extract and viz counts above were deliberately focused selections, not
-full-suite pass counts. The verification-only addendum records the exact
-collection and selection:
+## Unresolved scientific and custody risks
 
-- extract: 11 tests exist in the reported file; the focused command named 3
-  nodes and all 3 passed. A later full-file run produced 10 passed and 1 failed
-  before the product function call because the current OpenCV build rejected a
-  NumPy integer scalar in test setup.
-- viz: 76 tests exist across the two reported files; the focused command
-  selected all 43 provenance tests plus 18 scalar tests, and all 61 passed. A
-  later full run produced 65 passed and 11 failed: 9 were blocked by absent
-  repository fixtures and 2 exposed current `cytoolz.get` behavior outside the
-  legacy pinned dependency set.
+- Exact installed commits for floating `pyhsmm`, `pybasicbayes`, and
+  `autoregressive` dependencies remain unresolved.
+- Pinned-Dask `svd_compressed` PCA remains unseeded; within-environment
+  variability is not yet characterized.
+- The active study flip-classifier bytes still require exact custody.
+- Real-recording structural behavior, legacy unstamped inputs, and mixed-policy
+  dataset handling have not been validated by this fixture closeout.
+- A future analysis machine remains unqualified until it reproduces the full
+  locked environment and passes the separate known-answer and guarded-launch
+  controls.
 
-The actual extract-writer-to-viz-reader provenance chain failed in the round-2
-NumPy 2.5.1 environment because the legacy extract writer calls the removed
-`np.string_` API. The unchanged chain passed in the required isolated
-NumPy 1.26.4/h5py 3.11.0 environment. No production source was changed.
+## Authorization status
 
-## Frozen production environment and home pilot
-
-Katya's exact existing WSL2 Ubuntu 22.04, Python 3.7, NumPy 1.18.3
-`moseq2-app` Conda environment is the supported production target for this
-study. Modernization and multi-environment comparison are out of scope.
-
-Fable's environment audit is preserved verbatim at
-`ai/reviews/FABLE_ENVIRONMENT_AUDIT_2026-07-29.md`, with custody recorded in
-`evidence/manifests/fable-environment-audit-2026-07-29.json`.
-
-Round 2 is independently cleared for the structural real-data pilot, subject
-to the preservation and home qualification gates in
-`validation/home_pilot_packet/`. This is authorization to prepare and, only
-after explicit AJ confirmation, run one bounded pilot. It is not merge
-approval and does not authorize a large model fit.
-
-The home WSL is now defined as the golden reference, not necessarily the final
-analysis host. `validation/home_pilot_packet/deployment/` supplies a
-fail-closed future-machine path: exact offline export or verified WSL import,
-exact fingerprint comparison, a versioned production-path known-answer test,
-and a guarded production launcher. The machinery is statically validated only
-on this work computer. No future-machine bootstrap has been executed, and no
-machine may be called `QUALIFIED` until the golden WSL supplies a complete
-deployment lock and expected-results manifest and that machine passes both
-gates.
-
-## Reported broader-suite limitations
-
-Codex reported:
-
-- missing committed fixtures or data files;
-- ffmpeg and native Windows path/behavior differences;
-- missing legacy optional dependencies, including `qgrid` and `dtaidistance`;
-- Windows lacks the Unix `forkserver` multiprocessing start method used by some legacy tests.
-
-These reports are classifications to verify, not blanket excuses. Every broader-suite failure still needs an exact cause and a determination of environmental blocker versus product defect.
-
-## Current gate
-
-Phase 0 and Phase 1 are closed with independent Fable `PASS` verdicts. Fable's
-Phase 1 verification was attachment-only. The active gate is the next packet
-gate pending Hex reconciliation and explicit script-03 architect authorization.
-Script 03 and every later packet step remain unauthorized. The canonical
-operational state is `ai/HANDOFF_CURRENT.md`; the immutable Phase-0-to-Phase-1
-transition checkpoint remains `ai/HANDOFF_2026-07-31_PHASE0_TO_PHASE1.md`.
-
-All four PRs remain draft and unmerged. No PR is approved or ready for review,
-and AJ remains the sole merge authority.
+No merge is authorized. Script 04, real study-data inspection, and any
+real-recording pilot are unauthorized. The exact next phase is preparation for
+one bounded real-recording pilot, beginning only after a read-only new-architect
+comprehension check is reviewed and a later, explicit authorization is issued.
