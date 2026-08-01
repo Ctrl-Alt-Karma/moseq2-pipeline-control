@@ -37,11 +37,21 @@ acceptance criterion in section 17 passes and its complete result is reviewed.
 
 | Role | Assignment |
 |---|---|
-| Architect and merge authority | AJ; approves gate transitions and is the sole merge authority. |
-| Primary operator | Codex; may perform only the explicitly authorized active-gate action. |
-| Independent verifier | Fable; returned `VERDICT: PASS` for Phase 0. |
-| Control repository | `Ctrl-Alt-Karma/moseq2-pipeline-control`, branch `agent/bootstrap-pipeline-control`, draft PR #1. |
-| Scientific repositories | Evidence sources only unless an active gate explicitly authorizes bounded detached worktrees. No scientific code edits are authorized. |
+| Project owner and sole merge authority | AJ; retains final approval authority and is the only person authorized to approve merges. |
+| Architect, coordinator, and reconciler | Hex / GPT; maintains the frozen roadmap, classifies findings, reconciles builder and verifier evidence, makes gate recommendations, and must use formal change control for any proposed plan alteration. |
+| Primary builder and operator | Codex; may perform only the explicitly authorized active-gate action and must stop at the stated boundary. |
+| Independent adversarial verifier | Fable; independently audits completed gate evidence and labels findings as BLOCKS NEXT GATE, IMPORTANT NON-BLOCKING, or FUTURE / BACKLOG. |
+| Bounded backup | Claude Code; used only when explicitly authorized for a defined builder, operator, or verification task. |
+| Control repository | Ctrl-Alt-Karma/moseq2-pipeline-control, branch agent/bootstrap-pipeline-control, draft PR #1. |
+
+- Nothing merges without AJ's explicit approval.
+- Hex / GPT may authorize the next bounded operator action only after reconciling
+  the frozen acceptance criteria and available verification evidence.
+- Fable supplies independent evidence and blocker classifications; Fable does
+  not silently redesign or reorder the roadmap.
+- New evidence does not change the execution sequence unless formal change
+  control establishes that the next gate would otherwise be unsafe, invalid,
+  impossible, or incorrectly ordered.
 
 ## 6. AUTHORITATIVE SOURCES
 
