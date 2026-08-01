@@ -1,6 +1,18 @@
 # Current State
 
-Date: 2026-07-31
+Date: 2026-08-01
+
+## Governed phase status
+
+- Phase 0 golden-environment freeze: **CLOSED**, independent Fable `PASS`.
+- Phase 1 locked candidate worktrees: **CLOSED**, attachment-only independent
+  Fable `PASS`; `BLOCKS NEXT GATE: NONE`.
+- Active gate: next packet gate pending script-03 architect authorization.
+- Script 03: **NOT YET AUTHORIZED**.
+- The current Hex chat remains the active architect cockpit; the current Codex
+  chat remains the active operator. No new architect or Codex chat is opened
+  before the next formal phase boundary.
+- Canonical closeout: `ai/PHASE1_CLOSEOUT_2026-08-01.md`.
 
 ## Candidate draft PRs
 
@@ -104,12 +116,12 @@ These reports are classifications to verify, not blanket excuses. Every broader-
 
 ## Current gate
 
-Phase 0 golden-environment freeze is closed with an independent Fable `PASS`.
-The active gate is Phase 1 locked candidate worktree preparation, beginning
-with `02_prepare_locked_worktrees.sh` only against the existing reusable
-validation root. Script 03 and every later packet step remain unauthorized.
-The canonical operational state is `ai/HANDOFF_CURRENT.md`; the immutable
-transition checkpoint is `ai/HANDOFF_2026-07-31_PHASE0_TO_PHASE1.md`.
+Phase 0 and Phase 1 are closed with independent Fable `PASS` verdicts. Fable's
+Phase 1 verification was attachment-only. The active gate is the next packet
+gate pending Hex reconciliation and explicit script-03 architect authorization.
+Script 03 and every later packet step remain unauthorized. The canonical
+operational state is `ai/HANDOFF_CURRENT.md`; the immutable Phase-0-to-Phase-1
+transition checkpoint remains `ai/HANDOFF_2026-07-31_PHASE0_TO_PHASE1.md`.
 
 All four PRs remain draft and unmerged. No PR is approved or ready for review,
 and AJ remains the sole merge authority.
