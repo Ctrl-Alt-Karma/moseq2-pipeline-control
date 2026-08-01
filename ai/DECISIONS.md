@@ -1,7 +1,7 @@
 # Decisions
 
 Decisions D-001 through D-018 are dated 2026-07-29. D-019 is dated
-2026-07-30.
+2026-07-30. D-020 is dated 2026-07-31.
 
 | ID | Decision | Rationale |
 |---|---|---|
@@ -24,3 +24,4 @@ Decisions D-001 through D-018 are dated 2026-07-29. D-019 is dated
 | D-017 | Every new machine must independently pass exact preflight and the versioned known-answer fixture before real data. | Installation success is not qualification. Any `UNRESOLVED` or `MISMATCH` result is fail-closed. |
 | D-018 | `deployment/run_pipeline_guarded.sh` is the supported production entry point on a separate analysis machine. | It refuses unqualified execution and records the verified fingerprint and qualification binding in each analysis output. |
 | D-019 | One explicit packet-created validation root is reused across all home-pilot phases. | Script 01 alone initializes a versioned root. Every later phase validates the marker, required prior-phase receipt, and absence of its own outputs before adding new child state. Arbitrary roots, partial runs, reruns, and unknown state fail closed. |
+| D-020 | Phase 0 compares installed MoSeq source against three immutable code states and freezes the approved primary-project custody inputs. | `VANILLA` is the exact upstream `dattalab` release HEAD at the verified fork branch point; `FORK_RELEASE` is the exact `Ctrl-Alt-Karma` release SHA; `CANDIDATE` is the locked candidate SHA. The approved project, two explicit configuration files, and canonical classifier are recorded in `environment/LEGACY_PRODUCTION_TARGET.md`. The current primary config is the golden artifact; its extraction-time historical version remains explicitly unresolved rather than reconstructed. |
