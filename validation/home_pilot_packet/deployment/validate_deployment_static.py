@@ -263,6 +263,10 @@ def main():
         "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912",
         "scientific_processing_started=false",
         "model_application=HELDOUT_ONLY_STORED_PARAMETERS",
+        "MODEL_SHA_BEFORE=",
+        "MODEL_SHA_AFTER=",
+        "production_model_sha256_unchanged=true",
+        "MOSEQ_PACKET_SYNTHETIC_TEST_MODE",
         "model_fit_started=false",
         "model_adaptation_started=false",
     ):

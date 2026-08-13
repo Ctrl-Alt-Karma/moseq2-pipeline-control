@@ -46,6 +46,7 @@ PCA_COMPONENTS=""
 PRODUCTION_MODEL=""
 CONFIRM=""
 PILOT_FRAMES=3000
+PROVENANCE_PREFLIGHT_ONLY=false
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --root) ROOT="${2:?missing --root value}"; shift 2 ;;
@@ -58,6 +59,7 @@ while [[ $# -gt 0 ]]; do
         --production-model) PRODUCTION_MODEL="${2:?missing --production-model value}"; shift 2 ;;
         --confirm) CONFIRM="${2:?missing --confirm value}"; shift 2 ;;
         --pilot-frames) PILOT_FRAMES="${2:?missing --pilot-frames value}"; shift 2 ;;
+        --provenance-preflight-only) PROVENANCE_PREFLIGHT_ONLY=true; shift ;;
         --help|-h) usage; exit 0 ;;
         *) die "unknown argument: $1" ;;
     esac
@@ -125,6 +127,25 @@ if [[ "${PROVENANCE_EXIT}" -ne 0 ]]; then
         printf 'source_input_modified=false\n'
     } >"${OUTPUT}/REAL_PILOT_FAILURE_RECEIPT.txt"
     die "input provenance preflight failed with exit code ${PROVENANCE_EXIT}; scientific processing was not started"
+fi
+
+MODEL_SHA_BEFORE="$(sha256sum "${PRODUCTION_MODEL}" | awk '{print $1}')"
+[[ "${MODEL_SHA_BEFORE}" == "${FROZEN_MODEL_SHA256}" ]] || {
+    die "production model changed after provenance preflight"
+}
+
+if [[ "${PROVENANCE_PREFLIGHT_ONLY}" == true ]]; then
+    [[ "${MOSEQ_PACKET_SYNTHETIC_TEST_MODE:-0}" == 1 ]] || {
+        die "--provenance-preflight-only is restricted to MOSEQ_PACKET_SYNTHETIC_TEST_MODE=1"
+    }
+    {
+        printf 'status=PASS\n'
+        printf 'scope=PROVENANCE_GATE_ONLY_SYNTHETIC_TEST\n'
+        printf 'scientific_processing_started=false\n'
+        printf 'production_model_sha256=%s\n' "${MODEL_SHA_BEFORE}"
+    } >"${OUTPUT}/PROVENANCE_PREFLIGHT_ONLY_RECEIPT.txt"
+    printf 'Synthetic provenance preflight passed; scientific processing was not started.\n'
+    exit 0
 fi
 
 mkdir -p \
@@ -242,6 +263,19 @@ run_stage 04_apply_frozen_model \
     --load-groups False
 [[ -f "${APPLIED_MODEL}" ]] || die "held-out model application output was not created: ${APPLIED_MODEL}"
 
+MODEL_SHA_AFTER="$(sha256sum "${PRODUCTION_MODEL}" | awk '{print $1}')"
+if [[ "${MODEL_SHA_AFTER}" != "${MODEL_SHA_BEFORE}" || "${MODEL_SHA_AFTER}" != "${FROZEN_MODEL_SHA256}" ]]; then
+    {
+        printf 'status=FAILED_HOLD\n'
+        printf 'reason=PRODUCTION_MODEL_IDENTITY_CHANGED_DURING_HELDOUT_APPLICATION\n'
+        printf 'production_model_sha256_before=%s\n' "${MODEL_SHA_BEFORE}"
+        printf 'production_model_sha256_after=%s\n' "${MODEL_SHA_AFTER}"
+        printf 'model_fit_started=false\n'
+        printf 'model_adaptation_started=false\n'
+    } >"${OUTPUT}/REAL_PILOT_FAILURE_RECEIPT.txt"
+    die "production model identity changed during held-out application"
+fi
+
 run_stage 05_summarize_handoffs \
     python "${SCRIPT_DIR}/helpers/summarize_real_pilot.py" \
     --extraction-h5 "${EXTRACTION_H5}" \
@@ -258,7 +292,9 @@ run_stage 05_summarize_handoffs \
     printf 'production_model_reference=%s\n' "${PRODUCTION_MODEL}"
     printf 'production_model_seed=%s\n' "${FROZEN_MODEL_SEED}"
     printf 'production_model_kappa=%s\n' "${FROZEN_MODEL_KAPPA}"
-    printf 'production_model_sha256=%s\n' "$(sha256sum "${PRODUCTION_MODEL}" | awk '{print $1}')"
+    printf 'production_model_sha256_before=%s\n' "${MODEL_SHA_BEFORE}"
+    printf 'production_model_sha256_after=%s\n' "${MODEL_SHA_AFTER}"
+    printf 'production_model_sha256_unchanged=true\n'
     printf 'applied_model_output=%s\n' "${APPLIED_MODEL}"
     printf 'applied_model_sha256=%s\n' "$(sha256sum "${APPLIED_MODEL}" | awk '{print $1}')"
     printf 'model_application=HELDOUT_ONLY_STORED_PARAMETERS\n'

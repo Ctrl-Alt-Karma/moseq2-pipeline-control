@@ -112,7 +112,12 @@ application. A mismatch writes an explicit `FAILED_HOLD` receipt and exits
 nonzero without normal scientific outputs. The only model operation is
 held-out `moseq2-model apply-model` against seed `20260802`, kappa `464159`,
 SHA-256 `5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964`;
-fitting, refitting, and adaptation remain prohibited.
+fitting, refitting, and adaptation remain prohibited. The expected recording
+hash must come from the frozen run specification. The operator hashes the
+production model before and after held-out use and fails if either identity
+differs from the frozen value. A synthetic-test-only preflight exit exists to
+prove a matching run-spec hash crosses the provenance gate without starting
+scientific processing.
 
 Modernization remains out of scope.
 
