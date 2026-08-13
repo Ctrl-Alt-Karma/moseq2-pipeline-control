@@ -94,8 +94,10 @@ Qualification tests using only new validation outputs:
 Real-data processing:
 
 - `06_run_approved_real_pilot.sh`: the only real-data processing script. It
-  requires both an explicit recording path and
-  `--confirm RUN_APPROVED_REAL_PILOT`.
+  requires a frozen run specification, explicit recording/PCA/model paths, and
+  `--confirm RUN_APPROVED_REAL_PILOT`. It checks expected versus observed
+  recording, PCA, and production-model SHA-256 values before scientific work,
+  then applies the frozen model held-out. It never fits or adapts a model.
 
 Packaging:
 
@@ -200,8 +202,11 @@ Expected fixture failures remain visible. Nothing converts a failure to a pass.
 
 1. Run `bash 05_inventory_real_recordings.sh --root "${VALIDATION_ROOT}"`.
 2. Review `recording_recommendation.md`.
-3. Record the approved recording, extraction config, classifier, and PCA
-   components before continuing.
+3. Record the approved recording, extraction config, classifier, PCA
+   components, and frozen production-model identity before continuing.
+4. Create the session run specification from
+   `real_session_run_spec.example.json`; bind the exact approved recording
+   SHA-256 rather than inferring it at run time.
 
 This batch reads OneDrive-mounted data through `/mnt/c`; it writes only the
 manifest under the new validation root.
@@ -209,12 +214,15 @@ manifest under the new validation root.
 ## Batch 5 — explicitly approved pilot
 
 1. Read `06_run_approved_real_pilot.sh --help`.
-2. Run it with `--root "${VALIDATION_ROOT}"`, the approved recording
-   path, config, PCA components, and the exact confirmation flag.
+2. Run it with `--root "${VALIDATION_ROOT}"`, the frozen run specification,
+   approved recording path, config, classifier, PCA components, frozen
+   production-model path, and the exact confirmation flag.
 3. Inspect stage receipts before considering any repeatability work.
 
-The script never starts a model fit. It ends after producing and validating
-model-input handoff data.
+The script fails before scientific processing if the run-spec path or hash
+bindings do not match. On success it performs extraction, PCA projection, and
+held-out `moseq2-model apply-model` with stored production-model whitening/model
+parameters. It never starts fitting, refitting, or adaptation.
 
 ## Batch 6 — package evidence
 

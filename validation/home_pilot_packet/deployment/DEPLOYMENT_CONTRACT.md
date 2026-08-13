@@ -104,6 +104,16 @@ The wrapper records the verified fingerprint and qualification receipt inside
 the new analysis output before launching the requested pipeline command.
 Bypassing the wrapper is outside the supported study procedure.
 
+For real-session pilots, the launched operator is
+`06_run_approved_real_pilot.sh`. Its frozen JSON run specification binds the
+recording, PCA components, and production-model paths and SHA-256 identities.
+The operator verifies those identities before ROI, extraction, PCA, or model
+application. A mismatch writes an explicit `FAILED_HOLD` receipt and exits
+nonzero without normal scientific outputs. The only model operation is
+held-out `moseq2-model apply-model` against seed `20260802`, kappa `464159`,
+SHA-256 `5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964`;
+fitting, refitting, and adaptation remain prohibited.
+
 Modernization remains out of scope.
 
 ## Preferred Windows/WSL2 transfer

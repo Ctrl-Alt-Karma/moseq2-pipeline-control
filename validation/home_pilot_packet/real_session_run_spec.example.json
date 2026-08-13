@@ -1,0 +1,18 @@
+{
+  "pca_components": {
+    "path": "/home/ajm/moseq_work/5xfad_exploratory_20/pca/pca_scores.h5",
+    "sha256": "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912"
+  },
+  "production_model": {
+    "kappa": 464159,
+    "path": "/home/ajm/moseq2-validation-20260730/analysis/locked_464159_k200_long_chain_convergence_sentinel_20260812_R1/model/model-k200-kappa464159-seed20260802-iter500.p",
+    "seed": 20260802,
+    "sha256": "5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964"
+  },
+  "recording": {
+    "path": "/mnt/c/REPLACE_WITH_FROZEN_SESSION/depth.dat",
+    "sha256": "REPLACE_WITH_FROZEN_RECORDING_SHA256"
+  },
+  "schema": "moseq2-real-session-run-spec-v1",
+  "session_id": "REPLACE_WITH_FROZEN_SESSION_ID"
+}

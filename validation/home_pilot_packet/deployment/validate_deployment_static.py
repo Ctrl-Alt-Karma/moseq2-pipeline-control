@@ -243,6 +243,34 @@ def main():
         require('ROOT=""' in script_text, script + " has an implicit root")
         require("--root is required" in script_text, script + " does not require root")
 
+    real_pilot = packet_text("06_run_approved_real_pilot.sh")
+    provenance_call = real_pilot.index("helpers/verify_real_pilot_provenance.py")
+    extraction_call = real_pilot.index("run_stage 01_find_roi")
+    model_call = real_pilot.index("moseq2-model apply-model")
+    require(
+        provenance_call < extraction_call,
+        "input provenance gate is not before extraction",
+    )
+    require(
+        extraction_call < model_call,
+        "frozen model application is not after extraction/PCA",
+    )
+    for phrase in (
+        "--run-spec is required",
+        'PROVENANCE_PYTHON="${LEGACY_CONDA_PREFIX}/bin/python"',
+        "FROZEN_MODEL_SHA256=",
+        "5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964",
+        "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912",
+        "scientific_processing_started=false",
+        "model_application=HELDOUT_ONLY_STORED_PARAMETERS",
+        "model_fit_started=false",
+        "model_adaptation_started=false",
+    ):
+        require(
+            phrase in real_pilot,
+            "real-pilot provenance/model control missing: " + phrase,
+        )
+
     first_commands = packet_text("FIRST_THREE_POWERSHELL_COMMANDS.md")
     for phrase in (
         r"C:\Users\AJM\Documents\MoSeq2-WSL-Backups",
@@ -257,6 +285,8 @@ def main():
     print("safe_process_environment_allowlist=PASS")
     print("backup_stopped_state_controls=PASS")
     print("reusable_validation_root_controls=PASS")
+    print("real_pilot_input_provenance_gate=PASS")
+    print("real_pilot_frozen_model_application=PASS")
     print("fabricated_preflight_mismatch=PASS")
     print("future_bootstrap_executed=false")
     print("golden_export_executed=false")
