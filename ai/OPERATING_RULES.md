@@ -53,3 +53,11 @@ protected state can remain isolated.**
 32. Fable receives completed substantive evidence worth independent review, not every intermediate operator step.
 33. Side conversations are not context corruption. Resume through a concise anchor check against durable state.
 34. Interaction style never overrides skepticism, evidence standards, technical reasoning, uncertainty reporting, independence, or willingness to disagree with AJ.
+
+## Scientific evidence transport and validation discipline
+
+35. When a reviewer must characterize a frozen executable rule, provide the authoritative executable artifact, protocol, and conformance receipt when practical. Do not reconstruct load-bearing semantics from prose when the exact artifact exists.
+36. A portable evidence package must satisfy exact set equality: manifested members equal physical transport members union explicit exclusion-ledger members. Every omitted manifested member belongs in the ledger regardless of artifact type.
+37. Freeze numeric, mechanically evaluable load-bearing validation rules before opening validation values. “Materially outside” is not a mechanical rule.
+38. Out-of-family flags trigger causal and scientific adjudication; they do not automatically exclude data or authorize retuning.
+39. Do not tune through a HOLD. Any scientific component changed after validation evidence is opened requires explicit Architect adjudication of whether the affected held-out evidence remains valid.

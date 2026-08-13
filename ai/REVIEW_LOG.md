@@ -1,5 +1,39 @@
 # Review Log
 
+## 2026-08-13 — final-kappa closeout and project lessons
+
+### Final-kappa disposition
+
+- Phase A seed `20260802`: independently verified `SEED_RESOLVED`, winner
+  `464159`, 66/66 singleton winner sets.
+- Phase B seed `20260803`: independently verified `SEED_RESOLVED`, winner
+  `464159`, 66/66 singleton winner sets.
+- Independent disposition: `FABLE_VERIFIER_PASS_PHASE_B_FINAL_KAPPA`.
+- Architect disposition: `ARCHITECT_V4_FINAL_PRODUCTION_KAPPA_SELECTED_464159`.
+- Mechanically reverified manifests: Phase A 74/74; Phase B 103/103.
+- Correct full Phase B verifier transport SHA-256:
+  `48a3e69baaaeaf91d70eff682bdf55b4ebc54e5414b2b2001db9e86bb1dce8b1`.
+
+### Lesson 1 — Phase A verifier semantics
+
+When a reviewer must characterize frozen executable semantics, provide the
+authoritative executable rule, protocol, and conformance receipt when practical.
+Do not rely on prose reconstruction. Phase A's first review had sufficient
+numeric evidence to reproduce the result but characterized the practical-winner
+and absolute-adequacy semantics incorrectly; the authoritative artifacts enabled
+the independent correction and direct scorer execution.
+
+### Lesson 2 — transport manifest / exclusion set equality
+
+Transport construction and verification should enforce:
+
+`manifest members = physical transport members UNION explicit exclusion members`
+
+with exact set equality. Every omitted manifested member belongs in the
+exclusion ledger regardless of artifact type. Phase B's six unledgered pycache
+omissions were independently classified as non-load-bearing package bookkeeping,
+but harmlessness does not make the constructor rule correct.
+
 ## Schema
 
 Each finding must contain:

@@ -1,97 +1,121 @@
 # Current State
 
-Date: 2026-08-01
+Date: 2026-08-13
 
-## Verdict and phase status
+## Verdict and gate status
 
-- Phase 0, golden-environment freeze: **CLOSED**, independent Fable `PASS`.
-- Phase 1, locked candidate worktrees: **CLOSED**, attachment-only independent
-  Fable `PASS`.
-- Phase 2, fixture-backed candidate qualification: **CLOSED BY ARCHITECT
-  ADJUDICATION**. The formal R1, R2, and R3 results remain **FAIL CLOSED**.
-- Architect adjudication: **SUBSTANTIVE FIXTURE-BACKED CANDIDATE QUALIFICATION
-  COMPLETE.** See `ai/PHASE2_FIXTURE_QUALIFICATION_CLOSEOUT_2026-08-01.md`.
-- Current boundary: a new architect chat must pass the read-only comprehension
-  check in `ai/HANDOFF_CURRENT.md`. No pilot design or execution authority has
-  been granted.
+- Generic K / seed / convergence calibration: **CLOSED**.
+- Final-kappa Phase A, seed `20260802`: **CLOSED**; `SEED_RESOLVED`, winner `464159`.
+- Final-kappa Phase B, seed `20260803`: **CLOSED**; `SEED_RESOLVED`, winner `464159`.
+- Two-seed conjunction: **FINAL_KAPPA_SELECTED**, winner `464159`.
+- Architect disposition: `ARCHITECT_V4_FINAL_PRODUCTION_KAPPA_SELECTED_464159`.
+- Independent Verifier disposition: `FABLE_VERIFIER_PASS_PHASE_B_FINAL_KAPPA`.
+- Production-model artifact: **FROZEN** to the seed-`20260802`, kappa-`464159`,
+  500-iteration final model under the Architect fallback rule recorded below.
+- Active scientific gate: **real-session production validation**.
+- Protocol: `REAL_SESSION_PRODUCTION_VALIDATION_PROTOCOL_V4_R1`, status
+  **ARCHITECT CANDIDATE R1 / NOT YET SEALED**.
+- This synchronization did not start real-session validation and did not retire
+  Architect V4.
 
-## Frozen production environment
+## Accepted claim boundary
 
-Katya's existing WSL2 Ubuntu 22.04 `moseq2-app` Conda environment, Python 3.7
-and NumPy 1.18.3, remains the sole supported production target for this study.
-Candidate source is supplied by the locked `PYTHONPATH`; it is not installed
-into the environment. Modernization, in-place package changes, and
-multi-environment equivalence claims remain out of scope.
+The accepted claim is: **kappa `464159` was selected under the sealed two-seed
+protocol on this corpus.** This is not a claim of universal seed robustness,
+unique optimality, mathematical convergence, biological validity, or validity
+on arbitrary future cohorts.
 
-## Locked candidate source
+K=`200` remains a working production model space. Five hundred iterations
+remains a working production budget. Neither is a universal convergence proof.
 
-| Repository | SHA |
+## Accepted production identities
+
+| Item | Accepted identity |
 |---|---|
-| `moseq2-extract` | `e7f585104ba25b66e5326c88c77a47e33db95635` |
-| `moseq2-pca` | `efb6fcfa5d5af5bb4274540c371d0ddf96440b78` |
-| `moseq2-model` | `6e542e3f1db125202d42b59f390c922281e64f39` |
-| `moseq2-viz` | `b80192dc20353bf77c36610f315543b57afa908c` |
-| `moseq2-app` | `e0b85201226d03e15944473a734f71417698c31e` |
+| Model source | `6e542e3f1db125202d42b59f390c922281e64f39` |
+| PCA path | `/home/ajm/moseq_work/5xfad_exploratory_20/pca/pca_scores.h5` |
+| PCA SHA-256 | `26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912` |
+| Locked changepoints SHA-256 | `71565ef2498f27882bbfff5e2ddcc939ed57bc9f8d075161b32f0482bfecea6b` |
+| Production kappa | `464159` |
+| Production seed | `20260802` |
+| Production-model path | `/home/ajm/moseq2-validation-20260730/analysis/locked_464159_k200_long_chain_convergence_sentinel_20260812_R1/model/model-k200-kappa464159-seed20260802-iter500.p` |
+| Production-model SHA-256 | `5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964` |
+| Artifact decision basis | `ARCHITECT_FALLBACK_RULE` |
+| Independent seed-B final-model SHA-256 | `a08851c85267d4cc687f4a1d2bb721ea2cf0adca85de96101a1dec4c60eb0209` |
+| Exact M_R2 implementation SHA-256 | `24e8523d7af9b6370d34e3a55e7ec049353563fa80d338f6ef3f76d7d42fbe10` |
 
-The existing candidate PR record remains useful audit context:
+Production regime: `max_states=200`, `num_iter=500`, `npcs=10`, `nlags=3`,
+`whiten=all`, `alpha=5.7`, `gamma=1000`, `ncpus=2`,
+`percent_split=0`, `noise_level=0`.
 
-| Repository | Draft PR | Head SHA | State |
-|---|---|---|---|
-| `moseq2-extract` | [#6](https://github.com/Ctrl-Alt-Karma/moseq2-extract/pull/6) | `e7f585104ba25b66e5326c88c77a47e33db95635` | Open, unmerged |
-| `moseq2-viz` | [#5](https://github.com/Ctrl-Alt-Karma/moseq2-viz/pull/5) | `b80192dc20353bf77c36610f315543b57afa908c` | Open, unmerged |
-| `moseq2-app` | [#5](https://github.com/Ctrl-Alt-Karma/moseq2-app/pull/5) | `e0b85201226d03e15944473a734f71417698c31e` | Open, unmerged |
+The locked corpus contains 20 UUIDs, 539,189 persisted PCA frames, 539,129
+modeled nonnegative frames, and 60 lag-padding labels.
 
-AJ is the sole merge authority. GitHub mergeability metadata is not review
-evidence.
+The supported execution environment remains the accepted WSL Ubuntu 22.04
+`moseq2-app` Conda environment with Python 3.7.12 and NumPy 1.18.3. Candidate
+source is supplied from locked worktrees; modernization or replacement requires
+its own equivalence evidence and cannot contaminate current validation.
 
-## Governed fixture and harness identities
+## Final-kappa evidence
 
-| Item | Identity |
+| Evidence | Identity / result |
 |---|---|
-| Viz fixture archive | `de6c4d30a67c800888fc27ec395ff8e3821b2903248235c972a63b0e72b27728` |
-| Extract fixture archive | `21f9dd7a55a44eae329c76ba48686c36cc26dc2da4264d199c7ccd3b7eb370f9` |
-| Accepted external harness | `/home/ajm/moseq2-test-harnesses/pytest541_cov251_20260801_R2` |
-| Harness evidence | `/home/ajm/moseq2-validation-20260730/evidence/pytest_harness_20260801_R2` |
+| Phase A root | `/home/ajm/moseq2-validation-20260730/analysis/locked_k200_500iter_final_kappa_phase_A_seed20260802_20260812_R1` |
+| Phase A manifest | `53643e27002cc89e2ecbcdaa798dabc60b2ff7b9e62def7d04b5a8b2c100d095`; 74/74 entries verified 2026-08-13 |
+| Phase A result | `SEED_RESOLVED`; winner `464159`; 66/66 winner sets singleton `{464159}` |
+| Phase B root | `/home/ajm/moseq2-validation-20260730/analysis/locked_k200_500iter_final_kappa_phase_B_seed20260803_20260813_R1` |
+| Phase B manifest | `b07a87756d27c2e72678e1a46fd759eedaa86e0a49ad185f2aa997ab41957ba5`; 103/103 entries verified 2026-08-13 |
+| Phase B result | `SEED_RESOLVED`; winner `464159`; 66/66 winner sets singleton `{464159}` |
+| Full Phase B verifier transport | `48a3e69baaaeaf91d70eff682bdf55b4ebc54e5414b2b2001db9e86bb1dce8b1` |
 
-The isolated harness binds pytest 5.4.1 and pytest-cov 2.5.1 without changing
-the golden Conda environment.
+The transport digest above is the authoritative 64-character value. A previous
+record lost its final hexadecimal character; that clerical truncation is not a
+second artifact identity.
 
-## Formal run record and adjudication
+## Closed calibration boundary
 
-| Evidence | Formal result | Substantive record |
-|---|---|---|
-| Fixture R1 | **FAIL CLOSED** | Archive safety rejected the exact zero-byte root-only `/` directory marker before extraction or testing; later narrowly adjudicated safe without rewriting R1. |
-| Fixture R2 | **FAIL CLOSED** | Nine viz selectors omitted `TestScalarUtils`; collection exited `4`, no test ran. |
-| Fixture R3 | **FAIL CLOSED** | Targeted confirmation passed 10/10 non-vacuously; candidate suites passed 128/128; seven contract tests failed solely because three repository environment variables were omitted; ignored app `.coverage` also changed. |
-| Script-03 R2 | **FAIL CLOSED** | Candidate suites included seven cross-repository contract passes; the immutable run's separate formal failures remain unchanged. |
+Do not add Seed C, K300, another kappa, an arbitrary 1000-iteration extension,
+a training-likelihood tie-break, a visualization-based selection rule, or a
+generic calibration redesign absent a direct contradiction in primary evidence.
 
-The accepted combined evidence is: targeted viz 9/9; extract `test_get_roi`
-1/1 over five real TIFF inputs; R3 provenance 1/1, app 40/40, extract 11/11,
-and viz 76/76; prior script-03 R2 cross-repository contracts 7/7. This supports
-the architect adjudication but does not convert any formal run to `PASS`.
+## Current open gate
 
-R3's ignored app `.coverage` artifact was preserved, verified, and removed.
-The protected app worktree was touched and then exactly restored. Closeout
-evidence is at:
+The next gate asks whether the frozen production model and pipeline behave as a
+trustworthy scientific instrument on real recordings. It does not test genotype
+or treatment effects and does not reopen model selection.
 
-`/home/ajm/moseq2-validation-20260730/evidence/fixture_qualification_closeout_20260801`
+The controlling candidate protocol is
+`validation/protocols/REAL_SESSION_PRODUCTION_VALIDATION_PROTOCOL_V4_R1.md`.
+Before it may be sealed, all eight pre-result bindings listed there must be
+reacquired and frozen without opening production-model validation outputs.
 
-## Unresolved scientific and custody risks
+## No-peek boundary
 
-- Exact installed commits for floating `pyhsmm`, `pybasicbayes`, and
-  `autoregressive` dependencies remain unresolved.
-- Pinned-Dask `svd_compressed` PCA remains unseeded; within-environment
-  variability is not yet characterized.
-- The active study flip-classifier bytes still require exact custody.
-- Real-recording structural behavior, legacy unstamped inputs, and mixed-policy
-  dataset handling have not been validated by this fixture closeout.
-- A future analysis machine remains unqualified until it reproduces the full
-  locked environment and passes the separate known-answer and guarded-launch
-  controls.
+Do not inspect final-model validation outputs, crowd movies, syllable usage,
+validation PCA/model diagnostics, genotype/treatment results, or biological
+effects until the validation roster, exact production identities, corpus-derived
+numeric QC rules, negative control, replay plan, and visualization implementation
+qualification have been bound as the protocol requires.
 
-## Authorization status
+## Project practices and backlog
 
-No merge is authorized. Script 04, real study-data inspection, and any
-real-recording pilot are unauthorized. The exact next phase is preparation for
-one bounded real-recording pilot, beginning only after a read-only new-architect
-comprehension check is reviewed and a later, explicit authorization is issued.
+- Frozen executable rules should travel with their authoritative protocol and
+  conformance receipt when a reviewer must characterize their semantics.
+- Transport construction must enforce exact set equality:
+  `manifest = physical contents UNION explicit exclusions`.
+- A HOLD is adjudicated; it is not tuned through.
+- Out-of-family flags are adjudication triggers, not automatic exclusions.
+- Later: golden regression harness, performance profiling, drift canary, rig
+  substitution planning, and the separate anti-aging study-design program.
+
+## Role and retirement boundary
+
+- AJ / Karma: Owner and sole final authority.
+- Hex / ChatGPT: Architect V4 and technical adjudicator.
+- Codex: primary Builder/operator.
+- Fable: independent Verifier or Scientific Counsel only when the active brief
+  explicitly names the role.
+
+This state sync **does not retire V4**. Formal retirement still requires a live
+Retirement Canon Flush, successor reconstruction, a bounded backward pass, and
+`PASS_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION`.

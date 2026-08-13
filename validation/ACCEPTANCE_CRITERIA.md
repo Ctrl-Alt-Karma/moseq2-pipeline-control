@@ -41,4 +41,15 @@ General-use approval requires all applicable criteria below. These are structura
 
 ## Real-recording gate
 
-Representative real recordings are required later before general-use approval. They remain external to Git and must be referenced through checksummed manifests. Passing structural tests alone does not authorize general use.
+Representative real recordings are required before general-use approval. They
+remain external to Git and must be referenced through checksummed manifests.
+Passing structural tests or final-kappa selection alone does not authorize
+general use.
+
+The controlling candidate gate is
+`validation/protocols/REAL_SESSION_PRODUCTION_VALIDATION_PROTOCOL_V4_R1.md`.
+It remains **NOT YET SEALED** until its eight pre-result bindings are frozen.
+Its PASS requires input/extraction integrity, numeric corpus-derived PCA/model
+rules, deterministic replay/equivalence, qualified visualization, recorded
+high-mass syllable judgments, fail-loud provenance behavior, and no retuning
+against validation outputs.
