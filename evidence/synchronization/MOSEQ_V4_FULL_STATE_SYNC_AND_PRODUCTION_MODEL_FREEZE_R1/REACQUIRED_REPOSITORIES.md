@@ -37,8 +37,12 @@ local branch `agent/v4-full-state-sync-production-freeze`.
 
 Post-write project-state content commit:
 `d8d1ac7feb12dd53a53beca4857e106958f59c41`. The metadata-only closeout
-commit, pushed refs, PR state, and final remote HEAD are recorded in Git history
-and the final operator report after publication.
+commit is `579376b8acab6b0114e02b1001a359ee5a67573f`. The existing PR branch was
+fast-forwarded to that commit. The resulting normal, non-force merge commit on
+`main` is `30a69d39663dd35e9b500e8a496696760bc6c175` with parents the pre-write
+`main` and the exact PR head. A subsequent receipt-only commit, if present, is
+identified by Git history and the final operator report because it cannot
+contain its own SHA.
 
 ## BRIDGE
 

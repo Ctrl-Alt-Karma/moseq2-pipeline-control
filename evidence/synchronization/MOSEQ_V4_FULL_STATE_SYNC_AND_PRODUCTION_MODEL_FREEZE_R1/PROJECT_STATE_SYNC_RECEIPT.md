@@ -5,6 +5,14 @@ Operation: `MOSEQ_V4_FULL_STATE_SYNC_AND_PRODUCTION_MODEL_FREEZE_R1`
 Project-state content commit:
 `d8d1ac7feb12dd53a53beca4857e106958f59c41`
 
+Receipt metadata commit:
+`579376b8acab6b0114e02b1001a359ee5a67573f`
+
+Published existing PR branch: `agent/bootstrap-pipeline-control`
+
+Normal merge commit to `main`:
+`30a69d39663dd35e9b500e8a496696760bc6c175`
+
 ## Files updated
 
 | File | Reason |
@@ -73,7 +81,9 @@ The original dirty project checkout and its two untracked entries were not
 modified. BRIDGE was read-only and required no canon edit.
 
 The content commit above contains the complete state/protocol/receipt change.
-The later metadata-only closeout commit, pushed refs, PR merge identity, and
-final remote HEAD are authoritative in repository Git history and the final
-operator return after publication; a commit cannot truthfully contain its own
-not-yet-created SHA.
+The metadata commit binds it, and the merge commit has parents
+`2834a8378095131b2743bd7a6e38925e0c1cc097` and
+`579376b8acab6b0114e02b1001a359ee5a67573f`. A subsequent receipt-only
+publication commit, if present, and final remote HEAD are authoritative in Git
+history and the final operator return; a commit cannot truthfully contain its
+own not-yet-created SHA.
