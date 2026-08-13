@@ -1,0 +1,88 @@
+suite	collected_node	focused_selection	focused_outcome	full_outcome	full_classification
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_clean_frames	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_compute_scalars	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_compute_scalars_nonzero_velocity_components	SELECTED	PASSED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_convert_integer_pixels_to_fractional_millimetres	SELECTED	PASSED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_crop_and_rotate	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	ENVIRONMENT/TEST-SETUP FAILURE BEFORE PRODUCT CALL
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_feature_hampel_filter	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_get_frame_features	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_get_largest_cc	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_get_roi	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_model_smoother	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+extract	tests/unit_tests/test_extract_proc.py::TestExtractProc::test_velocity_3d_px_output_policy	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_all_stamped_and_agreeing_is_silent	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_all_unstamped_warns_but_does_not_raise	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_allow_mixed_downgrades_conflict_to_a_loud_warning	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_allow_mixed_downgrades_stamped_unstamped_mix	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_conflicting_policy_raises_and_names_key_and_files	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_empty_input_is_consistent	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_error_message_offers_the_override	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_policy_present_in_one_file_only_is_a_conflict	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_provenance_error_is_a_value_error	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_single_stamped_file_is_consistent	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceGate::test_stamped_mixed_with_unstamped_raises	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_agreeing_but_incomplete_policies_warn	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_different_area_policies_fail	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_different_git_sha_with_same_policies_is_fine	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_every_required_policy_is_actually_compared	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_identical_full_policies_pass_silently	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_pinhole_plus_small_angle_fails	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestRequiredScalarPolicies::test_required_extraction_keys_match_documented_snapshot	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestCrossPackageScope::test_disjoint_packages_are_not_claimed_compatible	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestCrossPackageScope::test_two_files_of_the_same_package_still_conflict	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_conflicting_dual_paths_are_corrupt	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_describe_lists_policies	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_describe_unstamped_as_unknown	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_every_corrupt_input_hard_fails_pooling	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_missing_record_reads_as_none	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_non_object_json_is_corrupt	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_one_corrupt_and_one_valid_hard_fails_pooling	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_reads_extracts_preferred_path	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_semantically_identical_dual_paths_are_accepted	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_truncated_json_is_corrupt	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestProvenanceReading::test_valid_historical_path_is_supported	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_compatible_complete_records_can_pool	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_complete_and_not_applied_refuse_to_pool	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_corrupt_flip_record_hard_fails	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_different_complete_records_refuse_to_pool	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_incomplete_and_failed_records_hard_fail	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_legacy_latch_only_hard_fails	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_non_mapping_flip_record_hard_fails	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_unstamped_corrected_and_plain_still_refuse	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestFlipCorrectionPolicy::test_update_sentinel_hard_fails	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestPoolingBoundaryIsGated::test_conflicting_policies_refuse_to_pool	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestPoolingBoundaryIsGated::test_override_gets_past_the_gate	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_provenance.py::TestPoolingBoundaryIsGated::test_stamped_unstamped_mix_refuses_to_pool	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_compute_all_pdf_data	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_compute_mouse_dist_to_center	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_compute_syllable_position_heatmaps	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_convert_legacy_scalars	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_convert_pxs_to_mm	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_convert_pxs_to_mm_matches_camera_intrinsics	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_generate_empty_feature_dict	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_get_scalar_map	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_is_legacy	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_nanzscore	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_pca_matches_labels	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_process_scalars	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_scalar_triggered_average	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_scalars_to_dataframe	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestScalarUtils::test_star_valmap	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	BLOCKED BY ABSENT REPOSITORY FIXTURE/DATA
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_behavioral_statistics_rejects_manual_legacy_dataframe	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_downstream_analysis_works_without_the_key	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_explicit_request_raises_actionable_error	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_get_scalar_map_drops_legacy_key_without_losing_mapping	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_legacy_conversion_does_not_recreate_it	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	CURRENT CYTOOLZ COMPATIBILITY FAILURE
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_legacy_numeric_column_is_dropped_with_warning	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_legacy_numeric_mapping_stays_a_mapping	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_metadata_columns_follow_include_keys_not_source_dict_order	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_model_parse_errors_are_not_swallowed	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_not_produced_in_new_feature_dict	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_position_plot_rejects_manual_legacy_dataframe	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_public_scalar_selectors_reject_legacy_dataframe_column	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_scalar_embedding_rejects_manual_legacy_dataframe	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_scalar_plot_rejects_manual_legacy_dataframe	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestDeprecatedScalars::test_valid_scalars_are_not_blocked	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestPinholeProjection::test_focal_lengths_and_pixel_scale	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestPinholeProjection::test_image_centre_maps_to_origin	SELECTED	PASSED	PASSED	PASS
+viz	tests/unit_tests/test_scalar_utils.py::TestPinholeProjection::test_legacy_force_conversion_reaches_the_pinhole_path	NOT COLLECTED BY FOCUSED COMMAND	NOT COLLECTED	FAILED	CURRENT CYTOOLZ COMPATIBILITY FAILURE

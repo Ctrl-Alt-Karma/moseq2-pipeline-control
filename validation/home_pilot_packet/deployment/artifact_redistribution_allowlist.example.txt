@@ -1,0 +1,10 @@
+# One absolute cache-artifact path per line.
+#
+# Copy this file outside the packet, review package redistribution terms, and
+# list only artifacts approved for inclusion in the private offline bundle.
+# export_offline_environment_bundle.sh copies no cache artifact merely because
+# it happens to exist. Missing approval is reported and keeps the bundle
+# INCOMPLETE; the script never guesses at legal status.
+#
+# /home/ajm/miniforge3/pkgs/example-1.0-py37_0.conda
+# /home/ajm/.cache/pip/wheels/aa/bb/cc/example-1.0-py3-none-any.whl

@@ -1,0 +1,43 @@
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Local environments and tool state
+.venv/
+venv/
+envs/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and local overrides
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Raw or scratch data directories
+raw/
+raw-data/
+raw-recordings/
+data/raw/
+work/
+tmp/
+temp/
+
+# Heavy/generated run products
+validation/runs/**/outputs/
+validation/runs/**/cache/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
