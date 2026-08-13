@@ -35,9 +35,10 @@ Neither was modified, deleted, staged, or included. All project edits were made
 in an isolated clean worktree from `origin/agent/bootstrap-pipeline-control` on
 local branch `agent/v4-full-state-sync-production-freeze`.
 
-Post-write commits, pushed refs, PR state, and final remote HEAD are recorded in
-the operation's `PROJECT_STATE_SYNC_RECEIPT.md`, Git history, and final operator
-report after publication.
+Post-write project-state content commit:
+`d8d1ac7feb12dd53a53beca4857e106958f59c41`. The metadata-only closeout
+commit, pushed refs, PR state, and final remote HEAD are recorded in Git history
+and the final operator report after publication.
 
 ## BRIDGE
 

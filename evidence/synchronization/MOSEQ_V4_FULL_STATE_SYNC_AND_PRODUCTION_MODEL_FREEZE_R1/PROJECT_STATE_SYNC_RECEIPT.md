@@ -2,6 +2,9 @@
 
 Operation: `MOSEQ_V4_FULL_STATE_SYNC_AND_PRODUCTION_MODEL_FREEZE_R1`
 
+Project-state content commit:
+`d8d1ac7feb12dd53a53beca4857e106958f59c41`
+
 ## Files updated
 
 | File | Reason |
@@ -69,6 +72,8 @@ validation-model application, biological analysis, or environment change ran.
 The original dirty project checkout and its two untracked entries were not
 modified. BRIDGE was read-only and required no canon edit.
 
-Exact commit, push, PR, merge, and final remote identities are authoritative in
-the repository Git history and the final operator return after publication; a
-commit cannot truthfully contain its own not-yet-created SHA.
+The content commit above contains the complete state/protocol/receipt change.
+The later metadata-only closeout commit, pushed refs, PR merge identity, and
+final remote HEAD are authoritative in repository Git history and the final
+operator return after publication; a commit cannot truthfully contain its own
+not-yet-created SHA.
