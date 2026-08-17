@@ -218,7 +218,7 @@
     }
   ],
   "accepted_operator_commit": "f026298a0cf2a0fa97bedb29245424bddcf0713b",
-  "accepted_packet_manifest_sha256": "8442e840f4c4ce0e0f31707b5f8fc93a175f2975e8603245c8403a8470d5b906",
+  "accepted_packet_manifest_sha256": "37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef",
   "accepted_packet_revision": "R4",
   "canonicalization": [
     {
@@ -259,6 +259,7 @@
   "operator_on_disk_sha256": "f01f6c45b1407324e8dcae9542fb7ef3900071d09b47cc9c18124c8cb8325580",
   "operator_provenance_note": "The operator entry point 08_run_r1_full_session_validation.sh is byte-identical between R3 and R4; operator_on_disk_sha256 is therefore unchanged. R4 changes one pre-science helper (record_r1_raw_frame_accounting.py) and its gate fixture, so the binding moves to the R4 packet revision and commit.",
   "original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
+  "packet_manifest_rebinding_note": "Rebound after a documentary evidence-consistency correction to evidence/R4_QUALIFICATION_REPORT.json (full_operator_gate.candidate_recording_processed true -> false, matching the gate test and its captured output). Operator code, gate logic, comparator code and the scientific partition are unchanged.",
   "schema": "moseq-r1-replay-comparison-contract-v1",
   "schema_derivation": {
     "authority": "operator and locked pipeline source only; no candidate output was opened to derive this schema",

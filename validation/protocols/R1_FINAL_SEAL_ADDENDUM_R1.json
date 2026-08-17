@@ -10,7 +10,7 @@
       "candidate_data_read": false,
       "case_count": 19,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
-      "sha256": "eeae5bd19a65e2d918c613cc3252918328ebdbc6c208429892d018385c68a3e1",
+      "sha256": "452a19206a07552acc9d6a247f49dc12904a18cf2d009c3da05a79c4b30372d2",
       "status": "PASS",
       "synthetic_fixture_only": true
     },
@@ -20,11 +20,11 @@
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "527a1d006cecdc45509a48a6541ed78a3f61613ddd1e8abf9184f1338428fb70"
+      "sha256": "9d569a5bfe9e4882fd92646787137fe565080c9e4fe4e255eedbb2580a983a44"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "16ea7021e24747aee0e032f8afe0b99edb6ad4d67c8d3c80dad991ecd98886a7"
+      "sha256": "5fa347777ce5769e5ae93f97d288036b5b7a40b1e40827262d61f7d4f0264819"
     }
   },
   "carried_forward_unchanged": {
@@ -37,7 +37,8 @@
   "chronology": [
     "2026-08-17 fc7cacc9 - replay comparison contract, comparator and 18-case qualification frozen before any primary candidate execution existed",
     "2026-08-17 delta - Counsel implementation hold; C1 corrected to own-root, Q19 added, 19/19 requalified, qualification claim narrowed; scientific partition untouched",
-    "2026-08-17 R3->R4 - pre-science raw-frame-accounting compatibility remediation; replay contract provenance rebound to the R4 operator commit; scientific partition byte-identical; comparator code unchanged; requalified 19/19"
+    "2026-08-17 R3->R4 - pre-science raw-frame-accounting compatibility remediation; replay contract provenance rebound to the R4 operator commit; scientific partition byte-identical; comparator code unchanged; requalified 19/19",
+    "2026-08-17 R4 evidence-consistency delta - documentary evidence correction only: evidence/R4_QUALIFICATION_REPORT.json field full_operator_gate.candidate_recording_processed corrected from true to false to agree with the gate test and its captured output. No operator code, gate logic, comparator code, scientific setting, partition class or raw data changed."
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -68,9 +69,31 @@
     "PARTIALLY_ESTABLISHED": 0
   },
   "r1_state": "SEALED",
+  "r4_evidence_consistency_correction": {
+    "already_pushed_commits_rewritten": false,
+    "artifact": "validation/home_pilot_packet/evidence/R4_QUALIFICATION_REPORT.json",
+    "authority": "tests/test_r1_full_session_operator_gate.sh emits candidate_recording_processed=false and evidence/R4_FULL_OPERATOR_GATE_OUTPUT.txt records the same",
+    "candidate_science_executed": false,
+    "cause": "the report generator recorded whether the assertion line was present rather than the value it asserted, inverting the sense",
+    "classification": "DOCUMENTARY_EVIDENCE_CORRECTION",
+    "comparator_code_changed": false,
+    "corrected_packet_manifest_sha256": "37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef",
+    "corrected_report_sha256": "11c08c9d552e1ff1d2e2db2d77b307233be10914b846bdbb279c60c6e0865e60",
+    "corrected_value": false,
+    "field": "full_operator_gate.candidate_recording_processed",
+    "gate_logic_changed": false,
+    "must_match_or_declared_ignored_changed": false,
+    "operator_code_changed": false,
+    "packet_manifest_entries": 65,
+    "previous_packet_manifest_sha256": "8442e840f4c4ce0e0f31707b5f8fc93a175f2975e8603245c8403a8470d5b906",
+    "previous_report_sha256": "5ce5e890b490f9fae3b55bc4389f396de82ee8e01503a9fc53f04f6c8924e70a",
+    "previous_value": true,
+    "raw_data_changed": false,
+    "scientific_settings_changed": false
+  },
   "r4_operator_rebinding": {
     "accepted_operator_commit": "f026298a0cf2a0fa97bedb29245424bddcf0713b",
-    "accepted_packet_manifest_sha256": "8442e840f4c4ce0e0f31707b5f8fc93a175f2975e8603245c8403a8470d5b906",
+    "accepted_packet_manifest_sha256": "37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef",
     "accepted_packet_revision": "R4",
     "candidate_science_during_remediation": false,
     "changed_member": "validation/home_pilot_packet/helpers/record_r1_raw_frame_accounting.py",

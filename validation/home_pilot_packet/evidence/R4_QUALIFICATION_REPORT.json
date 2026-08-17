@@ -43,7 +43,7 @@
       "production_model_before_after_immutability",
       "symlink_escape_rejected"
     ],
-    "candidate_recording_processed": true,
+    "candidate_recording_processed": false,
     "exit_code": 0,
     "fixture_depth_resolution": [
       512,
