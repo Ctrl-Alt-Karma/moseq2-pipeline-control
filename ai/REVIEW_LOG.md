@@ -310,3 +310,16 @@ access-limited rather than absent.
 - Builder note carried forward: corpus B1 values will be in-sample with respect to the
   whitening the corpus itself estimated, so a healthy new session may sit wider than
   corpus extrema. Predeclared as interpretation caution; it does not alter the rule.
+
+## 2026-08-17 — Tier-B corpus envelope computation
+
+- Formula-before-values discipline held end to end: the metric identity was frozen
+  while no value existed, then the values were computed under that frozen identity
+  without modification.
+- 20/20 corpus sessions evaluated, zero fail-loud conditions. Corpus order was taken
+  from the frozen model `keys` roster, never the HDF5 group listing, which is the
+  trap recorded earlier as D-034.
+- Extrema are empirical with no added tolerance. The in-sample caution recorded at
+  freeze stands and does not alter the rule.
+- All ten pre-seal rows are now closed. R1 sealing remains an Architect action and
+  was not performed by the Builder.

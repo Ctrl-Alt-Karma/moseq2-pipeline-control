@@ -1,9 +1,10 @@
 > **Superseded 2026-08-17.** The live handoff is
-> `ai/HANDOFF_2026-08-17_R1_TIER_B_FORMULA_FREEZE_R1.md`; earlier handoffs remain
-> immutable history. Tier-B **formulas are frozen** but Tier-B **corpus values remain
-> uncomputed and no envelope exists**. Matrix is 9 CLOSED / 1 PARTIALLY ESTABLISHED /
-> 0 OPEN. **R1 remains UNSEALED.** `ai/OPEN_QUESTIONS.md` is authoritative for
-> row-level state. The text below is preserved as written and is not rewritten.
+> `ai/HANDOFF_2026-08-17_R1_TIER_B_CORPUS_ENVELOPES_R1.md`; earlier handoffs remain
+> immutable history. Tier-B formulas are frozen **and** the numerical corpus
+> envelopes are computed. Matrix is 10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN.
+> **R1 remains UNSEALED** — sealing is an Architect action.
+> `ai/OPEN_QUESTIONS.md` is authoritative for row-level state. The text below is
+> preserved as written and is not rewritten.
 
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 

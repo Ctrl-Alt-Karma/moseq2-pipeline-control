@@ -265,3 +265,15 @@ Additive. Nothing above is rewritten.
 - OQ-V4-005 CLOSED; OQ-V4-006 remains PARTIALLY ESTABLISHED pending numerical
   envelopes. Matrix: **9 CLOSED, 1 PARTIALLY ESTABLISHED, 0 OPEN.**
 - **R1 remains UNSEALED.** No validation-candidate science occurred.
+
+## 2026-08-17 — Tier-B corpus envelopes computed (additive)
+
+- The frozen Tier-B formulas were applied unchanged to the exact 20-session corpus
+  `keys` roster. **20/20 evaluated, zero fail-loud conditions.**
+- Frozen numerical reference envelopes:
+  **B1_lower = 2.410095327226669, B1_upper = 3.925567393155021, B2_lower = 0.9979228486646884.**
+- Flag rules unchanged: B1 two-sided, B2 lower-only. Any breach is **HOLD FOR
+  ADJUDICATION**, never automatic failure, exclusion, retuning or threshold movement.
+- OQ-V4-006 CLOSED. Matrix: **10 CLOSED, 0 PARTIALLY ESTABLISHED, 0 OPEN.**
+- **R1 remains UNSEALED.** Sealing is an Architect action and was not performed here.
+- No validation-candidate data was accessed and no candidate science occurred.
