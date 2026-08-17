@@ -157,6 +157,17 @@ automatically discard the session, authorize PCA tuning, or permit threshold
 movement after values are seen. A challenging session's known stressor may
 inform only the predeclared expected-flag dimensions.
 
+### R1 clarification — reconstruction-quality requirement
+
+The accepted PCA implementation (`moseq2-pca`
+`efb6fcfa5d5af5bb4274540c371d0ddf96440b78`) exposes no implemented
+reconstruction-error or reconstruction-quality diagnostic; source retains
+reconstruction error only as an unimplemented TODO. For R1, the
+reconstruction-quality requirement is therefore explicitly waived by documented
+source absence rather than replaced by a new diagnostic, and the supported Tier-B
+battery is the frozen magnitude-and-coverage battery bound by the Tier-B
+formula-freeze artifact.
+
 ## 9. Tier C — model application and reproducibility
 
 Apply the frozen production model with no refit or adaptation. For every session

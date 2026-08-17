@@ -246,3 +246,22 @@ Additive. Nothing above is rewritten.
   candidate, or on any other real recording, and no threshold was derived.
 - Matrix: **8 CLOSED, 2 PARTIALLY ESTABLISHED, 0 OPEN.** **R1 remains UNSEALED.**
 - No validation-candidate science occurred.
+
+## 2026-08-17 — Tier-B formulas frozen before values (additive)
+
+- **Tier-B formulas are FROZEN**, before any Tier-B value exists. B1
+  `tier_b_whitened_score_rms_radius` operates in the exact frozen whitened 10-PC
+  space the production model consumes and is two-sided; B2
+  `tier_b_finite_score_row_fraction` is lower-only. Zero finite rows is an
+  evidence-level HOLD. Fail-loud rules cover transform nonfinites and solve failure.
+- The whitening identity was read unchanged from the frozen model artifact and never
+  re-estimated: mu (10,), L (10,10), offset (1,) observed **0.0**, all finite.
+- Reconstruction quality is **NOT_SUPPORTED_WITHOUT_NEW_METHOD** on bound source
+  evidence; the protocol carries a bounded R1 clarification waiving it by documented
+  absence rather than substituting an invented diagnostic.
+- **Tier-B corpus values remain UNCOMPUTED and no envelope exists.** Envelope
+  construction is frozen as a method only. Any future breach is HOLD FOR
+  ADJUDICATION, never automatic failure or threshold movement.
+- OQ-V4-005 CLOSED; OQ-V4-006 remains PARTIALLY ESTABLISHED pending numerical
+  envelopes. Matrix: **9 CLOSED, 1 PARTIALLY ESTABLISHED, 0 OPEN.**
+- **R1 remains UNSEALED.** No validation-candidate science occurred.

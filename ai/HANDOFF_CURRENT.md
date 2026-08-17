@@ -1,9 +1,9 @@
 > **Superseded 2026-08-17.** The live handoff is
-> `ai/HANDOFF_2026-08-17_R1_REPLACEMENTS_TIERB_REACQUISITION_R1.md`; earlier handoffs
-> remain immutable history. Replacements are frozen and OQ-V4-003 is CLOSED. The
-> matrix is 8 CLOSED / 2 PARTIALLY ESTABLISHED / 0 OPEN. **R1 remains UNSEALED and
-> Tier-B remains UNFROZEN.** `ai/OPEN_QUESTIONS.md` is authoritative for row-level
-> state. The text below is preserved as written and is not rewritten.
+> `ai/HANDOFF_2026-08-17_R1_TIER_B_FORMULA_FREEZE_R1.md`; earlier handoffs remain
+> immutable history. Tier-B **formulas are frozen** but Tier-B **corpus values remain
+> uncomputed and no envelope exists**. Matrix is 9 CLOSED / 1 PARTIALLY ESTABLISHED /
+> 0 OPEN. **R1 remains UNSEALED.** `ai/OPEN_QUESTIONS.md` is authoritative for
+> row-level state. The text below is preserved as written and is not rewritten.
 
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 

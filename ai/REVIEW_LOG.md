@@ -296,3 +296,17 @@ access-limited rather than absent.
 - Recorded honestly: reconstruction error is not emitted by the accepted pipeline and
   its residual target is not persisted. No substitute metric was invented to satisfy
   the protocol phrase.
+
+## 2026-08-17 — Tier-B formula freeze
+
+- Independent Scientific Counsel marker `PASS_FABLE_COUNSEL_R1_TIER_B_FORMULA_FREEZE_R1`;
+  Architect disposition `PASS_ARCHITECT_COUNSEL_R1_TIER_B_FORMULA_FREEZE_R1`. The local
+  counsel receipt is a durable pointer to that accepted result and explicitly does not
+  claim the Builder reproduced the review.
+- The freeze was performed with no Tier-B value in existence, which is the control
+  that makes the metric choice honest rather than convenient.
+- Reconstruction error was not substituted with an invented metric. The waiver rests
+  on bound source evidence: an unimplemented TODO at `moseq2_pca/pca/util.py:246`.
+- Builder note carried forward: corpus B1 values will be in-sample with respect to the
+  whitening the corpus itself estimated, so a healthy new session may sit wider than
+  corpus extrema. Predeclared as interpretation caution; it does not alter the rule.
