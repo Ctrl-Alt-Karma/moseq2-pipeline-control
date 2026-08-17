@@ -283,3 +283,16 @@ finding. No scientific result changed; no candidate was processed.
 A negative existence claim is only as strong as the scope actually searched. Record
 the scopes, name the evidence namespaces, and classify unsearched planes as
 access-limited rather than absent.
+
+## 2026-08-17 — R1 replacement freeze and Tier-B formula reacquisition
+
+- Replacement freeze: mechanical. Eligible universe reproduced exactly against the
+  accepted receipt; anchors reproduced the frozen primaries; coverage, non-overlap
+  and non-emptiness proven. ARCHITECT_ADJUDICATED for the rule, MECHANICALLY_VERIFIED
+  for the derived queues.
+- Tier-B: formula and source semantics only, deliberately performed before any value
+  was seen, so no formula could be chosen because its real-data values looked
+  convenient. The recommendation is Builder-proposed and not controlling.
+- Recorded honestly: reconstruction error is not emitted by the accepted pipeline and
+  its residual target is not persisted. No substitute metric was invented to satisfy
+  the protocol phrase.

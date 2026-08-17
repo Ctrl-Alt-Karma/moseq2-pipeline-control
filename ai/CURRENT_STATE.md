@@ -229,3 +229,20 @@ Additive. Nothing above is rewritten.
 - **No validation-candidate science occurred** and no candidate result-bearing
   artifact was opened.
 - Live handoff: `ai/HANDOFF_2026-08-17_V5_CONTINUITY_RECOVERY_R2.md`.
+
+## 2026-08-17 — R1 replacements frozen; Tier-B formula reacquired (additive)
+
+- **Predetermined replacements are frozen.** The eight-session primary roster is
+  unchanged and was not reselected. Eight non-empty replacement strata were derived
+  deterministically and result-blind from the accepted eligible universe; 57
+  replacements cover every eligible non-primary candidate exactly once. OQ-V4-003
+  moves to CLOSED.
+- **Tier-B formula reacquisition is complete and pending Architect adjudication.**
+  The recommended minimal battery is per-session 10-PC score magnitude (two-sided)
+  and per-session finite-row fraction (lower-only), which are exact set complements
+  on the row predicate. Reconstruction error is supported only by an exact inverse
+  transform whose residual target the pipeline does not persist.
+- **Tier-B remains UNFROZEN.** No Tier-B value was computed on the corpus, on any
+  candidate, or on any other real recording, and no threshold was derived.
+- Matrix: **8 CLOSED, 2 PARTIALLY ESTABLISHED, 0 OPEN.** **R1 remains UNSEALED.**
+- No validation-candidate science occurred.

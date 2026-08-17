@@ -1,10 +1,9 @@
-> **Superseded 2026-08-17. V5 continuity recovery complete.** The live handoff is
-> `ai/HANDOFF_2026-08-17_V5_CONTINUITY_RECOVERY_R2.md`. Its immediate predecessor is
-> `ai/HANDOFF_2026-08-17_ARCHITECT_SUCCESSION_COMPLETE_R1.md`; earlier retirement
-> handoffs remain immutable history. Architect V5 is RETIRED and the successor
-> Architect is ACTIVE. R1 remains UNSEALED and Tier-B remains UNFROZEN.
-> `ai/OPEN_QUESTIONS.md` is authoritative for row-level state. The text below is
-> preserved as written and is not rewritten.
+> **Superseded 2026-08-17.** The live handoff is
+> `ai/HANDOFF_2026-08-17_R1_REPLACEMENTS_TIERB_REACQUISITION_R1.md`; earlier handoffs
+> remain immutable history. Replacements are frozen and OQ-V4-003 is CLOSED. The
+> matrix is 8 CLOSED / 2 PARTIALLY ESTABLISHED / 0 OPEN. **R1 remains UNSEALED and
+> Tier-B remains UNFROZEN.** `ai/OPEN_QUESTIONS.md` is authoritative for row-level
+> state. The text below is preserved as written and is not rewritten.
 
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 
