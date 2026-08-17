@@ -1,0 +1,57 @@
+{
+  "architect_disposition": "PASS_ARCHITECT_R1_TIER_B_CORPUS_ENVELOPES_R1",
+  "bound_bindings": {
+    "accepted_r3_operator_commit": "59b15ce796bdda2b1d534fc34cded3e877360cac",
+    "accepted_r3_packet_manifest_sha256": "3d9c3442e63453be9b4a74bafeb2ba8ef0d99cfebd86dbb6cedc969fa413895b",
+    "deterministic_replay_binding": "first member of the frozen ordered eight-session roster, selected result-blind; one replay, both rigs sharing the same stored-recording downstream path; identity protected",
+    "eight_session_roster_receipt_sha256": "e8526258176c30f3856a121bcea8cd2d44396d6a53537b16c4259a0de5743716",
+    "predetermined_replacement_receipt_sha256": "c6f1fd96af1d0e671dac8a681402d0d541288f2882b2a67ef34fcb27c3a25aee",
+    "r1_run_spec_manifest_sha256": "74febdaac0e0d2a52b48b4bba648b25c1d91c03064a53a9596a714ae18929e3a",
+    "tier_b_corpus_envelope_receipt_sha256": "122a0a76af2179c875782e32c471dd65300de6f375c9b3c4b9c2b16c92562506",
+    "tier_b_formula_freeze_sha256": "87907d48a4897a5295da52ec0765d51035ffaa72cc5a262b0966e5d3a4dd35b9",
+    "tier_c_disposition": "PASS_TIER_C_IDENTICAL_PATH_CORPUS_ENVELOPES",
+    "tier_c_evidence_transport_sha256": "623aebf7d82b9fb9bfce9c2f06f4f6f4f9b4f0b79eaefc052ec56c1be8249812",
+    "tier_e_machinery_receipt_sha256": "a4c49384a809935aee1fda78c1769e41c4aaa26b9234a9f456aae8b2c49fff2d",
+    "tier_e_negative_control": "INTENTIONAL INPUT-PROVENANCE CHECKSUM MISMATCH; fails before ROI/extraction/PCA/model with scientific_processing_started=false",
+    "visualization_qualification_transport_sha256": "623aebf7d82b9fb9bfce9c2f06f4f6f4f9b4f0b79eaefc052ec56c1be8249812",
+    "visualization_result": "PASS_VISUALIZATION_ORIENTATION_REGRESSION"
+  },
+  "canonical_pre_seal_parent": "a97e20c444de5312fa2f23b48c76816137f2df44",
+  "frozen_scientific_identities": {
+    "corpus_order_sha256": "cb1a7b4676c3ee64ad006c26ae19f5a90a84811c7a2955d9c54321564bb046bd",
+    "moseq2_app": "e0b85201226d03e15944473a734f71417698c31e",
+    "moseq2_extract": "e7f585104ba25b66e5326c88c77a47e33db95635",
+    "moseq2_model": "6e542e3f1db125202d42b59f390c922281e64f39",
+    "moseq2_pca": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+    "moseq2_viz": "b80192dc20353bf77c36610f315543b57afa908c",
+    "pca_scores_h5_sha256": "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912",
+    "production_model_sha256": "5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964"
+  },
+  "pre_seal_integrity": {
+    "candidate_scientific_processing_before_seal": false,
+    "scientific_processing_started": false,
+    "validation_candidate_result_inspected_before_seal": false
+  },
+  "pre_seal_matrix": {
+    "CLOSED": 10,
+    "OPEN": 0,
+    "PARTIALLY_ESTABLISHED": 0
+  },
+  "protocol_id": "REAL_SESSION_PRODUCTION_VALIDATION_PROTOCOL_V4_R1",
+  "protocol_status": "SEALED \u2014 ARCHITECT R1",
+  "r1_sealed": true,
+  "schema": "moseq-r1-final-seal-v1",
+  "seal_scope": "documentary. Sealing the protocol does not authorize execution; the next scientific operation requires separate Architect authorization.",
+  "seal_timestamp_utc": "2026-08-17T17:33:25Z",
+  "tier_b_numerical_envelopes": {
+    "B1_flag_rule": "flag if B1 < B1_lower OR B1 > B1_upper (TWO_SIDED)",
+    "B1_lower": 2.410095327226669,
+    "B1_lower_repr": "2.410095327226669",
+    "B1_upper": 3.925567393155021,
+    "B1_upper_repr": "3.925567393155021",
+    "B2_flag_rule": "flag if B2 < B2_lower (LOWER_ONLY)",
+    "B2_lower": 0.9979228486646884,
+    "B2_lower_repr": "0.9979228486646884",
+    "breach_disposition": "HOLD FOR ADJUDICATION"
+  }
+}

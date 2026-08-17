@@ -1,10 +1,9 @@
-> **Superseded 2026-08-17.** The live handoff is
-> `ai/HANDOFF_2026-08-17_R1_TIER_B_CORPUS_ENVELOPES_R1.md`; earlier handoffs remain
-> immutable history. Tier-B formulas are frozen **and** the numerical corpus
-> envelopes are computed. Matrix is 10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN.
-> **R1 remains UNSEALED** — sealing is an Architect action.
-> `ai/OPEN_QUESTIONS.md` is authoritative for row-level state. The text below is
-> preserved as written and is not rewritten.
+> **Superseded 2026-08-17. R1 IS SEALED.** The live handoff is
+> `ai/HANDOFF_2026-08-17_R1_FINAL_SEAL_R1.md`; earlier handoffs remain immutable
+> history. Protocol status is SEALED — ARCHITECT R1 with the pre-seal matrix at
+> 10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN. **Sealing is documentary and
+> authorizes no execution; the next scientific operation requires separate
+> Architect authorization.** The text below is preserved as written.
 
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 

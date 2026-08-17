@@ -277,3 +277,20 @@ Additive. Nothing above is rewritten.
 - OQ-V4-006 CLOSED. Matrix: **10 CLOSED, 0 PARTIALLY ESTABLISHED, 0 OPEN.**
 - **R1 remains UNSEALED.** Sealing is an Architect action and was not performed here.
 - No validation-candidate data was accessed and no candidate science occurred.
+
+## 2026-08-17 — R1 SEALED (additive)
+
+- `REAL_SESSION_PRODUCTION_VALIDATION_PROTOCOL_V4_R1` status is now
+  **SEALED — ARCHITECT R1**, on Architect disposition
+  `PASS_ARCHITECT_R1_TIER_B_CORPUS_ENVELOPES_R1`.
+- Pre-seal matrix at seal: **10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN.**
+- Durable seal record: `validation/protocols/R1_FINAL_SEAL_R1.json`, SHA-256
+  `b6d4089eeba624d446b7cdd8c99508505b36192ee809b034ee39922fe68a58aa`. It binds the frozen scientific identities, roster and replacement receipts,
+  visualization qualification, Tier-B freeze and envelopes, Tier-C, Tier-E, replay
+  binding and the accepted R3 operator.
+- Tier-B numerical envelopes: B1_lower = 2.410095327226669, B1_upper =
+  3.925567393155021, B2_lower = 0.9979228486646884.
+- **No validation-candidate result was inspected and no candidate scientific
+  processing occurred before the seal.**
+- Sealing is documentary. **The next scientific execution requires separate
+  Architect authorization.**

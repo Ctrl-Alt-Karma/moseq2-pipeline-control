@@ -323,3 +323,13 @@ access-limited rather than absent.
   freeze stands and does not alter the rule.
 - All ten pre-seal rows are now closed. R1 sealing remains an Architect action and
   was not performed by the Builder.
+
+## 2026-08-17 — R1 final seal
+
+- Protocol status moved to SEALED — ARCHITECT R1 on
+  `PASS_ARCHITECT_R1_TIER_B_CORPUS_ENVELOPES_R1`, with the pre-seal matrix at
+  10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN.
+- The seal binds identities rather than restating prose, so a fresh reviewer can
+  reacquire every pre-seal decision from hashes.
+- Recorded explicitly: no candidate result was inspected before the seal, and the
+  seal authorizes no execution.
