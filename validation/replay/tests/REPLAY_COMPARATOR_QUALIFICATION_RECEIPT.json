@@ -1,6 +1,6 @@
 {
   "candidate_data_read": false,
-  "case_count": 18,
+  "case_count": 19,
   "cases": [
     {
       "case": "Q01_identical_plus_declared_ignored_only",
@@ -153,6 +153,16 @@
       "stderr": ""
     },
     {
+      "case": "Q19_foreign_cross_run_root_contamination",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
       "case": "Q16_report_determinism",
       "digest": "a4707c9d7eb20de7f2502d38db2a28e7efea3f0a24b6e4cf60b91d25813ccbe9",
       "expected": "IDENTICAL",
@@ -173,7 +183,7 @@
       "result": "PASS"
     }
   ],
-  "comparator_sha256": "7ba18ec5617d329db241d6ddf7579ba368d961a44c113b94f35fe26258c75bd4",
+  "comparator_sha256": "6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46",
   "contract_sha256": "2a25b1f2eb08b53002da4ade120c8e5f687f895bcf69b83f938d6a29a3ddd56e",
   "schema": "moseq-r1-replay-comparator-qualification-v1",
   "status": "PASS",

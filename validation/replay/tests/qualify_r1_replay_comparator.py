@@ -166,11 +166,11 @@ def run_comparator(primary, replay, report):
 # --------------------------------------------------------------------------
 # mutations (applied to the replay root only)
 # --------------------------------------------------------------------------
-def m_none(root):
+def m_none(root, primary=None):
     pass
 
 
-def m_hdf5_dataset_bit(root):
+def m_hdf5_dataset_bit(root, primary=None):
     path = os.path.join(root, "stages", "02_extract", "results_00.h5")
     with h5py.File(path, "a") as f:
         data = f["frames"][()]
@@ -178,52 +178,52 @@ def m_hdf5_dataset_bit(root):
         f["frames"][...] = data
 
 
-def m_hdf5_attr(root):
+def m_hdf5_attr(root, primary=None):
     with h5py.File(os.path.join(root, "stages", "02_extract", "results_00.h5"), "a") as f:
         f.attrs["flip_classifier_applied"] = False
 
 
-def m_hdf5_extra_dataset(root):
+def m_hdf5_extra_dataset(root, primary=None):
     with h5py.File(os.path.join(root, "stages", "02_extract", "results_00.h5"), "a") as f:
         f.create_dataset("scalars/undeclared_new", data=np.zeros(3, dtype="float32"))
 
 
-def m_hdf5_missing_dataset(root):
+def m_hdf5_missing_dataset(root, primary=None):
     with h5py.File(os.path.join(root, "stages", "02_extract", "results_00.h5"), "a") as f:
         del f["scalars/angle"]
 
 
-def m_nan_placement(root):
+def m_nan_placement(root, primary=None):
     path = os.path.join(root, "stages", "02_extract", "results_00.h5")
     with h5py.File(path, "a") as f:
         f["scalars/angle"][...] = angle_array(5)
 
 
-def m_json_leaf(root):
+def m_json_leaf(root, primary=None):
     path = os.path.join(root, "inputs", "extraction_frame_accounting.json")
     doc = json.load(open(path))
     doc["extracted_frames"] = 11
     wj(path, doc)
 
 
-def m_json_extra_key(root):
+def m_json_extra_key(root, primary=None):
     path = os.path.join(root, "inputs", "raw_frame_accounting.json")
     doc = json.load(open(path))
     doc["undeclared_new_key"] = "x"
     wj(path, doc)
 
 
-def m_keyval_field(root):
+def m_keyval_field(root, primary=None):
     path = os.path.join(root, "R1_FULL_SESSION_RECEIPT.txt")
     text = open(path).read().replace("model_fit_started=false", "model_fit_started=true")
     w(path, text)
 
 
-def m_bytes_input(root):
+def m_bytes_input(root, primary=None):
     w(os.path.join(root, "inputs", "config.working.yaml"), "crop_size: [80, 81]\n")
 
 
-def m_pickle_label(root):
+def m_pickle_label(root, primary=None):
     path = os.path.join(root, "stages", "04_model", "model-applied-heldout.p")
     data = pickle.load(open(path, "rb"), encoding="latin1")
     data["labels"]["synthetic-uuid"][2] = 99
@@ -231,20 +231,33 @@ def m_pickle_label(root):
         pickle.dump(data, handle, protocol=2)
 
 
-def m_yaml_field(root):
+def m_yaml_field(root, primary=None):
     path = os.path.join(root, "stages", "02_extract", "results_00.yaml")
     w(path, open(path).read().replace("crop_size: 80", "crop_size: 79"))
 
 
-def m_exit_code(root):
+def m_exit_code(root, primary=None):
     w(os.path.join(root, "logs", "02_extract_full_session.exit_code.txt"), "1\n")
 
 
-def m_missing_file(root):
+def m_missing_file(root, primary=None):
     os.remove(os.path.join(root, "summaries", "pca_summary.json"))
 
 
-def m_extra_file(root):
+def m_foreign_root_contamination(root, primary):
+    """Replay emits the PRIMARY run root literal in a MUST_MATCH field.
+
+    The primary side canonicalises its own root to <RUN_ROOT>; the replay
+    side must NOT canonicalise the foreign primary root, so the literal
+    survives and the comparison must fail.
+    """
+    path = os.path.join(root, "summaries", "extraction_summary.json")
+    doc = json.load(open(path))
+    doc["provenance"] = "extract run in %s" % primary
+    wj(path, doc)
+
+
+def m_extra_file(root, primary=None):
     w(os.path.join(root, "summaries", "undeclared_extra.json"), "{}\n")
 
 
@@ -264,6 +277,7 @@ CASES = [
     ("Q13_undeclared_extra_file", m_extra_file, "FAIL"),
     ("Q14_undeclared_extra_hdf5_dataset", m_hdf5_extra_dataset, "FAIL"),
     ("Q15_undeclared_extra_json_key", m_json_extra_key, "FAIL"),
+    ("Q19_foreign_cross_run_root_contamination", m_foreign_root_contamination, "FAIL"),
 ]
 
 
@@ -277,7 +291,7 @@ def main():
             replay = os.path.join(case_dir, "replay")
             build_root(primary, "2026-08-17T10:00:00Z")
             build_root(replay, "2026-08-17T20:30:00Z")
-            mutate(replay)
+            mutate(replay, primary)
             report = os.path.join(case_dir, "report.json")
             code, out, err = run_comparator(primary, replay, report)
             doc = json.load(open(report)) if os.path.exists(report) else {}

@@ -364,7 +364,9 @@ text are now defined over canonical Git object bytes at a pinned revision.
   while the criteria were being written.
 - Frozen: a closed-world `MUST_MATCH` / `DECLARED_IGNORED` partition, a deterministic
   comparator, and an 18-case synthetic qualification suite (18/18 PASS) proving
-  single-bit sensitivity in every MUST_MATCH class, NaN-relocation sensitivity,
+  single-bit sensitivity across every handler class plus structural failure cases
+  (see the 2026-08-17 delta-remediation entry below, which corrects this wording),
+  NaN-relocation sensitivity,
   missing-content and undeclared-extra-content failure, report determinism,
   directory-order invariance, correct exit codes, and report blindness.
 - The original seal is cited and left byte-identical; the addendum is additive.
@@ -380,3 +382,32 @@ principle in a protocol is not an executable contract. The freeze that matters i
 the one that enumerates, before any output exists, exactly which content must match
 and exactly which content may differ — with the closed-world property that anything
 unlisted fails rather than silently passes.
+
+## 2026-08-17 — R1 replay comparator delta remediation (C1 own-root)
+
+- Scientific Counsel disposition: `HOLD_FABLE_COUNSEL_R1_REPLAY_COMPARISON_IMPLEMENTATION`.
+- The scientific comparison contract was APPROVED; the hold was implementation-only.
+- Defect: `canon_text` was supplied **both** run roots for **both** sides. Contract rule
+  C1 specifies own-root semantics, so the implementation was broader than the contract.
+  A replay output that leaked the primary run root would have had that foreign literal
+  canonicalised away and compared equal.
+- Fix: each side is canonicalised against its own root alone. Confirmed by reverting the
+  wiring on a throwaway copy: under the old behaviour the comparator returned `PASS` on
+  contaminated content; under the corrected behaviour it returns `FAIL`.
+- Added `Q19_foreign_cross_run_root_contamination`. Suite is now 19/19 PASS with
+  `Q01`–`Q18` semantics unchanged.
+- Corrected an overstated qualification claim: the suite proves sensitivity across every
+  handler class plus structural failure cases. It does **not** independently perturb all
+  twenty-four MUST_MATCH rows, and the earlier wording implied that it did.
+- MUST_MATCH and DECLARED_IGNORED inventories, I08 MP4 treatment, zero-tolerance
+  exactness and OQ-V4-008 scope are unchanged. Original seal byte-identical.
+- No candidate science. No candidate artifact opened.
+
+### Lesson 6 — an implementation can be quietly broader than its contract
+
+The contract said "each run root's own absolute path". The code neutralised both roots on
+both sides, which is strictly more permissive and silently erases exactly the evidence of
+cross-run contamination a replay check exists to catch. A qualification suite that only
+perturbs *values* will not find this; it took a case that perturbs *provenance* to expose
+it. Where a contract names a side, the test must put the wrong side's data in and prove
+the comparison fails.

@@ -5,9 +5,9 @@ Classification: **PRE_EXECUTION_CLARIFICATION**
 Machine-readable partition: `REPLAY_COMPARISON_CONTRACT_R1.json`
 (SHA-256 `2a25b1f2eb08b53002da4ade120c8e5f687f895bcf69b83f938d6a29a3ddd56e`)
 Comparator: `compare_r1_replay.py`
-(SHA-256 `7ba18ec5617d329db241d6ddf7579ba368d961a44c113b94f35fe26258c75bd4`)
+(SHA-256 `6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46`)
 Qualification receipt: `tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json`
-(SHA-256 `097b5809238745fb901e21952bd632abbbe1945fd307451b702b25944cc86cd2`)
+(SHA-256 `b91144595af48f971d6b8cce53fcc10fd70de26489517d4de67b4786c8ea9aec`)
 
 ## Why this exists
 
@@ -104,10 +104,10 @@ scientific meaning and must not be re-run with a relaxed contract.
 
 `tests/qualify_r1_replay_comparator.py` builds synthetic fixtures only — no
 candidate recording, extraction, score, model output or roster identity is read.
-Eighteen cases, all `PASS`:
+Nineteen cases, all `PASS`. The suite proves sensitivity across every handler class plus structural failure cases; it does not claim independent perturbation of all twenty-four MUST_MATCH rows:
 
 - `Q01` scientific values identical with only declared-ignored differences → PASS
-- `Q02`–`Q09` one-value or one-bit change in each MUST_MATCH class (HDF5 dataset,
+- `Q02`–`Q09` one-value or one-bit change in each **handler class** (HDF5 dataset,
   HDF5 attribute, JSON leaf, receipt field, frozen input bytes, pickle label
   array, YAML field, stage exit code) → FAIL
 - `Q10` NaN relocated with count unchanged → FAIL
@@ -116,6 +116,10 @@ Eighteen cases, all `PASS`:
 - `Q16` byte-identical report across repeated runs
 - `Q17` directory-order invariance (replay built in reverse creation order)
 - `Q18` blindness: sentinel scientific values never appear in any report
+- `Q19` foreign cross-run-root contamination: the replay side emits the *primary*
+  run root literal in a MUST_MATCH field. The primary canonicalises its own root
+  to `<RUN_ROOT>`; the replay must not canonicalise a foreign root, so the literal
+  survives → FAIL
 
 ## Usage
 

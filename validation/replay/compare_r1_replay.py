@@ -37,9 +37,15 @@ RUN_ROOT_TOKEN = "<RUN_ROOT>"
 # --------------------------------------------------------------------------
 # canonicalisation + digests
 # --------------------------------------------------------------------------
-def canon_text(text, roots):
-    """Contract rule C1: neutralise each run root's own absolute path."""
-    for root in roots:
+def canon_text(text, own_roots):
+    """Contract rule C1: neutralise ONLY this side's own run root.
+
+    Each side is canonicalised against its own root alone. A foreign run
+    root appearing in the other side's output therefore survives
+    canonicalisation and forces a comparison failure. Supplying both roots
+    to both sides would mask cross-run-root contamination.
+    """
+    for root in own_roots:
         text = text.replace(root, RUN_ROOT_TOKEN)
         text = text.replace(root.rstrip("/"), RUN_ROOT_TOKEN)
     return text
@@ -242,7 +248,7 @@ def inventory(root):
 def compare(root_a, root_b, contract):
     root_a = os.path.abspath(root_a)
     root_b = os.path.abspath(root_b)
-    roots = [root_a, root_b]
+    own_a, own_b = [root_a], [root_b]  # C1: each side sees only its own root
     findings = []
     failures = 0
 
@@ -275,8 +281,8 @@ def compare(root_a, root_b, contract):
                              "rule": rule_id, "status": "IGNORED"})
             continue
         try:
-            units_a = HANDLERS[handler](os.path.join(root_a, rel), roots)
-            units_b = HANDLERS[handler](os.path.join(root_b, rel), roots)
+            units_a = HANDLERS[handler](os.path.join(root_a, rel), own_a)
+            units_b = HANDLERS[handler](os.path.join(root_b, rel), own_b)
         except Exception as error:  # unreadable governed content is a failure
             failures += 1
             findings.append({"logical_name": rel, "class": "MUST_MATCH",
