@@ -10,7 +10,7 @@
       "candidate_data_read": false,
       "case_count": 19,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
-      "sha256": "b91144595af48f971d6b8cce53fcc10fd70de26489517d4de67b4786c8ea9aec",
+      "sha256": "eeae5bd19a65e2d918c613cc3252918328ebdbc6c208429892d018385c68a3e1",
       "status": "PASS",
       "synthetic_fixture_only": true
     },
@@ -20,11 +20,11 @@
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "2a25b1f2eb08b53002da4ade120c8e5f687f895bcf69b83f938d6a29a3ddd56e"
+      "sha256": "527a1d006cecdc45509a48a6541ed78a3f61613ddd1e8abf9184f1338428fb70"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "a575ad1181b318013b1ba7c4ecdffdddf4370087c07d3fcdf5ddd60bedb828cb"
+      "sha256": "16ea7021e24747aee0e032f8afe0b99edb6ad4d67c8d3c80dad991ecd98886a7"
     }
   },
   "carried_forward_unchanged": {
@@ -36,7 +36,8 @@
   },
   "chronology": [
     "2026-08-17 fc7cacc9 - replay comparison contract, comparator and 18-case qualification frozen before any primary candidate execution existed",
-    "2026-08-17 delta - Counsel implementation hold; C1 corrected to own-root, Q19 added, 19/19 requalified, qualification claim narrowed; scientific partition untouched"
+    "2026-08-17 delta - Counsel implementation hold; C1 corrected to own-root, Q19 added, 19/19 requalified, qualification claim narrowed; scientific partition untouched",
+    "2026-08-17 R3->R4 - pre-science raw-frame-accounting compatibility remediation; replay contract provenance rebound to the R4 operator commit; scientific partition byte-identical; comparator code unchanged; requalified 19/19"
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -67,6 +68,29 @@
     "PARTIALLY_ESTABLISHED": 0
   },
   "r1_state": "SEALED",
+  "r4_operator_rebinding": {
+    "accepted_operator_commit": "f026298a0cf2a0fa97bedb29245424bddcf0713b",
+    "accepted_packet_manifest_sha256": "8442e840f4c4ce0e0f31707b5f8fc93a175f2975e8603245c8403a8470d5b906",
+    "accepted_packet_revision": "R4",
+    "candidate_science_during_remediation": false,
+    "changed_member": "validation/home_pilot_packet/helpers/record_r1_raw_frame_accounting.py",
+    "changed_member_new_sha256": "df4c7165461b3114b901e94f61c4886fd04294b36c096188540d2baae29f014a",
+    "changed_member_old_sha256": "a41271bd6eef25fde7078aa24da714e66889d0e1e65c5f46bced95529e5db8d0",
+    "classification": "MECHANICAL_PRE_SCIENCE_OPERATOR_COMPATIBILITY_DEFECT",
+    "comparator_code_changed": false,
+    "declared_ignored_classes_unchanged": 14,
+    "failed_slot_01_output_preserved": true,
+    "gate_fixture_also_changed": "validation/home_pilot_packet/tests/test_r1_full_session_operator_gate.sh",
+    "i08_unchanged": true,
+    "must_match_classes_unchanged": 24,
+    "operator_entry_point_bytes_unchanged": true,
+    "previous_accepted_operator_commit": "59b15ce796bdda2b1d534fc34cded3e877360cac",
+    "previous_accepted_packet_manifest_sha256": "3d9c3442e63453be9b4a74bafeb2ba8ef0d99cfebd86dbb6cedc969fa413895b",
+    "r3_history_rewritten": false,
+    "raw_data_changed": false,
+    "scientific_settings_changed": false,
+    "zero_tolerance_unchanged": true
+  },
   "report_identity_handling": {
     "classification": "PROTECTED_LOCAL_EVIDENCE",
     "comparator_changed_for_this": false,
