@@ -224,6 +224,17 @@ bindings do not match. On success it performs extraction, PCA projection, and
 held-out `moseq2-model apply-model` with stored production-model whitening/model
 parameters. It never starts fitting, refitting, or adaptation.
 
+## Sealed R1 full-session operator (R3)
+
+`08_run_r1_full_session_validation.sh` is the distinct whole-session operator
+for the selected R1 validation roster. It accepts only immutable staged raw
+triplets beneath the fixed internal R1 raw root, verifies the run-spec-v2
+bindings before science, and does not expose a frame-cap option. It must not be
+run until Architect V5 seals R1 and explicitly authorizes execution.
+
+The historical R2 `SHA256SUMS.txt` remains unchanged. R3 packet integrity is
+defined by `SHA256SUMS_R3.txt` and `R3_PACKET_INTEGRITY.md`.
+
 ## Batch 6 — package evidence
 
 1. Run `bash collect_evidence.sh --root "${VALIDATION_ROOT}"`.

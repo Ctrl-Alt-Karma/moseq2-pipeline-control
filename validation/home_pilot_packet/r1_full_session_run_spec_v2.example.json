@@ -1,0 +1,64 @@
+{
+  "candidate_identity_id": "CID-REPLACE",
+  "environment_receipts": {
+    "frozen_source_environment": {
+      "bytes": 0,
+      "path": "/path/to/ENVIRONMENT_REVALIDATION_REPORT.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "governed_external_dependencies": {
+      "bytes": 0,
+      "path": "/path/to/GOVERNED_EXTERNAL_DEPENDENCIES.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    }
+  },
+  "identity": {
+    "acquisition_start": "MM/DD/YYYY HH:MM:SS",
+    "rig": 1,
+    "session_name": "recorded SessionName",
+    "subject_name": "recorded SubjectName"
+  },
+  "raw_inputs": {
+    "depth": {
+      "bytes": 0,
+      "path": "/home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/CID-REPLACE/depth.dat",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "metadata": {
+      "bytes": 0,
+      "path": "/home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/CID-REPLACE/metadata.json",
+      "sha256": "REPLACE_WITH_SHA256"
+    },
+    "timestamps": {
+      "bytes": 0,
+      "path": "/home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/CID-REPLACE/depth_ts.txt",
+      "rows": 0,
+      "sha256": "REPLACE_WITH_SHA256"
+    }
+  },
+  "schema": "moseq2-r1-real-session-run-spec-v2",
+  "scientific_artifacts": {
+    "classifier": {
+      "bytes": 11981487,
+      "path": "/home/ajm/moseq_work/5xfad_exploratory_20/flip/flip_classifier_k2_c57_10to13weeks.pkl",
+      "sha256": "4b06e1e56928bb1ac227329d0932d4637cdd541a3af49865ae127b57991c2c00"
+    },
+    "config": {
+      "bytes": 4729,
+      "path": "/home/ajm/moseq_work/5xfad_exploratory_20/config.yaml",
+      "sha256": "ef42bf756eef975277d5dc62d0d7719daf75f374a2e58d96a6c3eb39ecd75269"
+    },
+    "pca": {
+      "bytes": 0,
+      "path": "/home/ajm/moseq_work/5xfad_exploratory_20/pca/pca_scores.h5",
+      "sha256": "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912"
+    },
+    "production_model": {
+      "bytes": 0,
+      "kappa": 464159,
+      "path": "/home/ajm/moseq2-validation-20260730/analysis/locked_464159_k200_long_chain_convergence_sentinel_20260812_R1/model/model-k200-kappa464159-seed20260802-iter500.p",
+      "seed": 20260802,
+      "sha256": "5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964"
+    }
+  }
+}
