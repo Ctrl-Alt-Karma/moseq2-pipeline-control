@@ -259,3 +259,27 @@ closure matrix are UNVERIFIED by default.
 - Documentary predecessor at the time of the check:
   `0a15f002bbe4ab10f347b1d4035a78486910e896`. BRIDGE unchanged at
   `328c7eee85cf57a5af4211b3d36f5ee7560ebc5d`.
+
+## 2026-08-17 — PROJECT-STATE CONTINUITY / EVIDENCE-NAMESPACE FAILURE
+
+Classification: **continuity and evidence-namespace failure**, not a new scientific
+finding. No scientific result changed; no candidate was processed.
+
+- The retiring cockpit produced load-bearing evidence in an artifact namespace that
+  durable project state never indexed. Retirement reconciliation searched the
+  repository and the Linux evidence root only.
+- A scope-limited negative result was reported as global absence, so accepted
+  completed work — inventory, roster selection, visualization qualification, Tier-C
+  freeze, custody, Tier-E and replay bindings — was recorded as unresolved.
+- Formal succession then propagated the defect, because the successor faithfully
+  reconstructed a durable record that was itself wrong.
+- Recovery: 24/24 pinned artifacts found and hash-matched; ledger
+  `f7bb096929bcf3e267752e59e91ba85f1dd078de2fc0d3c999b280c12e1103bc`.
+- Owner testimony on acquisition motive was serialized and explicitly confirmed by
+  the actor during execution before any dependent row was closed.
+
+### Lesson 3 — absence claims inherit their search scope
+
+A negative existence claim is only as strong as the scope actually searched. Record
+the scopes, name the evidence namespaces, and classify unsearched planes as
+access-limited rather than absent.

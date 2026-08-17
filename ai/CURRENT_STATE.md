@@ -206,3 +206,26 @@ assertion and its correction, which stand as historical record.
   execute it and does not authorize it.
 - **No candidate science was performed by this operation.**
 - Live handoff pointer: `ai/HANDOFF_2026-08-17_ARCHITECT_SUCCESSION_COMPLETE_R1.md`.
+
+## 2026-08-17 — V5 continuity recovery R2 (additive)
+
+Additive. Nothing above is rewritten.
+
+- The lost V5 evidence plane was recovered from an unindexed Windows Codex artifact
+  store. **24 of 24 Architect-pinned artifacts were found and hash-matched**; none
+  missing, none mismatched.
+- The V5 retirement reconciliation had searched only the control repository and the
+  Linux evidence root, then promoted `NOT_FOUND_IN_SEARCHED_SCOPE` to project
+  absence. Completed accepted work was consequently recorded as unresolved.
+- Recovered and now controlling: the outside-corpus inventory, the result-blind
+  roster-selection receipt, the visualization orientation regression, the Tier-C
+  formula freeze and corpus envelopes, R3 operator qualification, source-to-stage
+  custody, the Tier-E negative-control binding and the replay binding.
+- Closure matrix after adjudication: **7 CLOSED, 3 PARTIALLY ESTABLISHED, 0 OPEN**;
+  3 of 10 rows are not fully closed. Every promoted row states its claim class and,
+  where its evidence is non-repository, its access limitation.
+- **Tier-B remains UNFROZEN.** No Tier-B artifact was recovered and no Tier-B value
+  was computed. **R1 remains UNSEALED.** The roster is unchanged.
+- **No validation-candidate science occurred** and no candidate result-bearing
+  artifact was opened.
+- Live handoff: `ai/HANDOFF_2026-08-17_V5_CONTINUITY_RECOVERY_R2.md`.
