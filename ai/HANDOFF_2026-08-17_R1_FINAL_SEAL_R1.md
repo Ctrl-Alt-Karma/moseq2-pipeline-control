@@ -33,3 +33,21 @@ false.
 Separate Architect authorization for the R1 execution operation. Nothing in this
 handoff permits extraction, PCA or model application to candidates, diagnostics,
 visualization, Tier-E execution or replay.
+
+
+---
+
+## ADDITIVE CORRECTION 2026-08-17 — seal artifact hash identity
+
+The original wording above is preserved as written and is not rewritten.
+
+The controlling canonical identity of `validation/protocols/R1_FINAL_SEAL_R1.json`
+is SHA-256 `ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2` over canonical Git object bytes (Git blob SHA-1 `5de59c6a5446cec5ec05faf62b53e91a5a672580`, 3,540 bytes,
+pure LF).
+
+The value `b6d4089eeba624d446b7cdd8c99508505b36192ee809b034ee39922fe68a58aa` stated above is **historical CRLF worktree representation only** — the
+Windows `core.autocrlf` materialization of the same tracked-LF bytes. It is not the
+controlling canonical identity.
+
+The seal artifact bytes were never modified, the JSON semantics are identical, and no
+scientific state changed. Verbatim verifier report: `evidence/continuity/R1_REPOSITORY_HASH_PROVENANCE_CHECK_FABLE.md`.

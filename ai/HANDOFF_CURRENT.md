@@ -1,9 +1,9 @@
-> **Superseded 2026-08-17. R1 IS SEALED.** The live handoff is
-> `ai/HANDOFF_2026-08-17_R1_FINAL_SEAL_R1.md`; earlier handoffs remain immutable
-> history. Protocol status is SEALED — ARCHITECT R1 with the pre-seal matrix at
-> 10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN. **Sealing is documentary and
-> authorizes no execution; the next scientific operation requires separate
-> Architect authorization.** The text below is preserved as written.
+> **Superseded 2026-08-17.** The live handoff is
+> `ai/HANDOFF_2026-08-17_R1_SEAL_HASH_REMEDIATION_R1.md`; earlier handoffs remain
+> immutable history. R1 is **SEALED**; matrix 10 CLOSED / 0 PARTIALLY ESTABLISHED /
+> 0 OPEN. Canonical seal artifact SHA-256 is
+> `ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2`. The text below
+> is preserved as written and is not rewritten.
 
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 

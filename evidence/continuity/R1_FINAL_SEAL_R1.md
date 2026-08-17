@@ -23,3 +23,17 @@ No validation-candidate result was inspected and no candidate scientific process
 occurred before the seal. Sealing is documentary; the next scientific execution
 requires separate Architect authorization. Protected candidate identities are not
 published.
+
+
+---
+
+## ADDITIVE CORRECTION 2026-08-17 — seal artifact hash identity
+
+Controlling canonical identity of `validation/protocols/R1_FINAL_SEAL_R1.json`:
+SHA-256 `ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2`, Git blob SHA-1 `5de59c6a5446cec5ec05faf62b53e91a5a672580`, 3,540 bytes, pure LF.
+
+The `b6d4089eeba624d446b7cdd8c99508505b36192ee809b034ee39922fe68a58aa` value stated above is **historical CRLF worktree representation only**
+(`CRLF_WORKTREE_REPRESENTATION`), not the controlling identity. Seal bytes unchanged;
+JSON semantics identical; no scientific state changed.
+
+Verbatim verifier report: `evidence/continuity/R1_REPOSITORY_HASH_PROVENANCE_CHECK_FABLE.md`.

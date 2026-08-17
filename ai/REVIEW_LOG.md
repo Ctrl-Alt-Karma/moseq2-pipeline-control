@@ -333,3 +333,20 @@ access-limited rather than absent.
   reacquire every pre-seal decision from hashes.
 - Recorded explicitly: no candidate result was inspected before the seal, and the
   seal authorizes no execution.
+
+## 2026-08-17 — R1 repository hash / line-ending provenance check
+
+- Independent Verifier disposition: `PASS_R1_REPOSITORY_HASH_PROVENANCE_CHECK`.
+- Architect acceptance: `PASS_ARCHITECT_R1_REPOSITORY_HASH_PROVENANCE_CHECK`.
+- Verbatim verifier report preserved at `evidence/continuity/R1_REPOSITORY_HASH_PROVENANCE_CHECK_FABLE.md`.
+- Finding: exactly one repository-tracked SHA-256 binding was affected, in four
+  durable locations; the exposure is representation-only and the CRLF mechanism was
+  reproduced bit-exactly rather than assumed. No binding classified as content drift.
+- Correction is additive: D-041 and the original seal handoff wording are preserved,
+  and the canonical identity is added alongside a labelled historical representation.
+
+### Lesson 4 — a hash binds a representation, not just a file
+
+A SHA-256 over a working tree can differ from the same file's canonical repository
+bytes whenever line-ending materialization is in play. Bindings of repository-tracked
+text are now defined over canonical Git object bytes at a pinned revision.

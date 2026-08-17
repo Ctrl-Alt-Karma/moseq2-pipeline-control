@@ -294,3 +294,22 @@ Additive. Nothing above is rewritten.
   processing occurred before the seal.**
 - Sealing is documentary. **The next scientific execution requires separate
   Architect authorization.**
+
+## 2026-08-17 — R1 seal hash-identity correction (additive)
+
+Additive. The historical R1 SEALED section above is preserved unchanged.
+
+- **Controlling canonical identity** of `validation/protocols/R1_FINAL_SEAL_R1.json`:
+  SHA-256 `ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2`, Git blob SHA-1 `5de59c6a5446cec5ec05faf62b53e91a5a672580`, 3,540 bytes, pure LF.
+- The previously recorded `b6d4089eeba624d446b7cdd8c99508505b36192ee809b034ee39922fe68a58aa` is **superseded as controlling** and is retained as
+  `CRLF_WORKTREE_REPRESENTATION` only — the Windows `core.autocrlf` materialization
+  of the same tracked-LF bytes (3,597 bytes), which reproduces that hash bit-exactly.
+- **JSON semantics, every binding inside the seal, and all scientific state are
+  unchanged.** The seal artifact itself was not modified.
+- Independent Verifier disposition `PASS_R1_REPOSITORY_HASH_PROVENANCE_CHECK`;
+  Architect acceptance `PASS_ARCHITECT_R1_REPOSITORY_HASH_PROVENANCE_CHECK`. Verbatim
+  report: `evidence/continuity/R1_REPOSITORY_HASH_PROVENANCE_CHECK_FABLE.md`.
+- Rule for future bindings: SHA-256 of repository-tracked text artifacts is taken over
+  canonical Git object bytes at a pinned revision, not a working tree.
+- R1 remains **SEALED**; matrix remains 10 CLOSED / 0 PARTIALLY ESTABLISHED / 0 OPEN;
+  no candidate science occurred.
