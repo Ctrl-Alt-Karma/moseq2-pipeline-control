@@ -218,3 +218,27 @@ The status does not alter the original reproduction disposition below.
 | F-13 | PARTIALLY CONFIRMED | The candidate expectation edit had no causal production change, as reported. A synthetic source-order change did reproduce unstable public column order. | viz `b80192dc20353bf77c36610f315543b57afa908c` | Metadata columns now follow the explicit `include_keys` API order. Absent historical fixture data still blocks the original fixture-backed test. |
 | F-14 | CONFIRMED | `zeros_like` inherited integer dtype and truncated fractional millimetres; the old expectation accepted truncation. | extract `e7f585104ba25b66e5326c88c77a47e33db95635`; viz `b80192dc20353bf77c36610f315543b57afa908c`; control `43eb14a920c0c01d454e0067ca3ee440b34c2e21` | Both functions allocate float64; exact integer-input and cross-repo regressions pass. Production’s usual float input reduced impact but did not excuse the API defect. |
 | F-15 | CONFIRMED | Both provenance helpers had only definitions, docs, and tests—no production caller. | viz `b80192dc20353bf77c36610f315543b57afa908c`; control `20249e42eda3cd674f651c0011dbbd99e62cf774` | Dead helpers/tests removed; the real HDF5 pooling boundary remains gated. Model-provenance gating is still not claimed. |
+
+## 2026-08-17 — Fable Scientific Counsel, R1 pre-seal reconstruction
+
+- Disposition: `FABLE_COUNSEL_HOLD_R1_PRESEAL_RECONSTRUCTION`.
+- Sanitized pointer and access limitation:
+  `ai/reviews/FABLE_COUNSEL_2026-08-17_R1_PRESEAL_RECONSTRUCTION.md`.
+- Preserved verbatim report SHA-256:
+  `2a23377600d06f09dfd52a3a6f097084880bb8683de0606a6c4414ecaa7d2db6`.
+- Counsel reviewed the repository at `59b15ce7…` only, without access to
+  `/home/ajm`. Its matrix therefore records absence-in-repository.
+- Reconciliation against local primary evidence followed on the same date under
+  `V5_R1_PRESEAL_EVIDENCE_RECONCILIATION_AND_ARCHITECT_RETIREMENT_SYNC_R1`.
+  Two rows moved (OQ-V4-001 CLOSED, OQ-V4-003 partially established); the rest
+  stood; OQ-V5-009 and OQ-V5-010 were added. Architect commentary is additive
+  and does not rewrite the counsel report.
+
+### Lesson 2 — status assertions drift faster than semantics
+
+Protocol §8 specifies what must be frozen for Tier B. A compression chain
+promoted that specification into a claim that the thing had been frozen. The
+tense error survived retelling because each paraphrase dropped one hedge. The
+control is structural, not stylistic: a status may not move without its closing
+artifact in the same change (rule 40), and inherited statuses absent from the
+closure matrix are UNVERIFIED by default.

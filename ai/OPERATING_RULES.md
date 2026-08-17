@@ -61,3 +61,9 @@ protected state can remain isolated.**
 37. Freeze numeric, mechanically evaluable load-bearing validation rules before opening validation values. “Materially outside” is not a mechanical rule.
 38. Out-of-family flags trigger causal and scientific adjudication; they do not automatically exclude data or authorize retuning.
 39. Do not tune through a HOLD. Any scientific component changed after validation evidence is opened requires explicit Architect adjudication of whether the affected held-out evidence remains valid.
+
+## Status integrity (project-only)
+
+40. An `ai/OPEN_QUESTIONS.md` status may not be promoted to `CLOSED` or `RESOLVED` unless the same documentary change directly links the exact closing primary artifact or sealed local evidence identity. Where the artifact is not reachable from this public repository, record the exact local path, SHA-256, the narrow claim established, and the access limitation. A summary, handoff, review, or chat assertion cannot itself close a row.
+41. Any assertion that a gate, binding, or requirement is complete — in any wording, not only the words READY, PASS, SEALED, or CLOSED — must cite a primary artifact or carry the label UNVERIFIED or INHERITED. The citation must be to a primary artifact, never to another summary.
+42. A successor Architect's comprehension handshake must re-derive gate statuses from the closure matrix and its linked artifacts. Any inherited status absent from that matrix is UNVERIFIED by default.

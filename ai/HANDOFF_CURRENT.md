@@ -1,3 +1,8 @@
+> **Superseded 2026-08-17.** The live handoff is
+> `ai/HANDOFF_2026-08-17_ARCHITECT_V5_RETIREMENT.md`. Architect V5 is retired
+> and R1 remains unsealed; see `ai/OPEN_QUESTIONS.md` for row-level pre-seal
+> status. The text below is preserved as written and is not rewritten.
+
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 
 ## Handoff ID

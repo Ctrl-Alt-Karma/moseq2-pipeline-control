@@ -119,3 +119,36 @@ qualification have been bound as the protocol requires.
 This state sync **does not retire V4**. Formal retirement still requires a live
 Retirement Canon Flush, successor reconstruction, a bounded backward pass, and
 `PASS_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION`.
+
+## 2026-08-17 — V5 retirement reconciliation (additive)
+
+This section is additive. Nothing above it is rewritten; where it corrects an
+earlier claim, both records stand at their own claim classes.
+
+- Architect V5 is **RETIRED**. See
+  `ai/HANDOFF_2026-08-17_ARCHITECT_V5_RETIREMENT.md`.
+- Independent Scientific Counsel returned
+  `FABLE_COUNSEL_HOLD_R1_PRESEAL_RECONSTRUCTION`.
+- R1 remains **UNSEALED**. The protocol status remains ARCHITECT CANDIDATE R1 /
+  NOT YET SEALED.
+- **Correction of an inherited claim:** Architect V5 asserted that Tier-B numeric
+  corpus envelopes had previously been reported READY. No such artifact has ever
+  existed in this repository on any ref, or in any local evidence root. The
+  assertion is withdrawn (D-031). A companion assertion that only one pre-seal
+  item remained is likewise withdrawn.
+- The kappa row above reads `FINAL_KAPPA_SELECTED`. The underlying Builder
+  receipt reads `TWO_SEED_CONJUNCTION_SATISFIED_PENDING_ARCHITECT` with
+  `final_production_kappa_selected: false`; the Architect adjudication in D-021
+  and D-022 is what closed it. Both are correct at their own claim class and
+  neither supersedes the other.
+- Reconciled pre-seal state: of ten tracked rows, one is CLOSED (OQ-V4-001), two
+  are PARTIALLY ESTABLISHED (OQ-V4-003, OQ-V4-007), and seven are OPEN. Row-level
+  detail and closing or blocking artifacts are in `ai/OPEN_QUESTIONS.md`.
+- Eight validation sessions are staged locally with all three load-bearing raw
+  files present and per-file SHA-256 bound in sealed run specs;
+  `scientific_processing_started` is `false`. Their source custody chain is not
+  evidenced (OQ-V5-010) and the historical-versus-prospective design fork is not
+  bound (OQ-V5-009).
+- Scientific source, external model dependencies, PCA and production-model
+  identities were re-verified clean and unchanged on 2026-08-17.
+- **No validation-candidate scientific processing has occurred.**
