@@ -350,3 +350,33 @@ access-limited rather than absent.
 A SHA-256 over a working tree can differ from the same file's canonical repository
 bytes whenever line-ending materialization is in play. Bindings of repository-tracked
 text are now defined over canonical Git object bytes at a pinned revision.
+
+## 2026-08-17 — R1 deterministic replay comparison contract (OQ-V6-011)
+
+- Architect classification: `PRE_EXECUTION_CLARIFICATION`.
+- Scientific Counsel disposition accepted: `PASS_FABLE_COUNSEL_R1_REPLAY_REMEDIATION_PLAN`.
+- Trigger: a pre-launch reacquisition established that the sealed
+  `deterministic_replay_binding` fixed the replay target, count and result-blind
+  selection, but that no comparison contract existed. Both
+  `DETERMINISTIC_REPLAY_PLAN.md` and `DETERMINISTIC_REPLAY_PLAN_R2.md` deferred it,
+  R2 being marked `INCOMPLETE` and conditioning its exactness list on a later freeze.
+  Primary execution was held rather than started, so that no output could exist
+  while the criteria were being written.
+- Frozen: a closed-world `MUST_MATCH` / `DECLARED_IGNORED` partition, a deterministic
+  comparator, and an 18-case synthetic qualification suite (18/18 PASS) proving
+  single-bit sensitivity in every MUST_MATCH class, NaN-relocation sensitivity,
+  missing-content and undeclared-extra-content failure, report determinism,
+  directory-order invariance, correct exit codes, and report blindness.
+- The original seal is cited and left byte-identical; the addendum is additive.
+- The original seal's top-level `architect_disposition` is noted as carrying a
+  constituent Tier-B marker and is recorded as historical without rewriting.
+- No candidate science occurred. No primary run directory existed at freeze time.
+
+### Lesson 5 — a frozen target is not a frozen comparison
+
+Binding *which* session to replay, *how many* replays, and *how* the target was
+selected leaves the actual predicate unwritten. An equivalence rule stated as a
+principle in a protocol is not an executable contract. The freeze that matters is
+the one that enumerates, before any output exists, exactly which content must match
+and exactly which content may differ — with the closed-world property that anything
+unlisted fails rather than silently passes.

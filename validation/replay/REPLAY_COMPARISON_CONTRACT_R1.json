@@ -1,0 +1,96 @@
+{
+  "schema": "moseq-r1-replay-comparison-contract-v1",
+  "contract_id": "REPLAY_COMPARISON_CONTRACT_R1",
+  "governs": "OQ-V6-011",
+  "classification": "PRE_EXECUTION_CLARIFICATION",
+  "original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
+  "accepted_operator_commit": "59b15ce796bdda2b1d534fc34cded3e877360cac",
+  "operator_on_disk_sha256": "f01f6c45b1407324e8dcae9542fb7ef3900071d09b47cc9c18124c8cb8325580",
+  "schema_derivation": {
+    "authority": "operator and locked pipeline source only; no candidate output was opened to derive this schema",
+    "sources": [
+      "validation/home_pilot_packet/08_run_r1_full_session_validation.sh",
+      "validation/home_pilot_packet/lib/common.sh",
+      "validation/home_pilot_packet/helpers/verify_r1_full_session_provenance.py",
+      "validation/home_pilot_packet/helpers/verify_r1_runtime_identity.py",
+      "validation/home_pilot_packet/helpers/record_r1_raw_frame_accounting.py",
+      "validation/home_pilot_packet/helpers/verify_r1_extraction_frame_accounting.py",
+      "validation/home_pilot_packet/helpers/summarize_real_pilot.py",
+      "worktrees/moseq2-extract@e7f585104ba25b66e5326c88c77a47e33db95635 (helpers/wrappers.py, helpers/data.py)",
+      "worktrees/moseq2-pca@efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "worktrees/moseq2-model@6e542e3f1db125202d42b59f390c922281e64f39"
+    ]
+  },
+  "comparison_principles": {
+    "granularity": "semantic dataset/field comparison; whole-file byte equality is never used as the primary predicate except for frozen input copies and opaque image bytes",
+    "array_exactness": "dtype AND shape AND exact C-order bytes; NaN representation and NaN position are therefore compared bit-exactly",
+    "float_exactness": "scalar floats compared as IEEE-754 little-endian bit patterns; NaN and -0.0 are distinguished",
+    "scientific_tolerance": 0,
+    "unclassified_behaviour": "any logical name in governed scope belonging to neither MUST_MATCH nor DECLARED_IGNORED is a FAIL",
+    "inventory_rule": "the relative-path inventories of both run roots must be identical; any missing or extra entry is a FAIL",
+    "blindness": "reports contain logical names, classes, match status, and digests only; no scientific value is ever emitted"
+  },
+  "canonicalization": [
+    {
+      "id": "C1",
+      "rule": "each run root's own absolute path is replaced by the literal token <RUN_ROOT> in all text, JSON string, and YAML string content before comparison",
+      "justification": "the two run roots differ by construction; canonicalizing them keeps embedded provenance paths MUST_MATCH instead of being ignored"
+    }
+  ],
+  "governed_scope": {
+    "definition": "every filesystem entry beneath each of the two run output roots produced by 08_run_r1_full_session_validation.sh",
+    "roots_compared": 2
+  },
+  "MUST_MATCH": [
+    {"id": "M01", "logical_name": "<inventory>", "handler": "inventory", "detail": "identical set of relative paths across both roots"},
+    {"id": "M02", "logical_name": "R1_FULL_SESSION_RECEIPT.txt", "handler": "keyval", "detail": "all key=value fields; key set must match"},
+    {"id": "M03", "logical_name": "R1_FULL_SESSION_FAILURE_RECEIPT.txt", "handler": "keyval", "detail": "all fields, if the file exists in either root"},
+    {"id": "M04", "logical_name": "process_environment.txt", "handler": "keyval", "detail": "frozen environment variables including PYTHONHASHSEED, PYTHONPATH, OMP/MKL/OPENBLAS/NUMEXPR thread counts, DASK_NUM_WORKERS, CONDA_PREFIX, LANG, LC_ALL, TZ"},
+    {"id": "M05", "logical_name": "inputs/R1_FULL_SESSION_RUN_SPEC.json", "handler": "json", "detail": "every leaf; the run spec is the frozen input identity"},
+    {"id": "M06", "logical_name": "inputs/config.original.yaml", "handler": "bytes", "detail": "frozen config input copy"},
+    {"id": "M07", "logical_name": "inputs/config.working.yaml", "handler": "bytes", "detail": "working config copy actually consumed by every stage"},
+    {"id": "M08", "logical_name": "inputs/flip_classifier.pkl", "handler": "bytes", "detail": "frozen classifier input copy"},
+    {"id": "M09", "logical_name": "inputs/pca_components.h5", "handler": "bytes", "detail": "frozen PCA input copy"},
+    {"id": "M10", "logical_name": "inputs/provenance_preflight.json", "handler": "json", "detail": "all expected/observed identities, byte counts, digests and checks"},
+    {"id": "M11", "logical_name": "inputs/runtime_identity.json", "handler": "json", "detail": "python/numpy/dask versions, all five moseq source commits, all three external dependency commits, cleanliness and pass flags"},
+    {"id": "M12", "logical_name": "inputs/raw_frame_accounting.json", "handler": "json", "detail": "depth bytes, timestamp rows, derived frame count, all checks"},
+    {"id": "M13", "logical_name": "inputs/extraction_frame_accounting.json", "handler": "json", "detail": "expected/extracted frame, timestamp and mask counts, all checks, tolerance"},
+    {"id": "M14", "logical_name": "logs/*.exit_code.txt", "handler": "bytes", "detail": "every stage exit code"},
+    {"id": "M15", "logical_name": "logs/*.command.txt", "handler": "bytes", "detail": "exact stage command line after C1 canonicalization"},
+    {"id": "M16", "logical_name": "stages/01_roi/*.tiff", "handler": "bytes", "detail": "background image, ROI images and any plane-fit image emitted by find-roi"},
+    {"id": "M17", "logical_name": "stages/02_extract/results_*.h5", "handler": "hdf5", "detail": "all datasets and attributes: frames, frames_mask, timestamps, scalars/*, metadata/uuid, metadata/acquisition/*, metadata/extraction/*"},
+    {"id": "M18", "logical_name": "stages/02_extract/results_*.yaml", "handler": "yaml", "detail": "extraction status document"},
+    {"id": "M19", "logical_name": "stages/03_pca/pca_scores.h5", "handler": "hdf5", "detail": "all score datasets, score index datasets and pipeline provenance"},
+    {"id": "M20", "logical_name": "stages/04_model/model-applied-heldout.p", "handler": "pickle", "detail": "applied label arrays and all handoff keys; label arrays compared dtype+shape+exact bytes"},
+    {"id": "M21", "logical_name": "summaries/extraction_summary.json", "handler": "json", "detail": "dataset shapes, dtypes, dataset digests, min/max/mean, scalar summaries, flip records, pipeline provenance"},
+    {"id": "M22", "logical_name": "summaries/pca_summary.json", "handler": "json", "detail": "pipeline provenance and score summaries"},
+    {"id": "M23", "logical_name": "summaries/model_input_handoff.json", "handler": "json", "detail": "input session keys, metadata, input summaries, model_fit_started"},
+    {"id": "M24", "logical_name": "<hdf5 internal default>", "handler": "hdf5", "detail": "every HDF5 dataset and attribute not explicitly listed in DECLARED_IGNORED is MUST_MATCH"}
+  ],
+  "DECLARED_IGNORED": [
+    {"id": "I01", "logical_name": "R1_FULL_SESSION_RECEIPT.txt::completed_utc", "justification": "wall-clock completion stamp; carries no scientific content"},
+    {"id": "I02", "logical_name": "inputs/provenance_preflight.json::checked_utc", "justification": "wall-clock stamp emitted by the preflight helper"},
+    {"id": "I03", "logical_name": "inputs/runtime_identity.json::checked_utc", "justification": "wall-clock stamp emitted by the runtime identity helper"},
+    {"id": "I04", "logical_name": "process_environment.txt::captured_utc", "justification": "wall-clock stamp written by write_process_environment"},
+    {"id": "I05", "logical_name": "process_environment.txt::pwd", "justification": "invocation working directory; runtime material, not a pipeline input"},
+    {"id": "I06", "logical_name": "logs/*.stdout.txt", "justification": "human-readable stage log text carrying progress counters, durations and worker ordering"},
+    {"id": "I07", "logical_name": "logs/*.stderr.txt", "justification": "human-readable stage log text carrying progress bars and warnings"},
+    {"id": "I08", "logical_name": "stages/02_extract/results_*.mp4", "justification": "non-load-bearing preview rendering derived entirely from MUST_MATCH extraction frames; container embeds encoder identity and creation time"},
+    {"id": "I09", "logical_name": "summaries/extraction_summary.json::path", "justification": "absolute path of the extraction HDF5 inside the run root; identity is already carried by MUST_MATCH digests"},
+    {"id": "I10", "logical_name": "summaries/pca_summary.json::path", "justification": "absolute path of the PCA score file inside the run root; identity is already carried by MUST_MATCH digests"},
+    {"id": "I11", "logical_name": "stages/02_extract/results_*.yaml::start_time", "justification": "wall-clock extraction start stamp"},
+    {"id": "I12", "logical_name": "stages/02_extract/results_*.yaml::end_time", "justification": "wall-clock extraction end stamp"},
+    {"id": "I13", "logical_name": "stages/02_extract/results_*.yaml::duration", "justification": "elapsed wall-clock duration"},
+    {"id": "I14", "logical_name": "<filesystem metadata>", "justification": "mtime, ownership and permission bits are not compared; they are host bookkeeping and are not pipeline outputs"}
+  ],
+  "not_ignored_explicitly": [
+    "provenance, source, model, PCA, config and classifier identities are load-bearing and are MUST_MATCH",
+    "absolute paths that are NOT run-root dependent (locked worktree paths, input paths, module files) remain MUST_MATCH",
+    "no metadata group is ignored wholesale"
+  ],
+  "disposition_rule": {
+    "PASS": "every MUST_MATCH logical name matched exactly, inventories were identical, and nothing was unclassified",
+    "FAIL": "any MUST_MATCH difference, any inventory difference, or any unclassified logical name",
+    "exit_codes": {"PASS": 0, "FAIL": 2}
+  }
+}

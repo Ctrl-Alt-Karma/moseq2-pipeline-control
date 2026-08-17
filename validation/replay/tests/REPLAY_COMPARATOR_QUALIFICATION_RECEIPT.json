@@ -1,0 +1,181 @@
+{
+  "candidate_data_read": false,
+  "case_count": 18,
+  "cases": [
+    {
+      "case": "Q01_identical_plus_declared_ignored_only",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q02_hdf5_dataset_single_bit",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q03_hdf5_attribute_value",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q04_json_scientific_leaf",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q05_keyval_receipt_field",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q06_frozen_input_copy_bytes",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q07_pickle_label_array_value",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q08_yaml_scientific_field",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q09_stage_exit_code",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q10_nan_placement_moved_same_count",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q11_missing_must_match_hdf5_dataset",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q12_missing_must_match_file",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q13_undeclared_extra_file",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q14_undeclared_extra_hdf5_dataset",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q15_undeclared_extra_json_key",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q16_report_determinism",
+      "digest": "a4707c9d7eb20de7f2502d38db2a28e7efea3f0a24b6e4cf60b91d25813ccbe9",
+      "expected": "IDENTICAL",
+      "observed": "IDENTICAL",
+      "result": "PASS"
+    },
+    {
+      "case": "Q17_directory_order_invariance",
+      "exit_code": 0,
+      "expected": "PASS+INVARIANT",
+      "observed": "PASS/INVARIANT",
+      "result": "PASS"
+    },
+    {
+      "case": "Q18_report_blindness",
+      "expected": "NO_VALUES",
+      "observed": "NO_VALUES",
+      "result": "PASS"
+    }
+  ],
+  "comparator_sha256": "7ba18ec5617d329db241d6ddf7579ba368d961a44c113b94f35fe26258c75bd4",
+  "contract_sha256": "2a25b1f2eb08b53002da4ade120c8e5f687f895bcf69b83f938d6a29a3ddd56e",
+  "schema": "moseq-r1-replay-comparator-qualification-v1",
+  "status": "PASS",
+  "synthetic_fixture_only": true
+}

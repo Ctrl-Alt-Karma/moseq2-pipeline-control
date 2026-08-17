@@ -1,0 +1,77 @@
+{
+  "schema": "moseq-r1-final-seal-addendum-v1",
+  "addendum_id": "R1_FINAL_SEAL_ADDENDUM_R1",
+  "classification": "PRE_EXECUTION_CLARIFICATION",
+  "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
+  "original_seal_path": "validation/protocols/R1_FINAL_SEAL_R1.json",
+  "original_seal_modified": false,
+  "original_seal_relationship": "additive; the original seal is cited and left byte-identical. This addendum does not reopen, supersede or rewrite it.",
+  "r1_state": "SEALED",
+  "pre_seal_matrix_unchanged": {"CLOSED": 10, "OPEN": 0, "PARTIALLY_ESTABLISHED": 0},
+  "authorising_decision": "ARCHITECT DECISION - R1 REPLAY PRE-EXECUTION CLARIFICATION, accepting PASS_FABLE_COUNSEL_R1_REPLAY_REMEDIATION_PLAN",
+  "why": "Protocol section 9 requires any component needing an equivalence criterion to have that criterion frozen before the replay result is seen. The sealed deterministic_replay_binding fixed replay target, count and result-blind selection but did not enumerate the comparison. Both DETERMINISTIC_REPLAY_PLAN revisions deferred it; R2 is marked INCOMPLETE and conditions its exactness list on a later comparison-contract freeze. This addendum binds that contract.",
+  "bound_artifacts": {
+    "replay_comparison_contract_spec_md": {
+      "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
+      "sha256": "25d54b28d0fe7d02d655ce764ef6cba5974d6f06f2c5d458efc71922dc47cf4f"
+    },
+    "replay_comparison_contract_json": {
+      "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
+      "sha256": "2a25b1f2eb08b53002da4ade120c8e5f687f895bcf69b83f938d6a29a3ddd56e"
+    },
+    "replay_comparator": {
+      "path": "validation/replay/compare_r1_replay.py",
+      "sha256": "7ba18ec5617d329db241d6ddf7579ba368d961a44c113b94f35fe26258c75bd4"
+    },
+    "replay_comparator_qualification_suite": {
+      "path": "validation/replay/tests/qualify_r1_replay_comparator.py",
+      "sha256": "ae7a65638a2adac7bb8a27696f95597d2a0e44503d68697e21e8cb7559deb58d"
+    },
+    "replay_comparator_qualification_receipt": {
+      "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
+      "sha256": "097b5809238745fb901e21952bd632abbbe1945fd307451b702b25944cc86cd2",
+      "status": "PASS",
+      "case_count": 18,
+      "synthetic_fixture_only": true,
+      "candidate_data_read": false
+    }
+  },
+  "carried_forward_unchanged": {
+    "accepted_operator_commit": "59b15ce796bdda2b1d534fc34cded3e877360cac",
+    "accepted_r3_packet_manifest_sha256": "3d9c3442e63453be9b4a74bafeb2ba8ef0d99cfebd86dbb6cedc969fa413895b",
+    "r1_run_spec_manifest_sha256": "74febdaac0e0d2a52b48b4bba648b25c1d91c03064a53a9596a714ae18929e3a",
+    "eight_session_roster_receipt_sha256": "e8526258176c30f3856a121bcea8cd2d44396d6a53537b16c4259a0de5743716",
+    "deterministic_replay_binding": "unchanged; target remains the first member of the frozen ordered eight-session roster, selected result-blind"
+  },
+  "tier_e": {
+    "disposition": "PASS_R1_TIER_E_NEGATIVE_CONTROL_R1",
+    "binding_receipt_sha256": "85eb61c8cfcf81c36abd3cfa79b63993f6909303c10c2ec40c2a4ce004d14c88",
+    "selected_field": "raw_inputs.depth.sha256",
+    "note": "Tier-E is CLOSED and must not be rerun."
+  },
+  "pre_execution_integrity": {
+    "no_primary_candidate_science_existed_when_contract_frozen": true,
+    "primary_run_directories_present_at_freeze": 0,
+    "candidate_result_artifact_opened": false,
+    "schema_derived_from_candidate_output": false,
+    "schema_derived_from": "accepted operator and locked pipeline source only"
+  },
+  "historical_note_on_original_seal": {
+    "field": "architect_disposition",
+    "observed_value": "PASS_ARCHITECT_R1_TIER_B_CORPUS_ENVELOPES_R1",
+    "note": "The original seal's top-level architect_disposition carries a constituent Tier-B marker rather than a whole-seal disposition. It is recorded here as historical and is deliberately NOT rewritten; the original seal remains byte-identical.",
+    "action_taken": "none; annotation only"
+  },
+  "governance": {
+    "new_row": "OQ-V6-011",
+    "oq_v4_008_treatment": "additively annotated; its closure continues to cover replay path distinctness, count, target binding and result-blind selection. Replay comparison semantics are governed by OQ-V6-011.",
+    "rule_40_dependency": "none; this addendum does not cite or depend on Rule 40"
+  },
+  "scope_limits": {
+    "authorises_candidate_science": false,
+    "authorises_primary_execution": false,
+    "authorises_replay_execution": false,
+    "merged_to_main": false,
+    "next_step": "separate Architect authorisation"
+  }
+}
