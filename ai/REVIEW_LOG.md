@@ -242,3 +242,20 @@ tense error survived retelling because each paraphrase dropped one hedge. The
 control is structural, not stylistic: a status may not move without its closing
 artifact in the same change (rule 40), and inherited statuses absent from the
 closure matrix are UNVERIFIED by default.
+
+## 2026-08-17 — Architect succession fidelity check
+
+- Result: `PASS_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION`, returned by both the
+  successor reconstruction and the retiring Architect V5 bounded backward pass.
+- Classification: **formal succession fidelity check**, not scientific
+  verification. It establishes that the successor's reconstruction of state,
+  authority and next action is faithful. It verifies no scientific claim, seals
+  nothing, and promotes no OPEN_QUESTIONS row.
+- Backward pass found no material omission, contradiction, authority or scope
+  error, accidental reopening of settled science, or incorrect interpretation of
+  the next authorized action.
+- Nonblocking wording correction adopted: the production-model fallback choice is
+  **ARCHITECT_ADJUDICATED**, not independently verified.
+- Documentary predecessor at the time of the check:
+  `0a15f002bbe4ab10f347b1d4035a78486910e896`. BRIDGE unchanged at
+  `328c7eee85cf57a5af4211b3d36f5ee7560ebc5d`.

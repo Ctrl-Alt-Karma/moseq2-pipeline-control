@@ -180,3 +180,29 @@ above as a historical documentary error rather than erased.
 - Exactly one next authorized action: the formal successor Architect comprehension
   handshake, whose result returns to the retiring V5 cockpit for the bounded
   backward pass. R1 remains unsealed; no Tier-B computation; no candidate science.
+
+## 2026-08-17 — Architect succession complete (additive)
+
+Additive. Nothing above is rewritten, including the earlier premature retirement
+assertion and its correction, which stand as historical record.
+
+- The formal two-way succession handshake completed: the successor cockpit's
+  independent reconstruction and the retiring Architect V5 bounded backward pass
+  each returned `PASS_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION`.
+- **Architect V5 is RETIRED** and retains no substantive project authority.
+- **The successor Architect is ACTIVE.** Architect authority transferred
+  completely, and only on that PASS. Owner AJ / Karma remains ultimate Owner
+  authority, unchanged.
+- The production-model fallback choice is **ARCHITECT_ADJUDICATED**, not
+  independently verified.
+- **Scientific state is unchanged by succession.** R1 remains **UNSEALED**;
+  Tier-B remains **UNFROZEN**; the pre-seal matrix remains **1 CLOSED, 2
+  PARTIALLY ESTABLISHED, 7 OPEN**, so 9 of 10 rows are not fully closed. No
+  OPEN_QUESTIONS row was promoted and no scientific gate was reopened.
+- The next unresolved upstream dependency is **OQ-V5-009**, the
+  historical-existing versus prospective-validation design fork, which gates
+  OQ-V4-002, OQ-V4-003 and OQ-V5-010. The intended next operation is a bounded
+  read-only golden-host reacquisition centered on it; this operation did not
+  execute it and does not authorize it.
+- **No candidate science was performed by this operation.**
+- Live handoff pointer: `ai/HANDOFF_2026-08-17_ARCHITECT_SUCCESSION_COMPLETE_R1.md`.
