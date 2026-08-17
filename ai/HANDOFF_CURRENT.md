@@ -1,7 +1,11 @@
 > **Superseded 2026-08-17.** The live handoff is
-> `ai/HANDOFF_2026-08-17_ARCHITECT_V5_RETIREMENT.md`. Architect V5 is retired
-> and R1 remains unsealed; see `ai/OPEN_QUESTIONS.md` for row-level pre-seal
-> status. The text below is preserved as written and is not rewritten.
+> `ai/HANDOFF_2026-08-17_ARCHITECT_V5_RETIREMENT_CORRECTION_R1.md`; its immediate
+> historical predecessor is `ai/HANDOFF_2026-08-17_ARCHITECT_V5_RETIREMENT.md`,
+> which remains immutable and is corrected only on succession status, authority
+> transfer, and row-count wording. Architect V5 is RETIRING / SUCCESSION PENDING;
+> no Architect authority has transferred. R1 remains unsealed; see
+> `ai/OPEN_QUESTIONS.md` for row-level pre-seal status. The text below is
+> preserved as written and is not rewritten.
 
 # V4 Current Handoff — Final Kappa Closed, Validation R1 Pending Seal
 

@@ -152,3 +152,31 @@ earlier claim, both records stand at their own claim classes.
 - Scientific source, external model dependencies, PCA and production-model
   identities were re-verified clean and unchanged on 2026-08-17.
 - **No validation-candidate scientific processing has occurred.**
+
+## 2026-08-17 — succession semantics correction R1 (additive)
+
+The reconciliation section above recorded that Architect V5 is RETIRED. That was
+procedurally premature and is corrected here; the earlier assertion is preserved
+above as a historical documentary error rather than erased.
+
+- Architect V5 status: **RETIREMENT INITIATED / SUCCESSION PENDING**.
+- No Architect authority has transferred. Architect V5 retains only the authority
+  to receive the successor's independent comprehension reconstruction, perform the
+  bounded backward-pass fidelity check, and return
+  `PASS_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION` or
+  `HOLD_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION - <reason>`.
+- Authority transfers completely and only on
+  `PASS_HANDOFF_SUCCESSOR_STATE_RECONSTRUCTION`. Owner acceptance is not a
+  substitute for that formal PASS.
+- The successor candidate holds no Architect authority during its read-only
+  handshake.
+- Reconciled pre-seal matrix, stated unambiguously: **1 CLOSED, 2 PARTIALLY
+  ESTABLISHED, 7 OPEN**; therefore **9 of 10 rows are not fully closed**. Seven is
+  the OPEN-only count. No row status changed.
+- Project-only operating rule 40 stands. Rules 41 and 42 from the first sync are
+  removed as `ALREADY_CANON` in BRIDGE, without replacement. BRIDGE is unchanged
+  at `328c7eee85cf57a5af4211b3d36f5ee7560ebc5d`.
+- Live handoff pointer: `ai/HANDOFF_2026-08-17_ARCHITECT_V5_RETIREMENT_CORRECTION_R1.md`.
+- Exactly one next authorized action: the formal successor Architect comprehension
+  handshake, whose result returns to the retiring V5 cockpit for the bounded
+  backward pass. R1 remains unsealed; no Tier-B computation; no candidate science.
