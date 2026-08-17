@@ -23,14 +23,46 @@ def metadata_frame_count(metadata):
     return {"key": None, "value": None}
 
 
+def parse_resolution(resolution):
+    """Return (width, height) for a supported DepthResolution, else None.
+
+    Two representations are supported and must agree numerically:
+
+      "512x424"   legacy string form
+      [512, 424]  JSON list form
+
+    Every other representation fails closed by returning None, which the
+    caller turns into a FAILED_HOLD accounting receipt rather than an
+    exception. Strings inside lists are not coerced, booleans are not
+    accepted as integers, and non-positive dimensions are rejected.
+    """
+    if isinstance(resolution, str):
+        match = re.match(r"^(\d+)x(\d+)$", resolution)
+        if match is None:
+            return None
+        width, height = int(match.group(1)), int(match.group(2))
+    elif isinstance(resolution, (list, tuple)):
+        if len(resolution) != 2:
+            return None
+        for value in resolution:
+            if isinstance(value, bool) or not isinstance(value, int):
+                return None
+        width, height = resolution[0], resolution[1]
+    else:
+        return None
+    if width <= 0 or height <= 0:
+        return None
+    return width, height
+
+
 def raw_frames_from_bytes(depth_bytes, metadata):
     resolution = metadata.get("DepthResolution")
     dtype = metadata.get("DepthDataType")
-    match = re.match(r"^(\d+)x(\d+)$", resolution or "")
+    dimensions = parse_resolution(resolution)
     bytes_per_pixel = {"UInt16[]": 2, "uint16": 2}.get(dtype)
-    if match is None or bytes_per_pixel is None:
+    if dimensions is None or bytes_per_pixel is None:
         return {"resolution": resolution, "data_type": dtype, "bytes_per_frame": None, "frames": None, "exact_division": False}
-    bytes_per_frame = int(match.group(1)) * int(match.group(2)) * bytes_per_pixel
+    bytes_per_frame = dimensions[0] * dimensions[1] * bytes_per_pixel
     return {
         "resolution": resolution,
         "data_type": dtype,

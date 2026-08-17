@@ -1,0 +1,85 @@
+{
+  "behavioral_delta": {
+    "DepthDataType_handling": "unchanged",
+    "booleans": "rejected as integers",
+    "divisibility_timestamp_and_declared_count_checks": "unchanged",
+    "every_other_representation": "fails closed through the FAILED_HOLD accounting receipt, never raises",
+    "list_form_512_424": "newly supported; must be length 2, both non-boolean ints, both > 0",
+    "non_positive_dimensions": "rejected (this also removes a latent ZeroDivisionError for a zero-valued string form)",
+    "raw_frame_derivation_formula": "unchanged: depth_bytes // (d1 * d2 * bytes_per_pixel)",
+    "resolution_representation_in_receipt": "preserved verbatim as supplied by the metadata",
+    "string_form_512x424": "unchanged, still supported",
+    "strings_inside_lists": "not coerced; rejected"
+  },
+  "defect": {
+    "classification": "MECHANICAL_PRE_SCIENCE_OPERATOR_COMPATIBILITY_DEFECT",
+    "member": "helpers/record_r1_raw_frame_accounting.py",
+    "observed_failure": "R1_FULL_SESSION operator exit 1, reason=RAW_FRAME_ACCOUNTING_FAILED, scientific_processing_started=false",
+    "symptom": "TypeError in re.match when metadata DepthResolution is a JSON list",
+    "why_r3_gate_missed_it": "the R3 synthetic fixture declared DepthResolution as the string form",
+    "why_tier_e_missed_it": "Tier-E failed one step earlier at the provenance preflight and never reached raw-frame accounting"
+  },
+  "full_operator_gate": {
+    "assertion_count": 20,
+    "assertions": [
+      "approved_staged_root_path_accepted",
+      "arbitrary_home_path_rejected",
+      "bad_raw_inputs_depth_hash_rejected",
+      "bad_raw_inputs_metadata_hash_rejected",
+      "bad_raw_inputs_timestamps_hash_rejected",
+      "bad_scientific_artifacts_classifier_hash_rejected",
+      "bad_scientific_artifacts_config_hash_rejected",
+      "bad_scientific_artifacts_pca_hash_rejected",
+      "bad_scientific_artifacts_production_model_hash_rejected",
+      "frozen_pythonpath_worktree_runtime_gate",
+      "frozen_runtime_identity",
+      "full_session_has_no_truncation_argument",
+      "list_form_resolution_traverses_raw_frame_accounting",
+      "missing_metadata_rejected",
+      "missing_timestamps_rejected",
+      "mnt_c_path_rejected",
+      "mnt_e_path_rejected",
+      "no_fit_refit_resume_adaptation_route",
+      "production_model_before_after_immutability",
+      "symlink_escape_rejected"
+    ],
+    "candidate_recording_processed": true,
+    "exit_code": 0,
+    "fixture_depth_resolution": [
+      512,
+      424
+    ],
+    "output_evidence": "evidence/R4_FULL_OPERATOR_GATE_OUTPUT.txt",
+    "path": "tests/test_r1_full_session_operator_gate.sh",
+    "status": "PASS"
+  },
+  "helper_identity": {
+    "new_git_blob": "3a942d8b2eb8fc87b1534a87c38468dbd891c5fa",
+    "new_sha256": "df4c7165461b3114b901e94f61c4886fd04294b36c096188540d2baae29f014a",
+    "old_git_blob": "4499466bedfdcc3d6a76a09732348ebccba219ed",
+    "old_sha256": "a41271bd6eef25fde7078aa24da714e66889d0e1e65c5f46bced95529e5db8d0"
+  },
+  "helper_qualification": {
+    "case_count": 21,
+    "path": "tests/qualify_r1_raw_frame_accounting.py",
+    "receipt": "tests/R4_RAW_FRAME_ACCOUNTING_QUALIFICATION_RECEIPT.json",
+    "receipt_sha256": "cab8e1694d5d1082a71e8c25e8a682400dc47390b4ade09f467f6290255ab1a3",
+    "status": "PASS"
+  },
+  "historical_r3_operator_commit": "59b15ce796bdda2b1d534fc34cded3e877360cac",
+  "historical_r3_packet_manifest_sha256": "3d9c3442e63453be9b4a74bafeb2ba8ef0d99cfebd86dbb6cedc969fa413895b",
+  "invariants": {
+    "candidate_result_artifact_opened": false,
+    "candidate_science_occurred_during_remediation": false,
+    "model_pca_config_classifier_changed": false,
+    "raw_data_changed": false,
+    "replacements_used": false,
+    "replay_comparison_semantics_changed": false,
+    "roster_changed": false,
+    "scientific_settings_changed": false
+  },
+  "packet_revision": "R4",
+  "schema": "moseq-r1-r4-operator-packet-qualification-v1",
+  "supersedes_packet_revision": "R3",
+  "synthetic_fixture_only": true
+}

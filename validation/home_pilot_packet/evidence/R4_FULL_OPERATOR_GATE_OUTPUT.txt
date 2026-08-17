@@ -1,0 +1,34 @@
+frozen_runtime_identity=PASS
+approved_staged_root_path_accepted=PASS
+list_form_resolution_traverses_raw_frame_accounting=PASS
+ERROR: recording must resolve to /home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/<candidate_identity_id>/depth.dat
+mnt_e_path_rejected=PASS
+ERROR: recording must resolve to /home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/<candidate_identity_id>/depth.dat
+mnt_c_path_rejected=PASS
+ERROR: recording must resolve to /home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/<candidate_identity_id>/depth.dat
+arbitrary_home_path_rejected=PASS
+ERROR: recording must resolve to /home/ajm/moseq2-validation-20260730/validation/r1_existing_outside_corpus_v5/raw/<candidate_identity_id>/depth.dat
+symlink_escape_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+missing_metadata_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+missing_timestamps_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_raw_inputs_depth_hash_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_raw_inputs_metadata_hash_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_raw_inputs_timestamps_hash_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_scientific_artifacts_pca_hash_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_scientific_artifacts_production_model_hash_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_scientific_artifacts_config_hash_rejected=PASS
+ERROR: R1 full-session provenance preflight failed; science was not started
+bad_scientific_artifacts_classifier_hash_rejected=PASS
+full_session_has_no_truncation_argument=PASS
+production_model_before_after_immutability=PASS
+no_fit_refit_resume_adaptation_route=PASS
+frozen_pythonpath_worktree_runtime_gate=PASS
+candidate_recording_processed=false

@@ -1,0 +1,226 @@
+{
+  "candidate_data_read": false,
+  "case_count": 21,
+  "cases": [
+    {
+      "case": "string_512x424_uint16",
+      "exit_code": 0,
+      "expected": "PASS",
+      "expected_exit_code": 0,
+      "observed_status": "PASS",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_512_424_uint16",
+      "exit_code": 0,
+      "expected": "PASS",
+      "expected_exit_code": 0,
+      "observed_status": "PASS",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_len1",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_len0",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_len3",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_string_element",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_zero_dimension",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_negative_dimension",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_boolean_element",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "list_float_element",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "null_resolution",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "absent_resolution",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": null,
+      "result": "PASS"
+    },
+    {
+      "case": "unsupported_resolution_string",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "string_zero_dimension",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "dict_resolution",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "unsupported_dtype",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "non_whole_frame_bytes",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "timestamp_row_mismatch",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "declared_frame_count_mismatch",
+      "exit_code": 42,
+      "expected": "FAILED_HOLD",
+      "expected_exit_code": 42,
+      "observed_status": "FAILED_HOLD",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "declared_frame_count_match",
+      "exit_code": 0,
+      "expected": "PASS",
+      "expected_exit_code": 0,
+      "observed_status": "PASS",
+      "raised_exception": false,
+      "resolution_representation_preserved": true,
+      "result": "PASS"
+    },
+    {
+      "case": "string_and_list_forms_numerically_identical",
+      "detail": {
+        "list_512_424_uint16": {
+          "bytes_per_frame": 434176,
+          "frames": 2
+        },
+        "string_512x424_uint16": {
+          "bytes_per_frame": 434176,
+          "frames": 2
+        }
+      },
+      "expected": "IDENTICAL",
+      "observed_status": "IDENTICAL",
+      "result": "PASS"
+    }
+  ],
+  "helper_sha256": "df4c7165461b3114b901e94f61c4886fd04294b36c096188540d2baae29f014a",
+  "schema": "moseq-r1-r4-raw-frame-accounting-qualification-v1",
+  "status": "PASS",
+  "synthetic_fixture_only": true
+}

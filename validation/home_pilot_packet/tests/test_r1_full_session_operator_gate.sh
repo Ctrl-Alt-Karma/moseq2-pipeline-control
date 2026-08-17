@@ -25,7 +25,7 @@ trap cleanup EXIT
 
 mkdir -p "${SESSION}" "${RUNS_ROOT}"
 truncate -s $((512 * 424 * 2 * 2)) "${SESSION}/depth.dat"
-printf '{"DepthDataType":"UInt16[]","DepthResolution":"512x424","SessionName":"synthetic_r3_qualification","StartTime":"01/01/2000 00:00:00","SubjectName":"synthetic_0_1_nonbiological"}\n' >"${SESSION}/metadata.json"
+printf '{"DepthDataType":"UInt16[]","DepthResolution":[512,424],"SessionName":"synthetic_r3_qualification","StartTime":"01/01/2000 00:00:00","SubjectName":"synthetic_0_1_nonbiological"}\n' >"${SESSION}/metadata.json"
 printf '0\n1\n' >"${SESSION}/depth_ts.txt"
 printf '{"fixture":"frozen_source_environment"}\n' >"${WORK}/source_environment.json"
 printf '{"fixture":"governed_external_dependencies"}\n' >"${WORK}/external_dependencies.json"
@@ -84,6 +84,15 @@ grep -q '^status=PASS$' "${POSITIVE_OUTPUT}/R1_FULL_SESSION_PREFLIGHT_ONLY_RECEI
 grep -q '^scientific_processing_started=false$' "${POSITIVE_OUTPUT}/R1_FULL_SESSION_PREFLIGHT_ONLY_RECEIPT.txt"
 [[ ! -e "${POSITIVE_OUTPUT}/stages" ]]
 printf 'approved_staged_root_path_accepted=PASS\n'
+
+# R4: the list-form DepthResolution fixture must traverse raw-frame accounting
+# and stop before any candidate science begins.
+[[ -f "${POSITIVE_OUTPUT}/inputs/raw_frame_accounting.json" ]]
+grep -q '"status": "PASS"' "${POSITIVE_OUTPUT}/inputs/raw_frame_accounting.json"
+grep -q '"bytes_per_frame": 434176' "${POSITIVE_OUTPUT}/inputs/raw_frame_accounting.json"
+[[ ! -e "${POSITIVE_OUTPUT}/stages" ]]
+[[ ! -e "${POSITIVE_OUTPUT}/summaries" ]]
+printf 'list_form_resolution_traverses_raw_frame_accounting=PASS\n'
 
 for family in mnt_e mnt_c arbitrary_home; do
     case "${family}" in
