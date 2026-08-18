@@ -4,11 +4,11 @@
   "bound_artifacts": {
     "replay_comparator": {
       "path": "validation/replay/compare_r1_replay.py",
-      "sha256": "6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46"
+      "sha256": "8d36ca3b5b13eede3f0c5aac760044550502f86e921d796a78d29f54890bfa31"
     },
     "replay_comparator_qualification_receipt": {
       "candidate_data_read": false,
-      "case_count": 19,
+      "case_count": 26,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
       "sha256": "284960e6a61b5eddc78549f26fbe170c4d696c884d630180ac1db70e8420e0c5",
       "status": "PASS",
@@ -16,15 +16,15 @@
     },
     "replay_comparator_qualification_suite": {
       "path": "validation/replay/tests/qualify_r1_replay_comparator.py",
-      "sha256": "d8ff0e1ff51d926838ae14e807a9822c7b8be968c45ac94af89b80249b4f6c6e"
+      "sha256": "002020176aa715f4de1f2413bc2915fb67249dcdb8842a1b66672a5dafb22d93"
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "90536a864366a21642f8380f5362f2ca2964e482a378ff8eba32b029641cb7ce"
+      "sha256": "7315a35d2588cb78f021c269792afa9313f161fb80ac7497ab55961dccf3b41c"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "f414b7d88cf7d88240203311e23d6e3e18a822815d7e941f67247d8475460f09"
+      "sha256": "5a42908b3b6d6054f2cf583b2cc83401d77af3eb4cd6ea219d3b14cd365a621b"
     }
   },
   "carried_forward_unchanged": {
@@ -46,6 +46,7 @@
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
+  "current_bindings_note": "bound_artifacts reflect the CURRENT R6 state. Historical R3/R4/R5 identities are preserved in the per-revision blocks and in chronology.",
   "governance": {
     "new_row": "OQ-V6-011",
     "oq_v4_008_treatment": "additively annotated; its closure continues to cover replay path distinctness, count, target binding and result-blind selection. Replay comparison semantics are governed by OQ-V6-011.",
@@ -65,7 +66,8 @@
     "no_primary_candidate_science_existed_when_contract_frozen": true,
     "primary_run_directories_present_at_freeze": 0,
     "schema_derived_from": "accepted operator and locked pipeline source only",
-    "schema_derived_from_candidate_output": false
+    "schema_derived_from_candidate_output": false,
+    "scope": "ORIGINAL contract freeze only. These statements describe the state when the original contract was frozen and are not claims about the later R6 amendments."
   },
   "pre_seal_matrix_unchanged": {
     "CLOSED": 10,
@@ -253,6 +255,29 @@
     "root_cause": "plane_ransac sampled 3-point hypotheses from the unseeded global NumPy RNG, so ROI, extraction, scalars, PCA scores and applied labels differed between a run and its replay of the same session",
     "tier_b_tier_c_criteria_unchanged": true,
     "zero_tolerance_unchanged": true
+  },
+  "r6_remediation_integrity": {
+    "candidate_identities_or_uuid_values_exposed": false,
+    "classification": "POST_R5_FAILURE_DETERMINISM_AND_COMPARATOR_REMEDIATION",
+    "comparator_changes_source_confirmed_structural_corrections": true,
+    "current_packet_manifest_sha256": "3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e",
+    "current_packet_members": 75,
+    "current_partition": {
+      "declared_ignored_classes": 15,
+      "must_match_classes": 25,
+      "scientific_tolerance": 0
+    },
+    "current_qualification": {
+      "cases": 26,
+      "status": "PASS"
+    },
+    "locked_moseq2_extract_commit": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+    "protected_r5_output_structure_inspected": true,
+    "ransac_nondeterminism_was_a_genuine_scientific_output_defect": true,
+    "scientific_values_inspected": false,
+    "scope": "R6 amendments, made after the R5 replay failed",
+    "what_was_inspected": "loader behaviour and container format, dataset and key names, and per-unit match/differ status in an identity-redacted report",
+    "zero_scientific_tolerance_remains": true
   },
   "report_identity_handling": {
     "classification": "PROTECTED_LOCAL_EVIDENCE",

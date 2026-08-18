@@ -228,9 +228,10 @@
       "logical_name": "stages/02_extract/*.tiff"
     }
   ],
+  "accepted_operator_bytes_unchanged_in_r6": true,
   "accepted_operator_commit": "1f028869ad884fc0b506845ec717a226540d651b",
-  "accepted_packet_manifest_sha256": "190b052e055d2fa18bfb5ab621a4763fb3e24084826ee5f584ab99c330da80e1",
-  "accepted_packet_revision": "R5",
+  "accepted_packet_manifest_sha256": "3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e",
+  "accepted_packet_revision": "R6",
   "canonicalization": [
     {
       "id": "C1",
@@ -243,10 +244,15 @@
       "rule": "each side's own generated extraction UUID - the uuid4 minted by moseq2-extract for that run, read from that run's own results_00.yaml - is replaced by the literal token <EXTRACTION_UUID> in HDF5 logical names, HDF5 string values and attributes, JSON and YAML keys and string values, PCA score and score-index group names, and applied-model keys and metadata"
     }
   ],
-  "classification": "PRE_EXECUTION_CLARIFICATION",
+  "classification": "POST_R5_FAILURE_DETERMINISM_AND_COMPARATOR_REMEDIATION",
   "comparison_principles": {
     "array_exactness": "dtype AND shape AND exact C-order bytes; NaN representation and NaN position are therefore compared bit-exactly",
     "blindness": "reports contain logical names, classes, match status, and digests only; no scientific value is ever emitted",
+    "current_partition": {
+      "declared_ignored_classes": 15,
+      "must_match_classes": 25,
+      "scientific_tolerance": 0
+    },
     "float_exactness": "scalar floats compared as IEEE-754 little-endian bit patterns; NaN and -0.0 are distinguished",
     "granularity": "semantic dataset/field comparison; whole-file byte equality is never used as the primary predicate except for frozen input copies and opaque image bytes",
     "inventory_rule": "the relative-path inventories of both run roots must be identical; any missing or extra entry is a FAIL",
@@ -268,6 +274,8 @@
     "roots_compared": 2
   },
   "governs": "OQ-V6-011",
+  "locked_moseq2_extract_commit": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+  "locked_moseq2_extract_previous_commit": "e7f585104ba25b66e5326c88c77a47e33db95635",
   "not_ignored_explicitly": [
     "provenance, source, model, PCA, config and classifier identities are load-bearing and are MUST_MATCH",
     "absolute paths that are NOT run-root dependent (locked worktree paths, input paths, module files) remain MUST_MATCH",
@@ -275,11 +283,14 @@
   ],
   "operator_on_disk_sha256": "cbdbba19ca7f2f143f4d5339dc24fef5c126f2331f2ddc002037180bdddbaf97",
   "operator_provenance_note": "R5 corrects the runtime PCA role binding, so the operator entry point is no longer byte-identical to R3/R4 and operator_on_disk_sha256 moves with it. The runtime PCA artifact is the component basis pca.h5 (6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368); the training-score artifact pca_scores.h5 (26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912) remains frozen upstream evidence and is NOT a runtime input.",
+  "original_freeze_classification": "PRE_EXECUTION_CLARIFICATION",
+  "original_freeze_note": "The original contract was frozen before any primary candidate execution existed and that historical fact is unchanged. The R6 amendments below were made after the R5 replay failed.",
   "original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "packet_manifest_rebinding_note": "Provenance rebound after the R5 companion PCA yaml dependency correction. The runtime PCA component basis is unchanged at 6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368; the operator now also binds and verifies the companion pca.yaml (ba47df9b1229ab6dae884adf2fab49cfde4a07c5d44575e35547be12277af0d9, 2714 bytes) that moseq2-pca consumes at apply time, and stage 03 uses the verified original PCA path so the locked pipeline resolves that companion. Comparison semantics are unchanged.",
   "schema": "moseq-r1-replay-comparison-contract-v1",
   "schema_derivation": {
-    "authority": "operator and locked pipeline source only; no candidate output was opened to derive this schema",
+    "authority": "ORIGINAL FREEZE: operator and locked pipeline source only; no candidate output existed or was opened to derive the original schema.",
+    "r6_amendment_authority": "R6 AMENDMENTS: informed by a protected, identity-redacted STRUCTURAL decomposition of the preserved R5 primary/replay pair, plus confirmation in locked source. Structure only was inspected - loader behaviour, container format, dataset and key names, and match/differ status. No scientific value was inspected, no candidate identity or UUID value was exposed, and no scientific tolerance was introduced.",
     "sources": [
       "validation/home_pilot_packet/08_run_r1_full_session_validation.sh",
       "validation/home_pilot_packet/lib/common.sh",

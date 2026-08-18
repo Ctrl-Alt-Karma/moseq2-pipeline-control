@@ -1,15 +1,15 @@
 # R1 deterministic replay comparison contract
 
 Governs: **OQ-V6-011**
-Classification: **PRE_EXECUTION_CLARIFICATION**
+Classification: **POST_R5_FAILURE_DETERMINISM_AND_COMPARATOR_REMEDIATION** (the original freeze was PRE_EXECUTION_CLARIFICATION and that history stands)
 Machine-readable partition: `REPLAY_COMPARISON_CONTRACT_R1.json`
-(SHA-256 `90536a864366a21642f8380f5362f2ca2964e482a378ff8eba32b029641cb7ce`)
+(SHA-256 `7315a35d2588cb78f021c269792afa9313f161fb80ac7497ab55961dccf3b41c`)
 Comparator: `compare_r1_replay.py`
-(SHA-256 `6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46`)
+(SHA-256 `8d36ca3b5b13eede3f0c5aac760044550502f86e921d796a78d29f54890bfa31`)
 Qualification receipt: `tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json`
 (SHA-256 `284960e6a61b5eddc78549f26fbe170c4d696c884d630180ac1db70e8420e0c5`)
 
-Operator binding: **R5** packet revision, operator commit
+Operator binding: **R6** packet revision, operator commit
 `1f028869ad884fc0b506845ec717a226540d651b`, packet manifest
 `3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e` (75 members).
 Rebound from the R4 binding by the R5 PCA provenance-role correction, which moved
@@ -142,3 +142,14 @@ Nineteen cases, all `PASS`. The suite proves sensitivity across every handler cl
   --contract validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json \
   --report   <evidence>/REPLAY_COMPARISON_REPORT_R1.json
 ```
+
+## Provenance of the R6 amendments
+
+The original contract was frozen before any primary candidate execution existed.
+The R6 amendments were made *after* the R5 replay failed, and were informed by a
+protected, identity-redacted **structural** decomposition of the preserved R5
+primary/replay pair together with confirmation in locked source. Only structure was
+inspected: loader behaviour, container format, dataset and key names, and match or
+differ status. No scientific value was inspected, no candidate identity or UUID value
+was exposed, and no tolerance was introduced. Current locked moseq2-extract source is
+`2c9cd86571bcc23ad6870e4da344e0f558f3f54c`.
