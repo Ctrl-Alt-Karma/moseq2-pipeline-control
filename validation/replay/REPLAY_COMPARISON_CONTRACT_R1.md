@@ -3,15 +3,15 @@
 Governs: **OQ-V6-011**
 Classification: **PRE_EXECUTION_CLARIFICATION**
 Machine-readable partition: `REPLAY_COMPARISON_CONTRACT_R1.json`
-(SHA-256 `9d569a5bfe9e4882fd92646787137fe565080c9e4fe4e255eedbb2580a983a44`)
+(SHA-256 `f5095def25fdedfa73754bc3ed401f2d482178ec10f692e8fc49f778c3ba7dd1`)
 Comparator: `compare_r1_replay.py`
 (SHA-256 `6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46`)
 Qualification receipt: `tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json`
-(SHA-256 `452a19206a07552acc9d6a247f49dc12904a18cf2d009c3da05a79c4b30372d2`)
+(SHA-256 `a08bb51b4d9464cbb287d28bffecca5ba53bcf3ce312f0694cb2af1fe306e24a`)
 
 Operator binding: R4 packet revision, operator commit
-`f026298a0cf2a0fa97bedb29245424bddcf0713b`, packet manifest
-`37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef`.
+`485a2dcf08726cd208cf4f5e7cc342c5a35594a6`, packet manifest
+`8b5b5424204bf5a8d0ac5df3a88d2100b45bfd75b2dbe4dd1aab58706c4dd983`.
 Rebound from the R3 operator commit after a pre-science raw-frame-accounting
 compatibility remediation. The comparison partition below is unchanged.
 

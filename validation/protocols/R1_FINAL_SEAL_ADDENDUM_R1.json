@@ -10,7 +10,7 @@
       "candidate_data_read": false,
       "case_count": 19,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
-      "sha256": "452a19206a07552acc9d6a247f49dc12904a18cf2d009c3da05a79c4b30372d2",
+      "sha256": "a08bb51b4d9464cbb287d28bffecca5ba53bcf3ce312f0694cb2af1fe306e24a",
       "status": "PASS",
       "synthetic_fixture_only": true
     },
@@ -20,11 +20,11 @@
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "9d569a5bfe9e4882fd92646787137fe565080c9e4fe4e255eedbb2580a983a44"
+      "sha256": "f5095def25fdedfa73754bc3ed401f2d482178ec10f692e8fc49f778c3ba7dd1"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "5fa347777ce5769e5ae93f97d288036b5b7a40b1e40827262d61f7d4f0264819"
+      "sha256": "5ee61467a212956c05078a6a573e62ae6222d13c553578cfbf3b485fe09de8d1"
     }
   },
   "carried_forward_unchanged": {
@@ -38,7 +38,8 @@
     "2026-08-17 fc7cacc9 - replay comparison contract, comparator and 18-case qualification frozen before any primary candidate execution existed",
     "2026-08-17 delta - Counsel implementation hold; C1 corrected to own-root, Q19 added, 19/19 requalified, qualification claim narrowed; scientific partition untouched",
     "2026-08-17 R3->R4 - pre-science raw-frame-accounting compatibility remediation; replay contract provenance rebound to the R4 operator commit; scientific partition byte-identical; comparator code unchanged; requalified 19/19",
-    "2026-08-17 R4 evidence-consistency delta - documentary evidence correction only: evidence/R4_QUALIFICATION_REPORT.json field full_operator_gate.candidate_recording_processed corrected from true to false to agree with the gate test and its captured output. No operator code, gate logic, comparator code, scientific setting, partition class or raw data changed."
+    "2026-08-17 R4 evidence-consistency delta - documentary evidence correction only: evidence/R4_QUALIFICATION_REPORT.json field full_operator_gate.candidate_recording_processed corrected from true to false to agree with the gate test and its captured output. No operator code, gate logic, comparator code, scientific setting, partition class or raw data changed.",
+    "2026-08-17 R4->R5 - PCA provenance role correction; runtime PCA binding moved from the training-score artifact to the component basis, one semantic /components role gate added, fresh R5 run specs derived; replay provenance rebound to R5; comparison partition byte-identical; comparator code unchanged; requalified 19/19"
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -112,6 +113,48 @@
     "r3_history_rewritten": false,
     "raw_data_changed": false,
     "scientific_settings_changed": false,
+    "zero_tolerance_unchanged": true
+  },
+  "r5_pca_role_correction": {
+    "accepted_operator_commit": "485a2dcf08726cd208cf4f5e7cc342c5a35594a6",
+    "accepted_packet_manifest_sha256": "8b5b5424204bf5a8d0ac5df3a88d2100b45bfd75b2dbe4dd1aab58706c4dd983",
+    "accepted_packet_revision": "R5",
+    "c1_own_root_canonicalization_unchanged": true,
+    "candidate_science_during_remediation": false,
+    "classification": "PROVENANCE_ROLE_CORRECTION",
+    "comparator_code_changed": false,
+    "declared_ignored_classes_unchanged": 14,
+    "failed_run_directories_preserved": true,
+    "lineage_basis": "PASS_ARCHITECT_PCA_COMPONENT_LINEAGE_ESTABLISHED_R1",
+    "model_refit": false,
+    "must_match_classes_unchanged": 24,
+    "only_pca_binding_changed_in_all_eight_specs": true,
+    "pca_refit": false,
+    "pca_runtime_component_basis": {
+      "dataset": "/components",
+      "dtype": "float32",
+      "path": "/home/ajm/moseq_work/5xfad_exploratory_20/pca/pca.h5",
+      "sha256": "6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368",
+      "shape": [
+        25,
+        6400
+      ]
+    },
+    "pca_training_score_artifact": {
+      "deleted_or_redefined": false,
+      "is_runtime_apply_pca_input": false,
+      "path": "/home/ajm/moseq_work/5xfad_exploratory_20/pca/pca_scores.h5",
+      "role": "frozen upstream evidence for the production model and Tier-B envelopes",
+      "sha256": "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912"
+    },
+    "production_model_sha256": "5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964",
+    "r3_and_r4_artifacts_preserved": true,
+    "r4_run_specs_mutated": false,
+    "r5_run_spec_manifest_sha256": "cff22ab7a941ef4d740cb396b9ed070b12e8fa7d862dcc42c61c6be70d300705",
+    "r5_run_specs_derived_from_r4": true,
+    "scientific_retuning": false,
+    "semantic_role_gate": "runtime PCA artifact must be readable HDF5 containing /components with shape (25, 6400) and dtype float32; fails closed before candidate science",
+    "tier_b_or_tier_c_criteria_changed": false,
     "zero_tolerance_unchanged": true
   },
   "report_identity_handling": {

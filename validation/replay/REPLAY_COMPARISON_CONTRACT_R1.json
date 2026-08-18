@@ -217,9 +217,9 @@
       "logical_name": "<hdf5 internal default>"
     }
   ],
-  "accepted_operator_commit": "f026298a0cf2a0fa97bedb29245424bddcf0713b",
-  "accepted_packet_manifest_sha256": "37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef",
-  "accepted_packet_revision": "R4",
+  "accepted_operator_commit": "485a2dcf08726cd208cf4f5e7cc342c5a35594a6",
+  "accepted_packet_manifest_sha256": "8b5b5424204bf5a8d0ac5df3a88d2100b45bfd75b2dbe4dd1aab58706c4dd983",
+  "accepted_packet_revision": "R5",
   "canonicalization": [
     {
       "id": "C1",
@@ -256,8 +256,8 @@
     "absolute paths that are NOT run-root dependent (locked worktree paths, input paths, module files) remain MUST_MATCH",
     "no metadata group is ignored wholesale"
   ],
-  "operator_on_disk_sha256": "f01f6c45b1407324e8dcae9542fb7ef3900071d09b47cc9c18124c8cb8325580",
-  "operator_provenance_note": "The operator entry point 08_run_r1_full_session_validation.sh is byte-identical between R3 and R4; operator_on_disk_sha256 is therefore unchanged. R4 changes one pre-science helper (record_r1_raw_frame_accounting.py) and its gate fixture, so the binding moves to the R4 packet revision and commit.",
+  "operator_on_disk_sha256": "87a7bb1da0f655242b77e01d8d4b4c0be8c3bb39d5dd95f710114490c7399823",
+  "operator_provenance_note": "R5 corrects the runtime PCA role binding, so the operator entry point is no longer byte-identical to R3/R4 and operator_on_disk_sha256 moves with it. The runtime PCA artifact is the component basis pca.h5 (6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368); the training-score artifact pca_scores.h5 (26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912) remains frozen upstream evidence and is NOT a runtime input.",
   "original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "packet_manifest_rebinding_note": "Rebound after a documentary evidence-consistency correction to evidence/R4_QUALIFICATION_REPORT.json (full_operator_gate.candidate_recording_processed true -> false, matching the gate test and its captured output). Operator code, gate logic, comparator code and the scientific partition are unchanged.",
   "schema": "moseq-r1-replay-comparison-contract-v1",
@@ -278,8 +278,9 @@
   },
   "superseded_operator_binding": {
     "r3_operator_commit": "59b15ce796bdda2b1d534fc34cded3e877360cac",
-    "r3_packet_manifest_sha256": "3d9c3442e63453be9b4a74bafeb2ba8ef0d99cfebd86dbb6cedc969fa413895b",
-    "reason": "R3 aborted before science with RAW_FRAME_ACCOUNTING_FAILED on list-form metadata DepthResolution; R4 is the mechanical pre-science compatibility remediation. No scientific criterion changed.",
+    "r4_operator_commit": "f026298a0cf2a0fa97bedb29245424bddcf0713b",
+    "r4_packet_manifest_sha256": "37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef",
+    "reason": "R4 bound the frozen training-score artifact as the runtime PCA input; R5 is the provenance role correction. No scientific criterion changed.",
     "superseded_before_any_primary_completed": true
   }
 }
