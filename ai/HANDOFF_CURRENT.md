@@ -1,4 +1,7 @@
-> **Superseded 2026-08-17.** The live handoff is
+> **Superseded 2026-08-18.** The live handoff is
+> `ai/HANDOFF_2026-08-18_R1_R6_POST_COMPARATOR_VERIFICATION_CHECKPOINT.md`;
+> the comparator-correction verification gate is CLOSED at correction tip
+> `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`. The prior live handoff was
 > `ai/HANDOFF_2026-08-17_R1_SEAL_HASH_REMEDIATION_R1.md`; earlier handoffs remain
 > immutable history. R1 is **SEALED**; matrix 10 CLOSED / 0 PARTIALLY ESTABLISHED /
 > 0 OPEN. Canonical seal artifact SHA-256 is

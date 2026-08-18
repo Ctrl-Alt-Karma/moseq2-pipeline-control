@@ -1,6 +1,25 @@
 # Current State
 
-Date: 2026-08-13
+Date: 2026-08-13 (base) — see the 2026-08-18 checkpoint immediately below
+
+## 2026-08-18 checkpoint — comparator-correction verification gate CLOSED
+
+Additive. Nothing below this section is rewritten.
+
+- Comparator correction tip `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`, parent `54d8d7b5783c0810088ed96694a6bc10dcd7c94f`.
+- Independent Verifier: `PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION`.
+- Qualification **37 / 37 PASS**, independently reproduced, exit 0.
+- Comparator-correction verification gate: **CLOSED**.
+- The corrected comparator **has not been run** against the nine preserved R6 runs.
+- Original seal `ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2` and original `REPLAY_COMPARISON_REPORT_R6.json`
+  `22be3cecc3c586a8f47950802be71fcc689741eeb957340d0d1a94954d288a2c` remain untouched; R6 packet `3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e` 75 / 75.
+- Candidate processing remains **prohibited**.
+- Next authorized scientific operation: comparison-only evaluation of the verified
+  corrected comparator against the nine preserved R6 run outputs, emitting a new
+  separately named evidence artifact, then **STOP** for Architect adjudication
+  before any seal advancement or candidate work.
+- Live handoff: `ai/HANDOFF_2026-08-18_R1_R6_POST_COMPARATOR_VERIFICATION_CHECKPOINT.md`.
+
 
 ## Verdict and gate status
 

@@ -43,7 +43,8 @@
     "2026-08-17 R5 documentary cleanup - restored the historical R4 packet-manifest identity in the OQ-V6-011 R4 annotation, updated the spec operator-binding block from stale R4 wording to R5, and replaced the stale contract packet_manifest_rebinding_note; artifact hashes rebound mechanically; comparison partition and comparator code unchanged; requalified 19/19",
     "2026-08-17 R5 companion-dependency correction - the consumed companion pca.yaml (ba47df9b..., 2714 bytes) is bound in the R5 run specs and verified in the provenance preflight; stage 03 now uses the verified original PCA path so moseq2-pca resolves the genuine companion; packet manifest 72 members; replay provenance rebound; comparison partition and comparator code unchanged; requalified 19/19",
     "2026-08-17 R5->R6 determinism remediation - moseq2-extract plane_ransac made deterministic (local RandomState(0), commit 2c9cd86571bcc23ad6870e4da344e0f558f3f54c); replay comparator corrected for generated-UUID canonicalisation, joblib model loading, decoded-TIFF comparison and diagnostic presence-only; requalified 26/26; no scientific criterion changed",
-    "2026-08-18 R6 -> post-R6 comparator implementation correction - scientific determinism established (all arrays and labels bit-exact); three source-confirmed representation defects corrected: wall-clock provenance 'written' fields declared ignored with the surrounding provenance compared field by field, the embedded model object reduced to a presence marker per its existing contract rule, and fixed-capacity string dtype removed from the equality predicate after canonicalisation; requalified 37/37; no candidate rerun"
+    "2026-08-18 R6 -> post-R6 comparator implementation correction - scientific determinism established (all arrays and labels bit-exact); three source-confirmed representation defects corrected: wall-clock provenance 'written' fields declared ignored with the surrounding provenance compared field by field, the embedded model object reduced to a presence marker per its existing contract rule, and fixed-capacity string dtype removed from the equality predicate after canonicalisation; requalified 37/37; no candidate rerun",
+    "2026-08-18 post-comparator-verification checkpoint - comparator-correction verification gate CLOSED at tip 1cd7c900780a423f2b2186025ee3a324b2bf7fbd under PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION with 37/37 independently reproduced; corrected comparator not yet run against the nine preserved R6 runs; original seal and original R6 comparison report untouched; documentation only"
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -84,7 +85,22 @@
     "r6_packet_unchanged_sha256": "3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e",
     "scientific_arrays_and_labels_bit_exact_before_correction": true,
     "scientific_tolerance": 0,
-    "uuid_disclosure": "two generated extraction UUID values were inadvertently printed during the first R6 diagnostic pass; they are run-instance UUIDs, not candidate identities, no scientific values were exposed, and there is no scientific effect"
+    "uuid_disclosure": "two generated extraction UUID values were inadvertently printed during the first R6 diagnostic pass; they are run-instance UUIDs, not candidate identities, no scientific values were exposed, and there is no scientific effect",
+    "verification": {
+      "candidate_processing_prohibited": true,
+      "corrected_comparator_run_against_preserved_r6": false,
+      "gate": "CLOSED",
+      "independent_verifier_disposition": "PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION",
+      "next_authorized_operation": "comparison-only evaluation of the verified corrected comparator against the nine preserved R6 run outputs, emitting a new separately named evidence artifact, then STOP for Architect adjudication before any seal advancement or candidate work",
+      "original_r6_comparison_report_sha256": "22be3cecc3c586a8f47950802be71fcc689741eeb957340d0d1a94954d288a2c",
+      "original_r6_comparison_report_untouched": true,
+      "original_seal_untouched_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
+      "qualification_cases_independently_reproduced": 37,
+      "qualification_exit_code": 0,
+      "standing_non_blocking_note": "the qualification suite assumes the golden host's legacy skimage.external.tifffile import behavior",
+      "verified_correction_tip": "1cd7c900780a423f2b2186025ee3a324b2bf7fbd",
+      "verified_parent": "54d8d7b5783c0810088ed96694a6bc10dcd7c94f"
+    }
   },
   "pre_execution_integrity": {
     "candidate_result_artifact_opened": false,
