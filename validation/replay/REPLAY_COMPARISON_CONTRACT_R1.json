@@ -69,6 +69,11 @@
       "id": "I14",
       "justification": "mtime, ownership and permission bits are not compared; they are host bookkeeping and are not pipeline outputs",
       "logical_name": "<filesystem metadata>"
+    },
+    {
+      "id": "I15",
+      "justification": "diagnostic-only render consumed by no later scientific stage; its existence stays mandatory through the inventory rule M01, but its container bytes are not science",
+      "logical_name": "stages/*/depth_range_diagnostic.png"
     }
   ],
   "MUST_MATCH": [
@@ -163,8 +168,8 @@
       "logical_name": "logs/*.command.txt"
     },
     {
-      "detail": "background image, ROI images and any plane-fit image emitted by find-roi",
-      "handler": "bytes",
+      "detail": "ROI stage images compared as decoded pixel arrays (dtype + shape + exact bytes), never TIFF container bytes",
+      "handler": "tiff",
       "id": "M16",
       "logical_name": "stages/01_roi/*.tiff"
     },
@@ -187,8 +192,8 @@
       "logical_name": "stages/03_pca/pca_scores.h5"
     },
     {
-      "detail": "applied label arrays and all handoff keys; label arrays compared dtype+shape+exact bytes",
-      "handler": "pickle",
+      "detail": "applied held-out model loaded with joblib (moseq2-model writes zlib-compressed joblib, not raw pickle); label arrays compared dtype + shape + exact bytes; keys, metadata, model_parameters, run_parameters and whitening_parameters compared after generated extraction-UUID and own-run-root canonicalisation; the embedded model object is not recursively compared because the frozen source model SHA is independently bound",
+      "handler": "joblib",
       "id": "M20",
       "logical_name": "stages/04_model/model-applied-heldout.p"
     },
@@ -215,6 +220,12 @@
       "handler": "hdf5",
       "id": "M24",
       "logical_name": "<hdf5 internal default>"
+    },
+    {
+      "detail": "stage-02 duplicate working copies of the ROI/background images, compared as decoded pixel arrays; their load-bearing values are also inside the extraction HDF5, so this is a redundant check rather than the primary one",
+      "handler": "tiff",
+      "id": "M25",
+      "logical_name": "stages/02_extract/*.tiff"
     }
   ],
   "accepted_operator_commit": "1f028869ad884fc0b506845ec717a226540d651b",
@@ -225,6 +236,11 @@
       "id": "C1",
       "justification": "the two run roots differ by construction; canonicalizing them keeps embedded provenance paths MUST_MATCH instead of being ignored",
       "rule": "each run root's own absolute path is replaced by the literal token <RUN_ROOT> in all text, JSON string, and YAML string content before comparison"
+    },
+    {
+      "id": "C2",
+      "justification": "moseq2-extract mints a fresh uuid4 per extraction, so this value is pure run-instance identity and can never match across two runs. Only that exact generated value is canonicalised, and only on the side that produced it; acquisition and candidate identities and any other UUID-shaped string are left untouched and still compared",
+      "rule": "each side's own generated extraction UUID - the uuid4 minted by moseq2-extract for that run, read from that run's own results_00.yaml - is replaced by the literal token <EXTRACTION_UUID> in HDF5 logical names, HDF5 string values and attributes, JSON and YAML keys and string values, PCA score and score-index group names, and applied-model keys and metadata"
     }
   ],
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -234,6 +250,7 @@
     "float_exactness": "scalar floats compared as IEEE-754 little-endian bit patterns; NaN and -0.0 are distinguished",
     "granularity": "semantic dataset/field comparison; whole-file byte equality is never used as the primary predicate except for frozen input copies and opaque image bytes",
     "inventory_rule": "the relative-path inventories of both run roots must be identical; any missing or extra entry is a FAIL",
+    "run_instance_identity": "the generated extraction UUID is the only run-instance value canonicalised beyond the run root; scientific equality is not relaxed",
     "scientific_tolerance": 0,
     "unclassified_behaviour": "any logical name in governed scope belonging to neither MUST_MATCH nor DECLARED_IGNORED is a FAIL"
   },

@@ -10,7 +10,7 @@
       "candidate_data_read": false,
       "case_count": 19,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
-      "sha256": "3d3520f8f92f0edcc57f493f7a86d1e67db0c00d56a4b90e6bee7d2d189f2c6f",
+      "sha256": "284960e6a61b5eddc78549f26fbe170c4d696c884d630180ac1db70e8420e0c5",
       "status": "PASS",
       "synthetic_fixture_only": true
     },
@@ -20,11 +20,11 @@
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "d4c21ceea263fdc51ae95ecf03374f173198846f3e46b46064ab141ffd34d712"
+      "sha256": "90536a864366a21642f8380f5362f2ca2964e482a378ff8eba32b029641cb7ce"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "f899891711b47ea018f836a735c7d59a68d0bb4c5cc7430f5f5792f8898f6b3f"
+      "sha256": "f414b7d88cf7d88240203311e23d6e3e18a822815d7e941f67247d8475460f09"
     }
   },
   "carried_forward_unchanged": {
@@ -41,7 +41,8 @@
     "2026-08-17 R4 evidence-consistency delta - documentary evidence correction only: evidence/R4_QUALIFICATION_REPORT.json field full_operator_gate.candidate_recording_processed corrected from true to false to agree with the gate test and its captured output. No operator code, gate logic, comparator code, scientific setting, partition class or raw data changed.",
     "2026-08-17 R4->R5 - PCA provenance role correction; runtime PCA binding moved from the training-score artifact to the component basis, one semantic /components role gate added, fresh R5 run specs derived; replay provenance rebound to R5; comparison partition byte-identical; comparator code unchanged; requalified 19/19",
     "2026-08-17 R5 documentary cleanup - restored the historical R4 packet-manifest identity in the OQ-V6-011 R4 annotation, updated the spec operator-binding block from stale R4 wording to R5, and replaced the stale contract packet_manifest_rebinding_note; artifact hashes rebound mechanically; comparison partition and comparator code unchanged; requalified 19/19",
-    "2026-08-17 R5 companion-dependency correction - the consumed companion pca.yaml (ba47df9b..., 2714 bytes) is bound in the R5 run specs and verified in the provenance preflight; stage 03 now uses the verified original PCA path so moseq2-pca resolves the genuine companion; packet manifest 72 members; replay provenance rebound; comparison partition and comparator code unchanged; requalified 19/19"
+    "2026-08-17 R5 companion-dependency correction - the consumed companion pca.yaml (ba47df9b..., 2714 bytes) is bound in the R5 run specs and verified in the provenance preflight; stage 03 now uses the verified original PCA path so moseq2-pca resolves the genuine companion; packet manifest 72 members; replay provenance rebound; comparison partition and comparator code unchanged; requalified 19/19",
+    "2026-08-17 R5->R6 determinism remediation - moseq2-extract plane_ransac made deterministic (local RandomState(0), commit 2c9cd86571bcc23ad6870e4da344e0f558f3f54c); replay comparator corrected for generated-UUID canonicalisation, joblib model loading, decoded-TIFF comparison and diagnostic presence-only; requalified 26/26; no scientific criterion changed"
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -199,6 +200,58 @@
     "scientific_retuning": false,
     "semantic_role_gate": "runtime PCA artifact must be readable HDF5 containing /components with shape (25, 6400) and dtype float32; fails closed before candidate science",
     "tier_b_or_tier_c_criteria_changed": false,
+    "zero_tolerance_unchanged": true
+  },
+  "r6_determinism_remediation": {
+    "accepted_packet_manifest_sha256": "3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e",
+    "accepted_packet_revision": "R6",
+    "c1_unchanged": true,
+    "candidate_science_executed": false,
+    "classification": "DETERMINISM_REMEDIATION",
+    "classifier_unchanged": true,
+    "comparator_corrections": [
+      "C2 generated-extraction-UUID canonicalisation (own side only)",
+      "joblib model loading and field-level comparison",
+      "decoded TIFF pixel comparison instead of container bytes",
+      "diagnostic render presence-only via inventory"
+    ],
+    "comparator_qualification_cases": 26,
+    "comparator_qualification_status": "PASS",
+    "config_unchanged": true,
+    "declared_ignored_classes": 15,
+    "determinism_qualification": "7/7 PASS on the fix, 6/7 FAIL on the unmodified source",
+    "existing_tests": "ROI 4/4, extract proc 11/11, full unit suite unchanged (36 tests, same 7 pre-existing environment errors before and after)",
+    "moseq2_extract_branch": "fix/r1-ransac-determinism-r1",
+    "moseq2_extract_commit": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+    "moseq2_extract_previous_commit": "e7f585104ba25b66e5326c88c77a47e33db95635",
+    "must_match_classes": 25,
+    "no_arhmm_refit": true,
+    "no_kappa_rerun": true,
+    "no_pca_refit": true,
+    "output_policy_tag": "lstsq-inlier-refit-deterministic-rng0",
+    "pca_basis_unchanged": true,
+    "pca_companion_unchanged": true,
+    "production_model_unchanged": true,
+    "r5_regression_under_r6_contract": {
+      "disposition": "FAIL",
+      "failures": 73,
+      "interpretation": "contract and comparator defects are gone; only the genuine pre-fix nondeterminism remains. The contract was not tuned on this result.",
+      "missing_or_extra": 0,
+      "status_counts": {
+        "DIFFER": 73,
+        "IGNORED": 22,
+        "MATCH": 1143
+      },
+      "unclassified": 0,
+      "unreadable": 0
+    },
+    "r5_runs_preserved": true,
+    "r6_run_spec_manifest_sha256": "f41a5542336a14a5e930ba09030e70b2087e2da7035a9ca7655783a6e0b142f3",
+    "r6_run_specs_byte_identical_to_r5": true,
+    "raw_roster_unchanged": true,
+    "replacement_rules_unchanged": true,
+    "root_cause": "plane_ransac sampled 3-point hypotheses from the unseeded global NumPy RNG, so ROI, extraction, scalars, PCA scores and applied labels differed between a run and its replay of the same session",
+    "tier_b_tier_c_criteria_unchanged": true,
     "zero_tolerance_unchanged": true
   },
   "report_identity_handling": {

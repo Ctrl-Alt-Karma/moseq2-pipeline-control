@@ -3,20 +3,23 @@
 Governs: **OQ-V6-011**
 Classification: **PRE_EXECUTION_CLARIFICATION**
 Machine-readable partition: `REPLAY_COMPARISON_CONTRACT_R1.json`
-(SHA-256 `d4c21ceea263fdc51ae95ecf03374f173198846f3e46b46064ab141ffd34d712`)
+(SHA-256 `90536a864366a21642f8380f5362f2ca2964e482a378ff8eba32b029641cb7ce`)
 Comparator: `compare_r1_replay.py`
 (SHA-256 `6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46`)
 Qualification receipt: `tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json`
-(SHA-256 `3d3520f8f92f0edcc57f493f7a86d1e67db0c00d56a4b90e6bee7d2d189f2c6f`)
+(SHA-256 `284960e6a61b5eddc78549f26fbe170c4d696c884d630180ac1db70e8420e0c5`)
 
 Operator binding: **R5** packet revision, operator commit
 `1f028869ad884fc0b506845ec717a226540d651b`, packet manifest
-`190b052e055d2fa18bfb5ab621a4763fb3e24084826ee5f584ab99c330da80e1` (72 members).
+`3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e` (75 members).
 Rebound from the R4 binding by the R5 PCA provenance-role correction, which moved
 the runtime PCA input from the training-score artifact `pca_scores.h5` to the
 component basis `pca.h5`, and then by the companion-dependency correction that binds
 and verifies the consumed `pca.yaml` (`ba47df9b1229ab6dae884adf2fab49cfde4a07c5d44575e35547be12277af0d9`).
-The comparison partition below is unchanged.
+R6 then corrected the comparison itself: rule C2 canonicalises each side's own
+generated extraction UUID, the applied model is read with joblib, TIFFs are
+compared as decoded pixels, and the diagnostic render is presence-only. Scientific
+equality, zero tolerance, the closed world and C1 are unchanged.
 
 ## Why this exists
 

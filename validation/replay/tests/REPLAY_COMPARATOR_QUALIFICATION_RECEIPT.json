@@ -1,6 +1,6 @@
 {
   "candidate_data_read": false,
-  "case_count": 19,
+  "case_count": 26,
   "cases": [
     {
       "case": "Q01_identical_plus_declared_ignored_only",
@@ -163,8 +163,75 @@
       "stderr": ""
     },
     {
+      "case": "Q20_generated_extraction_uuid_canonicalized",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q21_unrelated_uuid_not_canonicalized",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 2,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q22_joblib_model_output_pass",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q23_joblib_label_perturbation_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q24_tiff_container_differs_pixels_identical",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q25_tiff_pixel_perturbation_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 3,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q26_diagnostic_presence_enforced_by_inventory",
+      "exit_code": 2,
+      "expected": "FAIL",
+      "observed": "FAIL",
+      "result": "PASS"
+    },
+    {
       "case": "Q16_report_determinism",
-      "digest": "94b63507bbdf02d721109e4e51b4e6b84f5b1c6be3a2227f827f789d4fccf6c5",
+      "digest": "c03fbc6ec01ba78ff54c7dca237e014262182297020ea8e20027a9bb8485a1a3",
       "expected": "IDENTICAL",
       "observed": "IDENTICAL",
       "result": "PASS"
@@ -183,9 +250,9 @@
       "result": "PASS"
     }
   ],
-  "comparator_sha256": "6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46",
-  "contract_sha256": "d4c21ceea263fdc51ae95ecf03374f173198846f3e46b46064ab141ffd34d712",
-  "schema": "moseq-r1-replay-comparator-qualification-v1",
+  "comparator_sha256": "8d36ca3b5b13eede3f0c5aac760044550502f86e921d796a78d29f54890bfa31",
+  "contract_sha256": "90536a864366a21642f8380f5362f2ca2964e482a378ff8eba32b029641cb7ce",
+  "schema": "moseq-r1-replay-comparator-qualification-v2",
   "status": "PASS",
   "synthetic_fixture_only": true
 }

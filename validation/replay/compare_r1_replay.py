@@ -16,11 +16,13 @@ import hashlib
 import json
 import os
 import pickle
+import re
 import struct
 import sys
 
 import numpy as np
 import h5py
+import joblib
 
 try:
     import yaml as _yaml
@@ -37,6 +39,26 @@ RUN_ROOT_TOKEN = "<RUN_ROOT>"
 # --------------------------------------------------------------------------
 # canonicalisation + digests
 # --------------------------------------------------------------------------
+EXTRACTION_UUID_TOKEN = "<EXTRACTION_UUID>"
+
+
+def generated_extraction_uuid(root):
+    """This run's own generated extraction UUID, read from its own output.
+
+    moseq2-extract mints a fresh uuid4 per extraction, so the value is pure
+    run-instance identity. Only this exact value is canonicalised, and only on
+    the side that produced it. Acquisition and candidate identities, and any
+    other UUID-shaped string, are left untouched.
+    """
+    status = os.path.join(root, "stages", "02_extract", "results_00.yaml")
+    if not os.path.exists(status):
+        return None
+    with open(status, "rb") as handle:
+        text = handle.read().decode("utf-8", "replace")
+    match = re.search(r"^uuid:\s*(\S+)\s*$", text, re.M)
+    return match.group(1).strip("'\"") if match else None
+
+
 def canon_text(text, own_roots):
     """Contract rule C1: neutralise ONLY this side's own run root.
 
@@ -46,6 +68,9 @@ def canon_text(text, own_roots):
     to both sides would mask cross-run-root contamination.
     """
     for root in own_roots:
+        if root.startswith("uuid:"):
+            text = text.replace(root[5:], EXTRACTION_UUID_TOKEN)
+            continue
         text = text.replace(root, RUN_ROOT_TOKEN)
         text = text.replace(root.rstrip("/"), RUN_ROOT_TOKEN)
     return text
@@ -181,6 +206,31 @@ def units_pickle(path, roots):
     return {"::" + k.lstrip("/"): v for k, v in out.items()}
 
 
+def units_tiff(path, roots):
+    """Compare decoded pixel arrays, never TIFF container bytes.
+
+    Two runs writing identical pixels still produce different container
+    bytes, so byte equality here reports noise rather than science.
+    """
+    try:
+        from moseq2_extract.io.image import read_image
+        pixels = read_image(path)
+    except Exception:
+        # any reader failure falls back to a plain container-agnostic decode;
+        # a genuinely unreadable file still raises and is reported FAIL_UNREADABLE
+        from skimage.external import tifffile
+        pixels = tifffile.imread(path)
+    return {"::pixels": array_digest(pixels, roots)}
+
+
+def units_joblib(path, roots):
+    """moseq2-model writes .p with joblib + zlib, not raw pickle."""
+    data = joblib.load(path)
+    out = {}
+    _walk_leaves(data, "", out, roots)
+    return dict(("::" + k.lstrip("/"), v) for k, v in out.items())
+
+
 HANDLERS = {
     "bytes": units_bytes,
     "keyval": units_keyval,
@@ -188,6 +238,8 @@ HANDLERS = {
     "yaml": units_yaml,
     "hdf5": units_hdf5,
     "pickle": units_pickle,
+    "tiff": units_tiff,
+    "joblib": units_joblib,
 }
 
 
@@ -249,6 +301,11 @@ def compare(root_a, root_b, contract):
     root_a = os.path.abspath(root_a)
     root_b = os.path.abspath(root_b)
     own_a, own_b = [root_a], [root_b]  # C1: each side sees only its own root
+    uuid_a, uuid_b = generated_extraction_uuid(root_a), generated_extraction_uuid(root_b)
+    if uuid_a:
+        own_a = own_a + ["uuid:" + uuid_a]
+    if uuid_b:
+        own_b = own_b + ["uuid:" + uuid_b]
     findings = []
     failures = 0
 
@@ -283,6 +340,11 @@ def compare(root_a, root_b, contract):
         try:
             units_a = HANDLERS[handler](os.path.join(root_a, rel), own_a)
             units_b = HANDLERS[handler](os.path.join(root_b, rel), own_b)
+            # Unit NAMES carry the generated extraction UUID too (HDF5 group
+            # names, PCA score keys, model label keys, JSON keys), so the same
+            # own-side canonicalisation must be applied to the locators.
+            units_a = dict((canon_text(k, own_a), v) for k, v in units_a.items())
+            units_b = dict((canon_text(k, own_b), v) for k, v in units_b.items())
         except Exception as error:  # unreadable governed content is a failure
             failures += 1
             findings.append({"logical_name": rel, "class": "MUST_MATCH",

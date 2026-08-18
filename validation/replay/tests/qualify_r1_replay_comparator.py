@@ -24,6 +24,18 @@ COMPARATOR = os.path.join(os.path.dirname(HERE), "compare_r1_replay.py")
 CONTRACT = os.path.join(os.path.dirname(HERE), "REPLAY_COMPARISON_CONTRACT_R1.json")
 PYTHON = sys.executable
 
+UNRELATED_UUID = "99999999-9999-4999-8999-999999999999"
+
+
+def write_tiff(path, pixels, stamp):
+    """Same pixels, different container bytes (description tag varies)."""
+    from skimage.external import tifffile
+    d = os.path.dirname(path)
+    if d and not os.path.isdir(d):
+        os.makedirs(d)
+    tifffile.imsave(path, pixels, description="written-at-%s" % stamp)
+
+
 SENTINEL_STR = "SENTINEL_SCIENTIFIC_VALUE_DO_NOT_EMIT"
 SENTINEL_NUM = 1234.56789
 
@@ -59,8 +71,12 @@ def angle_array(nan_index):
     return arr
 
 
-def build_root(root, stamp, nan_index=3, reverse_order=False):
+def build_root(root, stamp, nan_index=3, reverse_order=False,
+               gen_uuid="11111111-1111-4111-8111-111111111111",
+               roi_pixels=None, label_bump=0, unrelated_uuid=UNRELATED_UUID):
     """Build a synthetic governed output root matching the operator schema."""
+    if roi_pixels is None:
+        roi_pixels = np.arange(64, dtype="uint16").reshape(8, 8)
     steps = []
 
     steps.append(lambda: w(os.path.join(root, "R1_FULL_SESSION_RECEIPT.txt"),
@@ -98,11 +114,21 @@ def build_root(root, stamp, nan_index=3, reverse_order=False):
     steps.append(lambda: w(os.path.join(root, "logs", "02_extract_full_session.stderr.txt"),
         "warning emitted at %s\n" % stamp))
 
-    steps.append(lambda: wb(os.path.join(root, "stages", "01_roi", "bground.tiff"), b"\x03synthetic-bground"))
+    steps.append(lambda: write_tiff(os.path.join(root, "stages", "01_roi", "bground.tiff"),
+                                    roi_pixels + 1, stamp))
     steps.append(lambda: wb(os.path.join(root, "stages", "02_extract", "results_00.mp4"),
         b"\x04encoder-" + stamp.encode("utf-8")))
     steps.append(lambda: w(os.path.join(root, "stages", "02_extract", "results_00.yaml"),
-        "complete: true\nstart_time: %s\nend_time: %s\nduration: 41\nparameters:\n  crop_size: 80\n" % (stamp, stamp)))
+        "complete: true\nuuid: %s\nstart_time: %s\nend_time: %s\nduration: 41\n"
+        "parameters:\n  crop_size: 80\n" % (gen_uuid, stamp, stamp)))
+    # TIFFs: identical pixels, deliberately different container bytes per side
+    steps.append(lambda: write_tiff(os.path.join(root, "stages", "01_roi", "roi_00.tiff"),
+                                    roi_pixels, stamp))
+    steps.append(lambda: write_tiff(os.path.join(root, "stages", "02_extract", "roi_00.tiff"),
+                                    roi_pixels, stamp))
+    # diagnostic-only render: content differs by construction, presence enforced
+    steps.append(lambda: wb(os.path.join(root, "stages", "01_roi", "depth_range_diagnostic.png"),
+                            b"\x89PNG-diagnostic-" + stamp.encode("utf-8")))
 
     def make_extract_h5():
         path = os.path.join(root, "stages", "02_extract", "results_00.h5")
@@ -114,7 +140,7 @@ def build_root(root, stamp, nan_index=3, reverse_order=False):
             f.create_dataset("timestamps", data=np.arange(12, dtype="float64"))
             f.create_dataset("scalars/angle", data=angle_array(nan_index))
             f.create_dataset("scalars/velocity_2d_mm", data=np.full(12, SENTINEL_NUM, dtype="float32"))
-            f.create_dataset("metadata/uuid", data=np.string_("synthetic-uuid"))
+            f.create_dataset("metadata/uuid", data=np.string_(gen_uuid))
             f["frames"].attrs["description"] = np.string_("depth frames")
             f.attrs["flip_classifier_applied"] = True
     steps.append(make_extract_h5)
@@ -124,19 +150,24 @@ def build_root(root, stamp, nan_index=3, reverse_order=False):
         if not os.path.isdir(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
         with h5py.File(path, "w") as f:
-            f.create_dataset("scores/synthetic-uuid", data=np.linspace(0, 1, 20).reshape(10, 2))
-            f.create_dataset("scores_idx/synthetic-uuid", data=np.arange(10, dtype="int64"))
+            f.create_dataset("scores/" + gen_uuid, data=np.linspace(0, 1, 20).reshape(10, 2))
+            f.create_dataset("scores_idx/" + gen_uuid, data=np.arange(10, dtype="int64"))
             f.create_dataset("metadata/pipeline", data=np.string_("apply-pca provenance"))
     steps.append(make_pca_h5)
 
-    def make_model_pickle():
+    def make_model_joblib():
+        import joblib
         path = os.path.join(root, "stages", "04_model", "model-applied-heldout.p")
         if not os.path.isdir(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
-        with open(path, "wb") as handle:
-            pickle.dump({"labels": {"synthetic-uuid": np.array([1, 2, 3, 4], dtype="int32")},
-                         "model_fit_started": False}, handle, protocol=2)
-    steps.append(make_model_pickle)
+        joblib.dump({"labels": {gen_uuid: np.array([1, 2, 3, 4 + label_bump], dtype="int32")},
+                     "metadata": {"uuid": gen_uuid, "source": unrelated_uuid},
+                     "model_parameters": {"kappa": 464159},
+                     "run_parameters": {"npcs": 10},
+                     "whitening_parameters": {"whiten": "all"},
+                     "model_fit_started": False},
+                    path, compress=("zlib", 4))
+    steps.append(make_model_joblib)
 
     steps.append(lambda: wj(os.path.join(root, "summaries", "extraction_summary.json"),
         {"path": os.path.join(root, "stages", "02_extract", "results_00.h5"),
@@ -144,9 +175,10 @@ def build_root(root, stamp, nan_index=3, reverse_order=False):
          "provenance": "extract run in %s" % root}))
     steps.append(lambda: wj(os.path.join(root, "summaries", "pca_summary.json"),
         {"path": os.path.join(root, "stages", "03_pca", "pca_scores.h5"),
-         "score_summaries": {"synthetic-uuid": {"dataset_sha256": "dd" * 32}}}))
+         "score_summaries": {gen_uuid: {"dataset_sha256": "dd" * 32}}}))
     steps.append(lambda: wj(os.path.join(root, "summaries", "model_input_handoff.json"),
-        {"input_sessions": ["synthetic-uuid"], "model_fit_started": False}))
+        {"input_sessions": [gen_uuid], "unrelated_reference": unrelated_uuid,
+         "model_fit_started": False}))
 
     if reverse_order:
         steps = list(reversed(steps))
@@ -225,10 +257,11 @@ def m_bytes_input(root, primary=None):
 
 def m_pickle_label(root, primary=None):
     path = os.path.join(root, "stages", "04_model", "model-applied-heldout.p")
-    data = pickle.load(open(path, "rb"), encoding="latin1")
-    data["labels"]["synthetic-uuid"][2] = 99
-    with open(path, "wb") as handle:
-        pickle.dump(data, handle, protocol=2)
+    import joblib
+    data = joblib.load(path)
+    key = sorted(data["labels"])[0]
+    data["labels"][key][2] = 99
+    joblib.dump(data, path, compress=("zlib", 4))
 
 
 def m_yaml_field(root, primary=None):
@@ -280,6 +313,9 @@ CASES = [
     ("Q19_foreign_cross_run_root_contamination", m_foreign_root_contamination, "FAIL"),
 ]
 
+UUID_A = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
+UUID_B = "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
+
 
 def main():
     workdir = tempfile.mkdtemp(prefix="r1-replay-qual-")
@@ -305,12 +341,65 @@ def main():
                 "stderr": err.strip()[:200],
             })
 
+        # --- R6 semantic cases: differing generated extraction UUID per side ---
+        def scenario(name, akw, bkw, expected):
+            cdir = os.path.join(workdir, name)
+            p, r = os.path.join(cdir, "primary"), os.path.join(cdir, "replay")
+            build_root(p, "2026-08-17T10:00:00Z", **akw)
+            build_root(r, "2026-08-17T20:30:00Z", **bkw)
+            rep = os.path.join(cdir, "report.json")
+            code, _, err = run_comparator(p, r, rep)
+            doc = json.load(open(rep)) if os.path.exists(rep) else {}
+            obs = doc.get("disposition", "ERROR")
+            exit_ok = (code == 0) if expected == "PASS" else (code != 0)
+            results.append({"case": name, "expected": expected, "observed": obs,
+                            "exit_code": code, "exit_code_correct": exit_ok,
+                            "failure_count": doc.get("failure_count"),
+                            "result": "PASS" if (obs == expected and exit_ok) else "FAIL",
+                            "stderr": err.strip()[:160]})
+
+        base_a = {"gen_uuid": UUID_A}
+        base_b = {"gen_uuid": UUID_B}
+        # Q20: differing generated UUIDs alone must PASS after canonicalisation
+        scenario("Q20_generated_extraction_uuid_canonicalized", base_a, base_b, "PASS")
+        # Q21: an unrelated UUID that differs must NOT be canonicalised -> FAIL
+        scenario("Q21_unrelated_uuid_not_canonicalized",
+                 dict(base_a), dict(base_b, unrelated_uuid="12345678-1234-4123-8123-123456789abc"),
+                 "FAIL")
+        # Q22: joblib model output, identical labels -> PASS (proves joblib load path)
+        scenario("Q22_joblib_model_output_pass", base_a, base_b, "PASS")
+        # Q23: one-bit label perturbation -> FAIL
+        scenario("Q23_joblib_label_perturbation_fails",
+                 dict(base_a), dict(base_b, label_bump=1), "FAIL")
+        # Q24: TIFF container bytes differ, decoded pixels identical -> PASS
+        scenario("Q24_tiff_container_differs_pixels_identical", base_a, base_b, "PASS")
+        # Q25: TIFF pixel perturbation -> FAIL
+        px = np.arange(64, dtype="uint16").reshape(8, 8).copy()
+        px[3, 3] += 1
+        scenario("Q25_tiff_pixel_perturbation_fails",
+                 dict(base_a), dict(base_b, roi_pixels=px), "FAIL")
+
+        # Q26: diagnostic/duplicate presence still enforced by inventory
+        cdir = os.path.join(workdir, "Q26_diagnostic_presence_enforced")
+        p, r = os.path.join(cdir, "primary"), os.path.join(cdir, "replay")
+        build_root(p, "2026-08-17T10:00:00Z", **base_a)
+        build_root(r, "2026-08-17T20:30:00Z", **base_b)
+        os.remove(os.path.join(r, "stages", "01_roi", "depth_range_diagnostic.png"))
+        rep = os.path.join(cdir, "report.json")
+        code, _, _ = run_comparator(p, r, rep)
+        doc = json.load(open(rep)) if os.path.exists(rep) else {}
+        results.append({"case": "Q26_diagnostic_presence_enforced_by_inventory",
+                        "expected": "FAIL", "observed": doc.get("disposition"),
+                        "exit_code": code,
+                        "result": "PASS" if (doc.get("disposition") == "FAIL" and code != 0)
+                                  else "FAIL"})
+
         # Q16 determinism: identical inputs, two runs, byte-identical reports
         case_dir = os.path.join(workdir, "Q16_determinism")
         primary = os.path.join(case_dir, "primary")
         replay = os.path.join(case_dir, "replay")
-        build_root(primary, "2026-08-17T10:00:00Z")
-        build_root(replay, "2026-08-17T20:30:00Z")
+        build_root(primary, "2026-08-17T10:00:00Z", gen_uuid=UUID_A)
+        build_root(replay, "2026-08-17T20:30:00Z", gen_uuid=UUID_B)
         r1 = os.path.join(case_dir, "r1.json")
         r2 = os.path.join(case_dir, "r2.json")
         run_comparator(primary, replay, r1)
@@ -325,8 +414,8 @@ def main():
         case_dir = os.path.join(workdir, "Q17_order")
         primary = os.path.join(case_dir, "primary")
         replay = os.path.join(case_dir, "replay")
-        build_root(primary, "2026-08-17T10:00:00Z")
-        build_root(replay, "2026-08-17T20:30:00Z", reverse_order=True)
+        build_root(primary, "2026-08-17T10:00:00Z", gen_uuid=UUID_A)
+        build_root(replay, "2026-08-17T20:30:00Z", gen_uuid=UUID_B, reverse_order=True)
         r3 = os.path.join(case_dir, "r3.json")
         code, _, _ = run_comparator(primary, replay, r3)
         doc3 = json.load(open(r3))
@@ -347,7 +436,7 @@ def main():
 
         overall = "PASS" if all(r["result"] == "PASS" for r in results) else "FAIL"
         receipt = {
-            "schema": "moseq-r1-replay-comparator-qualification-v1",
+            "schema": "moseq-r1-replay-comparator-qualification-v2",
             "status": overall,
             "synthetic_fixture_only": True,
             "candidate_data_read": False,
