@@ -1,0 +1,99 @@
+{
+  "candidate_result_artifact_opened": false,
+  "candidate_science_executed": false,
+  "case_count": 12,
+  "cases": [
+    {
+      "case": "pca_component_basis_hash",
+      "detail": "6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368",
+      "result": "PASS"
+    },
+    {
+      "case": "component_basis_passes_role_check",
+      "detail": {
+        "checks": {
+          "pca_components_dtype_matches_frozen": true,
+          "pca_components_shape_matches_frozen": true,
+          "pca_runtime_artifact_has_components": true,
+          "pca_runtime_artifact_readable_hdf5": true
+        },
+        "observed_dtype": "float32",
+        "observed_shape": [
+          25,
+          6400
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "training_scores_fail_role_check",
+      "detail": {
+        "checks": {
+          "pca_components_dtype_matches_frozen": false,
+          "pca_components_shape_matches_frozen": false,
+          "pca_runtime_artifact_has_components": false,
+          "pca_runtime_artifact_readable_hdf5": true
+        },
+        "has_components": false,
+        "readable_hdf5": true
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "training_scores_hash_still_intact",
+      "detail": "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912",
+      "result": "PASS"
+    },
+    {
+      "case": "all_eight_r5_specs_bind_component_basis",
+      "detail": "8/8",
+      "result": "PASS"
+    },
+    {
+      "case": "all_eight_r5_specs_differ_only_in_pca_binding",
+      "detail": "8/8",
+      "result": "PASS"
+    },
+    {
+      "case": "r4_specs_unmutated",
+      "detail": "8/8",
+      "result": "PASS"
+    },
+    {
+      "case": "config_classifier_model_identities_unchanged",
+      "detail": [
+        "classifier",
+        "config",
+        "production_model"
+      ],
+      "result": "PASS"
+    },
+    {
+      "case": "raw_input_identities_unchanged",
+      "detail": "24 files across 8 slots",
+      "result": "PASS"
+    },
+    {
+      "case": "no_fit_refit_resume_adaptation_route",
+      "detail": [],
+      "result": "PASS"
+    },
+    {
+      "case": "operator_binds_component_basis",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "operator_records_training_score_role",
+      "detail": null,
+      "result": "PASS"
+    }
+  ],
+  "classification": "PROVENANCE_ROLE_CORRECTION",
+  "operator_sha256": "87a7bb1da0f655242b77e01d8d4b4c0be8c3bb39d5dd95f710114490c7399823",
+  "pca_component_basis_sha256": "6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368",
+  "pca_training_score_sha256": "26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912",
+  "preflight_sha256": "d510a9a5e5d92ab31073c74ab8ee8c1ab0ccd3086b09b8c788184f155a957aee",
+  "schema": "moseq-r1-r5-pca-role-qualification-v1",
+  "status": "PASS"
+}

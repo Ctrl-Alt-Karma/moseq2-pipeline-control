@@ -11,7 +11,10 @@ source "${SCRIPT_DIR}/lib/common.sh"
 CONFIRM_TOKEN="RUN_SEALED_R1_FULL_SESSION"
 FROZEN_CONFIG_SHA256="ef42bf756eef975277d5dc62d0d7719daf75f374a2e58d96a6c3eb39ecd75269"
 FROZEN_CLASSIFIER_SHA256="4b06e1e56928bb1ac227329d0932d4637cdd541a3af49865ae127b57991c2c00"
-FROZEN_PCA_SHA256="26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912"
+FROZEN_PCA_SHA256="6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368"  # PCA component basis (pca.h5). The training-score
+# artifact pca_scores.h5 (26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912)
+# remains frozen upstream evidence for the production model and Tier-B envelopes,
+# and is NOT the runtime input to apply-pca.
 FROZEN_MODEL_SHA256="5e10803af7017bd32cc491483fcfa3bfc570e617d427649b4d0f1ca86c49d964"
 FROZEN_MODEL_SEED=20260802
 FROZEN_MODEL_KAPPA=464159
@@ -29,7 +32,7 @@ Usage:
     --recording ${STAGED_RAW_ROOT}/CID-.../depth.dat \\
     --config /home/ajm/.../config.yaml \\
     --classifier /home/ajm/.../flip_classifier.pkl \\
-    --pca /home/ajm/.../pca_scores.h5 \\
+    --pca /home/ajm/.../pca.h5 \\
     --production-model /home/ajm/.../model.p \\
     --confirm ${CONFIRM_TOKEN} \\
     [--output ${RUNS_ROOT}/unique-new-directory]

@@ -12,8 +12,14 @@ import re
 import stat
 import sys
 
+import h5py
+import numpy
+
 
 SCHEMA = "moseq2-r1-real-session-run-spec-v2"
+PCA_COMPONENTS_PATH = "components"
+PCA_COMPONENTS_SHAPE = (25, 6400)
+PCA_COMPONENTS_DTYPE = "float32"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -23,6 +29,37 @@ def sha256_file(path):
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def pca_component_role(path):
+    """Semantic role gate for the runtime PCA artifact.
+
+    The runtime PCA input must be the component basis, not the training-score
+    artifact. A score file hashes correctly but has no /components dataset, so a
+    hash-only gate cannot tell the two apart. Fails closed before candidate
+    science; never raises.
+    """
+    observed = {"readable_hdf5": False, "has_components": False,
+                "shape": None, "dtype": None}
+    try:
+        with h5py.File(path, "r") as handle:
+            observed["readable_hdf5"] = True
+            if PCA_COMPONENTS_PATH in handle:
+                dataset = handle[PCA_COMPONENTS_PATH]
+                observed["has_components"] = True
+                observed["shape"] = list(dataset.shape)
+                observed["dtype"] = str(dataset.dtype)
+    except Exception as error:
+        observed["error"] = "{}: {}".format(type(error).__name__, error)
+    checks = {
+        "pca_runtime_artifact_readable_hdf5": observed["readable_hdf5"],
+        "pca_runtime_artifact_has_components": observed["has_components"],
+        "pca_components_shape_matches_frozen":
+            observed["shape"] == list(PCA_COMPONENTS_SHAPE),
+        "pca_components_dtype_matches_frozen":
+            observed["dtype"] == PCA_COMPONENTS_DTYPE,
+    }
+    return observed, checks
 
 
 def canonical(path):
@@ -219,6 +256,15 @@ def main():
             "pca": inspect_file(require_mapping(scientific.get("pca"), "scientific_artifacts.pca"), args.pca, "scientific_artifacts.pca", required_sha=args.required_pca_sha256),
             "production_model": inspect_file(require_mapping(scientific.get("production_model"), "scientific_artifacts.production_model"), args.model, "scientific_artifacts.production_model", required_sha=args.required_model_sha256),
         }
+        pca_observed, pca_role_checks = pca_component_role(args.pca)
+        receipt["scientific_artifacts"]["pca"]["component_role"] = {
+            "expected_dataset": PCA_COMPONENTS_PATH,
+            "expected_shape": list(PCA_COMPONENTS_SHAPE),
+            "expected_dtype": PCA_COMPONENTS_DTYPE,
+            "observed": pca_observed,
+        }
+        receipt["scientific_artifacts"]["pca"]["checks"].update(pca_role_checks)
+
         model_spec = require_mapping(scientific.get("production_model"), "scientific_artifacts.production_model")
         receipt["scientific_artifacts"]["production_model"]["checks"]["seed_matches_frozen"] = model_spec.get("seed") == args.required_model_seed
         receipt["scientific_artifacts"]["production_model"]["checks"]["kappa_matches_frozen"] = model_spec.get("kappa") == args.required_model_kappa
