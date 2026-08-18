@@ -259,7 +259,7 @@
   "operator_on_disk_sha256": "87a7bb1da0f655242b77e01d8d4b4c0be8c3bb39d5dd95f710114490c7399823",
   "operator_provenance_note": "R5 corrects the runtime PCA role binding, so the operator entry point is no longer byte-identical to R3/R4 and operator_on_disk_sha256 moves with it. The runtime PCA artifact is the component basis pca.h5 (6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368); the training-score artifact pca_scores.h5 (26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912) remains frozen upstream evidence and is NOT a runtime input.",
   "original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
-  "packet_manifest_rebinding_note": "Rebound after a documentary evidence-consistency correction to evidence/R4_QUALIFICATION_REPORT.json (full_operator_gate.candidate_recording_processed true -> false, matching the gate test and its captured output). Operator code, gate logic, comparator code and the scientific partition are unchanged.",
+  "packet_manifest_rebinding_note": "Provenance rebound after the R5 PCA role correction, which moved the runtime PCA input from the frozen training-score artifact pca_scores.h5 (26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912) to the component basis pca.h5 (6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368, /components shape (25, 6400) float32). The training-score artifact remains frozen upstream evidence and is not a runtime input. Comparison semantics are unchanged.",
   "schema": "moseq-r1-replay-comparison-contract-v1",
   "schema_derivation": {
     "authority": "operator and locked pipeline source only; no candidate output was opened to derive this schema",

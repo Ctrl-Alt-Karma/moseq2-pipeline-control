@@ -3,17 +3,18 @@
 Governs: **OQ-V6-011**
 Classification: **PRE_EXECUTION_CLARIFICATION**
 Machine-readable partition: `REPLAY_COMPARISON_CONTRACT_R1.json`
-(SHA-256 `f5095def25fdedfa73754bc3ed401f2d482178ec10f692e8fc49f778c3ba7dd1`)
+(SHA-256 `baf64f7be470930f2596a858129fca27c16a78ab6b0edb9c4b31f443a863ddd3`)
 Comparator: `compare_r1_replay.py`
 (SHA-256 `6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46`)
 Qualification receipt: `tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json`
-(SHA-256 `a08bb51b4d9464cbb287d28bffecca5ba53bcf3ce312f0694cb2af1fe306e24a`)
+(SHA-256 `7fd715b6fc1d4cbedf3a427ac3a8eb320baf27ed2dd9d194c8328d1a246a386e`)
 
-Operator binding: R4 packet revision, operator commit
+Operator binding: **R5** packet revision, operator commit
 `485a2dcf08726cd208cf4f5e7cc342c5a35594a6`, packet manifest
-`8b5b5424204bf5a8d0ac5df3a88d2100b45bfd75b2dbe4dd1aab58706c4dd983`.
-Rebound from the R3 operator commit after a pre-science raw-frame-accounting
-compatibility remediation. The comparison partition below is unchanged.
+`8b5b5424204bf5a8d0ac5df3a88d2100b45bfd75b2dbe4dd1aab58706c4dd983` (70 members).
+Rebound from the R4 binding by the R5 PCA provenance-role correction, which moved
+the runtime PCA input from the training-score artifact `pca_scores.h5` to the
+component basis `pca.h5`. The comparison partition below is unchanged.
 
 ## Why this exists
 

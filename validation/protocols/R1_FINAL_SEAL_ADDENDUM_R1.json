@@ -10,7 +10,7 @@
       "candidate_data_read": false,
       "case_count": 19,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
-      "sha256": "a08bb51b4d9464cbb287d28bffecca5ba53bcf3ce312f0694cb2af1fe306e24a",
+      "sha256": "7fd715b6fc1d4cbedf3a427ac3a8eb320baf27ed2dd9d194c8328d1a246a386e",
       "status": "PASS",
       "synthetic_fixture_only": true
     },
@@ -20,11 +20,11 @@
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "f5095def25fdedfa73754bc3ed401f2d482178ec10f692e8fc49f778c3ba7dd1"
+      "sha256": "baf64f7be470930f2596a858129fca27c16a78ab6b0edb9c4b31f443a863ddd3"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "5ee61467a212956c05078a6a573e62ae6222d13c553578cfbf3b485fe09de8d1"
+      "sha256": "f73326913fcd285ecd26f66cf8afb87e3888983b960bc98e19ab355d47b9c15a"
     }
   },
   "carried_forward_unchanged": {
@@ -39,7 +39,8 @@
     "2026-08-17 delta - Counsel implementation hold; C1 corrected to own-root, Q19 added, 19/19 requalified, qualification claim narrowed; scientific partition untouched",
     "2026-08-17 R3->R4 - pre-science raw-frame-accounting compatibility remediation; replay contract provenance rebound to the R4 operator commit; scientific partition byte-identical; comparator code unchanged; requalified 19/19",
     "2026-08-17 R4 evidence-consistency delta - documentary evidence correction only: evidence/R4_QUALIFICATION_REPORT.json field full_operator_gate.candidate_recording_processed corrected from true to false to agree with the gate test and its captured output. No operator code, gate logic, comparator code, scientific setting, partition class or raw data changed.",
-    "2026-08-17 R4->R5 - PCA provenance role correction; runtime PCA binding moved from the training-score artifact to the component basis, one semantic /components role gate added, fresh R5 run specs derived; replay provenance rebound to R5; comparison partition byte-identical; comparator code unchanged; requalified 19/19"
+    "2026-08-17 R4->R5 - PCA provenance role correction; runtime PCA binding moved from the training-score artifact to the component basis, one semantic /components role gate added, fresh R5 run specs derived; replay provenance rebound to R5; comparison partition byte-identical; comparator code unchanged; requalified 19/19",
+    "2026-08-17 R5 documentary cleanup - restored the historical R4 packet-manifest identity in the OQ-V6-011 R4 annotation, updated the spec operator-binding block from stale R4 wording to R5, and replaced the stale contract packet_manifest_rebinding_note; artifact hashes rebound mechanically; comparison partition and comparator code unchanged; requalified 19/19"
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -114,6 +115,24 @@
     "raw_data_changed": false,
     "scientific_settings_changed": false,
     "zero_tolerance_unchanged": true
+  },
+  "r5_documentary_cleanup": {
+    "candidate_science_executed": false,
+    "cause": "a blanket string replacement during the R5 rebinding overwrote the historical R4 packet-manifest hash inside the OQ-V6-011 R4 annotation, leaving an R5 hash paired with an R4 member count",
+    "classification": "DOCUMENTARY_CORRECTION",
+    "comparator_code_changed": false,
+    "operator_changed": false,
+    "pca_binding_changed": false,
+    "pca_semantic_gate_changed": false,
+    "provenance_helper_changed": false,
+    "r4_member_count": 65,
+    "r4_packet_manifest_restored": "37fa04ec61ad9e624276022fe6d52c46521af6246236a6418a40d0dca006caef",
+    "r5_member_count": 70,
+    "r5_packet_manifest": "8b5b5424204bf5a8d0ac5df3a88d2100b45bfd75b2dbe4dd1aab58706c4dd983",
+    "r5_packet_manifest_regenerated": false,
+    "r5_run_specs_changed": false,
+    "raw_or_candidate_data_changed": false,
+    "scientific_partition_changed": false
   },
   "r5_pca_role_correction": {
     "accepted_operator_commit": "485a2dcf08726cd208cf4f5e7cc342c5a35594a6",
