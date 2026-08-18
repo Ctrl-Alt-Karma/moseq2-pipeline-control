@@ -4,27 +4,27 @@
   "bound_artifacts": {
     "replay_comparator": {
       "path": "validation/replay/compare_r1_replay.py",
-      "sha256": "8d36ca3b5b13eede3f0c5aac760044550502f86e921d796a78d29f54890bfa31"
+      "sha256": "0697df76e49d43b3bf352d41230cd2385e3d5f8bdc87ddaf9eeaeee53c588840"
     },
     "replay_comparator_qualification_receipt": {
       "candidate_data_read": false,
-      "case_count": 26,
+      "case_count": 37,
       "path": "validation/replay/tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json",
-      "sha256": "284960e6a61b5eddc78549f26fbe170c4d696c884d630180ac1db70e8420e0c5",
+      "sha256": "58ac11375a4ed4b228123632d646214d20bd89abd27b513b74b8eb68e8766a70",
       "status": "PASS",
       "synthetic_fixture_only": true
     },
     "replay_comparator_qualification_suite": {
       "path": "validation/replay/tests/qualify_r1_replay_comparator.py",
-      "sha256": "002020176aa715f4de1f2413bc2915fb67249dcdb8842a1b66672a5dafb22d93"
+      "sha256": "06bb6c3dc2e3572c2d79a252cb127586454f7a2ad1279e3184238c4ec426dc9f"
     },
     "replay_comparison_contract_json": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.json",
-      "sha256": "7315a35d2588cb78f021c269792afa9313f161fb80ac7497ab55961dccf3b41c"
+      "sha256": "b5e2dcb3c0179ce1dba8bbb499a7335096c570cf1fbb091e0c6e4e00c2128d13"
     },
     "replay_comparison_contract_spec_md": {
       "path": "validation/replay/REPLAY_COMPARISON_CONTRACT_R1.md",
-      "sha256": "5a42908b3b6d6054f2cf583b2cc83401d77af3eb4cd6ea219d3b14cd365a621b"
+      "sha256": "9f0da41a876b287729c8bc834f60a8e97d21395251d62ea68718ecd311555359"
     }
   },
   "carried_forward_unchanged": {
@@ -42,7 +42,8 @@
     "2026-08-17 R4->R5 - PCA provenance role correction; runtime PCA binding moved from the training-score artifact to the component basis, one semantic /components role gate added, fresh R5 run specs derived; replay provenance rebound to R5; comparison partition byte-identical; comparator code unchanged; requalified 19/19",
     "2026-08-17 R5 documentary cleanup - restored the historical R4 packet-manifest identity in the OQ-V6-011 R4 annotation, updated the spec operator-binding block from stale R4 wording to R5, and replaced the stale contract packet_manifest_rebinding_note; artifact hashes rebound mechanically; comparison partition and comparator code unchanged; requalified 19/19",
     "2026-08-17 R5 companion-dependency correction - the consumed companion pca.yaml (ba47df9b..., 2714 bytes) is bound in the R5 run specs and verified in the provenance preflight; stage 03 now uses the verified original PCA path so moseq2-pca resolves the genuine companion; packet manifest 72 members; replay provenance rebound; comparison partition and comparator code unchanged; requalified 19/19",
-    "2026-08-17 R5->R6 determinism remediation - moseq2-extract plane_ransac made deterministic (local RandomState(0), commit 2c9cd86571bcc23ad6870e4da344e0f558f3f54c); replay comparator corrected for generated-UUID canonicalisation, joblib model loading, decoded-TIFF comparison and diagnostic presence-only; requalified 26/26; no scientific criterion changed"
+    "2026-08-17 R5->R6 determinism remediation - moseq2-extract plane_ransac made deterministic (local RandomState(0), commit 2c9cd86571bcc23ad6870e4da344e0f558f3f54c); replay comparator corrected for generated-UUID canonicalisation, joblib model loading, decoded-TIFF comparison and diagnostic presence-only; requalified 26/26; no scientific criterion changed",
+    "2026-08-18 R6 -> post-R6 comparator implementation correction - scientific determinism established (all arrays and labels bit-exact); three source-confirmed representation defects corrected: wall-clock provenance 'written' fields declared ignored with the surrounding provenance compared field by field, the embedded model object reduced to a presence marker per its existing contract rule, and fixed-capacity string dtype removed from the equality predicate after canonicalisation; requalified 37/37; no candidate rerun"
   ],
   "cites_original_seal_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2",
   "classification": "PRE_EXECUTION_CLARIFICATION",
@@ -61,6 +62,30 @@
   "original_seal_modified": false,
   "original_seal_path": "validation/protocols/R1_FINAL_SEAL_R1.json",
   "original_seal_relationship": "additive; the original seal is cited and left byte-identical. This addendum does not reopen, supersede or rewrite it.",
+  "post_r6_comparator_implementation_correction": {
+    "acquisition_timestamps_remain_must_match": true,
+    "candidate_processing_performed": false,
+    "classification": "POST_R6_REPLAY_COMPARATOR_IMPLEMENTATION_CORRECTION",
+    "corrected_comparator_run_against_r6": false,
+    "corrects_only_run_instance_container_and_object_representation": true,
+    "declared_ignored_classes": 19,
+    "defects_corrected": [
+      "wall-clock pipeline-provenance 'written' fields (I16-I19), with the surrounding provenance record compared field by field so no other field is ignored",
+      "M20 embedded model object compared as a presence marker instead of a repr digest, conforming the implementation to the existing contract rule; a missing key still fails",
+      "fixed-capacity HDF5 S<N> itemsize removed from the string equality predicate after C1/C2 canonicalisation; numeric dtype, shape and exact bytes unchanged"
+    ],
+    "must_match_classes": 25,
+    "qualification_cases": 37,
+    "qualification_status": "PASS",
+    "r6_decomposition_identity_redacted": true,
+    "r6_decomposition_value_blind": true,
+    "r6_outputs_preserved_and_not_rerun": true,
+    "r6_packet_members": 75,
+    "r6_packet_unchanged_sha256": "3bfc5ac04dd71f1d7b7a6010442561e2ef3d6399c88ebff88c4390781a59de5e",
+    "scientific_arrays_and_labels_bit_exact_before_correction": true,
+    "scientific_tolerance": 0,
+    "uuid_disclosure": "two generated extraction UUID values were inadvertently printed during the first R6 diagnostic pass; they are run-instance UUIDs, not candidate identities, no scientific values were exposed, and there is no scientific effect"
+  },
   "pre_execution_integrity": {
     "candidate_result_artifact_opened": false,
     "no_primary_candidate_science_existed_when_contract_frozen": true,

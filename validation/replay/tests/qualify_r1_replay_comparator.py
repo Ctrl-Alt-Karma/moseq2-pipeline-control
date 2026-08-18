@@ -73,7 +73,11 @@ def angle_array(nan_index):
 
 def build_root(root, stamp, nan_index=3, reverse_order=False,
                gen_uuid="11111111-1111-4111-8111-111111111111",
-               roi_pixels=None, label_bump=0, unrelated_uuid=UNRELATED_UUID):
+               roi_pixels=None, label_bump=0, unrelated_uuid=UNRELATED_UUID,
+               acquisition_stamp="2025-12-11T08:46:51Z",
+               extract_commit="2c9cd865", pca_commit="efb6fcfa",
+               roi_policy="lstsq-inlier-refit-deterministic-rng0",
+               include_model_object=True, model_param=1, param_bump=0):
     """Build a synthetic governed output root matching the operator schema."""
     if roi_pixels is None:
         roi_pixels = np.arange(64, dtype="uint16").reshape(8, 8)
@@ -141,6 +145,14 @@ def build_root(root, stamp, nan_index=3, reverse_order=False,
             f.create_dataset("scalars/angle", data=angle_array(nan_index))
             f.create_dataset("scalars/velocity_2d_mm", data=np.full(12, SENTINEL_NUM, dtype="float32"))
             f.create_dataset("metadata/uuid", data=np.string_(gen_uuid))
+            f.create_dataset("metadata/acquisition/StartTime",
+                             data=np.string_(acquisition_stamp))
+            f.create_dataset("metadata/extraction/pipeline", data=np.string_(
+                json.dumps({"written": stamp, "git_commit": extract_commit,
+                            "policy": {"roi_plane_fit": roi_policy}}, sort_keys=True)))
+            # fixed-width S dtype whose capacity tracks the run-root length
+            f.create_dataset("metadata/extraction/parameters/config_file",
+                             data=np.string_(os.path.join(root, "inputs", "config.working.yaml")))
             f["frames"].attrs["description"] = np.string_("depth frames")
             f.attrs["flip_classifier_applied"] = True
     steps.append(make_extract_h5)
@@ -152,7 +164,9 @@ def build_root(root, stamp, nan_index=3, reverse_order=False,
         with h5py.File(path, "w") as f:
             f.create_dataset("scores/" + gen_uuid, data=np.linspace(0, 1, 20).reshape(10, 2))
             f.create_dataset("scores_idx/" + gen_uuid, data=np.arange(10, dtype="int64"))
-            f.create_dataset("metadata/pipeline", data=np.string_("apply-pca provenance"))
+            f.create_dataset("metadata/pipeline", data=np.string_(
+                json.dumps({"written": stamp, "git_commit": pca_commit,
+                            "npcs": 10}, sort_keys=True)))
     steps.append(make_pca_h5)
 
     def make_model_joblib():
@@ -160,21 +174,26 @@ def build_root(root, stamp, nan_index=3, reverse_order=False,
         path = os.path.join(root, "stages", "04_model", "model-applied-heldout.p")
         if not os.path.isdir(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
-        joblib.dump({"labels": {gen_uuid: np.array([1, 2, 3, 4 + label_bump], dtype="int32")},
-                     "metadata": {"uuid": gen_uuid, "source": unrelated_uuid},
-                     "model_parameters": {"kappa": 464159},
-                     "run_parameters": {"npcs": 10},
-                     "whitening_parameters": {"whiten": "all"},
-                     "model_fit_started": False},
-                    path, compress=("zlib", 4))
+        payload = {"labels": {gen_uuid: np.array([1, 2, 3, 4 + label_bump], dtype="int32")},
+                   "metadata": {"uuid": gen_uuid, "source": unrelated_uuid},
+                   "run_parameters": {"npcs": 10},
+                   "whitening_parameters": {"whiten": "all"},
+                   "model_fit_started": False}
+        if include_model_object:
+            # stand-in for the embedded ARHMM: picklable, and its repr carries a
+            # heap address that differs on every load, exactly like the real object
+            payload["model"] = object()
+        payload["model_parameters"] = {"kappa": 464159 + param_bump}
+        joblib.dump(payload, path, compress=("zlib", 4))
     steps.append(make_model_joblib)
 
     steps.append(lambda: wj(os.path.join(root, "summaries", "extraction_summary.json"),
         {"path": os.path.join(root, "stages", "02_extract", "results_00.h5"),
          "datasets": {"frames": {"dataset_sha256": "cc" * 32, "mean": SENTINEL_NUM, "shape": [2, 3, 4]}},
-         "provenance": "extract run in %s" % root}))
+         "provenance": {"written": stamp, "note": "extract run in %s" % root}}))
     steps.append(lambda: wj(os.path.join(root, "summaries", "pca_summary.json"),
         {"path": os.path.join(root, "stages", "03_pca", "pca_scores.h5"),
+         "provenance": {"written": stamp, "note": "pca apply"},
          "score_summaries": {gen_uuid: {"dataset_sha256": "dd" * 32}}}))
     steps.append(lambda: wj(os.path.join(root, "summaries", "model_input_handoff.json"),
         {"input_sessions": [gen_uuid], "unrelated_reference": unrelated_uuid,
@@ -290,6 +309,24 @@ def m_foreign_root_contamination(root, primary):
     wj(path, doc)
 
 
+def m_numeric_dtype_widened(root, primary=None):
+    """Same numeric values, wider dtype: must FAIL (numeric dtype stays mandatory)."""
+    path = os.path.join(root, "stages", "02_extract", "results_00.h5")
+    with h5py.File(path, "a") as f:
+        data = f["timestamps"][()].astype("float32")
+        del f["timestamps"]
+        f.create_dataset("timestamps", data=data)
+
+
+def m_different_canonical_path_text(root, primary=None):
+    """Canonicalised path TEXT differs (not just S-width): must FAIL."""
+    path = os.path.join(root, "stages", "02_extract", "results_00.h5")
+    with h5py.File(path, "a") as f:
+        del f["metadata/extraction/parameters/config_file"]
+        f.create_dataset("metadata/extraction/parameters/config_file",
+                         data=np.string_(os.path.join(root, "inputs", "config.OTHER.yaml")))
+
+
 def m_extra_file(root, primary=None):
     w(os.path.join(root, "summaries", "undeclared_extra.json"), "{}\n")
 
@@ -311,6 +348,8 @@ CASES = [
     ("Q14_undeclared_extra_hdf5_dataset", m_hdf5_extra_dataset, "FAIL"),
     ("Q15_undeclared_extra_json_key", m_json_extra_key, "FAIL"),
     ("Q19_foreign_cross_run_root_contamination", m_foreign_root_contamination, "FAIL"),
+    ("Q36_numeric_dtype_mismatch_fails", m_numeric_dtype_widened, "FAIL"),
+    ("Q37_different_canonical_path_text_fails", m_different_canonical_path_text, "FAIL"),
 ]
 
 UUID_A = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa"
@@ -394,6 +433,33 @@ def main():
                         "result": "PASS" if (doc.get("disposition") == "FAIL" and code != 0)
                                   else "FAIL"})
 
+        # --- R7 negative controls -----------------------------------------
+        A0, B0 = {"gen_uuid": UUID_A}, {"gen_uuid": UUID_B}
+        # provenance wall-clock only -> PASS (stamps already differ per side)
+        scenario("Q27_provenance_written_only_differs", A0, B0, "PASS")
+        # any OTHER extraction provenance field -> FAIL
+        scenario("Q28_other_extraction_provenance_field_fails",
+                 dict(A0), dict(B0, extract_commit="deadbeef"), "FAIL")
+        scenario("Q29_extraction_policy_field_fails",
+                 dict(A0), dict(B0, roi_policy="lstsq-inlier-refit"), "FAIL")
+        # any OTHER pca provenance field -> FAIL
+        scenario("Q30_other_pca_provenance_field_fails",
+                 dict(A0), dict(B0, pca_commit="cafebabe"), "FAIL")
+        # acquisition timestamp remains MUST_MATCH -> FAIL
+        scenario("Q31_acquisition_timestamp_differs_fails",
+                 dict(A0), dict(B0, acquisition_stamp="2025-12-11T09:00:00Z"), "FAIL")
+        # embedded model object: equal content, different repr address -> PASS
+        scenario("Q32_embedded_model_repr_address_differs", A0, B0, "PASS")
+        # missing embedded model key -> FAIL
+        scenario("Q33_missing_embedded_model_key_fails",
+                 dict(A0), dict(B0, include_model_object=False), "FAIL")
+        # model/run/whitening parameter perturbation -> FAIL
+        scenario("Q34_model_parameter_perturbation_fails",
+                 dict(A0), dict(B0, param_bump=1), "FAIL")
+        # fixed-width S dtype differing only by run-root length -> PASS
+        # (build_root writes config_file under its own root; roots differ in length)
+        scenario("Q35_fixed_width_string_dtype_differs_pixels_same", A0, B0, "PASS")
+
         # Q16 determinism: identical inputs, two runs, byte-identical reports
         case_dir = os.path.join(workdir, "Q16_determinism")
         primary = os.path.join(case_dir, "primary")
@@ -436,7 +502,7 @@ def main():
 
         overall = "PASS" if all(r["result"] == "PASS" for r in results) else "FAIL"
         receipt = {
-            "schema": "moseq-r1-replay-comparator-qualification-v2",
+            "schema": "moseq-r1-replay-comparator-qualification-v3",
             "status": overall,
             "synthetic_fixture_only": True,
             "candidate_data_read": False,

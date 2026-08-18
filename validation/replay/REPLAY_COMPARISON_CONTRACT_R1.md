@@ -1,13 +1,13 @@
 # R1 deterministic replay comparison contract
 
 Governs: **OQ-V6-011**
-Classification: **POST_R5_FAILURE_DETERMINISM_AND_COMPARATOR_REMEDIATION** (the original freeze was PRE_EXECUTION_CLARIFICATION and that history stands)
+Classification: **POST_R6_REPLAY_COMPARATOR_IMPLEMENTATION_CORRECTION** (the original freeze was PRE_EXECUTION_CLARIFICATION and that history stands)
 Machine-readable partition: `REPLAY_COMPARISON_CONTRACT_R1.json`
-(SHA-256 `7315a35d2588cb78f021c269792afa9313f161fb80ac7497ab55961dccf3b41c`)
+(SHA-256 `b5e2dcb3c0179ce1dba8bbb499a7335096c570cf1fbb091e0c6e4e00c2128d13`)
 Comparator: `compare_r1_replay.py`
-(SHA-256 `8d36ca3b5b13eede3f0c5aac760044550502f86e921d796a78d29f54890bfa31`)
+(SHA-256 `0697df76e49d43b3bf352d41230cd2385e3d5f8bdc87ddaf9eeaeee53c588840`)
 Qualification receipt: `tests/REPLAY_COMPARATOR_QUALIFICATION_RECEIPT.json`
-(SHA-256 `284960e6a61b5eddc78549f26fbe170c4d696c884d630180ac1db70e8420e0c5`)
+(SHA-256 `58ac11375a4ed4b228123632d646214d20bd89abd27b513b74b8eb68e8766a70`)
 
 Operator binding: **R6** packet revision, operator commit
 `1f028869ad884fc0b506845ec717a226540d651b`, packet manifest
@@ -153,3 +153,31 @@ inspected: loader behaviour, container format, dataset and key names, and match 
 differ status. No scientific value was inspected, no candidate identity or UUID value
 was exposed, and no tolerance was introduced. Current locked moseq2-extract source is
 `2c9cd86571bcc23ad6870e4da344e0f558f3f54c`.
+
+## Post-R6 comparator implementation correction
+
+The R6 replay established, by an identity-redacted and value-blind decomposition,
+that **every scientific array and every applied label array is bit-exact**: frames,
+frames_mask, timestamps, all scalars, ROI, true_depth, flips, acquisition metadata,
+PCA score arrays, score indices, applied labels, and the model, run and whitening
+parameters. Seven comparator units still differed, and all seven were representation
+defects in the comparison itself, confirmed against locked source:
+
+1. **Wall-clock provenance.** Both `moseq2-extract` and `moseq2-pca` write
+   `"written": datetime.datetime.now().isoformat()` into their pipeline provenance.
+   The two HDF5 provenance records are now expanded and compared **field by field**,
+   so only the exact `written` field is declared ignored (I16-I19) and every other
+   provenance field stays MUST_MATCH. Acquisition timestamps are untouched and remain
+   MUST_MATCH.
+2. **Embedded model object.** Contract M20 already stated that the embedded model
+   object is not recursively compared. The implementation did compare it, digesting a
+   `repr` that carries a heap address. The comparator now emits a deterministic
+   presence marker for the `model` key; a missing key still fails.
+3. **Fixed-length string dtype.** HDF5 stores paths as `S<N>`, and `N` tracks the
+   *un-canonicalised* run-root length, so C1-identical text still differed. String and
+   bytes arrays are now canonicalised before equality, comparing semantic type class,
+   shape and exact canonicalised contents but not fixed capacity. **Numeric arrays are
+   unchanged: dtype and shape and exact C-order bytes remain mandatory.**
+
+Scientific tolerance remains **zero**. The R6 execution outputs are preserved and were
+not rerun, and the corrected comparator has not been run against them.

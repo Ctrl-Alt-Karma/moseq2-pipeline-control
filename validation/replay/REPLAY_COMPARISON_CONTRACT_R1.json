@@ -74,6 +74,26 @@
       "id": "I15",
       "justification": "diagnostic-only render consumed by no later scientific stage; its existence stays mandatory through the inventory rule M01, but its container bytes are not science",
       "logical_name": "stages/*/depth_range_diagnostic.png"
+    },
+    {
+      "id": "I16",
+      "justification": "wall-clock write stamp emitted by the locked pipeline provenance writer (datetime.datetime.now().isoformat()); every other provenance field in the same record remains MUST_MATCH because the record is compared field by field",
+      "logical_name": "stages/02_extract/results_*.h5::/metadata/extraction/pipeline/written"
+    },
+    {
+      "id": "I17",
+      "justification": "wall-clock write stamp emitted by the locked pipeline provenance writer (datetime.datetime.now().isoformat()); every other provenance field in the same record remains MUST_MATCH because the record is compared field by field",
+      "logical_name": "stages/03_pca/pca_scores.h5::/metadata/pipeline/written"
+    },
+    {
+      "id": "I18",
+      "justification": "wall-clock write stamp emitted by the locked pipeline provenance writer (datetime.datetime.now().isoformat()); every other provenance field in the same record remains MUST_MATCH because the record is compared field by field",
+      "logical_name": "summaries/extraction_summary.json::provenance/written"
+    },
+    {
+      "id": "I19",
+      "justification": "wall-clock write stamp emitted by the locked pipeline provenance writer (datetime.datetime.now().isoformat()); every other provenance field in the same record remains MUST_MATCH because the record is compared field by field",
+      "logical_name": "summaries/pca_summary.json::provenance/written"
     }
   ],
   "MUST_MATCH": [
@@ -174,7 +194,7 @@
       "logical_name": "stages/01_roi/*.tiff"
     },
     {
-      "detail": "all datasets and attributes: frames, frames_mask, timestamps, scalars/*, metadata/uuid, metadata/acquisition/*, metadata/extraction/*",
+      "detail": "all datasets and attributes: frames, frames_mask, timestamps, scalars/*, metadata/uuid, metadata/acquisition/*, metadata/extraction/* The pipeline-provenance JSON string dataset is expanded and compared field by field; only the wall-clock 'written' field is declared ignored.",
       "handler": "hdf5",
       "id": "M17",
       "logical_name": "stages/02_extract/results_*.h5"
@@ -186,13 +206,13 @@
       "logical_name": "stages/02_extract/results_*.yaml"
     },
     {
-      "detail": "all score datasets, score index datasets and pipeline provenance",
+      "detail": "all score datasets, score index datasets and pipeline provenance The pipeline-provenance JSON string dataset is expanded and compared field by field; only the wall-clock 'written' field is declared ignored.",
       "handler": "hdf5",
       "id": "M19",
       "logical_name": "stages/03_pca/pca_scores.h5"
     },
     {
-      "detail": "applied held-out model loaded with joblib (moseq2-model writes zlib-compressed joblib, not raw pickle); label arrays compared dtype + shape + exact bytes; keys, metadata, model_parameters, run_parameters and whitening_parameters compared after generated extraction-UUID and own-run-root canonicalisation; the embedded model object is not recursively compared because the frozen source model SHA is independently bound",
+      "detail": "applied held-out model loaded with joblib (moseq2-model writes zlib-compressed joblib, not raw pickle); label arrays compared dtype + shape + exact bytes; keys, metadata, model_parameters, run_parameters and whitening_parameters compared after generated extraction-UUID and own-run-root canonicalisation; the embedded model object is not recursively compared because the frozen source model SHA is independently bound The embedded model object key must be present on both sides and is compared as a deterministic presence marker only; it is never recursed into and its repr is never digested.",
       "handler": "joblib",
       "id": "M20",
       "logical_name": "stages/04_model/model-applied-heldout.p"
@@ -244,12 +264,12 @@
       "rule": "each side's own generated extraction UUID - the uuid4 minted by moseq2-extract for that run, read from that run's own results_00.yaml - is replaced by the literal token <EXTRACTION_UUID> in HDF5 logical names, HDF5 string values and attributes, JSON and YAML keys and string values, PCA score and score-index group names, and applied-model keys and metadata"
     }
   ],
-  "classification": "POST_R5_FAILURE_DETERMINISM_AND_COMPARATOR_REMEDIATION",
+  "classification": "POST_R6_REPLAY_COMPARATOR_IMPLEMENTATION_CORRECTION",
   "comparison_principles": {
     "array_exactness": "dtype AND shape AND exact C-order bytes; NaN representation and NaN position are therefore compared bit-exactly",
     "blindness": "reports contain logical names, classes, match status, and digests only; no scientific value is ever emitted",
     "current_partition": {
-      "declared_ignored_classes": 15,
+      "declared_ignored_classes": 19,
       "must_match_classes": 25,
       "scientific_tolerance": 0
     },
@@ -258,6 +278,7 @@
     "inventory_rule": "the relative-path inventories of both run roots must be identical; any missing or extra entry is a FAIL",
     "run_instance_identity": "the generated extraction UUID is the only run-instance value canonicalised beyond the run root; scientific equality is not relaxed",
     "scientific_tolerance": 0,
+    "string_array_exactness": "string and bytes arrays are canonicalised (C1/C2) before equality; the semantic type class and shape and the exact canonicalised contents are compared, but fixed-capacity itemsize is not, because HDF5 S<N> width tracks the un-canonicalised run-root path length. Numeric arrays are unchanged: dtype AND shape AND exact C-order bytes.",
     "unclassified_behaviour": "any logical name in governed scope belonging to neither MUST_MATCH nor DECLARED_IGNORED is a FAIL"
   },
   "contract_id": "REPLAY_COMPARISON_CONTRACT_R1",

@@ -1,6 +1,6 @@
 {
   "candidate_data_read": false,
-  "case_count": 26,
+  "case_count": 37,
   "cases": [
     {
       "case": "Q01_identical_plus_declared_ignored_only",
@@ -157,6 +157,26 @@
       "exit_code": 2,
       "exit_code_correct": true,
       "expected": "FAIL",
+      "failure_count": 2,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q36_numeric_dtype_mismatch_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q37_different_canonical_path_text_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
       "failure_count": 1,
       "observed": "FAIL",
       "result": "PASS",
@@ -230,8 +250,98 @@
       "result": "PASS"
     },
     {
+      "case": "Q27_provenance_written_only_differs",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q28_other_extraction_provenance_field_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q29_extraction_policy_field_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q30_other_pca_provenance_field_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q31_acquisition_timestamp_differs_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q32_embedded_model_repr_address_differs",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q33_missing_embedded_model_key_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q34_model_parameter_perturbation_fails",
+      "exit_code": 2,
+      "exit_code_correct": true,
+      "expected": "FAIL",
+      "failure_count": 1,
+      "observed": "FAIL",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
+      "case": "Q35_fixed_width_string_dtype_differs_pixels_same",
+      "exit_code": 0,
+      "exit_code_correct": true,
+      "expected": "PASS",
+      "failure_count": 0,
+      "observed": "PASS",
+      "result": "PASS",
+      "stderr": ""
+    },
+    {
       "case": "Q16_report_determinism",
-      "digest": "c03fbc6ec01ba78ff54c7dca237e014262182297020ea8e20027a9bb8485a1a3",
+      "digest": "95f9d3b1b96ede7dc4d1c9dd1c10d2c7f51c65dfd0d5bcd8a3824f7cd677ba48",
       "expected": "IDENTICAL",
       "observed": "IDENTICAL",
       "result": "PASS"
@@ -250,9 +360,9 @@
       "result": "PASS"
     }
   ],
-  "comparator_sha256": "8d36ca3b5b13eede3f0c5aac760044550502f86e921d796a78d29f54890bfa31",
-  "contract_sha256": "90536a864366a21642f8380f5362f2ca2964e482a378ff8eba32b029641cb7ce",
-  "schema": "moseq-r1-replay-comparator-qualification-v2",
+  "comparator_sha256": "0697df76e49d43b3bf352d41230cd2385e3d5f8bdc87ddaf9eeaeee53c588840",
+  "contract_sha256": "b5e2dcb3c0179ce1dba8bbb499a7335096c570cf1fbb091e0c6e4e00c2128d13",
+  "schema": "moseq-r1-replay-comparator-qualification-v3",
   "status": "PASS",
   "synthetic_fixture_only": true
 }

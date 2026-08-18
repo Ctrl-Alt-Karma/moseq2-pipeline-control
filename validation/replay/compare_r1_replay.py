@@ -107,7 +107,14 @@ def array_digest(array, roots):
     """dtype + shape + exact C-order bytes (NaN pattern included)."""
     arr = np.asarray(array)
     if arr.dtype == object or arr.dtype.kind in ("U", "S", "O"):
-        parts = [repr(arr.dtype.str).encode("utf-8"), repr(arr.shape).encode("utf-8")]
+        # String arrays are canonicalised (C1/C2) BEFORE equality is decided, so the
+        # fixed capacity of an HDF5 S<N> dtype must not enter the predicate: two runs
+        # storing the same canonical text differ in itemsize only because their
+        # un-canonicalised run-root paths differ in length. The semantic type class
+        # (bytes vs unicode vs object) and the shape are still compared, and the
+        # canonicalised leaf contents are still compared exactly.
+        parts = [("kind:" + arr.dtype.kind).encode("utf-8"),
+                 repr(arr.shape).encode("utf-8")]
         for item in arr.ravel().tolist() if arr.shape else [arr.tolist()]:
             parts.append(leaf_bytes(item, roots))
         return digest(*parts)
@@ -179,6 +186,26 @@ def units_yaml(path, roots):
     return {"::" + k.lstrip("/"): v for k, v in out.items()}
 
 
+PROVENANCE_JSON_DATASETS = ("metadata/extraction/pipeline", "metadata/pipeline")
+
+
+def _provenance_units(prefix, raw, roots):
+    """Expand a pipeline-provenance JSON string dataset field by field.
+
+    Comparing the blob whole would force the entire provenance record to be
+    ignored just to tolerate its wall-clock write stamp. Expanding it keeps every
+    other provenance field MUST_MATCH while allowing exactly one field to be
+    declared ignored. A record that cannot be parsed stays opaque and fails closed.
+    """
+    try:
+        document = json.loads(raw)
+    except Exception:
+        return None
+    out = {}
+    _walk_leaves(document, "", out, roots)
+    return dict((prefix + "/" + k.lstrip("/"), v) for k, v in out.items())
+
+
 def units_hdf5(path, roots):
     units = {}
 
@@ -194,6 +221,14 @@ def units_hdf5(path, roots):
             obj = handle[name]
             attrs_of("/" + name, obj)
             if isinstance(obj, h5py.Dataset):
+                if name in PROVENANCE_JSON_DATASETS:
+                    raw = obj[()]
+                    if isinstance(raw, bytes):
+                        raw = raw.decode("utf-8", "replace")
+                    expanded = _provenance_units("::/" + name, str(raw), roots)
+                    if expanded is not None:
+                        units.update(expanded)
+                        continue
                 units["::/" + name] = array_digest(obj[()], roots)
     return units
 
@@ -223,9 +258,23 @@ def units_tiff(path, roots):
     return {"::pixels": array_digest(pixels, roots)}
 
 
+EMBEDDED_MODEL_KEY = "model"
+EMBEDDED_MODEL_PRESENT = "<EMBEDDED_MODEL_OBJECT_PRESENT>"
+
+
 def units_joblib(path, roots):
-    """moseq2-model writes .p with joblib + zlib, not raw pickle."""
+    """moseq2-model writes .p with joblib + zlib, not raw pickle.
+
+    The embedded model object is NOT recursively compared, per contract M20: the
+    frozen source model SHA is independently bound, and the object's repr carries a
+    heap address that differs on every load. Its key must still be present on both
+    sides, so a deterministic presence marker is emitted instead; a missing key
+    therefore still fails.
+    """
     data = joblib.load(path)
+    if isinstance(data, dict) and EMBEDDED_MODEL_KEY in data:
+        data = dict(data)
+        data[EMBEDDED_MODEL_KEY] = EMBEDDED_MODEL_PRESENT
     out = {}
     _walk_leaves(data, "", out, roots)
     return dict(("::" + k.lstrip("/"), v) for k, v in out.items())
