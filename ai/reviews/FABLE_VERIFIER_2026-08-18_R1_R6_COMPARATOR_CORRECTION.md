@@ -21,3 +21,7 @@
 **11. No candidate data.** Receipt records `synthetic_fixture_only: true, candidate_data_read: false`; the correction block records `corrected_comparator_run_against_r6: false` and `r6_outputs_preserved_and_not_rerun: true`, so the verdict rests on synthetic fixtures, not preserved R6 outputs; and the only UUID-shaped strings in the entire delta are the two self-evidently synthetic fixtures (`11111111-…`, `aaaaaaaa-…`). The addendum's disclosure of two run-instance extraction UUIDs printed during the first R6 diagnostic pass concerns generated uuid4s, not candidate identities, and is consistent with the redaction policy.
 
 No material discrepancies. One standing note carried forward unchanged: the suite still presumes the golden host's legacy `skimage.external.tifffile` import.
+
+PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION
+
+STOP.

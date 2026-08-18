@@ -101,7 +101,7 @@ Partition 25 MUST_MATCH / 19 DECLARED_IGNORED, scientific tolerance 0. Kappa
 
 The Independent Verifier report underlying `PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION` is durably preserved at
 `ai/reviews/FABLE_VERIFIER_2026-08-18_R1_R6_COMPARATOR_CORRECTION.md`,
-SHA-256 `68b6daad94304d0948015f104b217dda06661adf019d5bac09cd42af9879ea64`, verified target `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`, evidence class
+SHA-256 `2c5fac827229b5be642c5196107540d1bdf1c6a1f4ec901ef021397e6b8cc57c`, verified target `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`, evidence class
 `DURABLY_RECORDED` (D-054). The earlier `COMPLETED_WORK_EVIDENCE_LINK_MISSING`
 classification for this result is **RESOLVED**. This is evidence-link recovery only and
 is not a new verification. Overall R6 execution acceptance remains **HOLD**, the corrected

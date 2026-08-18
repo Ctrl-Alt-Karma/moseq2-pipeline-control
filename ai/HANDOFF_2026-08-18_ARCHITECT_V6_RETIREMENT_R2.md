@@ -17,7 +17,7 @@ instrument, with result-blind validation and deterministic replay.
 disposition `PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION`, 37/37 qualification
 independently reproduced at exit 0. The verifier report is durably preserved at
 `ai/reviews/FABLE_VERIFIER_2026-08-18_R1_R6_COMPARATOR_CORRECTION.md`
-SHA-256 `68b6daad94304d0948015f104b217dda06661adf019d5bac09cd42af9879ea64`,
+SHA-256 `2c5fac827229b5be642c5196107540d1bdf1c6a1f4ec901ef021397e6b8cc57c`,
 verified target `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`, evidence class
 `DURABLY_RECORDED` (D-054).
 
@@ -76,7 +76,7 @@ partition 25 MUST_MATCH / 19 DECLARED_IGNORED, tolerance 0.
 Residual decomposition receipt `/home/ajm/moseq2-validation-20260730/evidence/r1_primary_execution_r6_r1/R6_RESIDUAL_DECOMPOSITION_RECEIPT.json` SHA-256 `4b2d931b5ea1f44ed818cd5aaae6b3a354421cdd3be9c7d44b0f081e2a241675`; original R6
 comparator report SHA-256 `22be3cecc3c586a8f47950802be71fcc689741eeb957340d0d1a94954d288a2c`; R6 evidence root `/home/ajm/moseq2-validation-20260730/evidence/r1_primary_execution_r6_r1`. Protected
 golden-host local evidence, not repository-accessible. Independent Verifier report `ai/reviews/FABLE_VERIFIER_2026-08-18_R1_R6_COMPARATOR_CORRECTION.md`
-SHA-256 `68b6daad94304d0948015f104b217dda06661adf019d5bac09cd42af9879ea64`, disposition `PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION`,
+SHA-256 `2c5fac827229b5be642c5196107540d1bdf1c6a1f4ec901ef021397e6b8cc57c`, disposition `PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION`,
 verified target `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`, `DURABLY_RECORDED`. Full repository sweep:
 `ai/RETIREMENT_RECONCILIATION_2026-08-18_R2.md`.
 
@@ -170,7 +170,7 @@ scientific-determinism acceptance and local receipt binding.
 | Canonical comparator result | `LOCAL_EVIDENCE_BOUND` | report `22be3cecc3c586a8f47950802be71fcc689741eeb957340d0d1a94954d288a2c` |
 | Residual decomposition | `DURABLY_RECORDED` as a bound identity, `LOCAL_EVIDENCE_BOUND` as content | receipt `4b2d931b5ea1f44ed818cd5aaae6b3a354421cdd3be9c7d44b0f081e2a241675` |
 | Global repository sweep | `DURABLY_RECORDED` | `ai/RETIREMENT_RECONCILIATION_2026-08-18_R2.md` |
-| Independent Verifier report (comparator correction) | `DURABLY_RECORDED` | `ai/reviews/FABLE_VERIFIER_2026-08-18_R1_R6_COMPARATOR_CORRECTION.md` SHA-256 `68b6daad94304d0948015f104b217dda06661adf019d5bac09cd42af9879ea64` |
+| Independent Verifier report (comparator correction) | `DURABLY_RECORDED` | `ai/reviews/FABLE_VERIFIER_2026-08-18_R1_R6_COMPARATOR_CORRECTION.md` SHA-256 `2c5fac827229b5be642c5196107540d1bdf1c6a1f4ec901ef021397e6b8cc57c` |
 
 Evidence namespaces used by the retiring cockpit: the project repository and BRIDGE
 (durably indexed); the golden-host validation and evidence roots (searched, local
