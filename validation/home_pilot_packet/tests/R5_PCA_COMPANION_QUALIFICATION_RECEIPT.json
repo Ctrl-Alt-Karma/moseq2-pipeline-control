@@ -1,0 +1,157 @@
+{
+  "candidate_result_artifact_opened": false,
+  "candidate_science_executed": false,
+  "case_count": 22,
+  "cases": [
+    {
+      "case": "pca_component_basis_hash",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "pca_component_role_gate",
+      "detail": {
+        "dtype": "float32",
+        "shape": [
+          25,
+          6400
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "pca_companion_yaml_exists",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "pca_companion_yaml_hash_and_bytes",
+      "detail": {
+        "bytes": 2714,
+        "sha256": "ba47df9b1229ab6dae884adf2fab49cfde4a07c5d44575e35547be12277af0d9"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "locked_get_pca_yaml_data_parses_companion",
+      "detail": {
+        "clean_param_keys": [
+          "gaussfilter_space",
+          "gaussfilter_time",
+          "medfilter_space",
+          "medfilter_time",
+          "tailfilter"
+        ],
+        "mask_param_keys": [
+          "mask_height_threshold",
+          "mask_threshold",
+          "max_height",
+          "min_height"
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "locked_parser_fails_on_missing_companion",
+      "detail": "OSError",
+      "result": "PASS"
+    },
+    {
+      "case": "operator_binds_companion_sha",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "operator_requires_companion_present",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "operator_passes_companion_to_preflight",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "stage03_uses_verified_original_not_copy",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "immutable_pca_evidence_copy_retained",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "no_pca_yaml_written_into_run_output",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "no_fit_refit_resume_adaptation_route",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "all_eight_bind_identical_pca_and_companion",
+      "detail": "8/8",
+      "result": "PASS"
+    },
+    {
+      "case": "all_other_spec_fields_unchanged_vs_r4",
+      "detail": "8/8",
+      "result": "PASS"
+    },
+    {
+      "case": "r5_spec_manifest_hashes_match",
+      "detail": "8/8",
+      "result": "PASS"
+    },
+    {
+      "case": "r4_specs_unmutated",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "config_classifier_model_unchanged",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "raw_identities_unchanged",
+      "detail": null,
+      "result": "PASS"
+    },
+    {
+      "case": "wrong_companion_fails_preflight_closed",
+      "detail": {
+        "exit": 42,
+        "status": "FAILED_HOLD"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "missing_companion_fails_preflight_closed",
+      "detail": {
+        "exit": 42,
+        "status": "FAILED_HOLD"
+      },
+      "result": "PASS"
+    },
+    {
+      "case": "correct_companion_passes_preflight",
+      "detail": {
+        "exit": 0,
+        "status": "PASS"
+      },
+      "result": "PASS"
+    }
+  ],
+  "classification": "RUNTIME_DEPENDENCY_CORRECTION",
+  "operator_sha256": "cbdbba19ca7f2f143f4d5339dc24fef5c126f2331f2ddc002037180bdddbaf97",
+  "pca_companion_yaml_bytes": 2714,
+  "pca_companion_yaml_sha256": "ba47df9b1229ab6dae884adf2fab49cfde4a07c5d44575e35547be12277af0d9",
+  "pca_component_basis_sha256": "6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368",
+  "preflight_sha256": "2e476365876ff9303428d6dad344e8e60c2272e5c2a34ffe3a1f40e6ad35c8e5",
+  "schema": "moseq-r1-r5-pca-companion-qualification-v1",
+  "status": "PASS"
+}

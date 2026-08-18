@@ -12,6 +12,10 @@ CONFIRM_TOKEN="RUN_SEALED_R1_FULL_SESSION"
 FROZEN_CONFIG_SHA256="ef42bf756eef975277d5dc62d0d7719daf75f374a2e58d96a6c3eb39ecd75269"
 FROZEN_CLASSIFIER_SHA256="4b06e1e56928bb1ac227329d0932d4637cdd541a3af49865ae127b57991c2c00"
 FROZEN_PCA_SHA256="6b587854412c1b0a0b69759f4262e4fac3583b1aa6144093fcd3d2bf1ff0b368"  # PCA component basis (pca.h5). The training-score
+# moseq2-pca derives the companion PCA yaml as splitext(pca_file)[0] + ".yaml"
+# and get_pca_yaml_data raises if it is absent. It carries the frozen filter and
+# mask parameters consumed at apply time, so it is a bound scientific dependency.
+FROZEN_PCA_YAML_SHA256="ba47df9b1229ab6dae884adf2fab49cfde4a07c5d44575e35547be12277af0d9"
 # artifact pca_scores.h5 (26e30500be1e885422307c707e0b7b5ec619c70149d557a764d3daa475108912)
 # remains frozen upstream evidence for the production model and Tier-B envelopes,
 # and is NOT the runtime input to apply-pca.
@@ -94,7 +98,9 @@ esac
 METADATA="${SESSION_REAL}/metadata.json"
 TIMESTAMPS="${SESSION_REAL}/depth_ts.txt"
 
-for path in "${RUN_SPEC}" "${CONFIG}" "${CLASSIFIER}" "${PCA}" "${PRODUCTION_MODEL}"; do
+PCA_YAML="${PCA%.h5}.yaml"
+[[ -f "${PCA_YAML}" ]] || die "companion PCA yaml is missing: ${PCA_YAML}"
+for path in "${RUN_SPEC}" "${CONFIG}" "${CLASSIFIER}" "${PCA}" "${PCA_YAML}" "${PRODUCTION_MODEL}"; do
     [[ -f "${path}" ]] || die "required file is missing: ${path}"
 done
 
@@ -129,10 +135,12 @@ PYTHONDONTWRITEBYTECODE=1 "${PROVENANCE_PYTHON}" -B "${SCRIPT_DIR}/helpers/verif
     --config "${CONFIG}" \
     --classifier "${CLASSIFIER}" \
     --pca "${PCA}" \
+    --pca-yaml "${PCA_YAML}" \
     --model "${PRODUCTION_MODEL}" \
     --required-config-sha256 "${FROZEN_CONFIG_SHA256}" \
     --required-classifier-sha256 "${FROZEN_CLASSIFIER_SHA256}" \
     --required-pca-sha256 "${FROZEN_PCA_SHA256}" \
+    --required-pca-yaml-sha256 "${FROZEN_PCA_YAML_SHA256}" \
     --required-model-sha256 "${FROZEN_MODEL_SHA256}" \
     --required-model-seed "${FROZEN_MODEL_SEED}" \
     --required-model-kappa "${FROZEN_MODEL_KAPPA}" \
@@ -248,7 +256,7 @@ run_stage 03_apply_frozen_pca \
     --input-dir "${OUTPUT_REAL}/stages/02_extract" \
     --output-dir "${OUTPUT_REAL}/stages/03_pca" \
     --output-file pca_scores \
-    --pca-file "${PCA_COPY}" \
+    --pca-file "${PCA}" \
     --cluster-type nodask \
     --config-file "${CONFIG_COPY}" \
     --overwrite-pca-apply True

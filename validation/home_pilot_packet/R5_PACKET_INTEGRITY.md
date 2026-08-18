@@ -42,3 +42,21 @@ the runtime input to apply-pca.
 No PCA refit, model refit, scientific retuning, new PCA selection, or change to
 Tier-B/Tier-C criteria is involved. Raw inputs, roster positions, config,
 classifier, production model and all other scientific identities are unchanged.
+
+## Companion PCA yaml dependency
+
+`moseq2-pca` derives the companion PCA yaml as `splitext(pca_file)[0] + ".yaml"`
+and `get_pca_yaml_data` raises `OSError` if it is absent. That companion carries
+the frozen filter and mask parameters actually consumed at apply time, so it is a
+consumed scientific dependency rather than incidental metadata.
+
+The operator therefore binds
+`pca/pca.yaml`, SHA-256
+`ba47df9b1229ab6dae884adf2fab49cfde4a07c5d44575e35547be12277af0d9`, 2714 bytes,
+requires it to exist, and verifies its path, hash and byte count in the
+provenance preflight, failing closed before science on any mismatch.
+
+Stage 03 is invoked with the original verified PCA path rather than the run-local
+copy, so the locked pipeline resolves the genuine companion. The immutable
+evidence copy `inputs/pca_components.h5` is still written, and no PCA yaml is
+copied into the run output tree.

@@ -168,7 +168,9 @@ def parse_args():
     parser.add_argument("--model", required=True)
     parser.add_argument("--required-config-sha256", required=True)
     parser.add_argument("--required-classifier-sha256", required=True)
+    parser.add_argument("--pca-yaml", required=True)
     parser.add_argument("--required-pca-sha256", required=True)
+    parser.add_argument("--required-pca-yaml-sha256", required=True)
     parser.add_argument("--required-model-sha256", required=True)
     parser.add_argument("--required-model-seed", required=True, type=int)
     parser.add_argument("--required-model-kappa", required=True, type=int)
@@ -190,6 +192,7 @@ def main():
             ("required_config_sha256", args.required_config_sha256),
             ("required_classifier_sha256", args.required_classifier_sha256),
             ("required_pca_sha256", args.required_pca_sha256),
+            ("required_pca_yaml_sha256", args.required_pca_yaml_sha256),
             ("required_model_sha256", args.required_model_sha256),
         ):
             if SHA256_RE.match(value) is None:
@@ -254,6 +257,7 @@ def main():
             "config": inspect_file(require_mapping(scientific.get("config"), "scientific_artifacts.config"), args.config, "scientific_artifacts.config", required_sha=args.required_config_sha256),
             "classifier": inspect_file(require_mapping(scientific.get("classifier"), "scientific_artifacts.classifier"), args.classifier, "scientific_artifacts.classifier", required_sha=args.required_classifier_sha256),
             "pca": inspect_file(require_mapping(scientific.get("pca"), "scientific_artifacts.pca"), args.pca, "scientific_artifacts.pca", required_sha=args.required_pca_sha256),
+            "pca_yaml": inspect_file(require_mapping(scientific.get("pca_yaml"), "scientific_artifacts.pca_yaml"), args.pca_yaml, "scientific_artifacts.pca_yaml", required_sha=args.required_pca_yaml_sha256),
             "production_model": inspect_file(require_mapping(scientific.get("production_model"), "scientific_artifacts.production_model"), args.model, "scientific_artifacts.production_model", required_sha=args.required_model_sha256),
         }
         pca_observed, pca_role_checks = pca_component_role(args.pca)
