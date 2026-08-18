@@ -164,7 +164,7 @@
     },
     {
       "case": "Q16_report_determinism",
-      "digest": "023af1f802cb226f654db1e1bc5d37a489fd49569a202e9363df698a40b1bf90",
+      "digest": "94b63507bbdf02d721109e4e51b4e6b84f5b1c6be3a2227f827f789d4fccf6c5",
       "expected": "IDENTICAL",
       "observed": "IDENTICAL",
       "result": "PASS"
@@ -184,7 +184,7 @@
     }
   ],
   "comparator_sha256": "6e9c0e575648d096dad3980428fd0452c4497d3cf91bfdfe5fc45f00274cbf46",
-  "contract_sha256": "baf64f7be470930f2596a858129fca27c16a78ab6b0edb9c4b31f443a863ddd3",
+  "contract_sha256": "d4c21ceea263fdc51ae95ecf03374f173198846f3e46b46064ab141ffd34d712",
   "schema": "moseq-r1-replay-comparator-qualification-v1",
   "status": "PASS",
   "synthetic_fixture_only": true
