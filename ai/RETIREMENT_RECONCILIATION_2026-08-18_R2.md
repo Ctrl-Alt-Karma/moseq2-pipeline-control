@@ -97,6 +97,17 @@ Nothing in this record claims they were independently repository-verified.
 Partition 25 MUST_MATCH / 19 DECLARED_IGNORED, scientific tolerance 0. Kappa
 `464159`, production seed `20260802`.
 
+## Independent Verifier evidence link
+
+The Independent Verifier report underlying `PASS_FABLE_VERIFIER_R1_R6_COMPARATOR_CORRECTION` is durably preserved at
+`ai/reviews/FABLE_VERIFIER_2026-08-18_R1_R6_COMPARATOR_CORRECTION.md`,
+SHA-256 `68b6daad94304d0948015f104b217dda06661adf019d5bac09cd42af9879ea64`, verified target `1cd7c900780a423f2b2186025ee3a324b2bf7fbd`, evidence class
+`DURABLY_RECORDED` (D-054). The earlier `COMPLETED_WORK_EVIDENCE_LINK_MISSING`
+classification for this result is **RESOLVED**. This is evidence-link recovery only and
+is not a new verification. Overall R6 execution acceptance remains **HOLD**, the corrected
+comparator has still **not** been evaluated against the preserved R6 outputs, and the only
+next project operation is unchanged.
+
 ## Operation boundary
 
 No candidate processing, extraction, PCA or model application or fitting,
