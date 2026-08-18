@@ -2,6 +2,39 @@
 
 Date: 2026-08-13 (base) — see the 2026-08-18 checkpoint immediately below
 
+## 2026-08-18 checkpoint — R6 corrected-comparator evaluation PASS
+
+Additive. Nothing below this section is rewritten.
+
+- Architect disposition `PASS_ARCHITECT_R1_R6_CORRECTED_COMPARATOR_EVALUATION_R1` (D-055).
+- The verified corrected comparator `0697df76e49d43b3bf352d41230cd2385e3d5f8bdc87ddaf9eeaeee53c588840`
+  was run **once, comparison-only**, against the preserved R6 slot-01 primary/replay
+  pair: exit `0`, disposition **PASS**, `failure_count` 0, `status_counts`
+  {"IGNORED": 26, "MATCH": 1230}, 1230 MUST_MATCH / 26 DECLARED_IGNORED / 0
+  unclassified, runtime `contract_sha256`
+  `b5e2dcb3c0179ce1dba8bbb499a7335096c570cf1fbb091e0c6e4e00c2128d13`.
+- Evidence artifact `/home/ajm/moseq2-validation-20260730/evidence/r1_primary_execution_r6_r1/REPLAY_COMPARISON_REPORT_R6_CORRECTED_COMPARATOR_R1.json`
+  SHA-256 `c3ffdad3bd7ceb6d5b4e1fb3ebe001b233b12a0319df559da23314a77a3b9783`; claim class
+  BUILDER_PRODUCED_EVIDENCE / ARCHITECT_ADJUDICATED / LOCAL_EVIDENCE_BOUND; protected
+  golden-host local evidence, not repository-accessible.
+- The R6 execution/replay acceptance subgate left on HOLD by D-053 is **CLOSED**.
+  No candidate rerun is required. Scientific tolerance remains **0**.
+- Original `REPLAY_COMPARISON_REPORT_R6.json`
+  `22be3cecc3c586a8f47950802be71fcc689741eeb957340d0d1a94954d288a2c` and original seal
+  `ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2` remain untouched;
+  both preserved R6 runs are unmutated.
+- This does **not** constitute `PASS_REAL_SESSION_PRODUCTION_VALIDATION`. Final
+  production validation still requires satisfaction or adjudication of the remaining
+  sealed-protocol criteria, including **Tier-D qualitative review**.
+- No model selection, PCA, ARHMM, extraction parameter, comparator semantics,
+  tolerance or sealed scientific criterion is reopened.
+- Execution record: an initial runner-wrapper launch produced no report, no captured
+  output, no exit code and no substantive mutation; the verdict-producing invocation
+  then ran once with the accepted bytes and arguments; its stdout and stderr were lost
+  with temporary scratch capture. Ancillary **evidence-capture defect**, not a
+  comparator or scientific defect; no rerun is authorized or required.
+- Candidate processing remains **prohibited**.
+
 ## 2026-08-18 checkpoint — comparator-correction verification gate CLOSED
 
 Additive. Nothing below this section is rewritten.
