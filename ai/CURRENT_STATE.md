@@ -2,6 +2,35 @@
 
 Date: 2026-08-13 (base) — see the 2026-08-18 checkpoint immediately below
 
+## 2026-08-18 checkpoint — R6 transfer technical adjudication PASS
+
+Additive. Nothing below this section is rewritten.
+
+- Architect disposition `PASS_ARCHITECT_R1_R6_TRANSFER_TECHNICAL_ADJUDICATION_R1` (D-056).
+- **No validation session is invalidated. No exclusion, replacement or rerun is justified.**
+- `model_modeled_frame_fraction` breaches (slots 03, 05, 07, 08) are **mechanically
+  recording-length only**: the metric equals `1 - 3/N` exactly across all 28 corpus and
+  validation sessions, and the corpus lower bound corresponds exactly to `N = 26946`,
+  the shortest corpus recording.
+- B2 breaches (slots 03, 05) reflect **elevated but fully accounted timestamp-gap
+  burden**, not corruption: 103 and 69 gap rows against a corpus maximum of 56, with
+  raw and extraction frame accounting both PASS.
+- B1 breaches (slots 07, 08) **establish genuine held-out representation shift**.
+- The 8/8 low `model_occupied_state_count` pattern is **genuine transfer signal** — not
+  recording duration, not evaluator error, and not a pooled-versus-single-invocation
+  artifact.
+- Bout-duration and top-1 usage breaches occur only in the **concentration direction**.
+- **No software or instrument failure is established.**
+- Supporting evidence, protected golden-host local, not repository-accessible:
+  `TRANSFER_ADJUDICATION_COMPARISON_R1.json`
+  `92d8e2155a88829b2509c78ac99211e2fa54d2fd558206975132db98f526bd87`; evaluator
+  `TIER_B_TIER_C_EVALUATOR_R1.py`
+  `3f331101d937e8c3cd0fc4162fe9cfe62fae752ffb10d9e9272322a8d5d6961e`; adversarial review
+  bundle `f69c94219805c53f1b92775953b0a86493dbdc35a88f8abd135173b4d0b77f66`.
+- **Final `PASS_REAL_SESSION_PRODUCTION_VALIDATION` remains HOLD**, pending Tier-A
+  per-session qualitative dispositions and the Tier-D blinded domain-scientist review.
+- Candidate processing beyond the sealed validation roster remains **prohibited**.
+
 ## 2026-08-18 checkpoint — R6 corrected-comparator evaluation PASS
 
 Additive. Nothing below this section is rewritten.
