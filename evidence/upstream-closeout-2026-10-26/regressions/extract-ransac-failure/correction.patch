@@ -1,0 +1,65 @@
+commit 050f5bcb6a806717cc93ea90392090100a5bb8e1
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:30 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:30 2026 -0400
+
+    fix: raise an actionable error when RANSAC cannot find a plane
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 11d2691ab56f9972930663e712c06cecb01f2eb1, c75272683c68cb5695be8e99d4e89ceb7adcf42b
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_extract/extract/roi.py b/moseq2_extract/extract/roi.py
+index 5191aa8..69ccea5 100644
+--- a/moseq2_extract/extract/roi.py
++++ b/moseq2_extract/extract/roi.py
+@@ -92,6 +92,10 @@ def plane_ransac(
+     )
+     coords = coords.T
+ 
++    if len(coords) < 3:
++        raise ValueError('Too few points remain after applying the ROI mask; at least 3 are required.')
++
++    best_plane = None
+     best_dist = np.inf
+     best_num = 0
+ 
+@@ -118,6 +122,9 @@ def plane_ransac(
+             best_num = ninliers
+             best_plane = tmp_plane
+ 
++    if best_plane is None:
++        raise ValueError('RANSAC found no accepted plane; check the depth range, mask and iteration count.')
++
+     # fit the plane to our x,y,z coordinates
+     coords = np.vstack((xx.ravel(), yy.ravel(), depth_image.ravel())).T
+     dist = np.abs(np.dot(coords, best_plane[:3]) + best_plane[3])
+diff --git a/tests/unit_tests/test_closeout_extract_ransac_failure.py b/tests/unit_tests/test_closeout_extract_ransac_failure.py
+new file mode 100644
+index 0000000..18f8e46
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_ransac_failure.py
+@@ -0,0 +1,20 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pytest
++
++
++def _floor():
++    y, x = np.mgrid[:30, :40]
++    return 700 + .3 * x - .2 * y + np.random.RandomState(3).normal(0, 2, (30, 40))
++
++
++def test_ransac_empty_mask_reports_input_problem():
++    from moseq2_extract.extract.roi import plane_ransac
++    with pytest.raises(ValueError, match="(?i)(mask|points|inlier)"):
++        plane_ransac(_floor(), mask=np.zeros((30, 40), dtype=bool), iters=2)
++
++
++def test_ransac_no_accepted_plane_reports_failure():
++    from moseq2_extract.extract.roi import plane_ransac
++    with pytest.raises(ValueError, match="(?i)(plane|iteration|ransac)"):
++        plane_ransac(_floor(), iters=0)

@@ -1,5 +1,25 @@
 # Current State
 
+## 2026-10-26 — terminal Owner closeout
+
+**R1 SCIENTIFIC VALIDATION CLOSED BY OWNER BEFORE FINAL HUMAN QUALITATIVE GATE**
+
+AJ / Karma terminated the remaining R1 effort. Blinded Tier-A / Tier-D human
+qualitative review was not completed. `PASS_REAL_SESSION_PRODUCTION_VALIDATION`
+was NOT issued. This is not scientific FAIL and establishes neither biological
+validity nor invalidity. Existing machine-side evidence retains its prior claim
+classes; the historical instrument/seal is not rewritten.
+
+51 focused current-upstream software PRs and six confirmed design-dependent
+issues were submitted separately from R1. See
+[final closeout](MOSEQ2_UPSTREAM_HANDOFF_AND_PROJECT_CLOSEOUT_2026-10-26.md),
+[terminal handoff](HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md) and D-057–D-059.
+
+There is no pending Katya request or next planned MoSeq task. No additional
+scientific processing or biological analysis is authorized. Future work requires
+an explicit new Owner reopening decision. Every dated section below is preserved
+historical state, not an instruction to resume an old HOLD or wait for review.
+
 Date: 2026-08-13 (base) — see the 2026-08-18 checkpoint immediately below
 
 ## 2026-08-18 checkpoint — R6 transfer technical adjudication PASS

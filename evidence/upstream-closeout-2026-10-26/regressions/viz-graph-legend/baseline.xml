@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.504" timestamp="2026-10-26T12:50:19.328342-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE4.viz-graph-legend.test_regression" name="test_difference_graph_legend_matches_edge_sign_colors" time="0.247"><failure message="assert (1.0, 0.0, 0.0, 1) == (0.0, 0.0, 1.0, 1.0)&#10;  &#10;  At index 0 diff: 1.0 != 0.0&#10;  Use -v to get more diff">test_results/PATCH_PLAN_WAVE4/viz-graph-legend/test_regression.py:23: in test_difference_graph_legend_matches_edge_sign_colors
+    assert to_rgba(up.get_color()) == to_rgba("blue")
+E   assert (1.0, 0.0, 0.0, 1) == (0.0, 0.0, 1.0, 1.0)
+E     
+E     At index 0 diff: 1.0 != 0.0
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

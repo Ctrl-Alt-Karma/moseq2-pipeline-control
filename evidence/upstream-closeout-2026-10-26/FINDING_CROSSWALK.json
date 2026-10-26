@@ -1,0 +1,2125 @@
+{
+  "operation": "FINAL_UPSTREAM_CONTRIBUTION_SWEEP_2026-10-26",
+  "counts": {
+    "PR_READY": 51,
+    "ISSUE_ONLY_CONFIRMED": 6,
+    "ALREADY_UPSTREAM": 4,
+    "UNCONFIRMED_HANDOFF": 9,
+    "OBSOLETE_OR_SUPERSEDED": 5,
+    "PROJECT_CONTROL_ONLY": 15,
+    "REJECTED": 1
+  },
+  "row_count": 91,
+  "upstream_pr_count": 51,
+  "upstream_issue_count": 6,
+  "historical_nonmerge_commits_reviewed": 40,
+  "historical_id_bindings": {
+    "EXTRACT-001": [
+      "extract-mixed-unit-velocity"
+    ],
+    "EXTRACT-002": [
+      "nonvacuous-scalar-regression"
+    ],
+    "VIZ-001": [
+      "viz-pinhole-geometry",
+      "extract-pinhole-geometry"
+    ],
+    "VIZ-002": [
+      "viz-invalid-mixed-unit-scalar"
+    ],
+    "VIZ-003": [
+      "viz-mapping-preserving-deprecation"
+    ],
+    "VIZ-004": [
+      "viz-fork-provenance-readers"
+    ],
+    "APP-001": [
+      "app-flip-lifecycle"
+    ],
+    "APP-002": [
+      "app-journal-sentinel-custody"
+    ],
+    "APP-003": [
+      "app-preview-finalization",
+      "app-preview-exit"
+    ],
+    "F-01": [
+      "viz-invalid-mixed-unit-scalar"
+    ],
+    "F-02": [
+      "viz-cross-package-contract-tests"
+    ],
+    "F-03": [
+      "viz-fork-provenance-readers"
+    ],
+    "F-04": [
+      "viz-cross-package-contract-tests"
+    ],
+    "F-05": [
+      "app-journal-sentinel-custody"
+    ],
+    "F-06": [
+      "app-fault-model-evidence"
+    ],
+    "F-07": [
+      "app-fault-model-evidence"
+    ],
+    "F-08": [
+      "viz-duplicated-conversion-design"
+    ],
+    "F-09": [
+      "app-extraction-app-flip-policy",
+      "orientation-byte-equality-inference"
+    ],
+    "F-10": [
+      "app-journal-sentinel-custody"
+    ],
+    "F-11": [
+      "app-preview-finalization"
+    ],
+    "F-12": [
+      "viz-fork-provenance-readers",
+      "app-journal-sentinel-custody"
+    ],
+    "F-13": [
+      "viz-metadata-order"
+    ],
+    "F-14": [
+      "extract-integer-coordinates",
+      "viz-integer-coordinates"
+    ],
+    "F-15": [
+      "viz-fork-provenance-readers"
+    ]
+  },
+  "counting_rule": "Topic rows, not unique PRs or legacy IDs; aliases are bound without duplicate rows.",
+  "findings": [
+    {
+      "id": "extract-integer-coordinates",
+      "name": "Preserve fractional millimetres for integer pixel coordinates",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [
+        "F-14"
+      ],
+      "implementation_commits": [
+        "e7f585104ba25b66e5326c88c77a47e33db95635"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "Integer input coordinates currently truncate converted millimetres back to integers. Integer and floating representations of the same pixel locations must produce the same physical coordinates.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_integer_coordinates.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/182"
+      ],
+      "contribution_commit": "b00699aad6320d29dc7a5bbb44668f035378d920"
+    },
+    {
+      "id": "extract-pinhole-geometry",
+      "name": "Use the pinhole relation for nominal field of view",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [
+        "VIZ-001"
+      ],
+      "implementation_commits": [
+        "c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The focal-length calculation uses the half-angle in radians instead of its tangent. Consequently the image edge does not map to depth times tan(FOV/2). The correction uses the nominal pinhole relation, not a new camera calibration.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_pinhole_geometry.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/183"
+      ],
+      "contribution_commit": "f9987793dc033196b9376ffd3fa3f79c55b99e0c"
+    },
+    {
+      "id": "extract-mixed-unit-velocity",
+      "name": "Stop emitting the dimensionally invalid velocity_3d_px scalar",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [
+        "EXTRACT-001"
+      ],
+      "implementation_commits": [
+        "5cc858626592ea2682260eae9911827c7c0ba551"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The scalar sums squared pixel displacements and squared millimetre height changes. It has neither pixel nor millimetre units. Omit this invalid field and its description; retain meaningful 2D-pixel and 3D-millimetre velocities.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_mixed_unit_velocity.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/184"
+      ],
+      "contribution_commit": "9674e130f0b27a17bd8d0280c6cd2d38e2e831d4"
+    },
+    {
+      "id": "extract-hampel-centroid",
+      "name": "Make centroid Hampel filtering translation invariant",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The rejection threshold includes the absolute median position and the loop filters only one coordinate. Translating the same track changes which outliers are removed. Filter both coordinates with the MAD-based threshold.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_hampel_centroid.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/185"
+      ],
+      "contribution_commit": "6212b47b32fec47de4c63cb808b287a042d80144"
+    },
+    {
+      "id": "extract-hampel-angle",
+      "name": "Allow angle-only Hampel filtering and use the MAD threshold",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The angle branch reuses padding initialized only by centroid filtering, and adds the median angle to the deviation threshold. Give the branch its own padding and compare deviations to scaled MAD.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_hampel_angle.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/186"
+      ],
+      "contribution_commit": "69fae4f7e333227af3f688ccee4fc1678ea176a0"
+    },
+    {
+      "id": "extract-ransac-seed",
+      "name": "Give plane RANSAC a local reproducible random generator",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "2c9cd86571bcc23ad6870e4da344e0f558f3f54c"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "Sampling consumes the global NumPy RNG, so unrelated draws alter an otherwise identical floor estimate. Add an explicit seed and use a local RandomState. The plane estimator, acceptance rule, and sample replacement policy are unchanged.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_ransac_seed.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/187"
+      ],
+      "contribution_commit": "89e778a7a8f63c5f7ec243d8a5d521dc2e826333"
+    },
+    {
+      "id": "extract-ransac-failure",
+      "name": "Raise an actionable error when RANSAC cannot find a plane",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "11d2691ab56f9972930663e712c06cecb01f2eb1",
+        "c75272683c68cb5695be8e99d4e89ceb7adcf42b"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "Too few masked points and no accepted hypotheses currently produce low-level sampling or unbound-local errors. Validate the point count and report that no plane met the existing acceptance rule.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_ransac_failure.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/188"
+      ],
+      "contribution_commit": "050f5bcb6a806717cc93ea90392090100a5bb8e1"
+    },
+    {
+      "id": "extract-depth-byte-order",
+      "name": "Honor the declared raw depth pixel byte order",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The raw ffmpeg reader always interprets bytes using native uint16, including when the requested pixel format is big-endian. Decode using the explicitly declared endian order.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_depth_byte_order.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/189"
+      ],
+      "contribution_commit": "4ac319b7772b4e62e3a8800525aaf9c3c8987311"
+    },
+    {
+      "id": "extract-unsigned-raw-depth",
+      "name": "Use unsigned 16-bit depth in the raw-reader CLI default",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The raw depth CLI defaults to signed int16 although depth is unsigned. Values above 32767 become negative. Use the unsigned little-endian default; explicit user dtypes remain available.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_extract_unsigned_raw_depth.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/190"
+      ],
+      "contribution_commit": "2bbebcda4556d0c665ba80483cc2f2f006be84b2"
+    },
+    {
+      "id": "pca-symmetric-kernel",
+      "name": "Center the Gaussian smoothing kernel on its impulse",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "ff3531632aaecbc045a42570db024c429235a914"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "The generated support omits the positive endpoint and has even length. This shifts the center of an otherwise symmetric impulse response. Include both endpoints without retuning sigma.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_pca_symmetric_kernel.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-pca/pull/133"
+      ],
+      "contribution_commit": "d8f975fdadf8e58eea2cb3b86a7f26fcbcdd06af"
+    },
+    {
+      "id": "pca-changepoint-sigma",
+      "name": "Pass the requested changepoint sigma to the Gaussian sigma argument",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "e9f573185e2d7ed86a2de15089903a8294635c3c"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "The requested sigma is passed as the kernel window length positional argument, leaving sigma at its default. Forward it by its named sigma argument. Default changepoint parameters are not retuned.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_pca_changepoint_sigma.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-pca/pull/134"
+      ],
+      "contribution_commit": "c1622a232020686671061d3f4f69cdee8d834970"
+    },
+    {
+      "id": "pca-disabled-smoothing",
+      "name": "Do not mask every changepoint when smoothing is disabled",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "f0d24d111bb359e6768462b6164bf579b323cbc8"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "With zero smoothing the edge count is zero and a [-0:] slice masks the whole signal. None also reaches unsupported arithmetic. Apply edge masking only when smoothing and its edge count are positive.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_pca_disabled_smoothing.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-pca/pull/135"
+      ],
+      "contribution_commit": "62b50277d3d1d9d9b350eff274c732ff0184d7ce"
+    },
+    {
+      "id": "pca-session-timestamps",
+      "name": "Use each session length for missing-timestamp fallback",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "ff3531632aaecbc045a42570db024c429235a914"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "The distributed result loop uses the frames variable left over from the last loaded session. A session without timestamps therefore receives another session's fallback time axis. Obtain fallback length from the currently open session in both distributed result loops.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_pca_session_timestamps.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-pca/pull/136"
+      ],
+      "contribution_commit": "24eb72e75d022340f6cf96f6d820d72f7547d502"
+    },
+    {
+      "id": "viz-integer-coordinates",
+      "name": "Preserve fractional millimetres for integer pixel coordinates",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "F-14"
+      ],
+      "implementation_commits": [
+        "b80192dc20353bf77c36610f315543b57afa908c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Integer arrays truncate converted physical coordinates. Preserve floating output so integer and float representations of the same pixels agree.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_integer_coordinates.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/190"
+      ],
+      "contribution_commit": "31021b517a0e857343c6d37d18a45ea8696c4cca"
+    },
+    {
+      "id": "viz-pinhole-geometry",
+      "name": "Use the nominal pinhole field-of-view conversion",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "VIZ-001"
+      ],
+      "implementation_commits": [
+        "3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The focal-length calculation uses radians instead of tan(half-FOV), violating the pinhole edge geometry. Correct the nominal conversion without claiming a calibrated camera model.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_pinhole_geometry.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/191"
+      ],
+      "contribution_commit": "d588667ed06008faf622a3e0398d273e84ff09e2"
+    },
+    {
+      "id": "viz-high-state-ranks",
+      "name": "Include raw states above 99 when ranking labels by usage",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Usage relabeling inherits the default 100-state statistics ceiling, so occupied raw states >=100 can be omitted or assigned incorrect ranks. Derive the needed ceiling from the supplied labels.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_high_state_ranks.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/192"
+      ],
+      "contribution_commit": "bbc70097f5a2c650dc6ccaeb070e2c6c8d3db79a"
+    },
+    {
+      "id": "viz-coverage-count",
+      "name": "Include the threshold-crossing syllable in the coverage count",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The function returns the zero-based crossing position rather than the number of syllables. Even a single occupied state returns zero, so requested coverage is not retained.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_coverage_count.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/193"
+      ],
+      "contribution_commit": "2361167d74c65589ab91c9f7ef2a6ac0103c33d9"
+    },
+    {
+      "id": "viz-first-transition",
+      "name": "Count the first observed state transition",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The transition-matrix path drops the initial state before forming adjacent state pairs, omitting the first transition. Compress consecutive runs while retaining the initial state.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_first_transition.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/194"
+      ],
+      "contribution_commit": "ac381ddc2aacebf951c9f2df7e5f50fdea938b9d"
+    },
+    {
+      "id": "viz-pairwise-groups",
+      "name": "Restrict Mann-Whitney comparisons to the requested groups",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "An unrequested third group affects the pairwise computation. Select the two requested groups explicitly so adding unrelated observations cannot alter their comparison.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1_PAIRWISE_CORRECTION/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_pairwise_groups.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/195"
+      ],
+      "contribution_commit": "37cf1671cc57c0776124426d800bdaaa1c5ba10a"
+    },
+    {
+      "id": "viz-dunn-correction",
+      "name": "Correct Dunn p-values across syllables within each comparison",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The multiplicity correction runs across group-pair columns instead of syllables, the hypothesis family described by this API. Correct the axis and test it against an independently computed statsmodels correction.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_dunn_correction.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/196"
+      ],
+      "contribution_commit": "6b48bbe33895e08610c69e0c7496cfad658dd57a"
+    },
+    {
+      "id": "viz-constant-ztest",
+      "name": "Handle equal and unequal zero-variance z-test inputs",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "83e9cadebf1dbd0822c87750217c39ba1d59e3ac",
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Zero pooled spread produces NaN for equal constants. Return one for equal constants and zero for distinct constants while retaining the ordinary nonzero-spread calculation.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_constant_ztest.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/197"
+      ],
+      "contribution_commit": "7308cbf71eb011ae2905b92dcaba17b8bc7151ac"
+    },
+    {
+      "id": "viz-empty-usages",
+      "name": "Keep zero-total usage normalization finite",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "83e9cadebf1dbd0822c87750217c39ba1d59e3ac"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Normalizing an empty-occupancy mapping divides by zero. Preserve its zero values when the total is zero.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_empty_usages.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/198"
+      ],
+      "contribution_commit": "0b20df4c1a5e6e04d9902c3bc245209d52e4de63"
+    },
+    {
+      "id": "viz-entropy-default",
+      "name": "Use the supported rows normalization in entropy_rate by default",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "83e9cadebf1dbd0822c87750217c39ba1d59e3ac"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The default passes row, while the transition-matrix implementation recognizes rows. The advertised default therefore differs from explicitly requested row normalization.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_entropy_default.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/199"
+      ],
+      "contribution_commit": "1251cfe2474cfe21b461525dcb12f074b0855787"
+    },
+    {
+      "id": "viz-metadata-order",
+      "name": "Preserve the requested metadata column order",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "F-13"
+      ],
+      "implementation_commits": [
+        "b80192dc20353bf77c36610f315543b57afa908c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Filtering metadata preserves each source mapping's insertion order, not include_keys order. Requested column order must not depend on how the input mapping was serialized.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_metadata_order.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/200"
+      ],
+      "contribution_commit": "448f18b34f7b3c57d92a85d0f3544ca52062b1ff"
+    },
+    {
+      "id": "viz-graph-legend",
+      "name": "Match transition difference legend colors to the plotted signs",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "8ef5b049eeaf78cecc9bad539529e3daf126ca27"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Positive differences are drawn blue and negative differences red, while the legend assigns the opposite meanings. Correct the legend, not the underlying signed data.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_graph_legend.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/201"
+      ],
+      "contribution_commit": "e156173cc3ca3c1b787f06948d5f57fd83a7857a"
+    },
+    {
+      "id": "viz-merge-models",
+      "name": "Keep state labels aligned with AR parameters when merging models",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The default cost-function alias is not implemented, the parameter key is misspelled, and the assignment direction disagrees with label remapping. Repair these mechanically coupled parts of the merge operation; a three-cycle permutation regression checks the correspondence.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_merge_models.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/202"
+      ],
+      "contribution_commit": "767c6869d80c66b6f2464b1b4b758482a8456a73"
+    },
+    {
+      "id": "viz-best-fit-summary",
+      "name": "Preserve distinct median and mean fit summaries",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Duplicate dictionary keys overwrite the median summary with the mean summary. Return distinct names so both already-computed quantities survive.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_best_fit_summary.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/203"
+      ],
+      "contribution_commit": "c813d9c1b18b711a4ec5a71fd4521f9a2e5940c3"
+    },
+    {
+      "id": "viz-legacy-area",
+      "name": "Apply an area conversion to legacy area scalars",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Legacy conversion multiplies pixel area by the mean linear scale. Use the product of x/y scales so doubling depth quadruples area while doubling linear dimensions. This is the legacy-viz counterpart of extract PR 180.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_legacy_area.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/204"
+      ],
+      "contribution_commit": "d611143a12ccd955706ea476fe7d482abde25394"
+    },
+    {
+      "id": "viz-sparse-nodes",
+      "name": "Index difference-graph usage by node identity after thresholding",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "68ca6a34055987ff22f8651b4dca2aa254380c87"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Node display values are taken from the first N states, not the retained graph's actual nodes. Thresholded sparse graphs can display another state's size and sign. Look up each retained node explicitly.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_sparse_nodes.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/205"
+      ],
+      "contribution_commit": "05f5e58c47e91e1ada2a340550b5e1584ae0ea98"
+    },
+    {
+      "id": "viz-legacy-keys",
+      "name": "Read legacy scalar mappings without eager array defaults",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The cytoolz get call receives an array default and also eagerly evaluates a possibly absent legacy key. Ordinary multirow arrays fail before conversion. Use an explicit key-presence choice.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE6/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_viz_legacy_keys.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/pull/206"
+      ],
+      "contribution_commit": "2aadf69c3753315b58e900150f04d482b5ece0a2"
+    },
+    {
+      "id": "app-flip-frame-index",
+      "name": "Update flip-corrected angles at absolute frame indices",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Batch-relative indices are used against the whole-session angle dataset, corrupting earlier angles in later batches. Map decisions through each batch's absolute indices.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_flip_frame_index.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/292"
+      ],
+      "contribution_commit": "c3d4a083de1c8a9b219b0607ef868c32176cc98e"
+    },
+    {
+      "id": "app-flip-final-frame",
+      "name": "Include the final frame in app flip correction",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "The batch generator receives len(frames)-1 and never classifies the last frame. Supply the complete frame count.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_flip_final_frame.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/293"
+      ],
+      "contribution_commit": "2ae035bd51e2736aa7e2ca82ef74fff1477b78a5"
+    },
+    {
+      "id": "app-flip-overlap",
+      "name": "Commit each overlapping flip-classifier frame only once",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+        "36d40e098a5c4629116b7a4e233573218345bd5d"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Overlapping batches can rotate the same frame twice. Keep classification context but defer trailing overlap and commit each frame once. The separate final-frame and absolute-angle-index defects are not folded into this change.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_flip_overlap.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/294"
+      ],
+      "contribution_commit": "40ed4a22c405e0e6eb37a6526846339b981a389b"
+    },
+    {
+      "id": "app-flip-lifecycle",
+      "name": "Refuse reprocessing of interrupted or completed flip corrections",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [
+        "APP-001"
+      ],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+        "bd103a987a0eaba50986b5cd2f992c2fb727809b",
+        "192921f1aff3ea58d3b1f268d71731ed222011d2",
+        "e0b85201226d03e15944473a734f71417698c31e"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "App correction mutates frames in place without a lifecycle guard. Repeating it silently unflips frames; interruption leaves an unmarked partial mutation. Flush an in-progress marker before mutation, record completion/failure, skip completed sessions, and refuse ambiguous reruns. This is not a transactional rollback or power-loss guarantee.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_flip_lifecycle.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/295"
+      ],
+      "contribution_commit": "6a01d1caaa11e0f2705b2af46117a8a2a55b16e5"
+    },
+    {
+      "id": "app-preview-finalization",
+      "name": "Finalize preview subprocesses when flip processing raises",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [
+        "APP-003",
+        "F-11"
+      ],
+      "implementation_commits": [
+        "e0b85201226d03e15944473a734f71417698c31e"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "An exception exits before communicate(), leaving the preview subprocess unreaped. Use a per-session try/finally for finalization. This does not add MP4 faststart or solve codec policy.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_preview_finalization.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/296"
+      ],
+      "contribution_commit": "76de73e268bd1684fee75cdc2f5ac8d31eb1b363"
+    },
+    {
+      "id": "app-qc-percentages",
+      "name": "Print QC percentages before the generic truthy-value branch",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "A nonzero float is consumed by a generic truthiness branch and its percentage is never shown. Handle percentage values first and promote the matching strict xfail to a hard regression.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_qc_percentages.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/297"
+      ],
+      "contribution_commit": "5bdbcf3d637124734b1afdd7bb260fac801cd3c7"
+    },
+    {
+      "id": "app-index-columns",
+      "name": "Do not serialize the display-only filename column into the index",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "DataFrame.drop is not assigned, so the display column leaks into saved YAML. Assign the dropped frame and promote the matching strict xfail to a hard regression.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_index_columns.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/298"
+      ],
+      "contribution_commit": "b8f048344686193b7623308c67742d72fca74849"
+    },
+    {
+      "id": "app-latest-model",
+      "name": "Select the newest model path in progress discovery",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "61861c3382d993cbba7522985d970de5c0f92ef9"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Ascending modification-time order chooses the oldest model despite the latest-model intent. Reverse the ordering.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_latest_model.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/299"
+      ],
+      "contribution_commit": "616c6d193b730f862347e5877cbab5e335fa2baa"
+    },
+    {
+      "id": "app-qc-stationary",
+      "name": "Keep stationary-frame counts nonnegative",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Subtracting the initial-frame correction can produce -1 when no zero velocities exist. Clamp the count to zero.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_qc_stationary.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/300"
+      ],
+      "contribution_commit": "4bfe8d656145dc0000171372e6c475b6683c2b0b"
+    },
+    {
+      "id": "app-qc-integer-timestamps",
+      "name": "Rescale integer timestamps without an in-place casting error",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "In-place division cannot store float seconds in an integer timestamp array. Use an out-of-place conversion and retain equivalent float-input behavior.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_qc_integer_timestamps.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/301"
+      ],
+      "contribution_commit": "993a697ef8034b98443e7d4d18476c9579963f61"
+    },
+    {
+      "id": "app-qc-small-area",
+      "name": "Use mean minus two standard deviations for small-area QC",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "The threshold uses (mean-2)*std instead of mean-2*std, contradicting the documented rule and depending on arbitrary area scaling. Restore the documented rule; no empirical threshold is introduced.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2_FIXTURE_CORRECTIONS/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_qc_small_area.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/302"
+      ],
+      "contribution_commit": "dfefd76c8354cabbd5ef7d5eaf5f38f0f8f77da1"
+    },
+    {
+      "id": "app-sidecar-paths",
+      "name": "Replace only the movie extension when finding sidecar files",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "61861c3382d993cbba7522985d970de5c0f92ef9",
+        "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Global replacement of mp4 also rewrites parent directory names. Replace the trailing extension in extraction progress and scalar-sidecar discovery.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2_FIXTURE_CORRECTIONS/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_sidecar_paths.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/303"
+      ],
+      "contribution_commit": "b5ca7d0cded025d33fddc4ae5f073c758fac4335"
+    },
+    {
+      "id": "app-cv-pca-leakage",
+      "name": "Fit flip-classifier PCA within each cross-validation fold",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "94b84918a3c6d4a228f1bc8a8b0e4808532dd841"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "PCA is fitted to all frames before cross-validation, leaking test-fold information into feature construction. Put flattening and PCA inside the classifier pipeline. The regression checks pipeline structure without training a classifier.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_cv_pca_leakage.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/304"
+      ],
+      "contribution_commit": "3691c8b3861835ad5149726c31dee1aac7c9d92f"
+    },
+    {
+      "id": "app-transition-legend",
+      "name": "Keep transition legend scale and signed differences consistent",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Edges use factors 250/400 but legends divide by 200/350; difference widths are absolute, so selecting negative widths loses every negative difference. Share the scales and pass signed probabilities through the legend path.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_transition_legend.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/305"
+      ],
+      "contribution_commit": "820b3fad0ca364d9c4749d5ea4c53ebd5dbeee59"
+    },
+    {
+      "id": "app-foreign-movies",
+      "name": "Ignore unrelated movie filenames in the crowd-movie index",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "The filename parser assumes every MP4 matches and crashes on an unrelated file. Skip nonmatches and parse arbitrary-width state IDs. The fixture contains names only, not video content.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE5/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_foreign_movies.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/306"
+      ],
+      "contribution_commit": "8b151a00c664badab09eaedaac883a19646c7f32"
+    },
+    {
+      "id": "app-bootstrap-nans",
+      "name": "Exclude unobserved values before bootstrapping confidence limits",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "All-NaN bootstrap resamples can poison percentile bounds even when valid observations exist. Drop missing observations first and return explicit NaNs if none remain. The global RNG policy is intentionally unchanged.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE6/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_bootstrap_nans.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/307"
+      ],
+      "contribution_commit": "3eed4290850909b355fb8a29082bd1e8faa06daa"
+    },
+    {
+      "id": "app-memory-display",
+      "name": "Report the actual training-frame array byte size",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "94b84918a3c6d4a228f1bc8a8b0e4808532dd841"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "nbytes already measures bytes; multiplying it by four overstates the displayed allocation. Remove the extra factor without changing data or classifier behavior.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE6/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_memory_display.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/308"
+      ],
+      "contribution_commit": "9593b6d6e4e5e60abc0865386c22283f9ccb1103"
+    },
+    {
+      "id": "model-training-split",
+      "name": "Split validation data from the requested training boundary",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "The training slice uses split_fraction*N, but validation starts at (1-split_fraction)*N. Non-half fractions overlap or leave gaps. Use one boundary and reject fractions outside (0,1).",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_model_training_split.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-model/pull/102"
+      ],
+      "contribution_commit": "c098468bb83dc0e796eff9b298bda3bc4af90d61"
+    },
+    {
+      "id": "model-scan-parameters",
+      "name": "Forward declared scientific options to scan-models commands",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "Generated learn-model commands omit several already-supported CLI parameters, silently replacing requested settings with defaults. Forward the declared options, without adding removed legacy backend flags.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_model_scan_parameters.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-model/pull/103"
+      ],
+      "contribution_commit": "48833663688c5a56743e751239581ca296a65bb3"
+    },
+    {
+      "id": "model-export-identity",
+      "name": "Bind exported label keys to the actual backend session order",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "The export lists all loaded input keys even when held-out or n/a sessions were not modeled. Labels belong to the backend session order, so zipping the exported keys with labels can misattribute them. Export the current backend's stored session order. The regression mocks training and exercises only export plumbing.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE7/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/unit_tests/test_closeout_model_export_identity.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-model/pull/105"
+      ],
+      "contribution_commit": "6b7357cb522712d8e3fd8c4e0e0d41a6a48a35d2"
+    },
+    {
+      "id": "app-preview-exit",
+      "name": "Report failed preview-writer completion as an error",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [
+        "APP-003"
+      ],
+      "implementation_commits": [
+        "36d40e098a5c4629116b7a4e233573218345bd5d",
+        "e0b85201226d03e15944473a734f71417698c31e"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical commit messages/tests plus ai/REVIEW_LOG.md and linked audit/implementation reports; see symbol coverage ledger.",
+      "prior_independent_verification": "Historical claims were not uniformly independently verified. R1 instrument-level acceptance does not independently prove every repair. New red/green checks are Builder evidence, not independent verification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "The preview writer is waited on but its nonzero exit status is ignored, so failed ffmpeg completion looks successful. Check the completed process status and raise an actionable error. Separate subprocess cleanup/lifecycle changes are not folded in; fake successful and failed processes exercise this contract without encoding video.",
+      "current_reproduction": "test_results/PATCH_PLAN_WAVE8/QUALIFICATION_SUMMARY.json",
+      "regression_file": "tests/software/test_closeout_app_preview_exit.py",
+      "disposition": "PR_READY",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/pull/310"
+      ],
+      "contribution_commit": "b15995f14f449432e7c5e4bacca1504320bbcd87"
+    },
+    {
+      "id": "extract-background-dropouts",
+      "name": "Background estimation treats missing zero depths as real floor observations",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c5e45345dea28873b1cc883e76498dd945680494"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical repair commit and current synthetic/API or source-branch reproduction; original proposal is not itself proof.",
+      "prior_independent_verification": "Not claimed individually independently verified; historical source acceptance and current Builder evidence are separate.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "A generated 3-frame, 8x8 depth stack has valid depth 700 and zero dropout in two observations of an interior patch. With med_scale=1, get_bground_im_file returns zero for that patch. np.nanmedian does not ignore zero. The pre-temporal spatial blur also spreads invalid depths.",
+      "current_reproduction": "def test_background_treats_zero_dropout_as_depth(tmp_path, monkeypatch):\n    from moseq2_extract.extract import proc\n    images = np.full((3, 8, 8), 700, dtype=np.uint16)\n    images[:2, 2:6, 2:6] = 0\n    monkeypatch.setattr(proc.moseq2_extract.io.video, 'load_movie_data', lambda path, idx, **kw: images[idx])\n    monkeypatch.setattr(proc, 'write_image', lambda *a, **kw: None)\n    value = proc.get_bground_im_file('synthetic-unused', frame_stride=1, med_scale=1,\n                                    output_dir=str(tmp_path), finfo={'nframes': 3, 'dims': (8, 8)})\n    assert value[3, 3] == 0  # missing zero depths dominate valid 700 mm",
+      "evidence_class": "CURRENT_API_SYNTHETIC_REPRODUCTION",
+      "implementation_boundary": "The right policy for persistently unobserved pixels and spatial/temporal filtering needs an explicit decision. I have not transplanted our project-specific imputation heuristic or proposed a new empirical threshold.",
+      "disposition": "ISSUE_ONLY_CONFIRMED",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/issues/191"
+      ]
+    },
+    {
+      "id": "extract-auto-floor-center",
+      "name": "Automatic floor range can be centered on a missing-depth pixel",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "b4429f839637782312a7008e82977f5c4a0e2a14"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Historical repair commit and current synthetic/API or source-branch reproduction; original proposal is not itself proof.",
+      "prior_independent_verification": "Not claimed individually independently verified; historical source acceptance and current Builder evidence are separate.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The current automatic-range branch reads bground_im[cY][cX] after get_bucket_center and uses that single value +/-50 mm. A zero/missing center in an otherwise valid synthetic 700 mm floor therefore produces [-50,50]. This is a static branch-level reproduction, not an end-to-end ROI acceptance claim.",
+      "current_reproduction": "import numpy as np\nbackground = np.full((8,8), 700.)\nbackground[4,4] = 0\nvalue = background[4,4]\nassert [int(value-50), int(value+50)] == [-50,50]",
+      "evidence_class": "CURRENT_SOURCE_BRANCH_RECONSTRUCTION",
+      "implementation_boundary": "A robust floor/arena choice is a broader acquisition-policy decision: a background mode need not be the arena floor. Our historical mode/connected-component heuristic is available in the linked project history but is not offered as a universally correct replacement.",
+      "disposition": "ISSUE_ONLY_CONFIRMED",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/issues/192"
+      ]
+    },
+    {
+      "id": "viz-missing-scalar-observations",
+      "name": "Missing physical scalar observations are filled with measured zeros",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c",
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical repair commit and current synthetic/API or source-branch reproduction; original proposal is not itself proof.",
+      "prior_independent_verification": "Not claimed individually independently verified; historical source acceptance and current Builder evidence are separate.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "get_session_mean_df fills an unobserved syllable scalar with zero. In a two-session synthetic table where each session expresses only one state, the absent height is returned as 0 rather than missing. Zero usage/count can be meaningful; zero height/duration for an unobserved state is not a measurement. The app InteractiveSyllableStats path separately calls self.df.fillna(0).",
+      "current_reproduction": "def test_noncount_statistic_missing_values_become_zero():\n    from moseq2_viz.model.stat import get_session_mean_df\n    frame = pd.DataFrame([\n        {'group': 'synthetic-a', 'uuid': 'a', 'syllable': 0, 'height': 50., 'usage': 1.},\n        {'group': 'synthetic-b', 'uuid': 'b', 'syllable': 1, 'height': 60., 'usage': 1.}])\n    result = get_session_mean_df(frame, statistic='height', max_syllable=2)\n    assert result.loc['synthetic-a', 'a'][1] == 0\n    assert result.loc['synthetic-b', 'b'][0] == 0",
+      "evidence_class": "CURRENT_API_SYNTHETIC_REPRODUCTION",
+      "implementation_boundary": "A responsible fix needs a consistent missing-data policy through each statistical test and plot, including effective sample counts and Kruskal/permutation handling. Simply deleting fillna can reintroduce the notebook failures addressed in app PR #94. Please do not interpret this report as prescribing Welch, a new family of hypotheses, or a biological conclusion.",
+      "disposition": "ISSUE_ONLY_CONFIRMED",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/issues/207"
+      ]
+    },
+    {
+      "id": "model-heldout-whitening",
+      "name": "Held-out sessions affect the training whitening transform",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Historical repair commit and current synthetic/API or source-branch reproduction; original proposal is not itself proof.",
+      "prior_independent_verification": "Not claimed individually independently verified; historical source acceptance and current Builder evidence are separate.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "prepare_model_metadata selects held-out keys, then calls whiten_all(data_dict) on the entire input dictionary. A generated two-session example with hold_out_seed=0 holds b out and trains on a. Changing only b shifts the transformed a. No sampler is invoked.",
+      "current_reproduction": "def test_whitening_training_parameters_depend_on_heldout_values():\n    from moseq2_model.helpers.data import prepare_model_metadata\n    config = dict(kappa=100, hold_out=True, nfolds=2, hold_out_seed=0, ncpus=1,\n                  gamma=1, alpha=1, nlags=1, robust=False, max_states=2,\n                  separate_trans=False, whiten='all', noise_level=0)\n    def prepare(offset):\n        rng = np.random.RandomState(17)\n        data = OrderedDict(a=rng.normal(size=(20, 2)),\n                           b=rng.normal(size=(20, 2)) + offset)\n        return prepare_model_metadata(data, {'groups': {'a': 'synthetic', 'b': 'synthetic'}}, dict(config))\n    first, second = prepare(100), prepare(1000)\n    assert first[2] == second[2] == ['a']\n    assert first[3] == second[3] == ['b']\n    assert not np.array_equal(first[0]['a'], second[0]['a'])",
+      "evidence_class": "CURRENT_API_SYNTHETIC_REPRODUCTION",
+      "implementation_boundary": "If the intended evaluation is inductive held-out validation, preprocessing parameters must be estimated from training data and applied to held-out data. If transductive preprocessing is intentional, that limitation needs explicit documentation. A coherent implementation must also settle whiten-each/unseen-session behavior, temporal percent splits, and saved transform compatibility; I have not guessed those policies.",
+      "disposition": "ISSUE_ONLY_CONFIRMED",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-model/issues/104"
+      ]
+    },
+    {
+      "id": "viz-invalid-mixed-unit-scalar",
+      "name": "Define a migration/rejection policy for the mixed-unit velocity_3d_px scalar",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "VIZ-002",
+        "F-01"
+      ],
+      "implementation_commits": [
+        "62ec4d579dffe0712e2e5b7f8531a029b3a04f00",
+        "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+        "b80192dc20353bf77c36610f315543b57afa908c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Historical repair commit and current synthetic/API or source-branch reproduction; original proposal is not itself proof.",
+      "prior_independent_verification": "Not claimed individually independently verified; historical source acceptance and current Builder evidence are separate.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The legacy converter constructs velocity_3d_px by summing squared x/y pixel displacements and squared height_ave_mm differences. get_scalar_triggered_average also accepts this field at its public include_keys boundary without a unit warning or rejection. The attached generated-value test confirms current acceptance. The dimensional defect is not a statement that an arbitrary supplied array is corrupt.",
+      "current_reproduction": "def test_public_scalar_average_accepts_invalid_mixed_units():\n    from moseq2_viz.scalars.util import get_scalar_triggered_average\n    result = get_scalar_triggered_average({'synthetic': {'velocity_3d_px': np.arange(12.)}},\n                                        {'synthetic': np.tile([0, 0, 1, 1], 3)},\n                                        include_keys=['velocity_3d_px'], max_syllable=2, nlags=1)\n    assert 'velocity_3d_px' in result",
+      "evidence_class": "CURRENT_API_SYNTHETIC_REPRODUCTION",
+      "implementation_boundary": "Extract now has a focused proposal to stop emitting this invalid field. Existing files and consumers still need a deliberate compatibility policy across public plotting, statistics, embedding and conversion APIs. Our historical fork guards and mapping-preserving filter are project-specific implementations, not an already-existing upstream contract. A warning/deprecation/rejection choice belongs with maintainers.",
+      "disposition": "ISSUE_ONLY_CONFIRMED",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-viz/issues/208"
+      ]
+    },
+    {
+      "id": "app-missing-heatmap",
+      "name": "Missing heatmaps are replaced by plausible all-zero images",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Historical repair commit and current synthetic/API or source-branch reproduction; original proposal is not itself proof.",
+      "prior_independent_verification": "Not claimed individually independently verified; historical source acceptance and current Builder evidence are separate.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "CrowdMovieComparison.generate_crowd_movie_divs catches every Exception while fetching a group PDF, substitutes np.zeros((50,50)), and then passes it to get_pdf_plot whenever cm_path is nonempty. Thus missing data and even unexpected errors can become a normal-looking heatmap. This is confirmed by static inspection and an isolated exception-branch reconstruction, not by opening any movie or running a notebook.",
+      "current_reproduction": "import numpy as np\nimport pandas as pd\ntry:\n    pd.Series([], dtype=object).iloc[0]\nexcept Exception:\n    pdf = np.zeros((50,50))\nassert pdf.shape == (50,50) and not pdf.any()",
+      "evidence_class": "CURRENT_SOURCE_BRANCH_RECONSTRUCTION",
+      "implementation_boundary": "The UI should distinguish not-observed from a measured zero image and should not hide unrelated exceptions. Skipping the whole panel versus rendering an explicit unavailable panel affects how an existing movie remains accessible; I have left that UI/missingness decision open rather than silently dropping evidence.",
+      "disposition": "ISSUE_ONLY_CONFIRMED",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-app/issues/309"
+      ]
+    },
+    {
+      "id": "extract-area-mm",
+      "name": "Area conversion",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "Current compute_scalars uses an area conversion; independent depth-doubling regression passed. PR 180 merged at 81c49e6e7dac99afd64df8312accea8680555fc8 and issue 179 is closed completed.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "ALREADY_UPSTREAM",
+      "upstream_urls": [
+        "https://github.com/dattalab/moseq2-extract/pull/180",
+        "https://github.com/dattalab/moseq2-extract/issues/179"
+      ]
+    },
+    {
+      "id": "pca-short-chunk-overlap",
+      "name": "Local temporal-filter overlap clamp",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "ff3531632aaecbc045a42570db024c429235a914"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "apply_pca_local already clamps overlap to min(smallest_chunk,20); current git blame identifies a8f66cf2 (2018). Do not transplant a duplicate repair.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "ALREADY_UPSTREAM",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-numpy-object",
+      "name": "Removed NumPy object alias",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Current relevant model utilities use builtin object rather than removed np.object. Modernization already covers the compatibility correction.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "ALREADY_UPSTREAM",
+      "upstream_urls": []
+    },
+    {
+      "id": "app-pandas-any-axis",
+      "name": "Pandas row-null axis keyword",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "count_nan_rows already calls any(axis=1). The historical positional-axis compatibility patch is unnecessary.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "ALREADY_UPSTREAM",
+      "upstream_urls": []
+    },
+    {
+      "id": "extract-ransac-estimator-design",
+      "name": "RANSAC refit/ranking/sample policy",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "11d2691ab56f9972930663e712c06cecb01f2eb1"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "Current estimator still returns a three-point hypothesis and samples with replacement. The historical inlier-refit/ranking changes may improve synthetic RMS, but no generally mandatory scientific estimator contract was established. Do not label an algorithm preference a proven universal defect.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "extract-floor-helper-opencv",
+      "name": "Old OpenCV binding fault in fork-only floor heuristic",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "b4429f839637782312a7008e82977f5c4a0e2a14",
+        "c75272683c68cb5695be8e99d4e89ceb7adcf42b"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "estimate_depth_range and its connected-components heuristic are absent upstream. The old OpenCV-4 binding workaround was for that fork-added helper; it is not an applicable current-upstream patch.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "OBSOLETE_OR_SUPERSEDED",
+      "upstream_urls": []
+    },
+    {
+      "id": "extract-ellipse-centroid-calibration",
+      "name": "Ellipse axes, centroid and calibrated dimensions",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1",
+        "c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "No independent current-source counterexample establishes a separate width/length or centroid defect beyond the submitted coordinate/unit corrections. Rotated anisotropic-camera axis conversion and calibrated intrinsics remain limitations, not proof of incorrect biological dimensions.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "extract-provenance-contract",
+      "name": "Project extraction policy/provenance stamps",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [],
+      "implementation_commits": [
+        "424d643affb685e1cad145e3c7051b814d11265c",
+        "5cc858626592ea2682260eae9911827c7c0ba551"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The project added a provenance schema/output policy absent from upstream. Schema enforcement is project instrument custody; absence of our schema is not an upstream parse bug.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "nonvacuous-scalar-regression",
+      "name": "Non-vacuous scalar tests",
+      "repository": "dattalab/moseq2-extract",
+      "historical_ids": [
+        "EXTRACT-002"
+      ],
+      "implementation_commits": [
+        "ec418d7a2f134dcd3e62883ce7317bb68197a20b",
+        "f028801e9a6b54ffa63e22d9e10179ea7419ccc4"
+      ],
+      "original_upstream_base": "39a6f0f88d28fc311c8be96619ee9e53b14d3a96",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "current_upstream_target": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "current_upstream_behavior": "The former zero-motion fixture could not establish nonzero velocity correctness. Current scalar PR has nonzero 3/4 pixel motion and 12 mm height change. Test adequacy is a project evidence correction, not another upstream scientific defect.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-sigma-1p3-retune",
+      "name": "Historical sigma 1.3 cadence preservation",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "e1fa3f8d2befdd90e1c1c281313c79010fae9d4e"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "The project changed sigma to preserve a historical cadence after repairing the kernel. This does not justify retuning upstream defaults. No upstream threshold/default retune is submitted.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-frame-rate-estimation",
+      "name": "Mean/median timestamp FPS inference",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "ff3531632aaecbc045a42570db024c429235a914",
+        "f0d24d111bb359e6768462b6164bf579b323cbc8"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "The fork used robust timestamp cadence and fallback handling. Current routines infer FPS using mean differences. The correct treatment of drift, gaps and fallback cadence needs a defined timing contract; no candidate data or new method was used to invent one here.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-old-scipy-import",
+      "name": "Old scipy.stats import dependency",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "e9f573185e2d7ed86a2de15089903a8294635c3c"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "A current-environment import probe resolves scipy.stats.zscore after scipy.signal without the extra historical import. This is not proof about every old SciPy build; the current probe does not reproduce the old failure.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "OBSOLETE_OR_SUPERSEDED",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-randomized-svd",
+      "name": "Unseeded randomized PCA risk",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [],
+      "original_upstream_base": null,
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": false,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "The legacy risk register records randomized SVD without an explicit seed. No repeated PCA fit was authorized or performed. This remains a reproducibility risk observation, not a newly proven source defect or instruction to rerun R1.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-provenance-stamps",
+      "name": "Project PCA/changepoint provenance",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "efb6fcfa5d5af5bb4274540c371d0ddf96440b78"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "Project-specific artifact provenance stamps are not an upstream schema contract. Exact R1 PCA/changepoint custody is preserved, not regenerated.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-artifact-binding",
+      "name": "Project PCA role/binding mistakes",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [],
+      "original_upstream_base": null,
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": false,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "Wrong artifact roles, manifest binding, persisted-row accounting and protocol readiness belonged to our operator/control plane, not an upstream PCA algorithm defect.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "model-legacy-prior-stability",
+      "name": "Legacy regularize_for_stability",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "The current JAX backend removed regularize_for_stability. It explicitly maintains covariance definiteness without writing the old data-dependent ridge into the prior. Do not port the pyhsmm repair into a removed path or claim backend equivalence.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "OBSOLETE_OR_SUPERSEDED",
+      "upstream_urls": []
+    },
+    {
+      "id": "model-legacy-float64-layout",
+      "name": "Old compiled sampler contiguous-float64 repair",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "4215f63f422ff40237db77d7c0de9cf990e14302"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "The historical patch repaired a fork preprocessing regression and the pyhsmm input contract. Current backend stacking converts to float64 arrays under a different implementation. No legacy ABI workaround is proposed.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "OBSOLETE_OR_SUPERSEDED",
+      "upstream_urls": []
+    },
+    {
+      "id": "model-legacy-seed-cli",
+      "name": "Legacy sampler CLI seed forwarding",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "Current ARHMM has a JAX seed contract, while the old pyhsmm CLI flag is absent. The submitted scan fix forwards only currently declared options, not a removed flag. Backend seeding is not claimed equivalent to R1.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "OBSOLETE_OR_SUPERSEDED",
+      "upstream_urls": []
+    },
+    {
+      "id": "model-provenance-and-kappa-governance",
+      "name": "Model provenance, target/kappa governance and M_R2 qualification",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [
+        "6e542e3f1db125202d42b59f390c922281e64f39"
+      ],
+      "original_upstream_base": "c7c1e1f1ff22c8670bcf0d929d4ca3a12d53190d",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "These are project artifact/experiment custody decisions, not upstream model-source defects. Keep final-kappa closure, the qualified M_R2 extractor and artifact-selection chronology unchanged.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-statistical-test-choice",
+      "name": "Student versus Welch default",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Changing equal-variance test assumptions is a scientific-method choice, not established as universally wrong by the historical patch. No test-family or biological inference is changed.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-bootstrap-rng-policy",
+      "name": "Bootstrap plot repeatability",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "645415411f3119e62b59fe79e26df504d23bbb1c",
+        "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Unseeded bootstrap intervals can vary by design. The historical default-seeding proposal is preserved, but variation alone is not proof of an upstream defect. The separately submitted NaN fix does not change RNG policy.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-no-event-transition-entropy",
+      "name": "Entropy when no transitions are observed",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [],
+      "implementation_commits": [
+        "83e9cadebf1dbd0822c87750217c39ba1d59e3ac"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Current generated one-state example yields NaN through zero-column normalization. No observed transitions means the distribution is unidentified; forcing entropy to zero requires a convention. No unsupported finite-zero guarantee is imposed.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-fork-provenance-readers",
+      "name": "Corrupt/nonmapping provenance and pooling enforcement",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "VIZ-004",
+        "F-03",
+        "F-12",
+        "F-15"
+      ],
+      "implementation_commits": [
+        "b2ad7e71dbae0da5e2d5e8575d7e9476c95cd2da",
+        "62ec4d579dffe0712e2e5b7f8531a029b3a04f00",
+        "32fe617db2cfd160070c85bed1ae0dfc19d797d1",
+        "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+        "b80192dc20353bf77c36610f315543b57afa908c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Fail-open readers, conflicting paths, nonmapping records and dormant helpers existed in our fork-added provenance system. Current upstream does not contain those reader APIs. Their project fixes are preserved without describing absent upstream functions as broken.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-mapping-preserving-deprecation",
+      "name": "Mapping-preserving deprecated-scalar filtering",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "VIZ-003"
+      ],
+      "implementation_commits": [
+        "62ec4d579dffe0712e2e5b7f8531a029b3a04f00",
+        "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The broken filter was part of our fork-added deprecation API. Preserve the corrected mapping contract as design knowledge; upstream migration/rejection policy is separately reported in issue 208.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-cross-package-contract-tests",
+      "name": "Cross-package policy copies and undeclared test dependency",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "F-02",
+        "F-04"
+      ],
+      "implementation_commits": [
+        "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+        "b80192dc20353bf77c36610f315543b57afa908c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "The defective hardcoded-key comparison and missing extract test dependency were in our provenance tests. Current upstream test ownership is package-local for unit tests and central moseq2-test for cross-package profiles. No legacy cross-package fixture is transplanted.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "viz-duplicated-conversion-design",
+      "name": "Duplicated conversion implementation",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "F-08"
+      ],
+      "implementation_commits": [
+        "3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d",
+        "b80192dc20353bf77c36610f315543b57afa908c"
+      ],
+      "original_upstream_base": "f571e0ac84cc26cd7f04ea5cf7478657894b02d8",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "Code duplication alone does not establish numerical error. Equivalent independent pinhole/dtype regressions were submitted in both packages. Consolidating package ownership would be a separate maintainer design decision, not necessary for these bounded corrections.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "app-journal-sentinel-custody",
+      "name": "Fork journal records, sentinels, canonical paths and fail-closed readers",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [
+        "APP-002",
+        "F-05",
+        "F-10",
+        "F-12"
+      ],
+      "implementation_commits": [
+        "bd103a987a0eaba50986b5cd2f992c2fb727809b",
+        "f7af95d75c3b289b8a438783fda93b79fdb031fb",
+        "192921f1aff3ea58d3b1f268d71731ed222011d2",
+        "e0b85201226d03e15944473a734f71417698c31e"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Our journal schema/readers are absent upstream. Malformed slots, authoritative sentinel semantics, interrupted diagnostics and canonical-path agreement were defects/requirements of that project extension. A minimal native lifecycle guard is separately submitted for the actual upstream reprocessing defect.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "app-extraction-app-flip-policy",
+      "name": "Layered extraction and app correction / stale-flip rendering",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [
+        "F-09"
+      ],
+      "implementation_commits": [
+        "f7af95d75c3b289b8a438783fda93b79fdb031fb",
+        "e0b85201226d03e15944473a734f71417698c31e"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Our accepted instrument prohibited layering and qualified an effective flip policy. Current upstream has no equivalent journal reader. A current whole-path orientation defect was not dynamically established here; metadata-state compatibility needs an explicit policy, not blind transplantation of the project guard.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "app-fault-model-evidence",
+      "name": "In-process exception versus SIGKILL / power-loss claims",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [
+        "F-06",
+        "F-07"
+      ],
+      "implementation_commits": [
+        "192921f1aff3ea58d3b1f268d71731ed222011d2",
+        "e0b85201226d03e15944473a734f71417698c31e"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "An in-process exception invokes h5py close/flush and is not evidence of SIGKILL behavior. H5Fflush is not fsync/power-loss durability. New lifecycle tests claim exception/reprocessing behavior only; no stronger crash-atomicity guarantee is asserted.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "app-frame-drop-estimand",
+      "name": "Frame-rate error versus missing-gap fraction",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [
+        "36d40e098a5c4629116b7a4e233573218345bd5d"
+      ],
+      "original_upstream_base": "7be1af1f96d7873ff44d6ea5ae45262881d76f9f",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "Current timestamp QC reports relative average acquisition-rate deviation, while the historical fork substituted a gap-count statistic. The name/documentation is broader than the formula, but the correct estimand is a policy question. The integer-rescaling exception is independently fixed without retuning this metric.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "UNCONFIRMED_HANDOFF",
+      "upstream_urls": []
+    },
+    {
+      "id": "orientation-byte-equality-inference",
+      "name": "Byte inequality implies failed orientation",
+      "repository": "dattalab/moseq2-viz",
+      "historical_ids": [
+        "F-09"
+      ],
+      "implementation_commits": [],
+      "original_upstream_base": null,
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": false,
+      "frozen_r1_source": "b80192dc20353bf77c36610f315543b57afa908c",
+      "current_upstream_target": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "current_upstream_behavior": "A generated asymmetric 80x80 fixture is not byte-equal after discrete 180-degree rotation followed by OpenCV rotation about an even crop center, yet matches exactly under a one-pixel translation and cannot match the rotated negative reference. Reject only that over-strict inference; this is not a current full-path viz qualification PASS.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "REJECTED",
+      "upstream_urls": []
+    },
+    {
+      "id": "project-transport-and-review-semantics",
+      "name": "Rule-artifact transport, pycache exclusions and reviewer semantics",
+      "repository": "dattalab/moseq2-app",
+      "historical_ids": [],
+      "implementation_commits": [],
+      "original_upstream_base": null,
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": false,
+      "frozen_r1_source": "e0b85201226d03e15944473a734f71417698c31e",
+      "current_upstream_target": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "current_upstream_behavior": "The missing rule artifacts and incomplete omission ledger were project evidence-transport defects. Preserve rule/protocol/conformance together and exact contents-union-exclusions set equality. Neither is an app scientific-code defect.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "project-replay-comparator-custody",
+      "name": "R1 comparator and environment/artifact custody",
+      "repository": "dattalab/moseq2-model",
+      "historical_ids": [],
+      "implementation_commits": [],
+      "original_upstream_base": null,
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": false,
+      "frozen_r1_source": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "current_upstream_target": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "current_upstream_behavior": "Comparator false negatives, operator source identity, environment freezing and replay receipt capture belonged to the project control plane. D-053 through D-056 remain historical accepted records. No comparator/scientific rerun occurs in closeout.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    },
+    {
+      "id": "pca-kernel-regression-fixture",
+      "name": "Historical kernel regression fixture",
+      "repository": "dattalab/moseq2-pca",
+      "historical_ids": [],
+      "implementation_commits": [
+        "d4e53b7784d37d5d12498d631aa4d1a29c715d5d"
+      ],
+      "original_upstream_base": "a7bdbe179084c5d366290cd04f4ab26ee8387aa0",
+      "prior_reproduction": "Primary project history, ai/REVIEW_LOG.md, risk register and OPUS/Fable audit; exact claim retained rather than upgraded.",
+      "prior_independent_verification": "See original immutable review; current Builder classification is not independent scientific certification.",
+      "affected_frozen_r1_instrument": true,
+      "frozen_r1_source": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "current_upstream_target": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "current_upstream_behavior": "This tests-only repair updates the asymmetric-kernel expectation. The current upstream correction has an independent centered-impulse regression; a historical implementation-mirroring expectation is not separate proof of correctness.",
+      "current_reproduction": "Static pinned-source comparison unless the explanation explicitly identifies a generated regression/import probe. No new scientific pipeline run.",
+      "disposition": "PROJECT_CONTROL_ONLY",
+      "upstream_urls": []
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+commit 9593b6d6e4e5e60abc0865386c22283f9ccb1103
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:30 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:30 2026 -0400
+
+    fix: report the actual training-frame array byte size
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 94b84918a3c6d4a228f1bc8a8b0e4808532dd841
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/flip/train.py b/moseq2_app/flip/train.py
+index 1908631..100c8b0 100644
+--- a/moseq2_app/flip/train.py
++++ b/moseq2_app/flip/train.py
+@@ -73,7 +73,7 @@ def create_training_dataset(
+     )
+     frames = np.concatenate((frames, shifted_frames, cleaned_frames), axis=0)
+     print(
+-        f"Training data shape: {frames.shape}; memory usage: {frames.nbytes / 1e9 * 4:0.2f} GB"
++        f"Training data shape: {frames.shape}; memory usage: {frames.nbytes / 1e9:0.2f} GB"
+     )
+ 
+     flipped = np.concatenate((flipped, flipped, flipped), axis=0)
+diff --git a/tests/software/test_closeout_app_memory_display.py b/tests/software/test_closeout_app_memory_display.py
+new file mode 100644
+index 0000000..5b62977
+--- /dev/null
++++ b/tests/software/test_closeout_app_memory_display.py
+@@ -0,0 +1,27 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++
++
++
++def test_memory_report_uses_actual_array_bytes(tmp_path, monkeypatch, capsys):
++    import pickle
++    from moseq2_app.flip import train
++    path, index = tmp_path / 'synthetic.h5', tmp_path / 'synthetic.p'
++    with h5py.File(path, 'w') as f:
++        f['frames'] = np.zeros((500, 80, 80), dtype=np.uint8)
++    with index.open('wb') as f:
++        pickle.dump(({'synthetic': str(path)}, {'synthetic': [(False, slice(None))]}), f)
++    monkeypatch.setattr(train, 'clean_frames', lambda values, *a, **kw: values)
++    recorded = {}
++    monkeypatch.setattr(np, 'savez', lambda path, **arrays: recorded.update(arrays))
++    train.create_training_dataset(str(index))
++    message = capsys.readouterr().out
++    expected = recorded['frames'].nbytes / 1e9
++    assert f'memory usage: {expected:0.2f} GB' in message

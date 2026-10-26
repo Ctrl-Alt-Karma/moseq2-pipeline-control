@@ -1,0 +1,44 @@
+commit 2bbebcda4556d0c665ba80483cc2f2f006be84b2
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:38 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:38 2026 -0400
+
+    fix: use unsigned 16-bit depth in the raw-reader CLI default
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 93bf656c3fbdf4d976980a80f9dddaad99d8ffe1
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_extract/cli.py b/moseq2_extract/cli.py
+index 278fdd5..b05ca15 100644
+--- a/moseq2_extract/cli.py
++++ b/moseq2_extract/cli.py
+@@ -449,7 +449,7 @@ This is only a debugging parameter, for cases where dilate_iterations > 1, other
+     )(function)
+     function = click.option(
+         "--movie-dtype",
+-        default="<i2",
++        default="<u2",
+         help="Data type for raw frames read in for extraction",
+     )(function)
+     function = click.option(
+diff --git a/tests/unit_tests/test_closeout_extract_unsigned_raw_depth.py b/tests/unit_tests/test_closeout_extract_unsigned_raw_depth.py
+new file mode 100644
+index 0000000..79e80e6
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_unsigned_raw_depth.py
+@@ -0,0 +1,11 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++
++
++def test_raw_depth_cli_default_is_unsigned():
++    from moseq2_extract.cli import cli
++    option = next(p for p in cli.commands["extract"].params if p.name == "movie_dtype")
++    assert np.dtype(option.default).kind == "u"

@@ -1,0 +1,64 @@
+commit c813d9c1b18b711a4ec5a71fd4521f9a2e5940c3
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:54 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:54 2026 -0400
+
+    fix: preserve distinct median and mean fit summaries
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 68ca6a34055987ff22f8651b4dca2aa254380c87
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/model/util.py b/moseq2_viz/model/util.py
+index d81bacb..73b0b74 100644
+--- a/moseq2_viz/model/util.py
++++ b/moseq2_viz/model/util.py
+@@ -227,8 +227,8 @@ def get_best_fit(cp_path, model_results):
+         'best model - duration (mean match) kappa': model_results[best_model_mean]['model_parameters']['kappa'],
+         'min duration median match (seconds)': dist_median,
+         'duration distances median': dur_dists_median,
+-        'min duration median match (seconds)': dist_mean,
+-        'duration distances median': dur_dists_mean,
++        'min duration mean match (seconds)': dist_mean,
++        'duration distances mean': dur_dists_mean,
+         'best model - jsd': best_jsd_model,
+         'best model - jsd kappa': model_results[best_jsd_model]['model_parameters']['kappa'],
+         'min jensen-shannon distance': jsd_dist,
+@@ -1310,4 +1310,4 @@ def get_Xy_values(stat_means, unique_groups, stat='usage'):
+ 
+     y = np.array([mapping[l] for l in y])
+ 
+-    return np.array(X), y, mapping, rev_mapping
+\ No newline at end of file
++    return np.array(X), y, mapping, rev_mapping
+diff --git a/tests/unit_tests/test_closeout_viz_best_fit_summary.py b/tests/unit_tests/test_closeout_viz_best_fit_summary.py
+new file mode 100644
+index 0000000..393911c
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_best_fit_summary.py
+@@ -0,0 +1,22 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++
++
++def test_best_fit_does_not_overwrite_median_summary_with_mean(monkeypatch):
++    import moseq2_viz.model.util as util
++    reference = np.array([.1, .1, .9])
++    monkeypatch.setattr(util, "load_changepoint_distribution", lambda path: reference)
++    models = {
++        "synthetic-a": {"changepoints": np.array([.1, .1, .1]), "loglikes": 0.,
++                         "model_parameters": {"kappa": "synthetic-a"}},
++        "synthetic-b": {"changepoints": np.array([.2, .3, .6]), "loglikes": 1.,
++                         "model_parameters": {"kappa": "synthetic-b"}},
++    }
++    info, _ = util.get_best_fit("synthetic-unused", models)
++    assert info["min duration median match (seconds)"] == pytest.approx(0.)
++    assert info["duration distances median"]["synthetic-a"] == pytest.approx(0.)
++    assert "duration distances mean" in info

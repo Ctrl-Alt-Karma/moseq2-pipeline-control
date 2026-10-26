@@ -1,0 +1,1073 @@
+[
+  {
+    "id": "extract-integer-coordinates",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "5ec845949f252ced31c5ddc1680e084991584f9aa1ec359b9c3eb7525342b44a"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-pinhole-geometry",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "a8f8e1c7f057e4d55fe31eafd5137503baab8e917ac1ea8ceb56d4f3fc7e3c3f"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-mixed-unit-velocity",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "1634ee7773f2b23aa71fb2d15d324e12713433cb64c36ac44752829ac8fb8bb7"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-hampel-centroid",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "5d1408535f571259a4bfce68a7a94514d9ff41ad6d4dfc5f2548ee562aff46f0"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-hampel-angle",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "6765cb47b0a8c29b3ef6b4a88125a68cdf6c3cfb78c8785eb3844448947fe962"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-ransac-seed",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "5ec334774835491c0a54dc01c32ab434ac8cb2a34932da1cb3b3cf00f11d10ad"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-ransac-failure",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "d8a583fcd7a14d9a1d591637022a26aed32aaa8c9b9a192a5b020d141046edd6"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-depth-byte-order",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "dccce87b7a7ec9a9fb546f8017758b43b41b34e1e7e5a159ce2b58210f97b779"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "extract-unsigned-raw-depth",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f007292422b23c2cd244c12edf5ef1ede32a5e458cb17af95238857d783d3717"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "265b6826818fc149fe32064ee83ba80adb9a2c886b16d04334e721c4704cfe04"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "pca-symmetric-kernel",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b57136f192fd043210cb9a9bff1b00d2aa0bd8bdbb118c9bf2729a805b9486c8"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "bb2eb6da0b3bd0630e3376ff5c9e25156d0f96e2bda16f4e9bb2825ab4c4cdba"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "pca-changepoint-sigma",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b57136f192fd043210cb9a9bff1b00d2aa0bd8bdbb118c9bf2729a805b9486c8"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b6bff626bbbd57a0c126b2f36ab46978cc5c38029bb53695c9204556e12781a4"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "pca-disabled-smoothing",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b57136f192fd043210cb9a9bff1b00d2aa0bd8bdbb118c9bf2729a805b9486c8"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "8ffbca1b25af17433de91a8d91acb1bd79ebeaa949ee59f1a928e8d24bc5800b"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "pca-session-timestamps",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b57136f192fd043210cb9a9bff1b00d2aa0bd8bdbb118c9bf2729a805b9486c8"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "d053ef79ac1a54030212ec2f736f9654bb43d6fd0b2ab367ba38f624b3d2ccf9"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-integer-coordinates",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "7c6be2b8fa84aab4aacc31db6d62cd064bf96f52138091213732a2521c1a8c02"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "07feee4966f52c9e398f4cd550da6066d438374bd925acc285d7c83d28e25cc7"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-pinhole-geometry",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "7c6be2b8fa84aab4aacc31db6d62cd064bf96f52138091213732a2521c1a8c02"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "4b18d63023b203034c6e9fd1459ec7647c14e91b554ab86cced847e8f0ef78e2"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-high-state-ranks",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "9c2e908d7d1f3c9b4c619ea9b49740f3bcb971e5408b56891825b7d5d8c282db"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-coverage-count",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "c62044b752b30143ca0ac908c1262c8e5c28b3b4b1b6b1859502f4064abfbc30"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-first-transition",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "2c9543bc7e16d9d353595f1b2600097db3a56e665417158efdda8ac98a0aa7b6"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-pairwise-groups",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "27de3ca66ab9e3afffea858619ef1f8a1a97e185917cbbd406274da3c19b3097"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "0f9c660552dcd96420ed0b893efd09226c5ba80f9280ea4c48247fd238d53040"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1_PAIRWISE_CORRECTION/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-dunn-correction",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "a55354f6f9d215ffde6c5bfb23f7689b23159ed2cf89ab80a8e497920dce91c4"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-constant-ztest",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "a13f836e3f86df485792c52e9ca1d19e993635113de448e9858f079bec9f3e92"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-empty-usages",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "1ea2d670e599f08a1b295c9f8955ec2c9d4e8c924e866688648cccd7e8dde8c8"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-entropy-default",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "30cb90485df968ad33dfef118952081d41485640e5f0c3dac93b4a78e12d7bd2"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "ca2627488adb34e622c6908f1bed7a447f64fa942ca638c804c24e6759290c78"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE1/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-metadata-order",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "57a79963819fed96e32dc9865a1507d5e663f0864f32b7a7ad79f3d66f4308fe"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "74a4ee2c5728f9d6262d31386178aeb2751ac32d6b76eac89ee97a6fb8361914"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-graph-legend",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "57a79963819fed96e32dc9865a1507d5e663f0864f32b7a7ad79f3d66f4308fe"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "ba1091555729684c6334973829d765baa05f472bfb71637b67bb35cc1ddd3bd3"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-merge-models",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "57a79963819fed96e32dc9865a1507d5e663f0864f32b7a7ad79f3d66f4308fe"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "7b68126533e7dca41cdf1a5785276c9a021f044adb4854b15acdc05be466c7da"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-best-fit-summary",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "57a79963819fed96e32dc9865a1507d5e663f0864f32b7a7ad79f3d66f4308fe"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "389e5f17dd8307eb0a5fc357e05318c8ba2716f67045ff1c416878aa8639cf89"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE4/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-legacy-area",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "7c6be2b8fa84aab4aacc31db6d62cd064bf96f52138091213732a2521c1a8c02"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b29f379362679063bc14e7f2426b9ab6cde426891fa327134e3a219fe5db21fd"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-sparse-nodes",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "466643078bde70059649180364029f0b7ca1675cac802a61386aa6179d443c6c"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "2b96d216c6d6a826e14f042af969c58d949ca52da08e582bba7b099b3a82723d"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "viz-legacy-keys",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "156349d47dd9d5ff9a6a46229de5e28aaf3636c29ae064eb65897cd428bb9f09"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "7acddec5d515db5ca4964e02b2e2d943aa8d1f8f1a539d4c77c12e30a5ad0f3d"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE6/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-flip-frame-index",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "310056d1e95412eb08e65c47fd7eb6bbff4eeaf927e1ca69e7e758023c2c80a3"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-flip-final-frame",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "f055dcb862b94eb7815d8e12f820686e93ed7660d43768587bb261c8f3a3bce9"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-flip-overlap",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "a19ad20dc4a6e51a1063157a64f57e8b3d3bf81572b145a602dd83cef5ba4938"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-flip-lifecycle",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "9360e237460bfa508100c0f8fa8576062e8308c29d08ceaa401c38b1dc2598ba"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-preview-finalization",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b7ef05c062b9056e18d1d682595ed66bd115aa4ff2c2ffcf738bcde06b91d6a4"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE3/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-qc-percentages",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "66b3fd98de469f1576b0b0557522d5f6e472b1b92aaf46c37b9c5ab04b0d16bd"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-index-columns",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "590e44603f6729559a653d35a4fb347434347007243a30357771d95d6f8d23c5"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-latest-model",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "819aff25351575746557db306fbe5b1e2d9396a0f5b3e6d9e77d0dbf7facf4e0"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-qc-stationary",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "0d45f69d29f4ef34bb6f2896490c4f55a129805d1db63bed5c0bf9364a1e203a"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-qc-integer-timestamps",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "846f6a2d8d03fe51b0e94db55587de72ead7270345ed9deaf90f5c75827d3ff7"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-qc-small-area",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "1882b068046efae77f2e2b70d34d6573228736270f22a6c4e0787ce0db7055ab"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2_FIXTURE_CORRECTIONS/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-sidecar-paths",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "d069643830e4364103aaeaa5c53aa5d2f1b20c6c8f9a5374d9313c5d3c6b2e20"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2_FIXTURE_CORRECTIONS/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-cv-pca-leakage",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "69344b21dd72f5a943dbca87bc040b5eeeee0fa318b60a2c01363baeae0e14ff"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-transition-legend",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "ede59ebc3ca996c32f3c158135e0e98cc8e4ee1a724669b0f44225c6d73858ea"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5_CORRECTIONS/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-foreign-movies",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "d5914f7315e63bd1e5230f58455b9dd55cc6106b553da5df96ff6baa4f7d7860"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE5/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-bootstrap-nans",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "a7cc1a95a027babcdec5602f9cf7c1f1971bbb3a0e7644fb863a9ef3a56578f0"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE6/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-memory-display",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "e6d096570c9b3aae3a779d96e05e20c8f423daf1a766b1a686eefc373616419c"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE6/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "model-training-split",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 6,
+      "failures": 6,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "3ad73b5e0858867004c104e1d7d6b19595d9d40ad8eb9b5df1b81b4f994a1dce"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "618e3d1144c7a428b4a99fa154e2021c0716e7963ed0e21f17dfad2948a77c09"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "model-scan-parameters",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "3ad73b5e0858867004c104e1d7d6b19595d9d40ad8eb9b5df1b81b4f994a1dce"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "b9f6976a11b7ff294124e6c309ff6473a1926e652a248621fe3ec64b37a7edad"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE2/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "model-export-identity",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "c402e2b98dd92df9af21e711708d82de8aca56fe76d268429a002e0e06b6e310"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "fba0dd71d01885d0652d124db14371a585cba56356aebb7a3e22e31c81da51ae"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE7/QUALIFICATION_SUMMARY.json"
+  },
+  {
+    "id": "app-preview-exit",
+    "status": "PASS",
+    "baseline": {
+      "exit_code": 1,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "aaaccd4d33510cd550abc28e631742f5c1927b21a357ab5ebd001e1ec5a64cb9"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "wheel_sha256": "25bc7ccb8065604aae9b7a65db7febc2d39e5bab9eeed2ac13301809db0e7f49"
+    },
+    "source_receipt": "test_results/PATCH_PLAN_WAVE8/QUALIFICATION_SUMMARY.json"
+  }
+]

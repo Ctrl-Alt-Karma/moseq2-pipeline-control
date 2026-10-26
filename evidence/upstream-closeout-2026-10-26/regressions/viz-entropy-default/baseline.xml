@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.014" timestamp="2026-10-26T12:38:04.005330-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.viz-entropy-default.test_regression" name="test_entropy_rate_default_matches_documented_row_normalization" time="0.736"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 40 / 40 (100%)&#10;First 5 mismatches are at indices:&#10; [0, 0]: -15.509775004326936 (ACTUAL), 5.556488071769717 (DESIRED)&#10; [0, 1]: -11.60964047443681 (ACTUAL), 5.523400338942906 (DESIRED)&#10; [0, 2]: -15.509775004326936 (ACTUAL), 5.556488071769717 (DESIRED)&#10; [0, 3]: -0.0 (ACTUAL), 5.290943838940351 (DESIRED)&#10; [0, 4]: -0.0 (ACTUAL), 5.290943838940351 (DESIRED)&#10;Max absolute difference among violations: 21.06626308&#10;Max relative difference among violations: 3.79129097&#10; ACTUAL: array([[-15.509775, -11.60964 , -15.509775,  -0.      ,  -0.      ,&#10;         -0.      ,  -0.      ,  -0.      ,  -0.      ,  -0.      ,&#10;         -0.      ,  -0.      ,  -0.      ,  -0.      ,  -0.      ,...&#10; DESIRED: array([[5.556488, 5.5234  , 5.556488, 5.290944, 5.290944, 5.290944,&#10;        5.290944, 5.290944, 5.290944, 5.290944, 5.290944, 5.290944,&#10;        5.290944, 5.290944, 5.290944, 5.290944, 5.290944, 5.290944,...">test_results/PATCH_PLAN_WAVE1/viz-entropy-default/test_regression.py:10: in test_entropy_rate_default_matches_documented_row_normalization
+    np.testing.assert_allclose(entropy_rate(labels), entropy_rate(labels, normalize="rows"))
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 40 / 40 (100%)
+E   First 5 mismatches are at indices:
+E    [0, 0]: -15.509775004326936 (ACTUAL), 5.556488071769717 (DESIRED)
+E    [0, 1]: -11.60964047443681 (ACTUAL), 5.523400338942906 (DESIRED)
+E    [0, 2]: -15.509775004326936 (ACTUAL), 5.556488071769717 (DESIRED)
+E    [0, 3]: -0.0 (ACTUAL), 5.290943838940351 (DESIRED)
+E    [0, 4]: -0.0 (ACTUAL), 5.290943838940351 (DESIRED)
+E   Max absolute difference among violations: 21.06626308
+E   Max relative difference among violations: 3.79129097
+E    ACTUAL: array([[-15.509775, -11.60964 , -15.509775,  -0.      ,  -0.      ,
+E            -0.      ,  -0.      ,  -0.      ,  -0.      ,  -0.      ,
+E            -0.      ,  -0.      ,  -0.      ,  -0.      ,  -0.      ,...
+E    DESIRED: array([[5.556488, 5.5234  , 5.556488, 5.290944, 5.290944, 5.290944,
+E           5.290944, 5.290944, 5.290944, 5.290944, 5.290944, 5.290944,
+E           5.290944, 5.290944, 5.290944, 5.290944, 5.290944, 5.290944,...</failure></testcase></testsuite></testsuites>

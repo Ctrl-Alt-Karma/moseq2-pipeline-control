@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.359" timestamp="2026-10-26T12:36:35.926914-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.extract-pinhole-geometry.test_regression" name="test_nominal_fov_maps_image_edge_to_pinhole_extent" time="0.264"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 2 / 2 (100%)&#10;Mismatch at indices:&#10; [0]: 308.05061297699916 (ACTUAL), 354.01973356401135 (DESIRED)&#10; [1]: 261.79938779914943 (ACTUAL), 288.67513459481285 (DESIRED)&#10;Max absolute difference among violations: 45.96912059&#10;Max relative difference among violations: 0.12984903&#10; ACTUAL: array([308.050613, 261.799388])&#10; DESIRED: array([354.019734, 288.675135])">test_results/PATCH_PLAN_WAVE1/extract-pinhole-geometry/test_regression.py:10: in test_nominal_fov_maps_image_edge_to_pinhole_extent
+    np.testing.assert_allclose(actual[0], 500 * np.tan(np.deg2rad([35.3, 30.])))
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 308.05061297699916 (ACTUAL), 354.01973356401135 (DESIRED)
+E    [1]: 261.79938779914943 (ACTUAL), 288.67513459481285 (DESIRED)
+E   Max absolute difference among violations: 45.96912059
+E   Max relative difference among violations: 0.12984903
+E    ACTUAL: array([308.050613, 261.799388])
+E    DESIRED: array([354.019734, 288.675135])</failure></testcase></testsuite></testsuites>

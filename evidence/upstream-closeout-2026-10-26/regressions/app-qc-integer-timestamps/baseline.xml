@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.082" timestamp="2026-10-26T12:43:04.249923-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE2.app-qc-integer-timestamps.test_regression" name="test_integer_timestamps_can_be_rescaled" time="0.787"><failure message="numpy._core._exceptions._UFuncOutputCastingError: Cannot cast ufunc 'divide' output from dtype('float64') to dtype('int64') with casting rule 'same_kind'">test_results/PATCH_PLAN_WAVE2/app-qc-integer-timestamps/test_regression.py:13: in test_integer_timestamps_can_be_rescaled
+    assert check_timestamp_error_percentage(integers) == check_timestamp_error_percentage(integers.astype(float))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_app/roi/validation.py:34: in check_timestamp_error_percentage
+    diff /= scaling_factor
+E   numpy._core._exceptions._UFuncOutputCastingError: Cannot cast ufunc 'divide' output from dtype('float64') to dtype('int64') with casting rule 'same_kind'</failure></testcase></testsuite></testsuites>

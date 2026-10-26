@@ -1,5 +1,17 @@
 # Current Handoff — Live Pointer
 
+## Terminal pointer — 2026-10-26
+
+The controlling handoff is now
+[`HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md`](HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md).
+
+R1 scientific validation is CLOSED BY OWNER while incomplete, before final
+human qualitative review. `PASS_REAL_SESSION_PRODUCTION_VALIDATION` was NOT
+issued. No next scientific operation is planned or authorized; reopening requires
+an explicit new Owner decision. This supersedes all operational language below.
+
+## Historical pointer retained without continuation authority
+
 The active handoff is:
 
 `ai/HANDOFF_2026-08-18_ARCHITECT_V6_RETIREMENT_R2.md`

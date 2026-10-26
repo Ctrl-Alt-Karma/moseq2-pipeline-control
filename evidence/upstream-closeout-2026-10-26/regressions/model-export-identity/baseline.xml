@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.377" timestamp="2026-10-26T13:23:24.276922-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE7.model-export-identity.test_regression" name="test_exported_keys_follow_actual_backend_label_order[heldout]" time="1.160"><failure message="AssertionError: assert ['excluded', ...ond', 'first'] == ['second', 'first']&#10;  &#10;  At index 0 diff: 'excluded' != 'second'&#10;  Left contains one more item: 'first'&#10;  Use -v to get more diff">test_results/PATCH_PLAN_WAVE7/model-export-identity/test_regression.py:35: in test_exported_keys_follow_actual_backend_label_order
+    assert saved['keys'] == ['second', 'first']
+E   AssertionError: assert ['excluded', ...ond', 'first'] == ['second', 'first']
+E     
+E     At index 0 diff: 'excluded' != 'second'
+E     Left contains one more item: 'first'
+E     Use -v to get more diff</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE7.model-export-identity.test_regression" name="test_exported_keys_follow_actual_backend_label_order[n/a]" time="0.001"><failure message="AssertionError: assert ['excluded', ...ond', 'first'] == ['second', 'first']&#10;  &#10;  At index 0 diff: 'excluded' != 'second'&#10;  Left contains one more item: 'first'&#10;  Use -v to get more diff">test_results/PATCH_PLAN_WAVE7/model-export-identity/test_regression.py:35: in test_exported_keys_follow_actual_backend_label_order
+    assert saved['keys'] == ['second', 'first']
+E   AssertionError: assert ['excluded', ...ond', 'first'] == ['second', 'first']
+E     
+E     At index 0 diff: 'excluded' != 'second'
+E     Left contains one more item: 'first'
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

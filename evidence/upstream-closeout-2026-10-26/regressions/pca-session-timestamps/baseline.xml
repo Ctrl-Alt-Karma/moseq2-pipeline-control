@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.106" timestamp="2026-10-26T13:00:29.673357-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE5.pca-session-timestamps.test_regression" name="test_missing_timestamp_fallback_uses_each_sessions_frame_count" time="0.975"><failure message="assert 9 == 5&#10; +  where 9 = len(&lt;HDF5 dataset &quot;first&quot;: shape (9,), type &quot;&lt;f4&quot;&gt;)">test_results/PATCH_PLAN_WAVE5/pca-session-timestamps/test_regression.py:34: in test_missing_timestamp_fallback_uses_each_sessions_frame_count
+    assert len(f['scores_idx/' + name]) == length
+E   assert 9 == 5
+E    +  where 9 = len(&lt;HDF5 dataset "first": shape (9,), type "&lt;f4"&gt;)</failure></testcase></testsuite></testsuites>

@@ -1,5 +1,13 @@
 # Legacy Production Risk Register
 
+## Terminal posture — 2026-10-26
+
+Owner closed R1 before its final human qualitative gate. The historical risks
+below are preserved, not converted to proven defects, scientific FAIL, resolved
+questions or a new work program. Current-upstream findings have the separate
+[final crosswalk](../evidence/upstream-closeout-2026-10-26/FINDING_CROSSWALK.md).
+No follow-up is planned absent explicit new Owner reopening authorization.
+
 Date: 2026-07-29
 
 The production target is frozen at Katya's existing Python 3.7 / NumPy 1.18.3

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="2.023" timestamp="2026-10-26T13:06:38.982969-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE6.viz-legacy-keys.test_regression" name="test_legacy_conversion_accepts_multirow_scalar_mappings[False]" time="1.423"><failure message="ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()">test_results/PATCH_PLAN_WAVE6/viz-legacy-keys/test_regression.py:18: in test_legacy_conversion_accepts_multirow_scalar_mappings
+    result = convert_legacy_scalars(values, force=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_viz/scalars/util.py:159: in convert_legacy_scalars
+    features[f'{key}_px'] = get(f'{key}_px', old_features, old_features[key])
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+cytoolz/itertoolz.pyx:637: in cytoolz.itertoolz.get
+    ???
+cytoolz/itertoolz.pyx:705: in cytoolz.itertoolz.get
+    ???
+E   ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE6.viz-legacy-keys.test_regression" name="test_legacy_conversion_accepts_multirow_scalar_mappings[True]" time="0.000"><failure message="KeyError: 'width'">test_results/PATCH_PLAN_WAVE6/viz-legacy-keys/test_regression.py:18: in test_legacy_conversion_accepts_multirow_scalar_mappings
+    result = convert_legacy_scalars(values, force=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_viz/scalars/util.py:159: in convert_legacy_scalars
+    features[f'{key}_px'] = get(f'{key}_px', old_features, old_features[key])
+                                                           ^^^^^^^^^^^^^^^^^
+E   KeyError: 'width'</failure></testcase></testsuite></testsuites>

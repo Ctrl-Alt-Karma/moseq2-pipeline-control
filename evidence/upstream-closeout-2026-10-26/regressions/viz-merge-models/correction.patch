@@ -1,0 +1,74 @@
+commit 767c6869d80c66b6f2464b1b4b758482a8456a73
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:50 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:50 2026 -0400
+
+    fix: keep state labels aligned with AR parameters when merging models
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 68ca6a34055987ff22f8651b4dca2aa254380c87
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/model/util.py b/moseq2_viz/model/util.py
+index d81bacb..bc698bb 100644
+--- a/moseq2_viz/model/util.py
++++ b/moseq2_viz/model/util.py
+@@ -132,7 +132,7 @@ def merge_models(model_dir, ext='p',count='usage', force_merge=False,
+         curr_ar = deepcopy(unit_data['model_parameters']['ar_mat'])
+         # compute cost function
+         # the ar matrices to find the most similar syllables
+-        if cost_function == 'ar_mat':
++        if cost_function in ('ar_norm', 'ar_mat'):
+             prev_ar = template['model_parameters']['ar_mat']
+             cost = np.zeros((len(prev_ar), len(curr_ar)))
+             for i, state1 in enumerate(prev_ar):
+@@ -164,8 +164,8 @@ def merge_models(model_dir, ext='p',count='usage', force_merge=False,
+         unit_data['labels'] = valmap(_map_sylls, unit_data['labels'])
+ 
+         # remap the AR matrix
+-        for k, v in filter(lambda k: k[0] != -5, mapping.items()):
+-            unit_data['model_parameters']['are_mat'][k] = curr_ar[v]
++        for old_state, new_state in filter(lambda item: item[0] != -5, mapping.items()):
++            unit_data['model_parameters']['ar_mat'][new_state] = curr_ar[old_state]
+         model_data[pth] = unit_data
+ 
+     return model_data
+@@ -1310,4 +1310,4 @@ def get_Xy_values(stat_means, unique_groups, stat='usage'):
+ 
+     y = np.array([mapping[l] for l in y])
+ 
+-    return np.array(X), y, mapping, rev_mapping
+\ No newline at end of file
++    return np.array(X), y, mapping, rev_mapping
+diff --git a/tests/unit_tests/test_closeout_viz_merge_models.py b/tests/unit_tests/test_closeout_viz_merge_models.py
+new file mode 100644
+index 0000000..974c524
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_merge_models.py
+@@ -0,0 +1,23 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++
++
++def test_default_model_merge_preserves_state_parameter_alignment(monkeypatch):
++    from copy import deepcopy
++    import moseq2_viz.model.util as util
++    parameters = np.array([[[1., 0.]], [[3., 0.]], [[8., 0.]]])
++    template = {"labels": {"synthetic": np.array([0, 1, 2])},
++                "model_parameters": {"ar_mat": parameters.copy(), "kappa": "synthetic"}}
++    candidate = {"labels": {"synthetic": np.array([2, 0, 1])},
++                 "model_parameters": {"ar_mat": parameters[[1, 2, 0]].copy(), "kappa": "synthetic"}}
++    monkeypatch.setattr(util.glob, "glob", lambda *args: ["synthetic-a.p", "synthetic-b.p"])
++    monkeypatch.setattr(util, "parse_model_results", lambda path, **kw:
++                        deepcopy(template if path == "synthetic-a.p" else candidate))
++    result = util.merge_models("synthetic-unused", force_merge=True)
++    np.testing.assert_array_equal(result["synthetic-b.p"]["labels"]["synthetic"],
++                                  template["labels"]["synthetic"])
++    np.testing.assert_array_equal(result["synthetic-b.p"]["model_parameters"]["ar_mat"], parameters)

@@ -1,0 +1,20 @@
+{
+  "transport": {
+    "filename": "R1_TRANSPORT_BYTE_PROOF_R2.tar.xz",
+    "sha256": "ae1a709a36204495e7fe5a75e4e00d9f4339c2b2558c3522c09af270aca1c3ca",
+    "size_bytes": 237460672,
+    "path": "/home/ajm/moseq2-validation-20260730/evidence/r1_transport_byte_proof_r2/R1_TRANSPORT_BYTE_PROOF_R2.tar.xz",
+    "identity_check": "Hash and size independently checked read-only by Builder in this operation; archive not unpacked.",
+    "substantive_claim_class": "OWNER_SUPPLIED_ACCEPTED_VERIFIER_RESULT_NOT_REEXECUTED",
+    "accepted_claim": "Verifier established byte equality for transported preserved labels and PCA scores_idx; closes receipt-only derivation limitations, not production validation."
+  },
+  "companion": {
+    "filename": "Katya_R1_Qualitative_Review_Companion_v2.zip",
+    "sha256": "d8bd607d089917eb8357d5eebd256bf626bec193bf5133e2c9d026474dfdc169",
+    "size_bytes": 162656837,
+    "disposition": "PASS_FABLE_KATYA_R1_REVIEW_COMPANION_R2",
+    "claim_class": "OWNER_SUPPLIED_ACCEPTED_VERIFIER_RESULT_ARCHIVE_NOT_REACQUIRED",
+    "access_limit": "Companion archive/verifier report not located in the bounded host lookup. No Builder re-verification is claimed.",
+    "accepted_claim": "Review tool suitable for planned blinded review; human review never completed."
+  }
+}

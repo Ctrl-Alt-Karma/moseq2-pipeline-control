@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.137" timestamp="2026-10-26T12:37:05.757750-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.extract-ransac-seed.test_regression" name="test_ransac_repeated_calls_are_exact" time="0.026"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;Mismatched elements: 4 / 4 (100%)&#10;Mismatch at indices:&#10; [0]: 0.03842755068619861 (ACTUAL), -0.5271681387679129 (DESIRED)&#10; [1]: 0.5730793612006317 (ACTUAL), -0.0718885676494329 (DESIRED)&#10; [2]: 0.8185984174881695 (ACTUAL), 0.8467147024289158 (DESIRED)&#10; [3]: -582.5801013276962 (ACTUAL), -587.743817212498 (DESIRED)&#10;Max absolute difference among violations: 5.16371588&#10;Max relative difference among violations: 8.97177326&#10; ACTUAL: array([ 3.842755e-02,  5.730794e-01,  8.185984e-01, -5.825801e+02])&#10; DESIRED: array([-5.271681e-01, -7.188857e-02,  8.467147e-01, -5.877438e+02])">test_results/PATCH_PLAN_WAVE1/extract-ransac-seed/test_regression.py:16: in test_ransac_repeated_calls_are_exact
+    np.testing.assert_array_equal(a, b)
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 4 / 4 (100%)
+E   Mismatch at indices:
+E    [0]: 0.03842755068619861 (ACTUAL), -0.5271681387679129 (DESIRED)
+E    [1]: 0.5730793612006317 (ACTUAL), -0.0718885676494329 (DESIRED)
+E    [2]: 0.8185984174881695 (ACTUAL), 0.8467147024289158 (DESIRED)
+E    [3]: -582.5801013276962 (ACTUAL), -587.743817212498 (DESIRED)
+E   Max absolute difference among violations: 5.16371588
+E   Max relative difference among violations: 8.97177326
+E    ACTUAL: array([ 3.842755e-02,  5.730794e-01,  8.185984e-01, -5.825801e+02])
+E    DESIRED: array([-5.271681e-01, -7.188857e-02,  8.467147e-01, -5.877438e+02])</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE1.extract-ransac-seed.test_regression" name="test_ransac_does_not_consume_global_rng" time="0.001"><failure message="AssertionError: assert ('MT19937' == 'MT19937'&#10;  &#10;    MT19937 and (624, 0, 0.0) == (168, 0, 0.0)&#10;  &#10;  At index 0 diff: 624 != 168&#10;  Use -v to get more diff)">test_results/PATCH_PLAN_WAVE1/extract-ransac-seed/test_regression.py:25: in test_ransac_does_not_consume_global_rng
+    assert before[0] == after[0] and before[2:] == after[2:]
+E   AssertionError: assert ('MT19937' == 'MT19937'
+E     
+E       MT19937 and (624, 0, 0.0) == (168, 0, 0.0)
+E     
+E     At index 0 diff: 624 != 168
+E     Use -v to get more diff)</failure></testcase></testsuite></testsuites>

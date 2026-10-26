@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.889" timestamp="2026-10-26T12:37:15.112964-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.pca-changepoint-sigma.test_regression" name="test_changepoint_sigma_reaches_smoothing_std" time="0.627"><failure message="assert [1.5] == [2.0]&#10;  &#10;  At index 0 diff: 1.5 != 2.0&#10;  Use -v to get more diff">test_results/PATCH_PLAN_WAVE1/pca-changepoint-sigma/test_regression.py:16: in test_changepoint_sigma_reaches_smoothing_std
+    assert seen == [2.]
+E   assert [1.5] == [2.0]
+E     
+E     At index 0 diff: 1.5 != 2.0
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

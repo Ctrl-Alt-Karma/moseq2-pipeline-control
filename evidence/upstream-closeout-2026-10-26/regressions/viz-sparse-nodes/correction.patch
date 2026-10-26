@@ -1,0 +1,66 @@
+commit 05f5e58c47e91e1ada2a340550b5e1584ae0ea98
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:03 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:03 2026 -0400
+
+    fix: index difference-graph usage by node identity after thresholding
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 68ca6a34055987ff22f8651b4dca2aa254380c87
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/model/trans_graph.py b/moseq2_viz/model/trans_graph.py
+index 9a5d769..82c721f 100644
+--- a/moseq2_viz/model/trans_graph.py
++++ b/moseq2_viz/model/trans_graph.py
+@@ -375,8 +375,8 @@ def make_difference_graphs(trans_mats, usages, group, group_names, usage_kwargs,
+                 usages.append(df_usage)
+ 
+                 # get node sizes and colors based on usage differences
+-                node_size = np.abs(list(df_usage.values()))[:len(graph.nodes)] * usage_scale
+-                node_edge_color = ['b' if x > 0 else 'r' for x in df_usage.values()][:len(graph.nodes)]
++                node_size = np.array([abs(df_usage[node]) for node in graph.nodes]) * usage_scale
++                node_edge_color = ['b' if df_usage[node] > 0 else 'r' for node in graph.nodes]
+ 
+                 node_sizes.append(node_size)
+                 node_edge_colors.append(node_edge_color)
+@@ -673,4 +673,4 @@ def graph_transition_matrix(trans_mats, usages=None, groups=None,
+     for a in np.array(ax).flat:
+         a.axis('off')
+ 
+-    return fig, ax, pos
+\ No newline at end of file
++    return fig, ax, pos
+diff --git a/tests/unit_tests/test_closeout_viz_sparse_nodes.py b/tests/unit_tests/test_closeout_viz_sparse_nodes.py
+new file mode 100644
+index 0000000..eb89f6b
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_sparse_nodes.py
+@@ -0,0 +1,24 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++
++
++
++
++
++def test_difference_graph_uses_node_identity_after_thresholding():
++    from moseq2_viz.model.trans_graph import make_difference_graphs
++    a, b = np.zeros((6, 6)), np.zeros((6, 6))
++    b[3, 5] = .1
++    ua = dict.fromkeys(range(6), .1)
++    ub = dict(ua, **{})
++    ub[0], ub[1], ub[3], ub[5] = .9, .8, .2, .05
++    result = make_difference_graphs([a, b], [ua, ub], ['a', 'b'], ['a', 'b'], {}, [], {}, [],
++                                    node_sizes=[], difference_graphs=[], usage_scale=1)
++    graph = result[2][0]
++    assert list(graph.nodes) == [3, 5]
++    np.testing.assert_allclose(result[4][0], [.1, .05])
++    assert result[5][0] == ['b', 'r']

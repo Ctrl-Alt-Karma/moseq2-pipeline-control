@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.040" timestamp="2026-10-26T12:37:58.105497-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.viz-empty-usages.test_regression" name="test_empty_usage_normalization_is_finite" time="0.739"><failure message="ZeroDivisionError: float division by zero">test_results/PATCH_PLAN_WAVE1/viz-empty-usages/test_regression.py:9: in test_empty_usage_normalization_is_finite
+    actual = normalize_usages({0: 0., 1: 0.})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_viz/model/util.py:303: in normalize_usages
+    return valmap(lambda v: v / total, usage_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+cytoolz/dicttoolz.pyx:183: in cytoolz.dicttoolz.valmap
+    ???
+cytoolz/dicttoolz.pyx:208: in cytoolz.dicttoolz.valmap
+    ???
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_viz/model/util.py:303: in &lt;lambda&gt;
+    return valmap(lambda v: v / total, usage_dict)
+                            ^^^^^^^^^
+E   ZeroDivisionError: float division by zero</failure></testcase></testsuite></testsuites>

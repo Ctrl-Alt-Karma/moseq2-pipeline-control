@@ -1,0 +1,46 @@
+commit 993a697ef8034b98443e7d4d18476c9579963f61
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:59 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:59 2026 -0400
+
+    fix: rescale integer timestamps without an in-place casting error
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 313c9b5bf180fd2dbacbec071dba39b9c4472743
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/roi/validation.py b/moseq2_app/roi/validation.py
+index 990f48e..533aafb 100644
+--- a/moseq2_app/roi/validation.py
++++ b/moseq2_app/roi/validation.py
+@@ -31,7 +31,7 @@ def check_timestamp_error_percentage(timestamps, fps=30, scaling_factor=1000):
+     # Check if the timestamps are in milliseconds based on the mean difference amount
+     if np.mean(diff) > 10:
+         # rescale the timestamps to seconds
+-        diff /= scaling_factor
++        diff = diff / scaling_factor
+ 
+     # Find the average time difference between frames.
+     avgTime = np.mean(diff)
+diff --git a/tests/software/test_closeout_app_qc_integer_timestamps.py b/tests/software/test_closeout_app_qc_integer_timestamps.py
+new file mode 100644
+index 0000000..ec8c0e0
+--- /dev/null
++++ b/tests/software/test_closeout_app_qc_integer_timestamps.py
+@@ -0,0 +1,13 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++def test_integer_timestamps_can_be_rescaled():
++    from moseq2_app.roi.validation import check_timestamp_error_percentage
++    integers = np.arange(10) * 33
++    assert check_timestamp_error_percentage(integers) == check_timestamp_error_percentage(integers.astype(float))

@@ -1,0 +1,71 @@
+commit b15995f14f449432e7c5e4bacca1504320bbcd87
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:29:05 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:29:05 2026 -0400
+
+    fix: report failed preview-writer completion as an error
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 36d40e098a5c4629116b7a4e233573218345bd5d, e0b85201226d03e15944473a734f71417698c31e
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+    Co-authored-by: AJ Mitchell <ajmitchell@cheviot.lan>
+
+diff --git a/moseq2_app/flip/widget.py b/moseq2_app/flip/widget.py
+index cac9acd..c646d6e 100644
+--- a/moseq2_app/flip/widget.py
++++ b/moseq2_app/flip/widget.py
+@@ -284,8 +284,10 @@ class FlipClassifierWidget:
+                     # Check if video is done writing. If not, wait.
+                     if video_pipe is not None:
+                         video_pipe.communicate()
++                        if video_pipe.returncode != 0:
++                            raise RuntimeError(f"Flip preview writer failed with exit code {video_pipe.returncode}: {output_movie}")
+                         video_pipe = None
+ 
+     @property
+     def training_data_path(self):
+-        return str(self.data_path.parent / 'flip-training-frame-ranges.p')
+\ No newline at end of file
++        return str(self.data_path.parent / 'flip-training-frame-ranges.p')
+diff --git a/tests/software/test_closeout_app_preview_exit.py b/tests/software/test_closeout_app_preview_exit.py
+new file mode 100644
+index 0000000..6b46a6b
+--- /dev/null
++++ b/tests/software/test_closeout_app_preview_exit.py
+@@ -0,0 +1,33 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++
++
++
++@pytest.mark.parametrize('returncode', [0, 1])
++def test_preview_writer_failure_is_not_reported_as_completion(tmp_path, monkeypatch, returncode):
++    from moseq2_app.flip import widget
++    path = tmp_path / 'synthetic.h5'
++    with h5py.File(path, 'w') as f:
++        f['frames'] = np.zeros((5, 8, 8), dtype=np.uint8)
++        f['scalars/angle'] = np.zeros(5)
++    class Pipe:
++        def communicate(self):
++            self.returncode = returncode
++    monkeypatch.setattr(widget, 'get_flips', lambda values, **kw: np.zeros(len(values), dtype=bool))
++    monkeypatch.setattr(widget, 'write_frames_preview', lambda *a, **kw: Pipe())
++    subject = SimpleNamespace(sessions={'synthetic': path})
++    def run():
++        widget.FlipClassifierWidget.apply_flip_classifier(subject, 'unused', write_movie=True,
++                                                           smoothing=1, verbose=False)
++    if returncode:
++        with pytest.raises(RuntimeError, match='exit code 1'):
++            run()
++    else:
++        run()

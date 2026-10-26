@@ -1,0 +1,775 @@
+[
+  {
+    "id": "extract-integer-coordinates",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-integer-coordinates",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "b00699aad6320d29dc7a5bbb44668f035378d920",
+    "remote_sha": "b00699aad6320d29dc7a5bbb44668f035378d920",
+    "title": "Preserve fractional millimetres for integer pixel coordinates",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/182",
+    "intentional_change": "Integer input coordinates currently truncate converted millimetres back to integers. Integer and floating representations of the same pixel locations must produce the same physical coordinates.",
+    "historical_commits": [
+      "e7f585104ba25b66e5326c88c77a47e33db95635"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-pinhole-geometry",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-pinhole-geometry",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "f9987793dc033196b9376ffd3fa3f79c55b99e0c",
+    "remote_sha": "f9987793dc033196b9376ffd3fa3f79c55b99e0c",
+    "title": "Use the pinhole relation for nominal field of view",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/183",
+    "intentional_change": "The focal-length calculation uses the half-angle in radians instead of its tangent. Consequently the image edge does not map to depth times tan(FOV/2). The correction uses the nominal pinhole relation, not a new camera calibration.",
+    "historical_commits": [
+      "c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-mixed-unit-velocity",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-mixed-unit-velocity",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "9674e130f0b27a17bd8d0280c6cd2d38e2e831d4",
+    "remote_sha": "9674e130f0b27a17bd8d0280c6cd2d38e2e831d4",
+    "title": "Stop emitting the dimensionally invalid velocity_3d_px scalar",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/184",
+    "intentional_change": "The scalar sums squared pixel displacements and squared millimetre height changes. It has neither pixel nor millimetre units. Omit this invalid field and its description; retain meaningful 2D-pixel and 3D-millimetre velocities.",
+    "historical_commits": [
+      "5cc858626592ea2682260eae9911827c7c0ba551"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-hampel-centroid",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-hampel-centroid",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "6212b47b32fec47de4c63cb808b287a042d80144",
+    "remote_sha": "6212b47b32fec47de4c63cb808b287a042d80144",
+    "title": "Make centroid Hampel filtering translation invariant",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/185",
+    "intentional_change": "The rejection threshold includes the absolute median position and the loop filters only one coordinate. Translating the same track changes which outliers are removed. Filter both coordinates with the MAD-based threshold.",
+    "historical_commits": [
+      "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-hampel-angle",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-hampel-angle",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "69fae4f7e333227af3f688ccee4fc1678ea176a0",
+    "remote_sha": "69fae4f7e333227af3f688ccee4fc1678ea176a0",
+    "title": "Allow angle-only Hampel filtering and use the MAD threshold",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/186",
+    "intentional_change": "The angle branch reuses padding initialized only by centroid filtering, and adds the median angle to the deviation threshold. Give the branch its own padding and compare deviations to scaled MAD.",
+    "historical_commits": [
+      "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-ransac-seed",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-ransac-seed",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "89e778a7a8f63c5f7ec243d8a5d521dc2e826333",
+    "remote_sha": "89e778a7a8f63c5f7ec243d8a5d521dc2e826333",
+    "title": "Give plane RANSAC a local reproducible random generator",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/187",
+    "intentional_change": "Sampling consumes the global NumPy RNG, so unrelated draws alter an otherwise identical floor estimate. Add an explicit seed and use a local RandomState. The plane estimator, acceptance rule, and sample replacement policy are unchanged.",
+    "historical_commits": [
+      "2c9cd86571bcc23ad6870e4da344e0f558f3f54c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-ransac-failure",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-ransac-failure",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "050f5bcb6a806717cc93ea90392090100a5bb8e1",
+    "remote_sha": "050f5bcb6a806717cc93ea90392090100a5bb8e1",
+    "title": "Raise an actionable error when RANSAC cannot find a plane",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/188",
+    "intentional_change": "Too few masked points and no accepted hypotheses currently produce low-level sampling or unbound-local errors. Validate the point count and report that no plane met the existing acceptance rule.",
+    "historical_commits": [
+      "11d2691ab56f9972930663e712c06cecb01f2eb1",
+      "c75272683c68cb5695be8e99d4e89ceb7adcf42b"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-depth-byte-order",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-depth-byte-order",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "4ac319b7772b4e62e3a8800525aaf9c3c8987311",
+    "remote_sha": "4ac319b7772b4e62e3a8800525aaf9c3c8987311",
+    "title": "Honor the declared raw depth pixel byte order",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/189",
+    "intentional_change": "The raw ffmpeg reader always interprets bytes using native uint16, including when the requested pixel format is big-endian. Decode using the explicitly declared endian order.",
+    "historical_commits": [
+      "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "extract-unsigned-raw-depth",
+    "repository": "dattalab/moseq2-extract",
+    "branch": "codex/final-extract-unsigned-raw-depth",
+    "base_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "commit_sha": "2bbebcda4556d0c665ba80483cc2f2f006be84b2",
+    "remote_sha": "2bbebcda4556d0c665ba80483cc2f2f006be84b2",
+    "title": "Use unsigned 16-bit depth in the raw-reader CLI default",
+    "url": "https://github.com/dattalab/moseq2-extract/pull/190",
+    "intentional_change": "The raw depth CLI defaults to signed int16 although depth is unsigned. Values above 32767 become negative. Use the unsigned little-endian default; explicit user dtypes remain available.",
+    "historical_commits": [
+      "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "pca-symmetric-kernel",
+    "repository": "dattalab/moseq2-pca",
+    "branch": "codex/final-pca-symmetric-kernel",
+    "base_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "commit_sha": "d8f975fdadf8e58eea2cb3b86a7f26fcbcdd06af",
+    "remote_sha": "d8f975fdadf8e58eea2cb3b86a7f26fcbcdd06af",
+    "title": "Center the Gaussian smoothing kernel on its impulse",
+    "url": "https://github.com/dattalab/moseq2-pca/pull/133",
+    "intentional_change": "The generated support omits the positive endpoint and has even length. This shifts the center of an otherwise symmetric impulse response. Include both endpoints without retuning sigma.",
+    "historical_commits": [
+      "ff3531632aaecbc045a42570db024c429235a914"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "pca-changepoint-sigma",
+    "repository": "dattalab/moseq2-pca",
+    "branch": "codex/final-pca-changepoint-sigma",
+    "base_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "commit_sha": "c1622a232020686671061d3f4f69cdee8d834970",
+    "remote_sha": "c1622a232020686671061d3f4f69cdee8d834970",
+    "title": "Pass the requested changepoint sigma to the Gaussian sigma argument",
+    "url": "https://github.com/dattalab/moseq2-pca/pull/134",
+    "intentional_change": "The requested sigma is passed as the kernel window length positional argument, leaving sigma at its default. Forward it by its named sigma argument. Default changepoint parameters are not retuned.",
+    "historical_commits": [
+      "e9f573185e2d7ed86a2de15089903a8294635c3c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "pca-disabled-smoothing",
+    "repository": "dattalab/moseq2-pca",
+    "branch": "codex/final-pca-disabled-smoothing",
+    "base_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "commit_sha": "62b50277d3d1d9d9b350eff274c732ff0184d7ce",
+    "remote_sha": "62b50277d3d1d9d9b350eff274c732ff0184d7ce",
+    "title": "Do not mask every changepoint when smoothing is disabled",
+    "url": "https://github.com/dattalab/moseq2-pca/pull/135",
+    "intentional_change": "With zero smoothing the edge count is zero and a [-0:] slice masks the whole signal. None also reaches unsupported arithmetic. Apply edge masking only when smoothing and its edge count are positive.",
+    "historical_commits": [
+      "f0d24d111bb359e6768462b6164bf579b323cbc8"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "pca-session-timestamps",
+    "repository": "dattalab/moseq2-pca",
+    "branch": "codex/final-pca-session-timestamps",
+    "base_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "commit_sha": "24eb72e75d022340f6cf96f6d820d72f7547d502",
+    "remote_sha": "24eb72e75d022340f6cf96f6d820d72f7547d502",
+    "title": "Use each session length for missing-timestamp fallback",
+    "url": "https://github.com/dattalab/moseq2-pca/pull/136",
+    "intentional_change": "The distributed result loop uses the frames variable left over from the last loaded session. A session without timestamps therefore receives another session's fallback time axis. Obtain fallback length from the currently open session in both distributed result loops.",
+    "historical_commits": [
+      "ff3531632aaecbc045a42570db024c429235a914"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-integer-coordinates",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-integer-coordinates",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "31021b517a0e857343c6d37d18a45ea8696c4cca",
+    "remote_sha": "31021b517a0e857343c6d37d18a45ea8696c4cca",
+    "title": "Preserve fractional millimetres for integer pixel coordinates",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/190",
+    "intentional_change": "Integer arrays truncate converted physical coordinates. Preserve floating output so integer and float representations of the same pixels agree.",
+    "historical_commits": [
+      "b80192dc20353bf77c36610f315543b57afa908c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-pinhole-geometry",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-pinhole-geometry",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "d588667ed06008faf622a3e0398d273e84ff09e2",
+    "remote_sha": "d588667ed06008faf622a3e0398d273e84ff09e2",
+    "title": "Use the nominal pinhole field-of-view conversion",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/191",
+    "intentional_change": "The focal-length calculation uses radians instead of tan(half-FOV), violating the pinhole edge geometry. Correct the nominal conversion without claiming a calibrated camera model.",
+    "historical_commits": [
+      "3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-high-state-ranks",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-high-state-ranks",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "bbc70097f5a2c650dc6ccaeb070e2c6c8d3db79a",
+    "remote_sha": "bbc70097f5a2c650dc6ccaeb070e2c6c8d3db79a",
+    "title": "Include raw states above 99 when ranking labels by usage",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/192",
+    "intentional_change": "Usage relabeling inherits the default 100-state statistics ceiling, so occupied raw states >=100 can be omitted or assigned incorrect ranks. Derive the needed ceiling from the supplied labels.",
+    "historical_commits": [
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-coverage-count",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-coverage-count",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "2361167d74c65589ab91c9f7ef2a6ac0103c33d9",
+    "remote_sha": "2361167d74c65589ab91c9f7ef2a6ac0103c33d9",
+    "title": "Include the threshold-crossing syllable in the coverage count",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/193",
+    "intentional_change": "The function returns the zero-based crossing position rather than the number of syllables. Even a single occupied state returns zero, so requested coverage is not retained.",
+    "historical_commits": [
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-first-transition",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-first-transition",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "ac381ddc2aacebf951c9f2df7e5f50fdea938b9d",
+    "remote_sha": "ac381ddc2aacebf951c9f2df7e5f50fdea938b9d",
+    "title": "Count the first observed state transition",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/194",
+    "intentional_change": "The transition-matrix path drops the initial state before forming adjacent state pairs, omitting the first transition. Compress consecutive runs while retaining the initial state.",
+    "historical_commits": [
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-pairwise-groups",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-pairwise-groups",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "37cf1671cc57c0776124426d800bdaaa1c5ba10a",
+    "remote_sha": "37cf1671cc57c0776124426d800bdaaa1c5ba10a",
+    "title": "Restrict Mann-Whitney comparisons to the requested groups",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/195",
+    "intentional_change": "An unrequested third group affects the pairwise computation. Select the two requested groups explicitly so adding unrelated observations cannot alter their comparison.",
+    "historical_commits": [
+      "645415411f3119e62b59fe79e26df504d23bbb1c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-dunn-correction",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-dunn-correction",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "6b48bbe33895e08610c69e0c7496cfad658dd57a",
+    "remote_sha": "6b48bbe33895e08610c69e0c7496cfad658dd57a",
+    "title": "Correct Dunn p-values across syllables within each comparison",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/196",
+    "intentional_change": "The multiplicity correction runs across group-pair columns instead of syllables, the hypothesis family described by this API. Correct the axis and test it against an independently computed statsmodels correction.",
+    "historical_commits": [
+      "645415411f3119e62b59fe79e26df504d23bbb1c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-constant-ztest",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-constant-ztest",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "7308cbf71eb011ae2905b92dcaba17b8bc7151ac",
+    "remote_sha": "7308cbf71eb011ae2905b92dcaba17b8bc7151ac",
+    "title": "Handle equal and unequal zero-variance z-test inputs",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/197",
+    "intentional_change": "Zero pooled spread produces NaN for equal constants. Return one for equal constants and zero for distinct constants while retaining the ordinary nonzero-spread calculation.",
+    "historical_commits": [
+      "83e9cadebf1dbd0822c87750217c39ba1d59e3ac",
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-empty-usages",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-empty-usages",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "0b20df4c1a5e6e04d9902c3bc245209d52e4de63",
+    "remote_sha": "0b20df4c1a5e6e04d9902c3bc245209d52e4de63",
+    "title": "Keep zero-total usage normalization finite",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/198",
+    "intentional_change": "Normalizing an empty-occupancy mapping divides by zero. Preserve its zero values when the total is zero.",
+    "historical_commits": [
+      "83e9cadebf1dbd0822c87750217c39ba1d59e3ac"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-entropy-default",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-entropy-default",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "1251cfe2474cfe21b461525dcb12f074b0855787",
+    "remote_sha": "1251cfe2474cfe21b461525dcb12f074b0855787",
+    "title": "Use the supported rows normalization in entropy_rate by default",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/199",
+    "intentional_change": "The default passes row, while the transition-matrix implementation recognizes rows. The advertised default therefore differs from explicitly requested row normalization.",
+    "historical_commits": [
+      "83e9cadebf1dbd0822c87750217c39ba1d59e3ac"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-metadata-order",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-metadata-order",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "448f18b34f7b3c57d92a85d0f3544ca52062b1ff",
+    "remote_sha": "448f18b34f7b3c57d92a85d0f3544ca52062b1ff",
+    "title": "Preserve the requested metadata column order",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/200",
+    "intentional_change": "Filtering metadata preserves each source mapping's insertion order, not include_keys order. Requested column order must not depend on how the input mapping was serialized.",
+    "historical_commits": [
+      "b80192dc20353bf77c36610f315543b57afa908c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-graph-legend",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-graph-legend",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "e156173cc3ca3c1b787f06948d5f57fd83a7857a",
+    "remote_sha": "e156173cc3ca3c1b787f06948d5f57fd83a7857a",
+    "title": "Match transition difference legend colors to the plotted signs",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/201",
+    "intentional_change": "Positive differences are drawn blue and negative differences red, while the legend assigns the opposite meanings. Correct the legend, not the underlying signed data.",
+    "historical_commits": [
+      "8ef5b049eeaf78cecc9bad539529e3daf126ca27"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-merge-models",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-merge-models",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "767c6869d80c66b6f2464b1b4b758482a8456a73",
+    "remote_sha": "767c6869d80c66b6f2464b1b4b758482a8456a73",
+    "title": "Keep state labels aligned with AR parameters when merging models",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/202",
+    "intentional_change": "The default cost-function alias is not implemented, the parameter key is misspelled, and the assignment direction disagrees with label remapping. Repair these mechanically coupled parts of the merge operation; a three-cycle permutation regression checks the correspondence.",
+    "historical_commits": [
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-best-fit-summary",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-best-fit-summary",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "c813d9c1b18b711a4ec5a71fd4521f9a2e5940c3",
+    "remote_sha": "c813d9c1b18b711a4ec5a71fd4521f9a2e5940c3",
+    "title": "Preserve distinct median and mean fit summaries",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/203",
+    "intentional_change": "Duplicate dictionary keys overwrite the median summary with the mean summary. Return distinct names so both already-computed quantities survive.",
+    "historical_commits": [
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-legacy-area",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-legacy-area",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "d611143a12ccd955706ea476fe7d482abde25394",
+    "remote_sha": "d611143a12ccd955706ea476fe7d482abde25394",
+    "title": "Apply an area conversion to legacy area scalars",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/204",
+    "intentional_change": "Legacy conversion multiplies pixel area by the mean linear scale. Use the product of x/y scales so doubling depth quadruples area while doubling linear dimensions. This is the legacy-viz counterpart of extract PR 180.",
+    "historical_commits": [
+      "645415411f3119e62b59fe79e26df504d23bbb1c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-sparse-nodes",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-sparse-nodes",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "05f5e58c47e91e1ada2a340550b5e1584ae0ea98",
+    "remote_sha": "05f5e58c47e91e1ada2a340550b5e1584ae0ea98",
+    "title": "Index difference-graph usage by node identity after thresholding",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/205",
+    "intentional_change": "Node display values are taken from the first N states, not the retained graph's actual nodes. Thresholded sparse graphs can display another state's size and sign. Look up each retained node explicitly.",
+    "historical_commits": [
+      "68ca6a34055987ff22f8651b4dca2aa254380c87"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "viz-legacy-keys",
+    "repository": "dattalab/moseq2-viz",
+    "branch": "codex/final-viz-legacy-keys",
+    "base_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "commit_sha": "2aadf69c3753315b58e900150f04d482b5ece0a2",
+    "remote_sha": "2aadf69c3753315b58e900150f04d482b5ece0a2",
+    "title": "Read legacy scalar mappings without eager array defaults",
+    "url": "https://github.com/dattalab/moseq2-viz/pull/206",
+    "intentional_change": "The cytoolz get call receives an array default and also eagerly evaluates a possibly absent legacy key. Ordinary multirow arrays fail before conversion. Use an explicit key-presence choice.",
+    "historical_commits": [
+      "645415411f3119e62b59fe79e26df504d23bbb1c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-flip-frame-index",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-flip-frame-index",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "c3d4a083de1c8a9b219b0607ef868c32176cc98e",
+    "remote_sha": "c3d4a083de1c8a9b219b0607ef868c32176cc98e",
+    "title": "Update flip-corrected angles at absolute frame indices",
+    "url": "https://github.com/dattalab/moseq2-app/pull/292",
+    "intentional_change": "Batch-relative indices are used against the whole-session angle dataset, corrupting earlier angles in later batches. Map decisions through each batch's absolute indices.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-flip-final-frame",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-flip-final-frame",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "2ae035bd51e2736aa7e2ca82ef74fff1477b78a5",
+    "remote_sha": "2ae035bd51e2736aa7e2ca82ef74fff1477b78a5",
+    "title": "Include the final frame in app flip correction",
+    "url": "https://github.com/dattalab/moseq2-app/pull/293",
+    "intentional_change": "The batch generator receives len(frames)-1 and never classifies the last frame. Supply the complete frame count.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-flip-overlap",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-flip-overlap",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "40ed4a22c405e0e6eb37a6526846339b981a389b",
+    "remote_sha": "40ed4a22c405e0e6eb37a6526846339b981a389b",
+    "title": "Commit each overlapping flip-classifier frame only once",
+    "url": "https://github.com/dattalab/moseq2-app/pull/294",
+    "intentional_change": "Overlapping batches can rotate the same frame twice. Keep classification context but defer trailing overlap and commit each frame once. The separate final-frame and absolute-angle-index defects are not folded into this change.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+      "36d40e098a5c4629116b7a4e233573218345bd5d"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-flip-lifecycle",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-flip-lifecycle",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "6a01d1caaa11e0f2705b2af46117a8a2a55b16e5",
+    "remote_sha": "6a01d1caaa11e0f2705b2af46117a8a2a55b16e5",
+    "title": "Refuse reprocessing of interrupted or completed flip corrections",
+    "url": "https://github.com/dattalab/moseq2-app/pull/295",
+    "intentional_change": "App correction mutates frames in place without a lifecycle guard. Repeating it silently unflips frames; interruption leaves an unmarked partial mutation. Flush an in-progress marker before mutation, record completion/failure, skip completed sessions, and refuse ambiguous reruns. This is not a transactional rollback or power-loss guarantee.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+      "bd103a987a0eaba50986b5cd2f992c2fb727809b",
+      "192921f1aff3ea58d3b1f268d71731ed222011d2",
+      "e0b85201226d03e15944473a734f71417698c31e"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-preview-finalization",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-preview-finalization",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "76de73e268bd1684fee75cdc2f5ac8d31eb1b363",
+    "remote_sha": "76de73e268bd1684fee75cdc2f5ac8d31eb1b363",
+    "title": "Finalize preview subprocesses when flip processing raises",
+    "url": "https://github.com/dattalab/moseq2-app/pull/296",
+    "intentional_change": "An exception exits before communicate(), leaving the preview subprocess unreaped. Use a per-session try/finally for finalization. This does not add MP4 faststart or solve codec policy.",
+    "historical_commits": [
+      "e0b85201226d03e15944473a734f71417698c31e"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-qc-percentages",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-qc-percentages",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "5bdbcf3d637124734b1afdd7bb260fac801cd3c7",
+    "remote_sha": "5bdbcf3d637124734b1afdd7bb260fac801cd3c7",
+    "title": "Print QC percentages before the generic truthy-value branch",
+    "url": "https://github.com/dattalab/moseq2-app/pull/297",
+    "intentional_change": "A nonzero float is consumed by a generic truthiness branch and its percentage is never shown. Handle percentage values first and promote the matching strict xfail to a hard regression.",
+    "historical_commits": [
+      "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-index-columns",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-index-columns",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "b8f048344686193b7623308c67742d72fca74849",
+    "remote_sha": "b8f048344686193b7623308c67742d72fca74849",
+    "title": "Do not serialize the display-only filename column into the index",
+    "url": "https://github.com/dattalab/moseq2-app/pull/298",
+    "intentional_change": "DataFrame.drop is not assigned, so the display column leaks into saved YAML. Assign the dropped frame and promote the matching strict xfail to a hard regression.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-latest-model",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-latest-model",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "616c6d193b730f862347e5877cbab5e335fa2baa",
+    "remote_sha": "616c6d193b730f862347e5877cbab5e335fa2baa",
+    "title": "Select the newest model path in progress discovery",
+    "url": "https://github.com/dattalab/moseq2-app/pull/299",
+    "intentional_change": "Ascending modification-time order chooses the oldest model despite the latest-model intent. Reverse the ordering.",
+    "historical_commits": [
+      "61861c3382d993cbba7522985d970de5c0f92ef9"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-qc-stationary",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-qc-stationary",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "4bfe8d656145dc0000171372e6c475b6683c2b0b",
+    "remote_sha": "4bfe8d656145dc0000171372e6c475b6683c2b0b",
+    "title": "Keep stationary-frame counts nonnegative",
+    "url": "https://github.com/dattalab/moseq2-app/pull/300",
+    "intentional_change": "Subtracting the initial-frame correction can produce -1 when no zero velocities exist. Clamp the count to zero.",
+    "historical_commits": [
+      "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-qc-integer-timestamps",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-qc-integer-timestamps",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "993a697ef8034b98443e7d4d18476c9579963f61",
+    "remote_sha": "993a697ef8034b98443e7d4d18476c9579963f61",
+    "title": "Rescale integer timestamps without an in-place casting error",
+    "url": "https://github.com/dattalab/moseq2-app/pull/301",
+    "intentional_change": "In-place division cannot store float seconds in an integer timestamp array. Use an out-of-place conversion and retain equivalent float-input behavior.",
+    "historical_commits": [
+      "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-qc-small-area",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-qc-small-area",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "dfefd76c8354cabbd5ef7d5eaf5f38f0f8f77da1",
+    "remote_sha": "dfefd76c8354cabbd5ef7d5eaf5f38f0f8f77da1",
+    "title": "Use mean minus two standard deviations for small-area QC",
+    "url": "https://github.com/dattalab/moseq2-app/pull/302",
+    "intentional_change": "The threshold uses (mean-2)*std instead of mean-2*std, contradicting the documented rule and depending on arbitrary area scaling. Restore the documented rule; no empirical threshold is introduced.",
+    "historical_commits": [
+      "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-sidecar-paths",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-sidecar-paths",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "b5ca7d0cded025d33fddc4ae5f073c758fac4335",
+    "remote_sha": "b5ca7d0cded025d33fddc4ae5f073c758fac4335",
+    "title": "Replace only the movie extension when finding sidecar files",
+    "url": "https://github.com/dattalab/moseq2-app/pull/303",
+    "intentional_change": "Global replacement of mp4 also rewrites parent directory names. Replace the trailing extension in extraction progress and scalar-sidecar discovery.",
+    "historical_commits": [
+      "61861c3382d993cbba7522985d970de5c0f92ef9",
+      "313c9b5bf180fd2dbacbec071dba39b9c4472743"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-cv-pca-leakage",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-cv-pca-leakage",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "3691c8b3861835ad5149726c31dee1aac7c9d92f",
+    "remote_sha": "3691c8b3861835ad5149726c31dee1aac7c9d92f",
+    "title": "Fit flip-classifier PCA within each cross-validation fold",
+    "url": "https://github.com/dattalab/moseq2-app/pull/304",
+    "intentional_change": "PCA is fitted to all frames before cross-validation, leaking test-fold information into feature construction. Put flattening and PCA inside the classifier pipeline. The regression checks pipeline structure without training a classifier.",
+    "historical_commits": [
+      "94b84918a3c6d4a228f1bc8a8b0e4808532dd841"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-transition-legend",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-transition-legend",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "820b3fad0ca364d9c4749d5ea4c53ebd5dbeee59",
+    "remote_sha": "820b3fad0ca364d9c4749d5ea4c53ebd5dbeee59",
+    "title": "Keep transition legend scale and signed differences consistent",
+    "url": "https://github.com/dattalab/moseq2-app/pull/305",
+    "intentional_change": "Edges use factors 250/400 but legends divide by 200/350; difference widths are absolute, so selecting negative widths loses every negative difference. Share the scales and pass signed probabilities through the legend path.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-foreign-movies",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-foreign-movies",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "8b151a00c664badab09eaedaac883a19646c7f32",
+    "remote_sha": "8b151a00c664badab09eaedaac883a19646c7f32",
+    "title": "Ignore unrelated movie filenames in the crowd-movie index",
+    "url": "https://github.com/dattalab/moseq2-app/pull/306",
+    "intentional_change": "The filename parser assumes every MP4 matches and crashes on an unrelated file. Skip nonmatches and parse arbitrary-width state IDs. The fixture contains names only, not video content.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-bootstrap-nans",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-bootstrap-nans",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "3eed4290850909b355fb8a29082bd1e8faa06daa",
+    "remote_sha": "3eed4290850909b355fb8a29082bd1e8faa06daa",
+    "title": "Exclude unobserved values before bootstrapping confidence limits",
+    "url": "https://github.com/dattalab/moseq2-app/pull/307",
+    "intentional_change": "All-NaN bootstrap resamples can poison percentile bounds even when valid observations exist. Drop missing observations first and return explicit NaNs if none remain. The global RNG policy is intentionally unchanged.",
+    "historical_commits": [
+      "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-memory-display",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-memory-display",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "9593b6d6e4e5e60abc0865386c22283f9ccb1103",
+    "remote_sha": "9593b6d6e4e5e60abc0865386c22283f9ccb1103",
+    "title": "Report the actual training-frame array byte size",
+    "url": "https://github.com/dattalab/moseq2-app/pull/308",
+    "intentional_change": "nbytes already measures bytes; multiplying it by four overstates the displayed allocation. Remove the extra factor without changing data or classifier behavior.",
+    "historical_commits": [
+      "94b84918a3c6d4a228f1bc8a8b0e4808532dd841"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "model-training-split",
+    "repository": "dattalab/moseq2-model",
+    "branch": "codex/final-model-training-split",
+    "base_sha": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "commit_sha": "c098468bb83dc0e796eff9b298bda3bc4af90d61",
+    "remote_sha": "c098468bb83dc0e796eff9b298bda3bc4af90d61",
+    "title": "Split validation data from the requested training boundary",
+    "url": "https://github.com/dattalab/moseq2-model/pull/102",
+    "intentional_change": "The training slice uses split_fraction*N, but validation starts at (1-split_fraction)*N. Non-half fractions overlap or leave gaps. Use one boundary and reject fractions outside (0,1).",
+    "historical_commits": [
+      "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "model-scan-parameters",
+    "repository": "dattalab/moseq2-model",
+    "branch": "codex/final-model-scan-parameters",
+    "base_sha": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "commit_sha": "48833663688c5a56743e751239581ca296a65bb3",
+    "remote_sha": "48833663688c5a56743e751239581ca296a65bb3",
+    "title": "Forward declared scientific options to scan-models commands",
+    "url": "https://github.com/dattalab/moseq2-model/pull/103",
+    "intentional_change": "Generated learn-model commands omit several already-supported CLI parameters, silently replacing requested settings with defaults. Forward the declared options, without adding removed legacy backend flags.",
+    "historical_commits": [
+      "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "model-export-identity",
+    "repository": "dattalab/moseq2-model",
+    "branch": "codex/final-model-export-identity",
+    "base_sha": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "commit_sha": "6b7357cb522712d8e3fd8c4e0e0d41a6a48a35d2",
+    "remote_sha": "6b7357cb522712d8e3fd8c4e0e0d41a6a48a35d2",
+    "title": "Bind exported label keys to the actual backend session order",
+    "url": "https://github.com/dattalab/moseq2-model/pull/105",
+    "intentional_change": "The export lists all loaded input keys even when held-out or n/a sessions were not modeled. Labels belong to the backend session order, so zipping the exported keys with labels can misattribute them. Export the current backend's stored session order. The regression mocks training and exercises only export plumbing.",
+    "historical_commits": [
+      "bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+    ],
+    "git_status_short": ""
+  },
+  {
+    "id": "app-preview-exit",
+    "repository": "dattalab/moseq2-app",
+    "branch": "codex/final-app-preview-exit",
+    "base_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "commit_sha": "b15995f14f449432e7c5e4bacca1504320bbcd87",
+    "remote_sha": "b15995f14f449432e7c5e4bacca1504320bbcd87",
+    "title": "Report failed preview-writer completion as an error",
+    "url": "https://github.com/dattalab/moseq2-app/pull/310",
+    "intentional_change": "The preview writer is waited on but its nonzero exit status is ignored, so failed ffmpeg completion looks successful. Check the completed process status and raise an actionable error. Separate subprocess cleanup/lifecycle changes are not folded in; fake successful and failed processes exercise this contract without encoding video.",
+    "historical_commits": [
+      "36d40e098a5c4629116b7a4e233573218345bd5d",
+      "e0b85201226d03e15944473a734f71417698c31e"
+    ],
+    "git_status_short": ""
+  }
+]

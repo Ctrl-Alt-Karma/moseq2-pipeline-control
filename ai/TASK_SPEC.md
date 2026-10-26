@@ -1,5 +1,15 @@
 # Current Task Specification
 
+## Terminal status — 2026-10-26
+
+The final upstream handoff and Owner closeout supersedes the historical task
+below. R1 is CLOSED BY OWNER before the final human qualitative gate, without
+production-validation PASS or scientific FAIL. No scientific operation is active
+or planned. Any future task requires explicit new Owner reopening authorization.
+See [the terminal handoff](HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md).
+
+## Historical task specification — not executable authorization
+
 Date: 2026-08-13
 
 ## Operation

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="2.015" timestamp="2026-10-26T12:50:00.286104-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE4.viz-metadata-order.test_regression" name="test_metadata_columns_follow_requested_key_order" time="1.442"><failure message="AssertionError: assert ['StartTime',...'SessionName'] == ['SessionName..., 'StartTime']&#10;  &#10;  At index 0 diff: 'StartTime' != 'SessionName'&#10;  Use -v to get more diff">test_results/PATCH_PLAN_WAVE4/viz-metadata-order/test_regression.py:22: in test_metadata_columns_follow_requested_key_order
+    assert [key for key in frame.columns if key in keys] == keys
+E   AssertionError: assert ['StartTime',...'SessionName'] == ['SessionName..., 'StartTime']
+E     
+E     At index 0 diff: 'StartTime' != 'SessionName'
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

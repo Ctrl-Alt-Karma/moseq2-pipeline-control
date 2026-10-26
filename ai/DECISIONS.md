@@ -1,5 +1,19 @@
 # Decisions
 
+## 2026-10-26 — additive upstream handoff and Owner closeout
+
+| ID | Decision | Rationale / primary record |
+|---|---|---|
+| D-057 | Record the accepted focused-fix/unit-test upstream workflow and extract area_mm merge. | Extract PR #180 merged as `81c49e6e7dac99afd64df8312accea8680555fc8`, head `bd5ed2232a91dbf92c421e00a6e8276a94afc0ac`; issue #179 closed completed. JRJacoby accepted maintainer-local testing and approval during CI modernization in issue comment `5415717874`. Live GitHub state was reacquired. No D-057 existed in the prior control history. This is not blanket acceptance of later PRs. |
+| D-058 | Index the accepted byte-proof transport and Katya companion R2 results at their actual claim/access boundaries. | `ACCEPTED_CONTINUITY_RESULTS.json` under the 2026-10-26 software evidence root binds both hashes/sizes and the Owner-supplied accepted verifier conclusions. Builder independently rehashed the byte-proof archive only; no arrays were opened. Companion archive/report were not reacquired. Review-tool/transport verification is not completed human review or final production validation. |
+| D-059 | **AJ / Karma closes R1 scientific validation before the final human qualitative gate, while incomplete.** | Owner's 2026-10-26 final-operation directive terminates the remaining blinded Tier-A / Tier-D domain-scientist review. `PASS_REAL_SESSION_PRODUCTION_VALIDATION` was never issued. Absence of final PASS is not scientific FAIL or biological invalidity/validity. Prior machine-side/software evidence retains its existing claim classes. No further scientific processing, retuning, model selection, validation or biological analysis is planned. The independent upstream software contribution track is handed to maintainers. Future work requires explicit new Owner reopening authorization. The final handoff and complete crosswalk are the terminal control-plane record. |
+
+Primary serialization: [closeout](MOSEQ2_UPSTREAM_HANDOFF_AND_PROJECT_CLOSEOUT_2026-10-26.md)
+and [handoff](HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md).
+Earlier decisions and the historical scientific seal remain unchanged below.
+
+## Earlier decisions — preserved history
+
 Decisions D-001 through D-018 are dated 2026-07-29. D-019 is dated
 2026-07-30. D-020 is dated 2026-07-31. D-021 through D-029 are dated
 2026-08-13.

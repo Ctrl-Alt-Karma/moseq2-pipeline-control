@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.653" timestamp="2026-10-26T12:42:35.157109-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE2.app-flip-final-frame.test_regression" name="test_flip_processes_the_final_frame" time="1.379"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;Mismatched elements: 12 / 64 (18.8%)&#10;First 5 mismatches are at indices:&#10; [1, 2]: 12 (ACTUAL), 0 (DESIRED)&#10; [1, 3]: 12 (ACTUAL), 0 (DESIRED)&#10; [1, 4]: 12 (ACTUAL), 0 (DESIRED)&#10; [2, 2]: 12 (ACTUAL), 0 (DESIRED)&#10; [2, 3]: 12 (ACTUAL), 0 (DESIRED)&#10;Max absolute difference among violations: 12&#10;Max relative difference among violations: 1.&#10; ACTUAL: array([[ 0,  0,  0,  0,  0,  0,  0,  0],&#10;       [ 0,  0, 12, 12, 12,  0,  0,  0],&#10;       [ 0,  0, 12, 12, 12,  0,  0,  0],...&#10; DESIRED: array([[ 0,  0,  0,  0,  0,  0,  0,  0],&#10;       [ 0,  0,  0,  0,  0,  0,  0,  0],&#10;       [ 0,  0,  0,  0,  0,  0,  0,  0],...">test_results/PATCH_PLAN_WAVE2/app-flip-final-frame/test_regression.py:30: in test_flip_processes_the_final_frame
+    np.testing.assert_array_equal(f["frames"][-1], np.rot90(original[-1], 2))
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 12 / 64 (18.8%)
+E   First 5 mismatches are at indices:
+E    [1, 2]: 12 (ACTUAL), 0 (DESIRED)
+E    [1, 3]: 12 (ACTUAL), 0 (DESIRED)
+E    [1, 4]: 12 (ACTUAL), 0 (DESIRED)
+E    [2, 2]: 12 (ACTUAL), 0 (DESIRED)
+E    [2, 3]: 12 (ACTUAL), 0 (DESIRED)
+E   Max absolute difference among violations: 12
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[ 0,  0,  0,  0,  0,  0,  0,  0],
+E          [ 0,  0, 12, 12, 12,  0,  0,  0],
+E          [ 0,  0, 12, 12, 12,  0,  0,  0],...
+E    DESIRED: array([[ 0,  0,  0,  0,  0,  0,  0,  0],
+E          [ 0,  0,  0,  0,  0,  0,  0,  0],
+E          [ 0,  0,  0,  0,  0,  0,  0,  0],...</failure></testcase></testsuite></testsuites>

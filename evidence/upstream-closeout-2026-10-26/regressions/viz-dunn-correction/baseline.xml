@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.915" timestamp="2026-10-26T12:37:47.026797-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.viz-dunn-correction.test_regression" name="test_dunn_multiple_comparisons_correct_across_syllables" time="0.642"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 3 / 4 (75%)&#10;Mismatch at indices:&#10; [0]: 0.001 (ACTUAL), 0.004 (DESIRED)&#10; [1]: 0.01 (ACTUAL), 0.02 (DESIRED)&#10; [2]: 0.04 (ACTUAL), 0.05333333333333334 (DESIRED)&#10;Max absolute difference among violations: 0.01333333&#10;Max relative difference among violations: 0.75&#10; ACTUAL: array([0.001, 0.01 , 0.04 , 0.2  ])&#10; DESIRED: array([0.004   , 0.02    , 0.053333, 0.2     ])">test_results/PATCH_PLAN_WAVE1/viz-dunn-correction/test_regression.py:18: in test_dunn_multiple_comparisons_correct_across_syllables
+    np.testing.assert_allclose(actual[("a", "b")], multipletests(raw, method="fdr_bh")[1])
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 3 / 4 (75%)
+E   Mismatch at indices:
+E    [0]: 0.001 (ACTUAL), 0.004 (DESIRED)
+E    [1]: 0.01 (ACTUAL), 0.02 (DESIRED)
+E    [2]: 0.04 (ACTUAL), 0.05333333333333334 (DESIRED)
+E   Max absolute difference among violations: 0.01333333
+E   Max relative difference among violations: 0.75
+E    ACTUAL: array([0.001, 0.01 , 0.04 , 0.2  ])
+E    DESIRED: array([0.004   , 0.02    , 0.053333, 0.2     ])</failure></testcase></testsuite></testsuites>

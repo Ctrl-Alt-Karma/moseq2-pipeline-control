@@ -1,0 +1,56 @@
+commit dfefd76c8354cabbd5ef7d5eaf5f38f0f8f77da1
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:04 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:04 2026 -0400
+
+    fix: use mean minus two standard deviations for small-area QC
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 313c9b5bf180fd2dbacbec071dba39b9c4472743
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/roi/validation.py b/moseq2_app/roi/validation.py
+index 990f48e..bc2724a 100644
+--- a/moseq2_app/roi/validation.py
++++ b/moseq2_app/roi/validation.py
+@@ -75,7 +75,7 @@ def count_missing_mouse_frames(scalar_df):
+ 
+ def count_frames_with_small_areas(scalar_df):
+     """
+-    Count the number of frames where the mouse area is smaller than 2 standard deviations of all mouse areas.
++    Count the number of frames where the mouse area is more than 2 standard deviations below the mean mouse area.
+ 
+     Args:
+     scalar_df (pd.DataFrame): dataframe that contains frame by frame scalar and syllable data (moseq_df/scalar_df)
+@@ -84,7 +84,7 @@ def count_frames_with_small_areas(scalar_df):
+     corrupt_frames (int): Number of frames where the recorded mouse area is too small
+     """
+ 
+-    return (scalar_df["area_px"] < 2 * scalar_df["area_px"].std()).sum()
++    return (scalar_df["area_px"] < scalar_df["area_px"].mean() - 2 * scalar_df["area_px"].std()).sum()
+ 
+ 
+ def count_stationary_frames(scalar_df):
+diff --git a/tests/software/test_closeout_app_qc_small_area.py b/tests/software/test_closeout_app_qc_small_area.py
+new file mode 100644
+index 0000000..88ea799
+--- /dev/null
++++ b/tests/software/test_closeout_app_qc_small_area.py
+@@ -0,0 +1,14 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++def test_small_area_qc_is_scale_invariant():
++    from moseq2_app.roi.validation import count_frames_with_small_areas
++    values = pd.DataFrame({"area_px": [100.] * 19 + [70.]})
++    assert count_frames_with_small_areas(values) == 1
++    assert count_frames_with_small_areas(values * 5) == 1

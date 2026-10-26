@@ -1,0 +1,1226 @@
+[
+  {
+    "id": "extract-integer-coordinates",
+    "push_checked_at": "2026-10-26T17:13:00.699795+00:00",
+    "pr_checked_at": "2026-10-26T17:16:05.869378+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "1db5ed44c6b58f400f46c404e483203d7727308412a610ddb1c7c85af75d14dc",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-pinhole-geometry",
+    "push_checked_at": "2026-10-26T17:13:05.663190+00:00",
+    "pr_checked_at": "2026-10-26T17:16:13.786489+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "d3503cf090442ebab0ffca9cb3e59ec046115d5c9f9e6366afcc6a3c7855b770",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-mixed-unit-velocity",
+    "push_checked_at": "2026-10-26T17:13:10.725323+00:00",
+    "pr_checked_at": "2026-10-26T17:16:22.270237+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "b49306cfeea598e22641407ea06af0cea076dc21a30495b66469ac92ac633f56",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-hampel-centroid",
+    "push_checked_at": "2026-10-26T17:13:16.178912+00:00",
+    "pr_checked_at": "2026-10-26T17:16:29.792890+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "8deace7835b29ac6f0b6396f88b60cccc42e61966234a2c2b4012426508ea84d",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-hampel-angle",
+    "push_checked_at": "2026-10-26T17:13:20.963539+00:00",
+    "pr_checked_at": "2026-10-26T17:16:36.486729+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "765aac7a91f74cab52ad062973ca879cf5ac7c6160234652f60d87f889721267",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-ransac-seed",
+    "push_checked_at": "2026-10-26T17:13:24.869244+00:00",
+    "pr_checked_at": "2026-10-26T17:16:43.460144+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "7003316af656d821e33fff6cfa77315fbf6b1a7b763a921e1e2bc5f8b21d352b",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-ransac-failure",
+    "push_checked_at": "2026-10-26T17:13:29.080042+00:00",
+    "pr_checked_at": "2026-10-26T17:16:50.174423+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "49ae91a730ac4826358873595e82913cb13bcbffff90c309d08dd0b5e8393681",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-depth-byte-order",
+    "push_checked_at": "2026-10-26T17:13:33.023946+00:00",
+    "pr_checked_at": "2026-10-26T17:16:58.307697+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "ea92f72716e63bdd59be564da46ae88d537e53da33b14099c934dad963de25e8",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "extract-unsigned-raw-depth",
+    "push_checked_at": "2026-10-26T17:13:36.916768+00:00",
+    "pr_checked_at": "2026-10-26T17:17:04.479633+00:00",
+    "target_sha": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "dde2c65b122d31693d06c6bc70cfec5f2c1128acf880ea0f83b270cbae70dbcf",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "pca-symmetric-kernel",
+    "push_checked_at": "2026-10-26T17:13:40.739323+00:00",
+    "pr_checked_at": "2026-10-26T17:17:11.118973+00:00",
+    "target_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "bdaddb0f8449ec03d5a8d7e9248006a2c6facde4de857a7f0d4676c584090055",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "pca-changepoint-sigma",
+    "push_checked_at": "2026-10-26T17:13:45.379850+00:00",
+    "pr_checked_at": "2026-10-26T17:17:19.029931+00:00",
+    "target_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "9c368ad8777e6156158cc3320521e1605aca8383e491a491ddee741b5656be4f",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "pca-disabled-smoothing",
+    "push_checked_at": "2026-10-26T17:13:49.237634+00:00",
+    "pr_checked_at": "2026-10-26T17:17:25.496598+00:00",
+    "target_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "d33ae2b921aa6268ce78563bd46a2b3107854bdfe4759b2288e45d14a8df2550",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "pca-session-timestamps",
+    "push_checked_at": "2026-10-26T17:13:53.353493+00:00",
+    "pr_checked_at": "2026-10-26T17:17:31.786624+00:00",
+    "target_sha": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "9e61931d6c91cff2d4cab873a536f594814a4babfee24a1449ca8fd7096b9740",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-integer-coordinates",
+    "push_checked_at": "2026-10-26T17:13:57.250233+00:00",
+    "pr_checked_at": "2026-10-26T17:17:39.181218+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "100160000467417e1b541926319c72b782f76cd0f0c3ec96d3f910dcac74c297",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-pinhole-geometry",
+    "push_checked_at": "2026-10-26T17:14:01.739623+00:00",
+    "pr_checked_at": "2026-10-26T17:17:45.946601+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "da00065bc45ed0295addcf6ffb27e31a12bdd4ad32d3203ea834bde2d0cff4ad",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-high-state-ranks",
+    "push_checked_at": "2026-10-26T17:14:05.601762+00:00",
+    "pr_checked_at": "2026-10-26T17:17:53.040811+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "ab947ccc67f6783861f16333782face049c947bfc906ee4dfe1778ea6f7873e0",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-coverage-count",
+    "push_checked_at": "2026-10-26T17:14:10.448462+00:00",
+    "pr_checked_at": "2026-10-26T17:18:02.170034+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "99e9b896bc0a8f4e022b2d2bd1815f85f549edb61830c6fd7ee593f3d04033b7",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-first-transition",
+    "push_checked_at": "2026-10-26T17:14:14.543317+00:00",
+    "pr_checked_at": "2026-10-26T17:18:09.277361+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "94f69413c8d67153aa18dd37c7c853acaf8e4fd8d1912bfc3f2c0d2b6ca7fd2b",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-pairwise-groups",
+    "push_checked_at": "2026-10-26T17:14:19.951873+00:00",
+    "pr_checked_at": "2026-10-26T17:18:16.413249+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "fa768c8c1527d14d327562c393a3b51ef5128cb4b6685952cc517591720624f6",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-dunn-correction",
+    "push_checked_at": "2026-10-26T17:14:24.206400+00:00",
+    "pr_checked_at": "2026-10-26T17:18:23.289437+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "d8e56b982338cfff80791b595da4d7575c1e0227febc55bed3a896ea4e8cef94",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-constant-ztest",
+    "push_checked_at": "2026-10-26T17:14:28.341641+00:00",
+    "pr_checked_at": "2026-10-26T17:18:30.377097+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "0bd1130f07562167cad2bf6c70d23b04feb0850b206c8c49d203cb2cda44374e",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-empty-usages",
+    "push_checked_at": "2026-10-26T17:14:32.196448+00:00",
+    "pr_checked_at": "2026-10-26T17:18:37.559562+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "a2ec668191b2bca3efa7180c1174c3407ca6fdc3d558ef4fdf86fa2560d34ddf",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-entropy-default",
+    "push_checked_at": "2026-10-26T17:14:35.865973+00:00",
+    "pr_checked_at": "2026-10-26T17:18:44.496423+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "f5f559839b4aeaf36cfa3bd8f09702e4254db302d093ced3607a468f1b4b2d83",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-metadata-order",
+    "push_checked_at": "2026-10-26T17:14:40.636563+00:00",
+    "pr_checked_at": "2026-10-26T17:18:51.680341+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "9172846445f3bbfe4b8a1d1d119f05c5ff68636895f2058253f4533c8979f236",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-graph-legend",
+    "push_checked_at": "2026-10-26T17:14:44.599376+00:00",
+    "pr_checked_at": "2026-10-26T17:18:58.495723+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "70901980912d186fb04d171c63a3bf54b71fce9dc27b6e20e6fe972ed6aece88",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-merge-models",
+    "push_checked_at": "2026-10-26T17:14:48.525024+00:00",
+    "pr_checked_at": "2026-10-26T17:19:05.315056+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "b8be344f905162a1044df39cbaa858c9a213998ce4098d7491407a568db351e5",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-best-fit-summary",
+    "push_checked_at": "2026-10-26T17:14:52.492047+00:00",
+    "pr_checked_at": "2026-10-26T17:19:14.474454+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "8b4a31d105a9e276a377219fe1a673c0b2f6d91549a562c42614368527ea2351",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-legacy-area",
+    "push_checked_at": "2026-10-26T17:14:56.629650+00:00",
+    "pr_checked_at": "2026-10-26T17:19:21.068812+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "b72991821a198176940c58a07cae137802cb31f9af0ed9e9bb490a733301dc20",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-sparse-nodes",
+    "push_checked_at": "2026-10-26T17:15:01.728690+00:00",
+    "pr_checked_at": "2026-10-26T17:19:29.360669+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "cfccd367e9337a821f517bbe91e278c3deb17bfe66961fc67f90115670c522ef",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "viz-legacy-keys",
+    "push_checked_at": "2026-10-26T17:15:05.803435+00:00",
+    "pr_checked_at": "2026-10-26T17:19:36.275055+00:00",
+    "target_sha": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "ef3e11018da1671e7be20deea2f0169f5ea6b9ee682c0b4caa2e831c5b0a5de4",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-flip-frame-index",
+    "push_checked_at": "2026-10-26T17:15:11.211600+00:00",
+    "pr_checked_at": "2026-10-26T17:20:57.653557+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "fefb53898369cd084d998e583a4ab65b2eea8b6aca693e624ae3c63118840eda",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-flip-final-frame",
+    "push_checked_at": "2026-10-26T17:15:15.788430+00:00",
+    "pr_checked_at": "2026-10-26T17:21:05.139039+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "8646340d299a5325694a5d9bf67931164f90a57ad51d43ecfdc97da45123c887",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-flip-overlap",
+    "push_checked_at": "2026-10-26T17:15:20.926945+00:00",
+    "pr_checked_at": "2026-10-26T17:21:12.141280+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "606a6fecd9ff30c6c138037f7fc4b815ac6a16c4b4411dfbc590320d0d8e0efd",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-flip-lifecycle",
+    "push_checked_at": "2026-10-26T17:15:26.704253+00:00",
+    "pr_checked_at": "2026-10-26T17:21:19.964698+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "c4a9075073dbea41dec25142ef7fa3d53a17adb3dee861179cf4f688e147f541",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-preview-finalization",
+    "push_checked_at": "2026-10-26T17:15:32.958921+00:00",
+    "pr_checked_at": "2026-10-26T17:21:27.855500+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "3237f7139a34d3046cb43c39a7ccdd45b0a6872ca1558d7d541470623487f491",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-qc-percentages",
+    "push_checked_at": "2026-10-26T17:15:37.656796+00:00",
+    "pr_checked_at": "2026-10-26T17:21:36.083164+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "d8b59406e0cc562d312961b9675b42960c949c59d7e8a413e336762c9ebd84c5",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-index-columns",
+    "push_checked_at": "2026-10-26T17:15:42.629252+00:00",
+    "pr_checked_at": "2026-10-26T17:21:42.627443+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "5a8e445aff19d45d8fed379151b8def4a763c44fda91ddc39a1c13da2824c4f6",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-latest-model",
+    "push_checked_at": "2026-10-26T17:15:47.542272+00:00",
+    "pr_checked_at": "2026-10-26T17:21:49.177969+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "8632683ec3119318d9edf982da8701580e804ecb28fdfeb62f178726bf010dbd",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-qc-stationary",
+    "push_checked_at": "2026-10-26T17:15:52.404687+00:00",
+    "pr_checked_at": "2026-10-26T17:21:55.606153+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "653c9306392ea8cf289da735df043c5a9d3c4ab0084ade6ae91d8bcb02fd36f8",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-qc-integer-timestamps",
+    "push_checked_at": "2026-10-26T17:15:57.647366+00:00",
+    "pr_checked_at": "2026-10-26T17:22:02.501849+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "f3755b8d97bc4e604248d0bf8e1fdc457f75d29206b21ba8a1954d3178cc3db0",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-qc-small-area",
+    "push_checked_at": "2026-10-26T17:16:02.143908+00:00",
+    "pr_checked_at": "2026-10-26T17:22:08.999570+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "a6496657bca7935e505b1d917d1213351dfc5e1d1e708dd084f0239a2ecae1c2",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-sidecar-paths",
+    "push_checked_at": "2026-10-26T17:16:06.561919+00:00",
+    "pr_checked_at": "2026-10-26T17:22:15.710211+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "a1cfa72e2502c74393b2b701aa5cf3e94168c151d2ada652b8e4bbde35cabe30",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-cv-pca-leakage",
+    "push_checked_at": "2026-10-26T17:16:11.117861+00:00",
+    "pr_checked_at": "2026-10-26T17:22:22.088998+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "f536cab323f9fb39c1a4ab0ba9500244bb0a0742e8173d4c066cc00e4fea85eb",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-transition-legend",
+    "push_checked_at": "2026-10-26T17:16:15.618971+00:00",
+    "pr_checked_at": "2026-10-26T17:22:29.496025+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "fbbde86565e54a2c7b4b7cd47ebe4cfe0f7aba161c3b385fc887eed5cafdd567",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-foreign-movies",
+    "push_checked_at": "2026-10-26T17:16:20.243842+00:00",
+    "pr_checked_at": "2026-10-26T17:22:36.635419+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "0d3429c06e686a051c1ddbf7c1579666b937106a27634cb2ad2ce0847a9d190c",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-bootstrap-nans",
+    "push_checked_at": "2026-10-26T17:16:24.430444+00:00",
+    "pr_checked_at": "2026-10-26T17:22:43.566827+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "c5f85db39df664ddd9cd0441335e45ff690ba72317be195a4ee276f81e57d667",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-memory-display",
+    "push_checked_at": "2026-10-26T17:16:28.682030+00:00",
+    "pr_checked_at": "2026-10-26T17:22:51.359119+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "43d856383f5a1708f1999b0b7ae2d6d8e4fe9193a4c77f5f9d4e71701ef0c87d",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "model-training-split",
+    "push_checked_at": "2026-10-26T17:16:33.040045+00:00",
+    "pr_checked_at": "2026-10-26T17:22:58.559332+00:00",
+    "target_sha": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "df2422354058604298209a87811e509856e6b664df458dbf46a0f11d6ab83ec0",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "model-scan-parameters",
+    "push_checked_at": "2026-10-26T17:16:37.511090+00:00",
+    "pr_checked_at": "2026-10-26T17:23:05.384856+00:00",
+    "target_sha": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "e73676b4901608fdd4648358520ba57ad47323b4abd635675c44947438c85039",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "model-export-identity",
+    "push_checked_at": "2026-10-26T17:23:53.130411+00:00",
+    "pr_checked_at": "2026-10-26T17:26:25.915879+00:00",
+    "target_sha": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "38a593f066a95c694928e40d8bad32f21a94cabdb0d9eb0cce66688543f66080",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  },
+  {
+    "id": "app-preview-exit",
+    "push_checked_at": "2026-10-26T17:29:03.172079+00:00",
+    "pr_checked_at": "2026-10-26T17:29:08.721721+00:00",
+    "target_sha": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "upstream_protected": true,
+    "upstream_active_rules": [],
+    "upstream_rulesets": [],
+    "branch_protection_summary": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "auxiliary_graphql_probe": {
+      "classification": "SCHEMA_ONLY_NOT_CLASSIC_PROTECTION",
+      "raw_receipt_sha256": "42854fd02793b9f1f39d67f768987d05efb591d52eaf9c0bf7658bfd08271212",
+      "limitation": "The query-string invocation returned schema introspection, not branch rules. Do not treat it as a classic-protection check. REST branch summary, active rules and rulesets were read before the write."
+    },
+    "fork_rulesets": [],
+    "fork_default_protected": false
+  }
+]

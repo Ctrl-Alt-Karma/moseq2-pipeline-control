@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="2.639" timestamp="2026-10-26T13:02:56.614635-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE5_CORRECTIONS.app-transition-legend.test_regression" name="test_transition_legend_inverts_the_drawn_scale" time="1.978"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 2 / 2 (100%)&#10;Mismatch at indices:&#10; [0]: 0.005 (ACTUAL), 0.004 (DESIRED)&#10; [1]: 0.015 (ACTUAL), 0.012 (DESIRED)&#10;Max absolute difference among violations: 0.003&#10;Max relative difference among violations: 0.25&#10; ACTUAL: array([0.005, 0.015])&#10; DESIRED: array([0.004, 0.012])">test_results/PATCH_PLAN_WAVE5_CORRECTIONS/app-transition-legend/test_regression.py:13: in test_transition_legend_inverts_the_drawn_scale
+    np.testing.assert_allclose(actual, [.004, .012])
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 0.005 (ACTUAL), 0.004 (DESIRED)
+E    [1]: 0.015 (ACTUAL), 0.012 (DESIRED)
+E   Max absolute difference among violations: 0.003
+E   Max relative difference among violations: 0.25
+E    ACTUAL: array([0.005, 0.015])
+E    DESIRED: array([0.004, 0.012])</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE5_CORRECTIONS.app-transition-legend.test_regression" name="test_difference_legend_retains_negative_edge_probabilities" time="0.001"><failure message="TypeError: get_minmax_tp() got an unexpected keyword argument 'signed_weights'">test_results/PATCH_PLAN_WAVE5_CORRECTIONS/app-transition-legend/test_regression.py:24: in test_difference_legend_retains_negative_edge_probabilities
+    np.testing.assert_allclose(get_minmax_tp(widths, True, signed_weights=weights), [.01, .01, .02, .02])
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: get_minmax_tp() got an unexpected keyword argument 'signed_weights'</failure></testcase></testsuite></testsuites>

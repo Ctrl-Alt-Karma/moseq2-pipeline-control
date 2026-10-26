@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.499" timestamp="2026-10-26T12:37:36.617791-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.viz-first-transition.test_regression" name="test_transition_matrix_counts_initial_transition" time="0.241"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;Mismatched elements: 1 / 4 (25%)&#10;Mismatch at index:&#10; [0, 1]: 0.0 (ACTUAL), 1 (DESIRED)&#10;Max absolute difference among violations: 1.&#10;Max relative difference among violations: 1.&#10; ACTUAL: array([[0., 0.],&#10;       [1., 0.]])&#10; DESIRED: array([[0, 1],&#10;       [1, 0]])">test_results/PATCH_PLAN_WAVE1/viz-first-transition/test_regression.py:11: in test_transition_matrix_counts_initial_transition
+    np.testing.assert_array_equal(actual, [[0, 1], [1, 0]])
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 1 / 4 (25%)
+E   Mismatch at index:
+E    [0, 1]: 0.0 (ACTUAL), 1 (DESIRED)
+E   Max absolute difference among violations: 1.
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[0., 0.],
+E          [1., 0.]])
+E    DESIRED: array([[0, 1],
+E          [1, 0]])</failure></testcase></testsuite></testsuites>

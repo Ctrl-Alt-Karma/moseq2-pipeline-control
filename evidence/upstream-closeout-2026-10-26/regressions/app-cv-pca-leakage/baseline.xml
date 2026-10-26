@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.084" timestamp="2026-10-26T12:43:17.879761-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE2.app-cv-pca-leakage.test_regression" name="test_flip_pca_is_inside_cross_validation_pipeline" time="0.795"><failure message="AssertionError: PCA fitted before cross-validation">test_results/PATCH_PLAN_WAVE2/app-cv-pca-leakage/test_regression.py:30: in test_flip_pca_is_inside_cross_validation_pipeline
+    assert isinstance(train.train_classifier(str(path), n_components=2), FakePipeline)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_app/flip/train.py:115: in train_classifier
+    pca.fit(flatten(frames[-len(frames) // 3:]))
+test_results/PATCH_PLAN_WAVE2/app-cv-pca-leakage/test_regression.py:18: in fit
+    raise AssertionError("PCA fitted before cross-validation")
+E   AssertionError: PCA fitted before cross-validation</failure></testcase></testsuite></testsuites>

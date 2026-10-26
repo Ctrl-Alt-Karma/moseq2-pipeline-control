@@ -1,0 +1,559 @@
+{
+  "checked_at_utc": "2026-10-26T18:07:07.473718+00:00",
+  "pull_requests": [
+    {
+      "id": "extract-integer-coordinates",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/182",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-integer-coordinates",
+      "head_sha": "b00699aad6320d29dc7a5bbb44668f035378d920",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-pinhole-geometry",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/183",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-pinhole-geometry",
+      "head_sha": "f9987793dc033196b9376ffd3fa3f79c55b99e0c",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-mixed-unit-velocity",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/184",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-mixed-unit-velocity",
+      "head_sha": "9674e130f0b27a17bd8d0280c6cd2d38e2e831d4",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-hampel-centroid",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/185",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-hampel-centroid",
+      "head_sha": "6212b47b32fec47de4c63cb808b287a042d80144",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-hampel-angle",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/186",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-hampel-angle",
+      "head_sha": "69fae4f7e333227af3f688ccee4fc1678ea176a0",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-ransac-seed",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/187",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-ransac-seed",
+      "head_sha": "89e778a7a8f63c5f7ec243d8a5d521dc2e826333",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-ransac-failure",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/188",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-ransac-failure",
+      "head_sha": "050f5bcb6a806717cc93ea90392090100a5bb8e1",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-depth-byte-order",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/189",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-depth-byte-order",
+      "head_sha": "4ac319b7772b4e62e3a8800525aaf9c3c8987311",
+      "base_ref": "release"
+    },
+    {
+      "id": "extract-unsigned-raw-depth",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/190",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-extract-unsigned-raw-depth",
+      "head_sha": "2bbebcda4556d0c665ba80483cc2f2f006be84b2",
+      "base_ref": "release"
+    },
+    {
+      "id": "pca-symmetric-kernel",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/133",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-pca-symmetric-kernel",
+      "head_sha": "d8f975fdadf8e58eea2cb3b86a7f26fcbcdd06af",
+      "base_ref": "release"
+    },
+    {
+      "id": "pca-changepoint-sigma",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/134",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-pca-changepoint-sigma",
+      "head_sha": "c1622a232020686671061d3f4f69cdee8d834970",
+      "base_ref": "release"
+    },
+    {
+      "id": "pca-disabled-smoothing",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/135",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-pca-disabled-smoothing",
+      "head_sha": "62b50277d3d1d9d9b350eff274c732ff0184d7ce",
+      "base_ref": "release"
+    },
+    {
+      "id": "pca-session-timestamps",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/136",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-pca-session-timestamps",
+      "head_sha": "24eb72e75d022340f6cf96f6d820d72f7547d502",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-integer-coordinates",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/190",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-integer-coordinates",
+      "head_sha": "31021b517a0e857343c6d37d18a45ea8696c4cca",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-pinhole-geometry",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/191",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-pinhole-geometry",
+      "head_sha": "d588667ed06008faf622a3e0398d273e84ff09e2",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-high-state-ranks",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/192",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-high-state-ranks",
+      "head_sha": "bbc70097f5a2c650dc6ccaeb070e2c6c8d3db79a",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-coverage-count",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/193",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-coverage-count",
+      "head_sha": "2361167d74c65589ab91c9f7ef2a6ac0103c33d9",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-first-transition",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/194",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-first-transition",
+      "head_sha": "ac381ddc2aacebf951c9f2df7e5f50fdea938b9d",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-pairwise-groups",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/195",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-pairwise-groups",
+      "head_sha": "37cf1671cc57c0776124426d800bdaaa1c5ba10a",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-dunn-correction",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/196",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-dunn-correction",
+      "head_sha": "6b48bbe33895e08610c69e0c7496cfad658dd57a",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-constant-ztest",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/197",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-constant-ztest",
+      "head_sha": "7308cbf71eb011ae2905b92dcaba17b8bc7151ac",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-empty-usages",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/198",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-empty-usages",
+      "head_sha": "0b20df4c1a5e6e04d9902c3bc245209d52e4de63",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-entropy-default",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/199",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-entropy-default",
+      "head_sha": "1251cfe2474cfe21b461525dcb12f074b0855787",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-metadata-order",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/200",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-metadata-order",
+      "head_sha": "448f18b34f7b3c57d92a85d0f3544ca52062b1ff",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-graph-legend",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/201",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-graph-legend",
+      "head_sha": "e156173cc3ca3c1b787f06948d5f57fd83a7857a",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-merge-models",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/202",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-merge-models",
+      "head_sha": "767c6869d80c66b6f2464b1b4b758482a8456a73",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-best-fit-summary",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/203",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-best-fit-summary",
+      "head_sha": "c813d9c1b18b711a4ec5a71fd4521f9a2e5940c3",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-legacy-area",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/204",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-legacy-area",
+      "head_sha": "d611143a12ccd955706ea476fe7d482abde25394",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-sparse-nodes",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/205",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-sparse-nodes",
+      "head_sha": "05f5e58c47e91e1ada2a340550b5e1584ae0ea98",
+      "base_ref": "release"
+    },
+    {
+      "id": "viz-legacy-keys",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/206",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-viz-legacy-keys",
+      "head_sha": "2aadf69c3753315b58e900150f04d482b5ece0a2",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-flip-frame-index",
+      "url": "https://github.com/dattalab/moseq2-app/pull/292",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-flip-frame-index",
+      "head_sha": "c3d4a083de1c8a9b219b0607ef868c32176cc98e",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-flip-final-frame",
+      "url": "https://github.com/dattalab/moseq2-app/pull/293",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-flip-final-frame",
+      "head_sha": "2ae035bd51e2736aa7e2ca82ef74fff1477b78a5",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-flip-overlap",
+      "url": "https://github.com/dattalab/moseq2-app/pull/294",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-flip-overlap",
+      "head_sha": "40ed4a22c405e0e6eb37a6526846339b981a389b",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-flip-lifecycle",
+      "url": "https://github.com/dattalab/moseq2-app/pull/295",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-flip-lifecycle",
+      "head_sha": "6a01d1caaa11e0f2705b2af46117a8a2a55b16e5",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-preview-finalization",
+      "url": "https://github.com/dattalab/moseq2-app/pull/296",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-preview-finalization",
+      "head_sha": "76de73e268bd1684fee75cdc2f5ac8d31eb1b363",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-qc-percentages",
+      "url": "https://github.com/dattalab/moseq2-app/pull/297",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-qc-percentages",
+      "head_sha": "5bdbcf3d637124734b1afdd7bb260fac801cd3c7",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-index-columns",
+      "url": "https://github.com/dattalab/moseq2-app/pull/298",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-index-columns",
+      "head_sha": "b8f048344686193b7623308c67742d72fca74849",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-latest-model",
+      "url": "https://github.com/dattalab/moseq2-app/pull/299",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-latest-model",
+      "head_sha": "616c6d193b730f862347e5877cbab5e335fa2baa",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-qc-stationary",
+      "url": "https://github.com/dattalab/moseq2-app/pull/300",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-qc-stationary",
+      "head_sha": "4bfe8d656145dc0000171372e6c475b6683c2b0b",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-qc-integer-timestamps",
+      "url": "https://github.com/dattalab/moseq2-app/pull/301",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-qc-integer-timestamps",
+      "head_sha": "993a697ef8034b98443e7d4d18476c9579963f61",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-qc-small-area",
+      "url": "https://github.com/dattalab/moseq2-app/pull/302",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-qc-small-area",
+      "head_sha": "dfefd76c8354cabbd5ef7d5eaf5f38f0f8f77da1",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-sidecar-paths",
+      "url": "https://github.com/dattalab/moseq2-app/pull/303",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-sidecar-paths",
+      "head_sha": "b5ca7d0cded025d33fddc4ae5f073c758fac4335",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-cv-pca-leakage",
+      "url": "https://github.com/dattalab/moseq2-app/pull/304",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-cv-pca-leakage",
+      "head_sha": "3691c8b3861835ad5149726c31dee1aac7c9d92f",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-transition-legend",
+      "url": "https://github.com/dattalab/moseq2-app/pull/305",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-transition-legend",
+      "head_sha": "820b3fad0ca364d9c4749d5ea4c53ebd5dbeee59",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-foreign-movies",
+      "url": "https://github.com/dattalab/moseq2-app/pull/306",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-foreign-movies",
+      "head_sha": "8b151a00c664badab09eaedaac883a19646c7f32",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-bootstrap-nans",
+      "url": "https://github.com/dattalab/moseq2-app/pull/307",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-bootstrap-nans",
+      "head_sha": "3eed4290850909b355fb8a29082bd1e8faa06daa",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-memory-display",
+      "url": "https://github.com/dattalab/moseq2-app/pull/308",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-memory-display",
+      "head_sha": "9593b6d6e4e5e60abc0865386c22283f9ccb1103",
+      "base_ref": "release"
+    },
+    {
+      "id": "model-training-split",
+      "url": "https://github.com/dattalab/moseq2-model/pull/102",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-model-training-split",
+      "head_sha": "c098468bb83dc0e796eff9b298bda3bc4af90d61",
+      "base_ref": "release"
+    },
+    {
+      "id": "model-scan-parameters",
+      "url": "https://github.com/dattalab/moseq2-model/pull/103",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-model-scan-parameters",
+      "head_sha": "48833663688c5a56743e751239581ca296a65bb3",
+      "base_ref": "release"
+    },
+    {
+      "id": "model-export-identity",
+      "url": "https://github.com/dattalab/moseq2-model/pull/105",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-model-export-identity",
+      "head_sha": "6b7357cb522712d8e3fd8c4e0e0d41a6a48a35d2",
+      "base_ref": "release"
+    },
+    {
+      "id": "app-preview-exit",
+      "url": "https://github.com/dattalab/moseq2-app/pull/310",
+      "state": "open",
+      "merged_at": null,
+      "draft": false,
+      "fork_branch": "codex/final-app-preview-exit",
+      "head_sha": "b15995f14f449432e7c5e4bacca1504320bbcd87",
+      "base_ref": "release"
+    }
+  ],
+  "issues": [
+    {
+      "id": "extract-background-dropouts",
+      "url": "https://github.com/dattalab/moseq2-extract/issues/191",
+      "state": "open"
+    },
+    {
+      "id": "extract-auto-floor-center",
+      "url": "https://github.com/dattalab/moseq2-extract/issues/192",
+      "state": "open"
+    },
+    {
+      "id": "viz-missing-scalar-observations",
+      "url": "https://github.com/dattalab/moseq2-viz/issues/207",
+      "state": "open"
+    },
+    {
+      "id": "model-heldout-whitening",
+      "url": "https://github.com/dattalab/moseq2-model/issues/104",
+      "state": "open"
+    },
+    {
+      "id": "viz-invalid-mixed-unit-scalar",
+      "url": "https://github.com/dattalab/moseq2-viz/issues/208",
+      "state": "open"
+    },
+    {
+      "id": "app-missing-heatmap",
+      "url": "https://github.com/dattalab/moseq2-app/issues/309",
+      "state": "open"
+    }
+  ],
+  "remote_heads_at_closeout": {
+    "dattalab/moseq2-extract": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+    "dattalab/moseq2-pca": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+    "dattalab/moseq2-model": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+    "dattalab/moseq2-viz": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+    "dattalab/moseq2-app": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+    "dattalab/moseq2-test": "9e696dbbc3e36169366ec309656b87183524ff3d",
+    "Ctrl-Alt-Karma/bridge": "a919e0ad170134fcce5ef56de14c1cf352130165"
+  },
+  "upstream_merge_performed_by_builder": false,
+  "publication_access": "Owner-account CLI; connector integration refused PR write with HTTP403.",
+  "required_scope": "PR/issue creation only; no bypass of protected-branch requirements."
+}

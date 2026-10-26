@@ -1,0 +1,62 @@
+commit 448f18b34f7b3c57d92a85d0f3544ca52062b1ff
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:42 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:42 2026 -0400
+
+    fix: preserve the requested metadata column order
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: b80192dc20353bf77c36610f315543b57afa908c
+    
+    Co-authored-by: AJ Mitchell <ajmitchell@cheviot.lan>
+
+diff --git a/moseq2_viz/scalars/util.py b/moseq2_viz/scalars/util.py
+index 1e800f3..14d402e 100644
+--- a/moseq2_viz/scalars/util.py
++++ b/moseq2_viz/scalars/util.py
+@@ -458,7 +458,7 @@ def scalars_to_dataframe(index: dict, include_keys: list = ['SessionName', 'Subj
+             'h5_path': pth,
+             'timestamps': timestamps,
+             'frame index': np.arange(len(timestamps))},
+-            keyfilter(lambda x: x in include_keys, v['metadata'])
++            {key: v['metadata'][key] for key in include_keys if key in v['metadata']}
+         )
+ 
+         try:
+@@ -688,4 +688,4 @@ def compute_syllable_position_heatmaps(scalar_df, syllable_key='labels (usage so
+     filtered_df = scalar_df[scalar_df[syllable_key].isin(syllables)]
+     hists = filtered_df.groupby(['group', 'uuid', 'SessionName', 'SubjectName', syllable_key]).apply(_compute_histogram)
+ 
+-    return hists
+\ No newline at end of file
++    return hists
+diff --git a/tests/unit_tests/test_closeout_viz_metadata_order.py b/tests/unit_tests/test_closeout_viz_metadata_order.py
+new file mode 100644
+index 0000000..3a52577
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_metadata_order.py
+@@ -0,0 +1,22 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++
++
++def test_metadata_columns_follow_requested_key_order(monkeypatch):
++    import moseq2_viz.scalars.util as util
++    def values(filename, path=None):
++        if path == "scalars":
++            return {"centroid_x_px": np.ones(4), "centroid_y_px": np.ones(4)}
++        raise KeyError("synthetic fixture has no ROI")
++    monkeypatch.setattr(util, "h5_to_dict", values)
++    monkeypatch.setattr(util, "get_timestamps_from_h5", lambda path: np.arange(4))
++    keys = ["SessionName", "SubjectName", "StartTime"]
++    index = {"files": {"synthetic": {"path": ["synthetic.h5", "synthetic.yaml"],
++                                     "group": "synthetic",
++                                     "metadata": {key: "synthetic" for key in keys[::-1]}}}}
++    frame = util.scalars_to_dataframe(index, include_keys=keys, force_conversion=False)
++    assert [key for key in frame.columns if key in keys] == keys

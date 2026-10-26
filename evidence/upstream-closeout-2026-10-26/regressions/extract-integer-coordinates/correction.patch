@@ -1,0 +1,44 @@
+commit b00699aad6320d29dc7a5bbb44668f035378d920
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:02 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:02 2026 -0400
+
+    fix: preserve fractional millimetres for integer pixel coordinates
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: e7f585104ba25b66e5326c88c77a47e33db95635
+    
+    Co-authored-by: AJ Mitchell <ajmitchell@cheviot.lan>
+
+diff --git a/moseq2_extract/util.py b/moseq2_extract/util.py
+index 9ba32f0..657d209 100644
+--- a/moseq2_extract/util.py
++++ b/moseq2_extract/util.py
+@@ -474,7 +474,7 @@ def convert_pxs_to_mm(coords, resolution=(512, 424), field_of_view=(70.6, 60), t
+     fw = resolution[0] / (2 * np.deg2rad(field_of_view[0] / 2))
+     fh = resolution[1] / (2 * np.deg2rad(field_of_view[1] / 2))
+ 
+-    new_coords = np.zeros_like(coords)
++    new_coords = np.zeros_like(coords, dtype=np.float64)
+     new_coords[:, 0] = true_depth * xhat / fw
+     new_coords[:, 1] = true_depth * yhat / fh
+ 
+diff --git a/tests/unit_tests/test_closeout_extract_integer_coordinates.py b/tests/unit_tests/test_closeout_extract_integer_coordinates.py
+new file mode 100644
+index 0000000..b598dba
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_integer_coordinates.py
+@@ -0,0 +1,11 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pytest
++
++
++def test_integer_coordinates_preserve_fractional_millimetres():
++    from moseq2_extract.util import convert_pxs_to_mm
++    coords = np.array([[257, 213], [258, 214]], dtype=np.int64)
++    actual = convert_pxs_to_mm(coords)
++    np.testing.assert_allclose(actual, convert_pxs_to_mm(coords.astype(float)))
++    assert np.issubdtype(actual.dtype, np.floating)

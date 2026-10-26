@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="6" time="1.321" timestamp="2026-10-26T12:42:19.730394-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE2.model-training-split.test_regression" name="test_training_split_partitions_every_input_row[0.2]" time="1.114"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;(shapes (40, 1), (100, 1) mismatch)&#10; ACTUAL: array([[ 0],&#10;       [ 1],&#10;       [ 2],...&#10; DESIRED: array([[ 0],&#10;       [ 1],&#10;       [ 2],...">test_results/PATCH_PLAN_WAVE2/model-training-split/test_regression.py:13: in test_training_split_partitions_every_input_row
+    np.testing.assert_array_equal(np.concatenate([train["synthetic"], validation["synthetic"]]), data["synthetic"])
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   (shapes (40, 1), (100, 1) mismatch)
+E    ACTUAL: array([[ 0],
+E          [ 1],
+E          [ 2],...
+E    DESIRED: array([[ 0],
+E          [ 1],
+E          [ 2],...</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE2.model-training-split.test_regression" name="test_training_split_partitions_every_input_row[0.8]" time="0.001"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;(shapes (160, 1), (100, 1) mismatch)&#10; ACTUAL: array([[ 0],&#10;       [ 1],&#10;       [ 2],...&#10; DESIRED: array([[ 0],&#10;       [ 1],&#10;       [ 2],...">test_results/PATCH_PLAN_WAVE2/model-training-split/test_regression.py:13: in test_training_split_partitions_every_input_row
+    np.testing.assert_array_equal(np.concatenate([train["synthetic"], validation["synthetic"]]), data["synthetic"])
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   (shapes (160, 1), (100, 1) mismatch)
+E    ACTUAL: array([[ 0],
+E          [ 1],
+E          [ 2],...
+E    DESIRED: array([[ 0],
+E          [ 1],
+E          [ 2],...</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE2.model-training-split.test_regression" name="test_training_split_rejects_degenerate_fractions[0]" time="0.000"><failure message="Failed: DID NOT RAISE ValueError">test_results/PATCH_PLAN_WAVE2/model-training-split/test_regression.py:20: in test_training_split_rejects_degenerate_fractions
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE2.model-training-split.test_regression" name="test_training_split_rejects_degenerate_fractions[1]" time="0.000"><failure message="Failed: DID NOT RAISE ValueError">test_results/PATCH_PLAN_WAVE2/model-training-split/test_regression.py:20: in test_training_split_rejects_degenerate_fractions
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE2.model-training-split.test_regression" name="test_training_split_rejects_degenerate_fractions[-0.1]" time="0.000"><failure message="Failed: DID NOT RAISE ValueError">test_results/PATCH_PLAN_WAVE2/model-training-split/test_regression.py:20: in test_training_split_rejects_degenerate_fractions
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE2.model-training-split.test_regression" name="test_training_split_rejects_degenerate_fractions[1.1]" time="0.000"><failure message="Failed: DID NOT RAISE ValueError">test_results/PATCH_PLAN_WAVE2/model-training-split/test_regression.py:20: in test_training_split_rejects_degenerate_fractions
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.518" timestamp="2026-10-26T13:00:26.044560-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE5.viz-sparse-nodes.test_regression" name="test_difference_graph_uses_node_identity_after_thresholding" time="0.247"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 2 / 2 (100%)&#10;Mismatch at indices:&#10; [0]: 0.8 (ACTUAL), 0.1 (DESIRED)&#10; [1]: 0.7000000000000001 (ACTUAL), 0.05 (DESIRED)&#10;Max absolute difference among violations: 0.7&#10;Max relative difference among violations: 13.&#10; ACTUAL: array([0.8, 0.7])&#10; DESIRED: array([0.1 , 0.05])">test_results/PATCH_PLAN_WAVE5/viz-sparse-nodes/test_regression.py:23: in test_difference_graph_uses_node_identity_after_thresholding
+    np.testing.assert_allclose(result[4][0], [.1, .05])
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 0.8 (ACTUAL), 0.1 (DESIRED)
+E    [1]: 0.7000000000000001 (ACTUAL), 0.05 (DESIRED)
+E   Max absolute difference among violations: 0.7
+E   Max relative difference among violations: 13.
+E    ACTUAL: array([0.8, 0.7])
+E    DESIRED: array([0.1 , 0.05])</failure></testcase></testsuite></testsuites>

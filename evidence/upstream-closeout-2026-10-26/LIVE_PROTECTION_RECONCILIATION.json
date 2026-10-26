@@ -1,0 +1,45 @@
+{
+  "checked_at_utc": "2026-10-26T18:09:54.804387+00:00",
+  "corrected_graphql": {
+    "data": {
+      "extract": {
+        "branchProtectionRules": {
+          "nodes": []
+        }
+      },
+      "pca": {
+        "branchProtectionRules": {
+          "nodes": []
+        }
+      },
+      "model": {
+        "branchProtectionRules": {
+          "nodes": []
+        }
+      },
+      "viz": {
+        "branchProtectionRules": {
+          "nodes": []
+        }
+      },
+      "app": {
+        "branchProtectionRules": {
+          "nodes": []
+        }
+      },
+      "control": {
+        "viewerPermission": "ADMIN",
+        "branchProtectionRules": {
+          "nodes": []
+        }
+      }
+    }
+  },
+  "upstream_full_rest_probe": {
+    "exit_code": 1,
+    "stdout": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\",\"status\":\"404\"}",
+    "stderr": "gh: Not Found (HTTP 404)\n"
+  },
+  "limitation": "Visible rules are not a claim of full upstream administrative visibility. No upstream protected-ref update or merge occurred.",
+  "prior_auxiliary_probe": "URI query invocation returned introspection schema; explicitly not classic-protection evidence. Raw local receipt hashes retained in RULE13_WRITE_AUDIT.json."
+}

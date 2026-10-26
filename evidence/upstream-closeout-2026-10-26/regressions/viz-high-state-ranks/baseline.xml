@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.020" timestamp="2026-10-26T12:37:24.906853-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.viz-high-state-ranks.test_regression" name="test_usage_relabeling_includes_raw_states_above_99" time="0.738"><failure message="assert [3, 0] == [150, 3]&#10;  &#10;  At index 0 diff: 3 != 150&#10;  Use -v to get more diff">test_results/PATCH_PLAN_WAVE1/viz-high-state-ranks/test_regression.py:11: in test_usage_relabeling_includes_raw_states_above_99
+    assert ordering[:2] == [150, 3]
+E   assert [3, 0] == [150, 3]
+E     
+E     At index 0 diff: 3 != 150
+E     Use -v to get more diff</failure></testcase></testsuite></testsuites>

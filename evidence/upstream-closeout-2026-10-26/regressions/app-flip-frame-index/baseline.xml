@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="2.464" timestamp="2026-10-26T12:42:28.408656-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE2.app-flip-frame-index.test_regression" name="test_flip_updates_the_angles_of_the_matching_batch" time="1.986"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 11 / 11 (100%)&#10;First 5 mismatches are at indices:&#10; [0]: 9.42477796076938 (ACTUAL), 3.141592653589793 (DESIRED)&#10; [1]: 9.42477796076938 (ACTUAL), 3.141592653589793 (DESIRED)&#10; [2]: 9.42477796076938 (ACTUAL), 3.141592653589793 (DESIRED)&#10; [3]: 6.283185307179586 (ACTUAL), 3.141592653589793 (DESIRED)&#10; [4]: 0.0 (ACTUAL), 3.141592653589793 (DESIRED)&#10;Max absolute difference among violations: 6.28318531&#10;Max relative difference among violations: 2.&#10; ACTUAL: array([9.424778, 9.424778, 9.424778, 6.283185, 0.      , 0.      ,&#10;       0.      , 0.      , 0.      , 0.      , 0.      ])&#10; DESIRED: array(3.141593)">test_results/PATCH_PLAN_WAVE2/app-flip-frame-index/test_regression.py:30: in test_flip_updates_the_angles_of_the_matching_batch
+    np.testing.assert_allclose(f["scalars/angle"][:11], np.pi)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 11 / 11 (100%)
+E   First 5 mismatches are at indices:
+E    [0]: 9.42477796076938 (ACTUAL), 3.141592653589793 (DESIRED)
+E    [1]: 9.42477796076938 (ACTUAL), 3.141592653589793 (DESIRED)
+E    [2]: 9.42477796076938 (ACTUAL), 3.141592653589793 (DESIRED)
+E    [3]: 6.283185307179586 (ACTUAL), 3.141592653589793 (DESIRED)
+E    [4]: 0.0 (ACTUAL), 3.141592653589793 (DESIRED)
+E   Max absolute difference among violations: 6.28318531
+E   Max relative difference among violations: 2.
+E    ACTUAL: array([9.424778, 9.424778, 9.424778, 6.283185, 0.      , 0.      ,
+E          0.      , 0.      , 0.      , 0.      , 0.      ])
+E    DESIRED: array(3.141593)</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.511" timestamp="2026-10-26T12:42:56.567970-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE2.app-latest-model.test_regression" name="test_progress_selects_the_newest_model_path" time="0.242"><failure message="AssertionError: assert '/tmp/pytest-...e_newe0/old.p' == '/tmp/pytest-...e_newe0/new.p'&#10;  &#10;  Skipping 50 identical leading characters in diff, use -v to show&#10;  - the_newe0/new.p&#10;  ?           ^^^&#10;  + the_newe0/old.p&#10;  ?           ^^^">test_results/PATCH_PLAN_WAVE2/app-latest-model/test_regression.py:20: in test_progress_selects_the_newest_model_path
+    assert find_progress(progress)["model_path"] == str(new)
+E   AssertionError: assert '/tmp/pytest-...e_newe0/old.p' == '/tmp/pytest-...e_newe0/new.p'
+E     
+E     Skipping 50 identical leading characters in diff, use -v to show
+E     - the_newe0/new.p
+E     ?           ^^^
+E     + the_newe0/old.p
+E     ?           ^^^</failure></testcase></testsuite></testsuites>

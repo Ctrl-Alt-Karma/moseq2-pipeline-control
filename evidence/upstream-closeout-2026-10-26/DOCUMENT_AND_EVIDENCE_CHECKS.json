@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "topic_rows": 91,
+  "legacy_commits": 40,
+  "legacy_ids": 24,
+  "strict_xfail_cases": 20,
+  "qualified_branches": 51,
+  "candidate_cases": 67,
+  "baseline_expected_failures": 65,
+  "raw_byte_source_files_checked": 53,
+  "preserved_scientific_seals": 3,
+  "parsed_json_files": 19,
+  "checked_markdown_links": 75,
+  "decisions": 59,
+  "scientific_pipeline_execution": false,
+  "whitespace_scope": "Authored source/docs/metadata; raw XML traceback text and patch context preserved as evidence data."
+}

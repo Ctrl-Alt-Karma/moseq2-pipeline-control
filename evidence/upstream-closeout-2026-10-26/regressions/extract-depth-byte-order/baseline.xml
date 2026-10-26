@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="0.653" timestamp="2026-10-26T12:47:11.788106-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE3.extract-depth-byte-order.test_regression" name="test_video_depth_decoding_respects_declared_byte_order[be]" time="0.469"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;Mismatched elements: 2 / 2 (100%)&#10;Mismatch at indices:&#10; [0, 0, 0]: 41218 (ACTUAL), 673 (DESIRED)&#10; [0, 0, 1]: 4 (ACTUAL), 1024 (DESIRED)&#10;Max absolute difference among violations: 40545&#10;Max relative difference among violations: 60.24517088&#10; ACTUAL: array([[[41218,     4]]], dtype=uint16)&#10; DESIRED: array([[[ 673, 1024]]])">test_results/PATCH_PLAN_WAVE3/extract-depth-byte-order/test_regression.py:17: in test_video_depth_decoding_respects_declared_byte_order
+    np.testing.assert_array_equal(actual, [[[673, 1024]]])
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0, 0, 0]: 41218 (ACTUAL), 673 (DESIRED)
+E    [0, 0, 1]: 4 (ACTUAL), 1024 (DESIRED)
+E   Max absolute difference among violations: 40545
+E   Max relative difference among violations: 60.24517088
+E    ACTUAL: array([[[41218,     4]]], dtype=uint16)
+E    DESIRED: array([[[ 673, 1024]]])</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE3.extract-depth-byte-order.test_regression" name="test_video_depth_decoding_respects_declared_byte_order[le]" time="0.001" /></testsuite></testsuites>

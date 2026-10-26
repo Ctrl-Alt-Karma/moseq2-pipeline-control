@@ -1,0 +1,107 @@
+{
+  "checked_at_utc": "2026-10-26T18:09:54.806391+00:00",
+  "repository": "Ctrl-Alt-Karma/moseq2-pipeline-control",
+  "branch": {
+    "name": "main",
+    "commit": {
+      "sha": "c1e3cab2780480c59e019765d0a810e7fc684604",
+      "node_id": "C_kwDOTnU2stoAKGMxZTNjYWIyNzgwNDgwYzU5ZTAxOTc2NWQwYTgxMGU3ZmM2ODQ2MDQ",
+      "commit": {
+        "author": {
+          "name": "Claude Builder",
+          "email": "noreply@anthropic.com",
+          "date": "2026-08-18T21:13:29Z"
+        },
+        "committer": {
+          "name": "Claude Builder",
+          "email": "noreply@anthropic.com",
+          "date": "2026-08-18T21:13:29Z"
+        },
+        "message": "docs: record R6 transfer technical adjudication (D-056)\n\nControl-plane documentation only. No scientific execution, no comparator, contract\nor threshold change, no candidate processing, no seal advancement, no BRIDGE edit,\nno local evidence artifact modified.\n\nArchitect disposition PASS_ARCHITECT_R1_R6_TRANSFER_TECHNICAL_ADJUDICATION_R1.\n\nNo validation session is invalidated; no exclusion, replacement or rerun is\njustified. modeled_frame_fraction breaches in slots 03/05/07/08 are mechanically\nrecording-length only: the metric equals 1 - 3/N exactly across all 28 corpus and\nvalidation sessions and the corpus lower bound corresponds exactly to N = 26946.\nB2 breaches in slots 03/05 reflect elevated but fully accounted timestamp-gap\nburden, not corruption. B1 breaches in slots 07/08 establish genuine held-out\nrepresentation shift. The 8/8 low occupied-state pattern is genuine transfer\nsignal, not duration, evaluator error or a pooled-versus-single-invocation\nartifact. Bout-duration and top-1 breaches occur only in the concentration\ndirection. No software or instrument failure is established.\n\nSupporting evidence, protected golden-host local, not repository-accessible:\nTRANSFER_ADJUDICATION_COMPARISON_R1.json\n92d8e2155a88829b2509c78ac99211e2fa54d2fd558206975132db98f526bd87;\nTIER_B_TIER_C_EVALUATOR_R1.py\n3f331101d937e8c3cd0fc4162fe9cfe62fae752ffb10d9e9272322a8d5d6961e;\nadversarial review bundle\nf69c94219805c53f1b92775953b0a86493dbdc35a88f8abd135173b4d0b77f66.\n\nFinal PASS_REAL_SESSION_PRODUCTION_VALIDATION remains HOLD, pending Tier-A\nper-session qualitative dispositions and the Tier-D blinded domain-scientist\nreview.\n\nFiles changed: ai/DECISIONS.md with D-056 appended, and ai/CURRENT_STATE.md with\nthe 2026-08-18 transfer technical adjudication checkpoint added. D-051 through\nD-055 and all historical sections are not rewritten.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
+        "tree": {
+          "sha": "ad6feac08b0eec2a18cf40fb471b1df6d7f1023b",
+          "url": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/git/trees/ad6feac08b0eec2a18cf40fb471b1df6d7f1023b"
+        },
+        "url": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/git/commits/c1e3cab2780480c59e019765d0a810e7fc684604",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      },
+      "url": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/commits/c1e3cab2780480c59e019765d0a810e7fc684604",
+      "html_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pipeline-control/commit/c1e3cab2780480c59e019765d0a810e7fc684604",
+      "comments_url": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/commits/c1e3cab2780480c59e019765d0a810e7fc684604/comments",
+      "author": {
+        "login": "claude",
+        "id": 81847,
+        "node_id": "MDQ6VXNlcjgxODQ3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/81847?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/claude",
+        "html_url": "https://github.com/claude",
+        "followers_url": "https://api.github.com/users/claude/followers",
+        "following_url": "https://api.github.com/users/claude/following{/other_user}",
+        "gists_url": "https://api.github.com/users/claude/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/claude/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/claude/subscriptions",
+        "organizations_url": "https://api.github.com/users/claude/orgs",
+        "repos_url": "https://api.github.com/users/claude/repos",
+        "events_url": "https://api.github.com/users/claude/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/claude/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "claude",
+        "id": 81847,
+        "node_id": "MDQ6VXNlcjgxODQ3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/81847?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/claude",
+        "html_url": "https://github.com/claude",
+        "followers_url": "https://api.github.com/users/claude/followers",
+        "following_url": "https://api.github.com/users/claude/following{/other_user}",
+        "gists_url": "https://api.github.com/users/claude/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/claude/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/claude/subscriptions",
+        "organizations_url": "https://api.github.com/users/claude/orgs",
+        "repos_url": "https://api.github.com/users/claude/repos",
+        "events_url": "https://api.github.com/users/claude/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/claude/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "a1c6678a9abc89693763d69b12eab59d6e72a89a",
+          "url": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/commits/a1c6678a9abc89693763d69b12eab59d6e72a89a",
+          "html_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pipeline-control/commit/a1c6678a9abc89693763d69b12eab59d6e72a89a"
+        }
+      ]
+    },
+    "_links": {
+      "self": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/branches/main",
+      "html": "https://github.com/Ctrl-Alt-Karma/moseq2-pipeline-control/tree/main"
+    },
+    "protected": false,
+    "protection": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "protection_url": "https://api.github.com/repos/Ctrl-Alt-Karma/moseq2-pipeline-control/branches/main/protection"
+  },
+  "rulesets": [],
+  "active_rules": [],
+  "viewer_permission": "ADMIN",
+  "write_mode": "Normal fast-forward HEAD:main; Owner explicitly authorized; no force push, no merge bypass."
+}

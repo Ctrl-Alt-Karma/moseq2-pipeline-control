@@ -1,0 +1,46 @@
+commit f9987793dc033196b9376ffd3fa3f79c55b99e0c
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:07 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:07 2026 -0400
+
+    fix: use the pinhole relation for nominal field of view
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_extract/util.py b/moseq2_extract/util.py
+index 9ba32f0..454deb7 100644
+--- a/moseq2_extract/util.py
++++ b/moseq2_extract/util.py
+@@ -471,8 +471,8 @@ def convert_pxs_to_mm(coords, resolution=(512, 424), field_of_view=(70.6, 60), t
+     xhat = coords[:, 0] - cx
+     yhat = coords[:, 1] - cy
+ 
+-    fw = resolution[0] / (2 * np.deg2rad(field_of_view[0] / 2))
+-    fh = resolution[1] / (2 * np.deg2rad(field_of_view[1] / 2))
++    fw = resolution[0] / (2 * np.tan(np.deg2rad(field_of_view[0] / 2)))
++    fh = resolution[1] / (2 * np.tan(np.deg2rad(field_of_view[1] / 2)))
+ 
+     new_coords = np.zeros_like(coords)
+     new_coords[:, 0] = true_depth * xhat / fw
+diff --git a/tests/unit_tests/test_closeout_extract_pinhole_geometry.py b/tests/unit_tests/test_closeout_extract_pinhole_geometry.py
+new file mode 100644
+index 0000000..686fb39
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_pinhole_geometry.py
+@@ -0,0 +1,11 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pytest
++
++
++def test_nominal_fov_maps_image_edge_to_pinhole_extent():
++    from moseq2_extract.util import convert_pxs_to_mm
++    coords = np.array([[512., 424.], [256., 212.]])
++    actual = convert_pxs_to_mm(coords, true_depth=500.)
++    np.testing.assert_allclose(actual[0], 500 * np.tan(np.deg2rad([35.3, 30.])))
++    np.testing.assert_array_equal(actual[1], [0., 0.])

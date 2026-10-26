@@ -1,0 +1,114 @@
+nodeid,source_file,line,reason,strict,test_docstring,code_path_exercised,project_overlap,classification_note
+tests/analysis/test_01_progress.py::test_the_sanity_check_notices_a_directory_that_is_gone,tests/analysis/test_01_progress.py,174,"progress_path_sanity_check compares path strings and opens nothing, so a project whose _pca directory has been deleted passes it silently and fails several cells later. The cell's own comment reads '# check all necessary paths exist'.",True,"6. What the cell's comment promises.
+
+A user who moved or cleaned the project gets no warning here. The check
+tests whether each path string contains an expected substring, which a
+path to a deleted directory still does.",capsys.readouterr; dict; progress_path_sanity_check; pytest.mark.xfail; str,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/analysis/test_01_progress.py::test_the_sanity_check_is_quiet_about_a_healthy_project,tests/analysis/test_01_progress.py,194,"the pipeline leaves scores_filename empty and nothing reads it, but the check requires every path to contain its keyword, so it complains about a project it produced itself.",True,"7. The other half.
+
+This project is the one the extraction and modeling notebook produces
+and every later cell reads without complaint. The check reports it as
+suspect anyway, which teaches a user to ignore the output.",capsys.readouterr; progress_path_sanity_check; pytest.mark.xfail; str,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/analysis/test_06_stats_df.py::test_the_unsorted_labelling_the_cell_offers_works,tests/analysis/test_06_stats_df.py,187,"the cell offers 'labels' as a syllable_key, but scalars_to_dataframe names that column 'labels (original)'. A user who takes the comment at its word gets KeyError: 'Column not found: labels'.",True,"10. One of the three options in the cell's comment does not exist.
+
+The other two name real columns. This one names the model's own
+syllable numbering, which cell 4 produces under a different name, so
+the only way to ask for it is to know that the comment is wrong.",compute_behavioral_statistics; pytest.mark.xfail,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/analysis/test_09_label_syllables.py::test_the_syllables_actually_kept_cover_what_was_asked_for,tests/analysis/test_09_label_syllables.py,116,"the number returned is the index at which the curve crosses the threshold, and every later cell uses it as a count. Keeping that many syllables keeps the ones below the crossing, which by construction fall short of the requested share; one more would be needed to reach it.",pytest.ini xfail_strict=true,"3. What a user believes they set.
+
+``explained_variance = 99`` reads as an instruction to keep enough
+syllables to account for ninety-nine percent of the behaviour. Cells
+10, 11, 12 and 14 then keep syllables numbered below the returned
+value, so the share they actually cover is the one at the position
+before the crossing.",pytest.mark.xfail; syllable_coverage,MATCHES_OUR_FINDING,Fork viz 68ca6a3 coverage index/count off-by-one.
+tests/analysis/test_09_label_syllables.py::test_the_movies_start_without_reading_all_of_them,tests/analysis/test_09_label_syllables.py,210,"crowd movies are written without -movflags +faststart, so the moov atom is appended after the frame data. Same defect as the extraction preview movie in the modeling notebook.",pytest.ini xfail_strict=true,"8. The index belongs at the front.
+
+The labeller plays these one after another as a user moves through
+the dropdown. With the index appended, each has to be fetched whole
+before its first frame appears.",index_is_at_the_front; pytest.mark.xfail,RELATED_BUT_DISTINCT,MP4 faststart/streaming differs from our preview subprocess lifecycle finding.
+tests/analysis/test_09_label_syllables.py::test_the_wrapper_runs_everything_it_contains,tests/analysis/test_09_label_syllables.py,289,"interactive_syllable_labeler_wrapper defines on_syll_change and registers it with output.observe after its own return statement, so neither ever runs. Nothing is lost by it: interactive_output already redraws the view when the dropdown changes.",pytest.ini xfail_strict=true,"12. Statements the function can never reach.
+
+The last thing in the wrapper is a handler meant to redraw the view
+when a user picks a different syllable, together with the call that
+registers it. Both sit after the function has returned.",ast.parse; enumerate; inspect.getsource; isinstance; len; pytest.mark.xfail; textwrap.dedent,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/analysis/test_11_syllable_stats.py::test_the_cached_dataframe_the_cell_asks_for_exists,tests/analysis/test_11_syllable_stats.py,182,"the cell asks for the cached dataframe by setting load_parquet=True, and the progress file names it, but the two lines that would write it in SyllableLabeler.get_mean_syllable_info are commented out. Every run of cells 11 and 14 rebuilds it from the recordings instead.",pytest.ini xfail_strict=true,"9. What ``load_parquet=True`` is supposed to save.
+
+Building the syllable dataframe means reading every recording's
+scalars and joining them against the model's labels. Cells 11 and 14
+each do it, and cell 9 was to have written the result once under
+``df_info_path`` for them to read back.",Path; Path(analysis_paths['df_info_path']).exists; pytest.mark.xfail,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/analysis/test_12_transition_matrices.py::test_the_figure_is_named_after_what_it_shows,tests/analysis/test_12_transition_matrices.py,216,"the cell writes `{normalize}_tansition_matrix`, so the figure a user goes looking for under `transition` is not there",pytest.ini xfail_strict=true,"8. A user finds this file by its name.
+
+Everything else the notebook writes is named for what it holds. This
+one is misspelled, so it does not turn up beside the others and a
+search for it finds nothing.",(plots / f'{NORMALIZE}_transition_matrix.png').exists; pytest.mark.xfail,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/analysis/test_12_transition_matrices.py::test_an_experiment_with_one_condition_still_plots,tests/analysis/test_12_transition_matrices.py,232,"plt.subplots(1, 1) returns a bare Axes rather than an array of one, and the cell indexes ax[i], so a pilot experiment with a single condition dies with TypeError: 'Axes' object is not subscriptable",pytest.ini xfail_strict=true,"9. The first thing anyone runs is a pilot.
+
+A project with one group is the normal starting point: a handful of
+animals, no comparison yet, just a look at what the model found.
+Every cell before this one handles it. This one builds its axes from
+the number of groups and then assumes there is more than one.",draw_matrices; pytest.mark.xfail; str,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_02_progress.py::test_a_finished_project_names_nothing_as_outstanding,tests/extract_modeling/test_02_progress.py,241,"the branch that names outstanding PCA items is guarded by `==` where it means `!=`, so it runs only when none are outstanding and always appends an empty list",pytest.ini xfail_strict=true,"A project with every PCA item done has nothing left to report.
+
+What it prints instead is `PCA Progress: 4 out of 4 items finished:  left`,
+with a gap where the names would go.",build_project; capsys.readouterr; check_progress; pytest.mark.xfail; str,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_04_flip_classifier.py::test_a_negative_selection_is_rejected,tests/extract_modeling/test_04_flip_classifier.py,91,"the selection is used as a plain list index, so a negative value wraps to the end of the list instead of being rejected",pytest.ini xfail_strict=true,"There is no classifier at a negative index.
+
+What happens instead is that `-1` quietly fetches the Azure classifier,
+which is a long way from what a user asking for it meant.",config.write_text; download_flip_command; pytest.mark.xfail; pytest.raises; str,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_05_arena_mask.py::test_a_filter_size_that_is_not_python_falls_back[3 by 3],tests/extract_modeling/test_05_arena_mask.py,352,the text is passed to eval() with a fallback for a value of the wrong type but none for text that does not parse,pytest.ini xfail_strict=true,"Text that makes no sense as a filter size should fall back, as a value
+of the wrong type already does.
+
+What happens instead is that the exception comes out of the button
+callback: ``SyntaxError`` for prose or for an empty box, ``NameError`` for
+a bare word. A notebook shows it as a traceback under the widget and the
+save does not happen. Clearing the box is the likeliest way to reach it.",click; open_widget; parameters; pytest.mark.parametrize; pytest.mark.xfail,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_05_arena_mask.py::test_a_filter_size_that_is_not_python_falls_back[],tests/extract_modeling/test_05_arena_mask.py,352,the text is passed to eval() with a fallback for a value of the wrong type but none for text that does not parse,pytest.ini xfail_strict=true,"Text that makes no sense as a filter size should fall back, as a value
+of the wrong type already does.
+
+What happens instead is that the exception comes out of the button
+callback: ``SyntaxError`` for prose or for an empty box, ``NameError`` for
+a bare word. A notebook shows it as a traceback under the widget and the
+save does not happen. Clearing the box is the likeliest way to reach it.",click; open_widget; parameters; pytest.mark.parametrize; pytest.mark.xfail,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_05_arena_mask.py::test_a_filter_size_that_is_not_python_falls_back[three],tests/extract_modeling/test_05_arena_mask.py,352,the text is passed to eval() with a fallback for a value of the wrong type but none for text that does not parse,pytest.ini xfail_strict=true,"Text that makes no sense as a filter size should fall back, as a value
+of the wrong type already does.
+
+What happens instead is that the exception comes out of the button
+callback: ``SyntaxError`` for prose or for an empty box, ``NameError`` for
+a bare word. A notebook shows it as a traceback under the widget and the
+save does not happen. Clearing the box is the likeliest way to reach it.",click; open_widget; parameters; pytest.mark.parametrize; pytest.mark.xfail,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_05_arena_mask.py::test_the_weight_boxes_accept_a_decimal,tests/extract_modeling/test_05_arena_mask.py,373,"pn.widgets.NumberInput picks an integer or a float box from the type of the value it is handed, and the config spells bg_roi_weights [1, 0.1, 1] and noise_tolerance 30, so the whole numbers get integer boxes",pytest.ini xfail_strict=true,"Every one of these parameters is declared ``param.Number``, so a user
+should be able to type ``0.5`` into any of them.
+
+Three of the four are built as integer spinners and refuse. Which ones is
+decided by how the shipped config happens to spell the number: ``0.1``
+arrives as a float and gets a float box, ``1`` and ``30`` arrive as ints
+and get integer boxes. The two that refuse are the mask area and distance
+weights, which ``get_roi`` is most sensitive to.",layout.select; open_widget; pytest.mark.xfail; widget.view.__panel__,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_06_extract.py::test_recordings_under_tmp_are_extracted,tests/extract_modeling/test_06_extract.py,174,"extract_found_sessions discards any recording whose absolute path contains '/tmp/', which is the only mention of /tmp in moseq2-extract and guards nothing the package creates",pytest.ini xfail_strict=true,"4. Where a project lives is not the cell's business.
+
+A user whose recordings sit under ``/tmp``, or under any path with a
+``tmp`` component such as ``/data/tmp/pilot``, watches the cell find them,
+discard all of them, and print ``Extractions Complete.`` Nothing is
+extracted and nothing says so.",Path; build_fake_project; extract_found_sessions; len; os.path.isdir; pytest.mark.skipif; pytest.mark.xfail; str; tempfile.TemporaryDirectory,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_06_extract.py::test_an_unreadable_selection_asks_again,tests/extract_modeling/test_06_extract.py,247,"the prompt passes what was typed to literal_eval, which raises on anything that is not a Python literal before the invalid-input branch is reached",pytest.ini xfail_strict=true,"7. A typo at the prompt should cost a user one more line, not the cell.
+
+The prompt loops until it gets something it understands, and prints
+``Invalid input. Try again or press q to quit.`` for an empty answer. A
+non-empty answer that is not a number never reaches that branch: it goes to
+``literal_eval`` and raises out of the cell.",build_fake_project; extract_found_sessions; iter; monkeypatch.setattr; next; pytest.mark.xfail; str,NO_PROJECT_OVERLAP,Unrelated upstream maintenance debt; no new project task.
+tests/extract_modeling/test_06_extract.py::test_the_preview_movie_starts_without_reading_all_of_it,tests/extract_modeling/test_06_extract.py,433,"the movie is written without -movflags +faststart, so its moov atom is appended after the frame data",pytest.ini xfail_strict=true,"16b. The index belongs at the front.
+
+With the moov atom at the end a browser has to fetch the whole file before
+it can show the first frame or seek, which is the difference between a
+preview that opens and one that appears to hang.",index_is_at_the_front; proc; pytest.mark.xfail,RELATED_BUT_DISTINCT,MP4 faststart/streaming differs from our preview subprocess lifecycle finding.
+tests/extract_modeling/test_07_validate.py::test_the_percentage_behind_a_flag_is_printed,tests/extract_modeling/test_07_validate.py,142,"a raised flag holds the percentage as a nonzero float, which is truthy, so the branch that prints it is only reachable by 0.0 and the number is never shown",pytest.ini xfail_strict=true,"6. How bad a flag is decides whether a user acts on it.
+
+The cell measures the percentage and formats a line for it. What a user
+sees is `corrupted flag raised` and nothing else, so a recording that lost
+six percent of its frames reads exactly like one that lost sixty.",corrupt; pytest.mark.xfail; re.search; report; section,MATCHES_OUR_FINDING,Fork app 313c9b5 percentage truthiness hides the numeric value.
+tests/extract_modeling/test_10_groups.py::test_saving_does_not_add_a_key_to_the_index,tests/extract_modeling/test_10_groups.py,207,"update_clicked calls self.df.drop('filename', axis=1) and discards the result, so the column it meant to remove is written out with the rest",pytest.ini xfail_strict=true,"9. The index should hold what it held, with the groups changed.
+
+Saving adds a ``filename`` key to every entry, which cell 9 did not write
+and nothing reads. It is harmless and idempotent, but it means the file on
+disk is no longer the shape the aggregation produced.",assign; open_table; plain; pytest.mark.xfail; read_yaml; str; widget.update_index_button.click,MATCHES_OUR_FINDING,Fork app c85b9a2 discarded DataFrame.drop result leaks filename.

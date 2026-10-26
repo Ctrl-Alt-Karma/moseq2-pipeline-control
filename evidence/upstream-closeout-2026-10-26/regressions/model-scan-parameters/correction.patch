@@ -1,0 +1,56 @@
+commit 48833663688c5a56743e751239581ca296a65bb3
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:39 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:39 2026 -0400
+
+    fix: forward declared scientific options to scan-models commands
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: bf8ca260631a7c67b9e383aafefe83abd2d50a82
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_model/util.py b/moseq2_model/util.py
+index e375de4..ad940c3 100644
+--- a/moseq2_model/util.py
++++ b/moseq2_model/util.py
+@@ -584,6 +584,12 @@ def get_parameter_strings(config_data):
+     if config_data["ncpus"] > 0:
+         parameters += f'--ncpus {config_data["ncpus"]} '
+ 
++    # Forward only options already supported by the learn-model CLI.
++    for key in ('nlags', 'whiten', 'alpha', 'gamma', 'var_name',
++                'hold_out_seed', 'noise_level', 'percent_split'):
++        if config_data.get(key) is not None:
++            parameters += f'--{key.replace(chr(95), chr(45))} {config_data[key]} '
++
+     # Handle possible Slurm batch functionality
+     prefix = ""
+     if config_data["cluster_type"] == "slurm":
+diff --git a/tests/unit_tests/test_closeout_model_scan_parameters.py b/tests/unit_tests/test_closeout_model_scan_parameters.py
+new file mode 100644
+index 0000000..ba2f109
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_model_scan_parameters.py
+@@ -0,0 +1,19 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++
++
++def test_scan_command_forwards_existing_fit_options():
++    from moseq2_model.util import get_parameter_strings
++    config = dict(npcs=10, num_iter=50, index=None, separate_trans=False,
++                  robust=False, e_step=False, hold_out=False, max_states=20,
++                  ncpus=0, cluster_type="local", nlags=5, whiten="each",
++                  alpha=100., gamma=500., var_name="synthetic_scores",
++                  hold_out_seed=17, noise_level=.2, percent_split=.3)
++    parameters, _ = get_parameter_strings(config)
++    for option in ["--nlags 5", "--whiten each", "--alpha 100.0", "--gamma 500.0",
++                   "--var-name synthetic_scores", "--hold-out-seed 17",
++                   "--noise-level 0.2", "--percent-split 0.3"]:
++        assert option in parameters

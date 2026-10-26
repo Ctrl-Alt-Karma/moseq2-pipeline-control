@@ -1,5 +1,13 @@
 # Open Questions
 
+## Terminal posture — 2026-10-26
+
+The project is CLOSED BY OWNER while scientific validation remains incomplete.
+No unresolved question is promoted to scientifically resolved by this closeout,
+and no historical row below is rewritten. These are archival constraints, not an
+active task queue. Final human qualitative evidence was not obtained and final
+production-validation PASS was not issued. See D-059 and the terminal handoff.
+
 Date: 2026-08-17 (continuity recovery R2)
 
 These questions are exactly the pre-result bindings that keep

@@ -1,0 +1,150 @@
+commit 76de73e268bd1684fee75cdc2f5ac8d31eb1b363
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:34 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:34 2026 -0400
+
+    fix: finalize preview subprocesses when flip processing raises
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: e0b85201226d03e15944473a734f71417698c31e
+    
+    Co-authored-by: AJ Mitchell <ajmitchell@cheviot.lan>
+
+diff --git a/moseq2_app/flip/widget.py b/moseq2_app/flip/widget.py
+index cac9acd..f8c7c8d 100644
+--- a/moseq2_app/flip/widget.py
++++ b/moseq2_app/flip/widget.py
+@@ -239,7 +239,6 @@ class FlipClassifierWidget:
+         smoothing (int): kernel size of the applied median filter on the flip classifier results
+         verbose (bool): displays the tqdm progress bars for each session.
+         """
+-        video_pipe = None
+         with warnings.catch_warnings():
+             warnings.simplefilter('ignore', UserWarning)
+             for key, path in tqdm(self.sessions.items(), desc='Flipping extracted sessions...'):
+@@ -251,41 +250,42 @@ class FlipClassifierWidget:
+                     frames = f[frame_path]
+                     frame_batches = gen_batch_sequence(len(frames)-1, chunk_size, chunk_overlap)
+     
+-                    for batch in tqdm(frame_batches, desc=f'Adjusting flips: {key}', disable=not verbose):
+-                        frame_batch = frames[batch]
++                    video_pipe = None
++                    try:
++                        for batch in tqdm(frame_batches, desc=f'Adjusting flips: {key}', disable=not verbose):
++                            frame_batch = frames[batch]
+     
+-                        # apply flip classifier on each batch to find which frames to flip
+-                        flips = get_flips(frame_batch.copy(), flip_file=clf_path, smoothing=smoothing)
+-                        flip_indices = np.where(flips)
++                            # apply flip classifier on each batch to find which frames to flip
++                            flips = get_flips(frame_batch.copy(), flip_file=clf_path, smoothing=smoothing)
++                            flip_indices = np.where(flips)
+     
+-                        # rewrite the frames with the newly classified orientation
+-                        frame_batch[flip_indices] = np.rot90(f[frame_path][batch][flip_indices], k=2, axes=(1, 2))
+-                        f[frame_path][batch] = frame_batch
++                            # rewrite the frames with the newly classified orientation
++                            frame_batch[flip_indices] = np.rot90(f[frame_path][batch][flip_indices], k=2, axes=(1, 2))
++                            f[frame_path][batch] = frame_batch
+     
+-                        # augment recorded scalar value to reflect orientation switches
+-                        f['scalars/angle'][flip_indices] += np.pi
++                            # augment recorded scalar value to reflect orientation switches
++                            f['scalars/angle'][flip_indices] += np.pi
+     
+-                        if write_movie:
+-                            try:
+-                                # Writing frame batch to mp4 file
+-                                video_pipe = write_frames_preview(output_movie,
+-                                                                  frame_batch,
+-                                                                  pipe=video_pipe,
+-                                                                  close_pipe=False,
+-                                                                  depth_min=0,
+-                                                                  depth_max=100,
+-                                                                  fps=fps,
+-                                                                  progress_bar=verbose)
+-                            except AttributeError as e:
+-                                warnings.warn(f'Could not generate flipped movie for {key}:{path}. Skipping...')
+-                                print(e)
+-                                print(e.__traceback__)
+-                                break
+-                    # Check if video is done writing. If not, wait.
+-                    if video_pipe is not None:
+-                        video_pipe.communicate()
+-                        video_pipe = None
++                            if write_movie:
++                                try:
++                                    # Writing frame batch to mp4 file
++                                    video_pipe = write_frames_preview(output_movie,
++                                                                      frame_batch,
++                                                                      pipe=video_pipe,
++                                                                      close_pipe=False,
++                                                                      depth_min=0,
++                                                                      depth_max=100,
++                                                                      fps=fps,
++                                                                      progress_bar=verbose)
++                                except AttributeError as e:
++                                    warnings.warn(f'Could not generate flipped movie for {key}:{path}. Skipping...')
++                                    print(e)
++                                    print(e.__traceback__)
++                                    break
++                    finally:
++                        if video_pipe is not None:
++                            video_pipe.communicate()
+ 
+     @property
+     def training_data_path(self):
+-        return str(self.data_path.parent / 'flip-training-frame-ranges.p')
+\ No newline at end of file
++        return str(self.data_path.parent / 'flip-training-frame-ranges.p')
+diff --git a/tests/software/test_closeout_app_preview_finalization.py b/tests/software/test_closeout_app_preview_finalization.py
+new file mode 100644
+index 0000000..9a066f2
+--- /dev/null
++++ b/tests/software/test_closeout_app_preview_finalization.py
+@@ -0,0 +1,43 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++@pytest.fixture
++def synthetic_flip_session(tmp_path, monkeypatch):
++    from moseq2_app.flip import widget
++    path = tmp_path / "synthetic.h5"
++    frames = np.zeros((12, 8, 8), dtype=np.uint8)
++    frames[:, 1:3, 2:5] = np.arange(1, 13)[:, None, None]
++    with h5py.File(path, "w") as f:
++        f["frames"] = frames
++        f["scalars/angle"] = np.zeros(12)
++        f.create_group("metadata/extraction")
++    monkeypatch.setattr(widget, "get_flips", lambda values, **kw: np.ones(len(values), dtype=bool))
++    subject = SimpleNamespace(sessions={"synthetic": path})
++    return widget, subject, path, frames
++
++
++def test_preview_pipe_is_reaped_when_processing_raises(synthetic_flip_session, monkeypatch):
++    widget, subject, _, _ = synthetic_flip_session
++    pipe = SimpleNamespace(returncode=0, reaped=False)
++    def reap():
++        pipe.reaped = True
++    pipe.communicate = reap
++    monkeypatch.setattr(widget, "write_frames_preview", lambda *a, **kw: pipe)
++    calls = 0
++    def interrupt(values, **kw):
++        nonlocal calls
++        calls += 1
++        if calls == 2:
++            raise RuntimeError("synthetic processing failure")
++        return np.ones(len(values), dtype=bool)
++    monkeypatch.setattr(widget, "get_flips", interrupt)
++    with pytest.raises(RuntimeError, match="synthetic processing"):
++        widget.FlipClassifierWidget.apply_flip_classifier(subject, "synthetic-unused", chunk_size=4,
++                                                           smoothing=1, verbose=False, write_movie=True)
++    assert pipe.reaped

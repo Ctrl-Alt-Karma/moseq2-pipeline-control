@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.559" timestamp="2026-10-26T12:39:17.474169-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1_PAIRWISE_CORRECTION.viz-pairwise-groups.test_regression" name="test_pairwise_mann_whitney_ignores_unrequested_group" time="1.036"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 2 / 2 (100%)&#10;Mismatch at indices:&#10; [0]: 0.004237400946076916 (ACTUAL), 0.015191410988288745 (DESIRED)&#10; [1]: 0.004237400946076916 (ACTUAL), 0.015191410988288745 (DESIRED)&#10;Max absolute difference among violations: 0.01095401&#10;Max relative difference among violations: 0.72106601&#10; ACTUAL: array([0.004237, 0.004237])&#10; DESIRED: array([0.015191, 0.015191])">test_results/PATCH_PLAN_WAVE1_PAIRWISE_CORRECTION/viz-pairwise-groups/test_regression.py:19: in test_pairwise_mann_whitney_ignores_unrequested_group
+    np.testing.assert_allclose(actual, expected)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 2 / 2 (100%)
+E   Mismatch at indices:
+E    [0]: 0.004237400946076916 (ACTUAL), 0.015191410988288745 (DESIRED)
+E    [1]: 0.004237400946076916 (ACTUAL), 0.015191410988288745 (DESIRED)
+E   Max absolute difference among violations: 0.01095401
+E   Max relative difference among violations: 0.72106601
+E    ACTUAL: array([0.004237, 0.004237])
+E    DESIRED: array([0.015191, 0.015191])</failure></testcase></testsuite></testsuites>

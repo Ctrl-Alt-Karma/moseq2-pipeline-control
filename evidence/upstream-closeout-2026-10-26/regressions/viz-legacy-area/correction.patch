@@ -1,0 +1,59 @@
+commit d611143a12ccd955706ea476fe7d482abde25394
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:58 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:58 2026 -0400
+
+    fix: apply an area conversion to legacy area scalars
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 645415411f3119e62b59fe79e26df504d23bbb1c
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/scalars/util.py b/moseq2_viz/scalars/util.py
+index 1e800f3..a108097 100644
+--- a/moseq2_viz/scalars/util.py
++++ b/moseq2_viz/scalars/util.py
+@@ -165,7 +165,7 @@ def convert_legacy_scalars(old_features, force: bool = False, true_depth: float
+ 
+     features['width_mm'] = features['width_px'] * px_to_mm[:, 1]
+     features['length_mm'] = features['length_px'] * px_to_mm[:, 0]
+-    features['area_mm'] = features['area_px'] * px_to_mm.mean(axis=1)
++    features['area_mm'] = features['area_px'] * px_to_mm.prod(axis=1)
+ 
+     features['angle'] = old_features['angle']
+ 
+@@ -688,4 +688,4 @@ def compute_syllable_position_heatmaps(scalar_df, syllable_key='labels (usage so
+     filtered_df = scalar_df[scalar_df[syllable_key].isin(syllables)]
+     hists = filtered_df.groupby(['group', 'uuid', 'SessionName', 'SubjectName', syllable_key]).apply(_compute_histogram)
+ 
+-    return hists
+\ No newline at end of file
++    return hists
+diff --git a/tests/unit_tests/test_closeout_viz_legacy_area.py b/tests/unit_tests/test_closeout_viz_legacy_area.py
+new file mode 100644
+index 0000000..eec876c
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_legacy_area.py
+@@ -0,0 +1,19 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++
++
++
++
++
++def test_legacy_area_scales_quadratically_with_depth():
++    from moseq2_viz.scalars.util import convert_legacy_scalars
++    features = {key: np.array([value], dtype=float) for key, value in
++                dict(centroid_x=250, centroid_y=210, width=10, length=20, area=150, height_ave=10, angle=0).items()}
++    a = convert_legacy_scalars(features, force=True, true_depth=400)
++    b = convert_legacy_scalars(features, force=True, true_depth=800)
++    np.testing.assert_allclose(b['area_mm'], 4 * a['area_mm'])
++    np.testing.assert_allclose(b['length_mm'], 2 * a['length_mm'])

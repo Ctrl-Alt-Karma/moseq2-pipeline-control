@@ -1,0 +1,51 @@
+commit 0b20df4c1a5e6e04d9902c3bc245209d52e4de63
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:34 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:34 2026 -0400
+
+    fix: keep zero-total usage normalization finite
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 83e9cadebf1dbd0822c87750217c39ba1d59e3ac
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/model/util.py b/moseq2_viz/model/util.py
+index d81bacb..b942a0b 100644
+--- a/moseq2_viz/model/util.py
++++ b/moseq2_viz/model/util.py
+@@ -300,6 +300,8 @@ def normalize_usages(usage_dict):
+     usage_dict (dict): dictionary containing syllable label keys pointing to usage frequencies.
+     """
+     total = sum(usage_dict.values())
++    if total == 0:
++        return valmap(lambda v: 0.0, usage_dict)
+     return valmap(lambda v: v / total, usage_dict)
+ 
+ 
+@@ -1310,4 +1312,4 @@ def get_Xy_values(stat_means, unique_groups, stat='usage'):
+ 
+     y = np.array([mapping[l] for l in y])
+ 
+-    return np.array(X), y, mapping, rev_mapping
+\ No newline at end of file
++    return np.array(X), y, mapping, rev_mapping
+diff --git a/tests/unit_tests/test_closeout_viz_empty_usages.py b/tests/unit_tests/test_closeout_viz_empty_usages.py
+new file mode 100644
+index 0000000..4ab5747
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_empty_usages.py
+@@ -0,0 +1,11 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pandas as pd
++import pytest
++
++
++def test_empty_usage_normalization_is_finite():
++    from moseq2_viz.model.util import normalize_usages
++    actual = normalize_usages({0: 0., 1: 0.})
++    assert all(np.isfinite(list(actual.values())))
++    assert sum(actual.values()) == 0

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.783" timestamp="2026-10-26T12:36:57.647369-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.extract-hampel-centroid.test_regression" name="test_hampel_centroid_filter_is_translation_invariant[0]" time="0.656"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=1e-12&#10;&#10;Mismatched elements: 26 / 202 (12.9%)&#10;First 5 mismatches are at indices:&#10; [10, 0]: 0.08233797712798907 (ACTUAL), 0.4952099073559566 (DESIRED)&#10; [14, 0]: -0.121568356628306 (ACTUAL), 0.3148189648029813 (DESIRED)&#10; [16, 0]: -0.36126595367991976 (ACTUAL), -0.49532267682175757 (DESIRED)&#10; [17, 0]: -0.36126595367991976 (ACTUAL), -0.6193244409363388 (DESIRED)&#10; [22, 0]: 0.11493655552725358 (ACTUAL), -0.5125017609501299 (DESIRED)&#10;Max absolute difference among violations: 11.85409944&#10;Max relative difference among violations: 14.37960198&#10; ACTUAL: array([[ 5.071577e-01, -1.397812e-01],&#10;       [ 9.846049e-03,  1.222549e-01],&#10;       [-2.366769e-01,  6.196719e-04],...&#10; DESIRED: array([[ 5.071577e-01, -1.397812e-01],&#10;       [ 9.846049e-03,  1.222549e-01],&#10;       [-2.366769e-01,  6.196719e-04],...">test_results/PATCH_PLAN_WAVE1/extract-hampel-centroid/test_regression.py:15: in test_hampel_centroid_filter_is_translation_invariant
+    np.testing.assert_allclose(near, far - 200, atol=1e-12)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=1e-12
+E   
+E   Mismatched elements: 26 / 202 (12.9%)
+E   First 5 mismatches are at indices:
+E    [10, 0]: 0.08233797712798907 (ACTUAL), 0.4952099073559566 (DESIRED)
+E    [14, 0]: -0.121568356628306 (ACTUAL), 0.3148189648029813 (DESIRED)
+E    [16, 0]: -0.36126595367991976 (ACTUAL), -0.49532267682175757 (DESIRED)
+E    [17, 0]: -0.36126595367991976 (ACTUAL), -0.6193244409363388 (DESIRED)
+E    [22, 0]: 0.11493655552725358 (ACTUAL), -0.5125017609501299 (DESIRED)
+E   Max absolute difference among violations: 11.85409944
+E   Max relative difference among violations: 14.37960198
+E    ACTUAL: array([[ 5.071577e-01, -1.397812e-01],
+E          [ 9.846049e-03,  1.222549e-01],
+E          [-2.366769e-01,  6.196719e-04],...
+E    DESIRED: array([[ 5.071577e-01, -1.397812e-01],
+E          [ 9.846049e-03,  1.222549e-01],
+E          [-2.366769e-01,  6.196719e-04],...</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE1.extract-hampel-centroid.test_regression" name="test_hampel_centroid_filter_is_translation_invariant[1]" time="0.002"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=1e-12&#10;&#10;Mismatched elements: 25 / 202 (12.4%)&#10;First 5 mismatches are at indices:&#10; [10, 0]: 0.08233797712798907 (ACTUAL), 0.4952099073559566 (DESIRED)&#10; [14, 0]: -0.121568356628306 (ACTUAL), 0.3148189648029813 (DESIRED)&#10; [16, 0]: -0.36126595367991976 (ACTUAL), -0.49532267682175757 (DESIRED)&#10; [17, 0]: -0.36126595367991976 (ACTUAL), -0.6193244409363388 (DESIRED)&#10; [22, 0]: 0.11493655552725358 (ACTUAL), -0.5125017609501299 (DESIRED)&#10;Max absolute difference among violations: 0.82077739&#10;Max relative difference among violations: 14.37960198&#10; ACTUAL: array([[ 5.071577e-01, -1.397812e-01],&#10;       [ 9.846049e-03,  1.222549e-01],&#10;       [-2.366769e-01,  6.196719e-04],...&#10; DESIRED: array([[ 5.071577e-01, -1.397812e-01],&#10;       [ 9.846049e-03,  1.222549e-01],&#10;       [-2.366769e-01,  6.196719e-04],...">test_results/PATCH_PLAN_WAVE1/extract-hampel-centroid/test_regression.py:15: in test_hampel_centroid_filter_is_translation_invariant
+    np.testing.assert_allclose(near, far - 200, atol=1e-12)
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=1e-12
+E   
+E   Mismatched elements: 25 / 202 (12.4%)
+E   First 5 mismatches are at indices:
+E    [10, 0]: 0.08233797712798907 (ACTUAL), 0.4952099073559566 (DESIRED)
+E    [14, 0]: -0.121568356628306 (ACTUAL), 0.3148189648029813 (DESIRED)
+E    [16, 0]: -0.36126595367991976 (ACTUAL), -0.49532267682175757 (DESIRED)
+E    [17, 0]: -0.36126595367991976 (ACTUAL), -0.6193244409363388 (DESIRED)
+E    [22, 0]: 0.11493655552725358 (ACTUAL), -0.5125017609501299 (DESIRED)
+E   Max absolute difference among violations: 0.82077739
+E   Max relative difference among violations: 14.37960198
+E    ACTUAL: array([[ 5.071577e-01, -1.397812e-01],
+E          [ 9.846049e-03,  1.222549e-01],
+E          [-2.366769e-01,  6.196719e-04],...
+E    DESIRED: array([[ 5.071577e-01, -1.397812e-01],
+E          [ 9.846049e-03,  1.222549e-01],
+E          [-2.366769e-01,  6.196719e-04],...</failure></testcase></testsuite></testsuites>

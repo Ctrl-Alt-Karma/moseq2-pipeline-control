@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.738" timestamp="2026-10-26T12:37:01.726281-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.extract-hampel-angle.test_regression" name="test_angle_hampel_filter_can_run_without_centroid_filter" time="0.621"><failure message="UnboundLocalError: cannot access local variable 'padded_orientation' where it is not associated with a value">test_results/PATCH_PLAN_WAVE1/extract-hampel-angle/test_regression.py:10: in test_angle_hampel_filter_can_run_without_centroid_filter
+    actual = feature_hampel_filter({"centroid": np.zeros((101, 2)), "orientation": angles},
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_extract/extract/proc.py:664: in feature_hampel_filter
+    vws = strided_app(padded_orientation, angle_hampel_span, 1)
+                      ^^^^^^^^^^^^^^^^^^
+E   UnboundLocalError: cannot access local variable 'padded_orientation' where it is not associated with a value</failure></testcase></testsuite></testsuites>

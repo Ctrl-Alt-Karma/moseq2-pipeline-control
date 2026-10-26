@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="2.016" timestamp="2026-10-26T13:06:44.648791-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE6.app-bootstrap-nans.test_regression" name="test_missing_observations_do_not_poison_bootstrap_limits" time="1.416"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;Mismatched elements: 1 / 2 (50%)&#10;Mismatch at index:&#10; [0]: 1.0 (ACTUAL), 1.3250000000000002 (DESIRED)&#10;Max absolute difference among violations: 0.325&#10;Max relative difference among violations: 0.24528302&#10; ACTUAL: array([1., 3.])&#10; DESIRED: array([1.325, 3.   ])">test_results/PATCH_PLAN_WAVE6/app-bootstrap-nans/test_regression.py:19: in test_missing_observations_do_not_poison_bootstrap_limits
+    np.testing.assert_array_equal(actual, expected)
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 1 / 2 (50%)
+E   Mismatch at index:
+E    [0]: 1.0 (ACTUAL), 1.3250000000000002 (DESIRED)
+E   Max absolute difference among violations: 0.325
+E   Max relative difference among violations: 0.24528302
+E    ACTUAL: array([1., 3.])
+E    DESIRED: array([1.325, 3.   ])</failure></testcase></testsuite></testsuites>

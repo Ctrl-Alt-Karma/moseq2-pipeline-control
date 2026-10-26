@@ -1,0 +1,56 @@
+commit c1622a232020686671061d3f4f69cdee8d834970
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:47 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:47 2026 -0400
+
+    fix: pass the requested changepoint sigma to the Gaussian sigma argument
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: e9f573185e2d7ed86a2de15089903a8294635c3c
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_pca/util.py b/moseq2_pca/util.py
+index a2b1cf4..98a3c9a 100644
+--- a/moseq2_pca/util.py
++++ b/moseq2_pca/util.py
+@@ -678,7 +678,7 @@ def get_changepoints(scores, k=5, sigma=3, peak_height=.5, peak_neighbors=1,
+ 
+     if sigma is not None and sigma > 0:
+         for i in range(scores.shape[0]):
+-            normed_df[i, :] = gauss_smooth(normed_df[i, :], sigma)
++            normed_df[i, :] = gauss_smooth(normed_df[i, :], sig=sigma)
+ 
+     normed_df[:, k // 2:-k // 2] = (normed_df[:, k:] - normed_df[:, :-k])**2
+ 
+@@ -719,4 +719,4 @@ def combine_new_config(config_file, config_data):
+     config_data = {**temp_config, **config_data}
+     # ensure output_file and output_dir are not in config_data or reusing config for extraction will fail
+     config_data = {k:v for k, v in config_data.items() if k not in ('output_dir', 'output_file')}
+-    write_yaml(config_data, config_file)
+\ No newline at end of file
++    write_yaml(config_data, config_file)
+diff --git a/tests/unit_tests/test_closeout_pca_changepoint_sigma.py b/tests/unit_tests/test_closeout_pca_changepoint_sigma.py
+new file mode 100644
+index 0000000..db70913
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_pca_changepoint_sigma.py
+@@ -0,0 +1,16 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pandas as pd
++import pytest
++
++
++def test_changepoint_sigma_reaches_smoothing_std(monkeypatch):
++    import moseq2_pca.util as util
++    seen = []
++    original = util.gauss_smooth
++    def record(signal, *args, **kwargs):
++        seen.append(kwargs.get("sig", 1.5))
++        return original(signal, *args, **kwargs)
++    monkeypatch.setattr(util, "gauss_smooth", record)
++    util.get_changepoints(np.sin(np.arange(120)[None, :] / 6), sigma=2.)
++    assert seen == [2.]

@@ -1,0 +1,69 @@
+commit 3691c8b3861835ad5149726c31dee1aac7c9d92f
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:13 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:13 2026 -0400
+
+    fix: fit flip-classifier PCA within each cross-validation fold
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 94b84918a3c6d4a228f1bc8a8b0e4808532dd841
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/flip/train.py b/moseq2_app/flip/train.py
+index 1908631..b885346 100644
+--- a/moseq2_app/flip/train.py
++++ b/moseq2_app/flip/train.py
+@@ -110,12 +110,9 @@ def train_classifier(
+     frames = data["frames"]
+     flipped = data["flipped"]
+ 
+-    print("Fitting PCA")
+-    pca = PCA(n_components=n_components)
+-    pca.fit(flatten(frames[-len(frames) // 3:]))
+-
+     pipeline = make_pipeline(
+-        FunctionTransformer(batch_apply_pca, kw_args={"pca": pca}, validate=False),
++        FunctionTransformer(flatten, validate=False),
++        PCA(n_components=n_components),
+         StandardScaler(),
+         (
+             RandomForestClassifier(n_estimators=150)
+diff --git a/tests/software/test_closeout_app_cv_pca_leakage.py b/tests/software/test_closeout_app_cv_pca_leakage.py
+new file mode 100644
+index 0000000..4d984b7
+--- /dev/null
++++ b/tests/software/test_closeout_app_cv_pca_leakage.py
+@@ -0,0 +1,30 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++def test_flip_pca_is_inside_cross_validation_pipeline(tmp_path, monkeypatch):
++    from moseq2_app.flip import train
++    path = tmp_path / "synthetic.npz"
++    np.savez(path, frames=np.zeros((12, 8, 8)), flipped=np.tile([False, True], 6))
++    class NoPrefitPCA:
++        def __init__(self, **kwargs):
++            pass
++        def fit(self, *args):
++            raise AssertionError("PCA fitted before cross-validation")
++    class FakePipeline:
++        def __init__(self, steps):
++            self.steps = steps
++        def fit(self, *args):
++            return self
++    monkeypatch.setattr(train, "PCA", NoPrefitPCA)
++    monkeypatch.setattr(train, "make_pipeline", lambda *steps: FakePipeline(steps))
++    def inspect_cv(pipeline, *args, **kwargs):
++        assert any(isinstance(step, NoPrefitPCA) for step in pipeline.steps)
++        return np.ones(4)
++    monkeypatch.setattr(train, "cross_val_score", inspect_cv)
++    assert isinstance(train.train_classifier(str(path), n_components=2), FakePipeline)

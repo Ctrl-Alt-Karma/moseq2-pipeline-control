@@ -1,0 +1,71 @@
+commit b5ca7d0cded025d33fddc4ae5f073c758fac4335
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:08 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:08 2026 -0400
+
+    fix: replace only the movie extension when finding sidecar files
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 61861c3382d993cbba7522985d970de5c0f92ef9, 313c9b5bf180fd2dbacbec071dba39b9c4472743
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/gui/progress.py b/moseq2_app/gui/progress.py
+index 3a469b7..2f9a58e 100644
+--- a/moseq2_app/gui/progress.py
++++ b/moseq2_app/gui/progress.py
+@@ -438,7 +438,7 @@ def get_extraction_progress(base_dir, exts=['dat', 'mkv', 'avi']):
+         extracted_path = e_path_dict.get(k, v)
+         extracted = False
+         if '.mp4' in extracted_path:
+-            yaml_path = extracted_path.replace('mp4', 'yaml')
++            yaml_path = extracted_path[:-4] + '.yaml'
+             if check_completion_status(yaml_path):
+                 extracted = True
+                 num_extracted += 1
+diff --git a/moseq2_app/roi/validation.py b/moseq2_app/roi/validation.py
+index 990f48e..5488471 100644
+--- a/moseq2_app/roi/validation.py
++++ b/moseq2_app/roi/validation.py
+@@ -120,8 +120,8 @@ def get_scalar_df(path_dict):
+         if not v.endswith('.mp4'):
+             continue
+         # Get relevant extraction paths
+-        h5path = v.replace('mp4', 'h5')
+-        yamlpath = v.replace('mp4', 'yaml')
++        h5path = v[:-4] + '.h5'
++        yamlpath = v[:-4] + '.yaml'
+ 
+         if not exists(yamlpath):
+             print(f'No valid yaml path for session: {k}')
+diff --git a/tests/software/test_closeout_app_sidecar_paths.py b/tests/software/test_closeout_app_sidecar_paths.py
+new file mode 100644
+index 0000000..963a688
+--- /dev/null
++++ b/tests/software/test_closeout_app_sidecar_paths.py
+@@ -0,0 +1,23 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++def test_sidecar_derivation_preserves_mp4_in_parent_path(monkeypatch):
++    from moseq2_app.roi import validation
++    expected_h5 = "/synthetic/mp4_archive/session.h5"
++    expected_yaml = "/synthetic/mp4_archive/session.yaml"
++    calls = []
++    monkeypatch.setattr(validation, "exists", lambda path: path == expected_yaml)
++    monkeypatch.setattr(validation, "read_yaml", lambda path: {
++        "metadata": {"SessionName": "synthetic", "SubjectName": "synthetic"}, "uuid": "synthetic"})
++    def scalars(filename, **kw):
++        calls.append(filename)
++        return {"area_px": np.ones(2)}
++    monkeypatch.setattr(validation, "h5_to_dict", scalars)
++    validation.get_scalar_df({"synthetic": "/synthetic/mp4_archive/session.mp4"})
++    assert calls == [expected_h5]

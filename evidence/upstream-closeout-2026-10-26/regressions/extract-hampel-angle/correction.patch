@@ -1,0 +1,63 @@
+commit 69fae4f7e333227af3f688ccee4fc1678ea176a0
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:22 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:22 2026 -0400
+
+    fix: allow angle-only Hampel filtering and use the MAD threshold
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 93bf656c3fbdf4d976980a80f9dddaad99d8ffe1
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_extract/extract/proc.py b/moseq2_extract/extract/proc.py
+index b4d7b70..fcfc033 100644
+--- a/moseq2_extract/extract/proc.py
++++ b/moseq2_extract/extract/proc.py
+@@ -656,16 +656,15 @@ def feature_hampel_filter(features, centroid_hampel_span=None, centroid_hampel_s
+             fill_idx = np.where(vals > med + centroid_hampel_sig * mad)[0]
+             features['centroid'][fill_idx, i] = med[fill_idx]
+ 
++    if angle_hampel_span is not None and angle_hampel_span > 0:
+         padded_orientation = np.pad(features['orientation'],
+                                     (angle_hampel_span // 2, angle_hampel_span // 2),
+                                     'constant', constant_values = np.nan)
+-
+-    if angle_hampel_span is not None and angle_hampel_span > 0:
+         vws = strided_app(padded_orientation, angle_hampel_span, 1)
+         med = np.nanmedian(vws, axis=1)
+         mad = np.nanmedian(np.abs(vws - med[:, None]), axis=1)
+         vals = np.abs(features['orientation'] - med)
+-        fill_idx = np.where(vals > med + angle_hampel_sig * mad)[0]
++        fill_idx = np.where(vals > angle_hampel_sig * 1.4826 * mad)[0]
+         features['orientation'][fill_idx] = med[fill_idx]
+ 
+     return features
+@@ -727,4 +726,4 @@ def model_smoother(features, ll=None, clips=(-300, -125)):
+         for k, v in features.items():
+             features[k][i] = (1 - smoother) * v[i + 1] + smoother * v[i]
+ 
+-    return features
+\ No newline at end of file
++    return features
+diff --git a/tests/unit_tests/test_closeout_extract_hampel_angle.py b/tests/unit_tests/test_closeout_extract_hampel_angle.py
+new file mode 100644
+index 0000000..deb54c7
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_hampel_angle.py
+@@ -0,0 +1,13 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pytest
++
++
++def test_angle_hampel_filter_can_run_without_centroid_filter():
++    from moseq2_extract.extract.proc import feature_hampel_filter
++    angles = np.random.RandomState(3).normal(.1, .01, 101)
++    angles[50] = 2
++    actual = feature_hampel_filter({"centroid": np.zeros((101, 2)), "orientation": angles},
++                                  centroid_hampel_span=0, angle_hampel_span=5,
++                                  angle_hampel_sig=3)
++    assert actual["orientation"][50] < 1

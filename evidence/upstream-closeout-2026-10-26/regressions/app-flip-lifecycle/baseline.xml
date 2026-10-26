@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="2.157" timestamp="2026-10-26T12:47:21.063868-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE3.app-flip-lifecycle.test_regression" name="test_flip_refuses_reprocessing_a_completed_session" time="1.814"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;Mismatched elements: 132 / 768 (17.2%)&#10;First 5 mismatches are at indices:&#10; [0, 1, 2]: 1 (ACTUAL), 0 (DESIRED)&#10; [0, 1, 3]: 1 (ACTUAL), 0 (DESIRED)&#10; [0, 1, 4]: 1 (ACTUAL), 0 (DESIRED)&#10; [0, 2, 2]: 1 (ACTUAL), 0 (DESIRED)&#10; [0, 2, 3]: 1 (ACTUAL), 0 (DESIRED)&#10;Max absolute difference among violations: 11&#10;Max relative difference among violations: 1.&#10; ACTUAL: array([[[ 0,  0,  0,  0,  0,  0,  0,  0],&#10;        [ 0,  0,  1,  1,  1,  0,  0,  0],&#10;        [ 0,  0,  1,  1,  1,  0,  0,  0],...&#10; DESIRED: array([[[ 0,  0,  0,  0,  0,  0,  0,  0],&#10;        [ 0,  0,  0,  0,  0,  0,  0,  0],&#10;        [ 0,  0,  0,  0,  0,  0,  0,  0],...">test_results/PATCH_PLAN_WAVE3/app-flip-lifecycle/test_regression.py:35: in test_flip_refuses_reprocessing_a_completed_session
+    np.testing.assert_array_equal(current, first)
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   Mismatched elements: 132 / 768 (17.2%)
+E   First 5 mismatches are at indices:
+E    [0, 1, 2]: 1 (ACTUAL), 0 (DESIRED)
+E    [0, 1, 3]: 1 (ACTUAL), 0 (DESIRED)
+E    [0, 1, 4]: 1 (ACTUAL), 0 (DESIRED)
+E    [0, 2, 2]: 1 (ACTUAL), 0 (DESIRED)
+E    [0, 2, 3]: 1 (ACTUAL), 0 (DESIRED)
+E   Max absolute difference among violations: 11
+E   Max relative difference among violations: 1.
+E    ACTUAL: array([[[ 0,  0,  0,  0,  0,  0,  0,  0],
+E           [ 0,  0,  1,  1,  1,  0,  0,  0],
+E           [ 0,  0,  1,  1,  1,  0,  0,  0],...
+E    DESIRED: array([[[ 0,  0,  0,  0,  0,  0,  0,  0],
+E           [ 0,  0,  0,  0,  0,  0,  0,  0],
+E           [ 0,  0,  0,  0,  0,  0,  0,  0],...</failure></testcase><testcase classname="test_results.PATCH_PLAN_WAVE3.app-flip-lifecycle.test_regression" name="test_interrupted_flip_refuses_mutating_rerun" time="0.007"><failure message="Failed: DID NOT RAISE RuntimeError">test_results/PATCH_PLAN_WAVE3/app-flip-lifecycle/test_regression.py:54: in test_interrupted_flip_refuses_mutating_rerun
+    with pytest.raises(RuntimeError, match="(?i)(incomplete|failed|restore|interrupted)"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE RuntimeError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,752 @@
+[
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "11d2691ab56f9972930663e712c06cecb01f2eb1",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Defect B: refit RANSAC plane on inliers, fix acceptance and sampling\n\nplane_ransac returned the plane defined by the 3 randomly sampled seed\npoints instead of refitting to all inliers, so the floor reference was\nset by 3 noisy pixels rather than the ~90k that agree with it. On\nsynthetic tilted-floor data this refit lowers floor RMS error ~4x\n(3.7mm -> 0.8mm).\n\nAlso in the same function:\n- np.random.choice used replace=True, which can draw the same point\n  three times and produce a degenerate plane; use replace=False.\n- best_plane was unbound when no iteration passed the acceptance gate,\n  raising UnboundLocalError; initialize it and raise a readable error.\n- acceptance required both more inliers AND lower mean distance over ALL\n  points, which can reject a strictly better plane; score on inlier\n  count and break ties on mean inlier distance.\n\nAdds plane_fit_lstsq (SVD total-least-squares plane fit) for the refit.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/extract/roi.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/extract/roi.py::plane_fit_lstsq",
+      "moseq2_extract/extract/roi.py::plane_ransac"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/11d2691ab56f9972930663e712c06cecb01f2eb1"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "c5e45345dea28873b1cc883e76498dd945680494",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Defect C: treat depth dropouts as missing in background estimate\n\nget_bground_im_file computed the background with np.nanmedian, but\ninvalid depth pixels are 0, not NaN, so zeros were treated as real\ndepth and pulled the background (and true_depth) toward the camera.\nThe per-frame median blur also ran before any masking, smearing dropout\nzeros into neighbouring valid pixels.\n\nMask zeros to NaN before any spatial filtering, take the temporal\nnanmedian, fill always-dropout pixels with the median floor depth, then\napply the spatial median blur once on the clean background. On synthetic\ndata with a heavy-dropout region this removes a ~700mm low bias, and a\npersistent reflective patch no longer reads as a false near-camera\nobject.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/extract/proc.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/extract/proc.py::get_bground_im_file"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/c5e45345dea28873b1cc883e76498dd945680494"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "b4429f839637782312a7008e82977f5c4a0e2a14",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Defect A: estimate floor depth range from the background mode\n\nThe automatic depth-range detection in get_roi_wrapper sampled a single\npixel at the image centroid. If that pixel was a depth dropout (0), the\nrange became [-50, 50] and plane_ransac failed with \"Too few datapoints\";\nthe centroid also lands near the frame center regardless of where the\narena is, and the hardcoded +/-50mm cannot span a tilted or wide floor.\n\nReplace it with estimate_depth_range: histogram all valid depth pixels,\nsmooth, find candidate modes, and pick the mode whose thresholded pixels\nform the largest compact connected region (favouring one covering the\nframe center). The pad is derived from the actual spread of the floor\npixels (95% span and MAD) with a 50mm floor. On synthetic backgrounds\nthis recovers the floor under center dropout, off-center arenas, 20%\nrandom dropout, and floor tilt, where the old code returned [-50, 50] on\nthe center-dropout case.\n\nAlso writes depth_range_diagnostic.png (histogram with the selected\nrange shaded) to the output directory so ambiguous scenes -- e.g. a\nsmall arena with a large room floor behind it, which no unsupervised\nheuristic resolves reliably -- can be confirmed by eye.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/helpers/wrappers.py",
+      "moseq2_extract/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/helpers/wrappers.py::get_roi_wrapper",
+      "moseq2_extract/util.py::estimate_depth_range",
+      "moseq2_extract/util.py::plot_depth_range_diagnostic"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/b4429f839637782312a7008e82977f5c4a0e2a14"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "ec418d7a2f134dcd3e62883ce7317bb68197a20b",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Add tests for least-squares plane fit and RANSAC no-plane error\n\nCovers the least-squares refit (recovers a noisy plane more accurately\nthan a 3-point fit) and the readable error raised when no plane meets\nthe inlier ratio.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "tests/unit_tests/test_extract_roi.py"
+    ],
+    "changed_functions": [],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/ec418d7a2f134dcd3e62883ce7317bb68197a20b"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix scalar units, Hampel outlier filter, and depth byte order\n\nScalars:\n\n- area_mm multiplied a pixel count (px^2) by the MEAN LINEAR mm/px factor,\n  leaving the result in px*mm rather than mm^2 and under-reporting mouse\n  area by roughly that factor (~1.6x for a typical rig). Use the product of\n  the x and y factors. Relative comparisons within a dataset were preserved\n  by the old code, but absolute mm^2 values were wrong.\n\nHampel outlier filter (feature_hampel_filter), three separate defects:\n\n- The threshold was `median + sig * MAD`, which adds the median *position*\n  to the tolerance. Since a centroid median is hundreds of pixels and MAD is\n  a fraction of a pixel, the threshold was never exceeded and the filter was\n  a silent no-op. Verified: a 300px glitch on a ~150px track produced a\n  threshold of 152.2 and flagged nothing. Compare against sig * 1.4826 * MAD\n  so the sig parameter means \"standard deviations\" as its name implies.\n- The centroid loop ran `range(1)`, so only the x coordinate was filtered\n  and y-axis tracking glitches passed straight through into velocity and\n  distance-to-center.\n- padded_orientation was built inside the centroid branch but used in the\n  angle branch, so enabling the angle filter alone raised UnboundLocalError\n  and aborted extraction.\n\nThese matter only when the Hampel filters are enabled (both spans default\nto 0), but a user who turns them on to clean glitchy tracking currently\ngets nothing.\n\nVideo IO:\n\n- read_frames read the ffmpeg output with a native-endian numpy dtype\n  regardless of pixel_format, so a gray16be stream was byte-swapped (a\n  depth of 673mm read as 41218). Derive the dtype byte order from\n  pixel_format. The main pipeline was accidentally safe because it passes\n  gray16le explicitly; read_mkv's own gray16be default was not.\n- The CLI --movie-dtype default was the signed \"<i2\" while the reader and\n  the notebook widget both use unsigned \"<u2\"; raw depth is unsigned, and\n  values >= 32768 (e.g. saturation markers) read as negative and evaded the\n  dropout mask. Align the CLI default to \"<u2\".\n\nAdds tests/unit_tests/test_scalar_correctness.py.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/cli.py",
+      "moseq2_extract/extract/proc.py",
+      "moseq2_extract/io/video.py",
+      "tests/unit_tests/test_scalar_correctness.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/cli.py::extract_options",
+      "moseq2_extract/extract/proc.py::compute_scalars",
+      "moseq2_extract/extract/proc.py::feature_hampel_filter",
+      "moseq2_extract/io/video.py::read_frames"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/93bf656c3fbdf4d976980a80f9dddaad99d8ffe1"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "c75272683c68cb5695be8e99d4e89ceb7adcf42b",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix segfault, center-pixel fragility, and masked-RANSAC crash\n\nFound by running the patched code in a reconstructed environment with the\npinned dependencies (python 3.7.16, opencv-python 4.1.2.30), which earlier\ntesting on a modern OpenCV could not surface.\n\n- estimate_depth_range SEGFAULTED on full-size depth frames. In the pinned\n  opencv-python 4.1.2, calling\n  `cv2.connectedComponentsWithStats(mask, connectivity=8)` with the keyword\n  form crashes the interpreter on a 424x512 mask containing a large region\n  (verified: exit 139, reproduced minimally). Passing connectivity and ltype\n  positionally avoids the faulty binding overload. This would have aborted\n  extraction outright for any CLI user relying on automatic depth-range\n  detection.\n\n- estimate_depth_range picked the wrong surface when the frame centre dropped\n  out. The centre bonus tested the single pixel labels[cy, cx], so a dropped\n  out centre denied every candidate the bonus and let a larger off-centre\n  surface win -- reintroducing exactly the single-pixel fragility this\n  function exists to remove. On a synthetic bucket with a centre dropout it\n  selected the walls: range [490, 617], 100% non-floor pixels. Score on the\n  fraction of a central window instead; the same scene now returns\n  [610, 736] with 0% non-floor, identical to the clean case.\n\n- plane_ransac could raise a bare numpy ValueError. The \"too few datapoints\"\n  guard runs before the ROI mask is applied, so a restrictive mask could\n  leave fewer than 3 points; sampling 3 without replacement then failed with\n  \"Cannot take a larger sample than population\". Re-check the count after\n  masking and raise an actionable error naming the mask.\n\nKnown remaining limitation: when arena walls sit within the pad of the floor\n(~45mm in testing), they are included in the range. No unsupervised heuristic\nseparates surfaces that close; this is what depth_range_diagnostic.png is for.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/extract/roi.py",
+      "moseq2_extract/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/extract/roi.py::plane_ransac",
+      "moseq2_extract/util.py::estimate_depth_range"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/c75272683c68cb5695be8e99d4e89ceb7adcf42b"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Use pinhole projection for pixel-to-mm conversion\n\nREVERSES an earlier decision to leave this alone. A third review supplied the\nexternal ground truth that changes the call: the formula disagrees with the\ncamera hardware.\n\nconvert_pxs_to_mm derived focal length as resolution / (2 * deg2rad(fov/2)),\nthe small-angle approximation, where the pinhole relation is\nresolution / (2 * tan(deg2rad(fov/2))). At 512x424 with the default FOV:\n\n    small-angle   fx=415.52  fy=404.89\n    pinhole       fx=361.56  fy=367.19\n    Kinect2 factory intrinsics        ~368 (fx == fy)\n\nThe pinhole values land within ~2% of the manufacturer's calibrated depth\nintrinsics; the small-angle values are 10-13% high, so every millimetre\ndisplacement was underestimated by that amount.\n\nThis was previously left as a \"convention\" on the grounds that it scales both\ngroups identically and therefore cancels in a group comparison. That reasoning\nis wrong for velocity_3d_mm:\n\n    vel_x, vel_y  <- centroid_*_mm, scaled by the focal length (wrong by ~1.1x)\n    vel_z         <- height_ave_mm, straight from the depth sensor (correct)\n\nso the 3D velocity combines two mis-scaled horizontal axes with a correct\nvertical one. That is a reweighting of horizontal against vertical motion, not\na common scale factor, and it does not cancel between groups that differ in the\nratio of rearing to locomotion -- which is close to the expected phenotype in\nthe study this is being used for. The same applies to any comparison between\nheight_ave_mm (unscaled) and length_mm / width_mm / area_mm (scaled).\n\nBlast radius is limited to the output scalars: convert_pxs_to_mm is called only\nfrom compute_scalars, so extraction decisions (ROI, cropping, thresholds) are\nunaffected.\n\nFor best accuracy, pass the session's calibrated fx/fy rather than deriving\nthem from a nominal FOV -- note the factory intrinsics have fx == fy while any\nFOV-derived pair does not.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/util.py::convert_pxs_to_mm"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "424d643affb685e1cad145e3c7051b814d11265c",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Stamp pipeline provenance into extracted h5 files\n\nThree review passes have each found defects that change the numbers written to\ndisk, and the rate of new findings is not decaying. The practical hazard is no\nlonger any single bug: it is silently combining data generated before a fix\nwith data generated after it. Nothing in the outputs recorded which code\nproduced them.\n\nAdds get_pipeline_provenance() / write_pipeline_provenance() and writes a JSON\nrecord to metadata/extraction/pipeline in every extracted h5:\n\n  - package name and version\n  - git commit of the installed package (best effort; \"unknown\" if unavailable)\n  - write timestamp\n  - EXTRACT_OUTPUT_POLICIES: semantic tags for each behaviour whose OUTPUT\n    changed relative to upstream (scalar_px_to_mm, area_units,\n    background_dropout, roi_plane_fit, hampel_filter, depth_range_detection)\n\nThe policy tags are the load-bearing part. A version number alone cannot say\nwhether a file was written with pinhole or small-angle pixel conversion; the\ntags can, and they are what a downstream consumer should compare. Bump the\nrelevant tag whenever a change alters the numbers on disk.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/helpers/data.py",
+      "moseq2_extract/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/helpers/data.py::create_extract_h5",
+      "moseq2_extract/util.py::_package_git_sha",
+      "moseq2_extract/util.py::get_pipeline_provenance",
+      "moseq2_extract/util.py::write_pipeline_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/424d643affb685e1cad145e3c7051b814d11265c"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "5cc858626592ea2682260eae9911827c7c0ba551",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Remove velocity_3d_px: it mixed pixel and millimetre units\n\nvelocity_3d_px was computed as sqrt(vel_x^2 + vel_y^2 + vel_z^2) where vel_x\nand vel_y are pixels-per-frame but vel_z is derived from height_ave_mm, which\nnever passes through px_to_mm and is therefore millimetres-per-frame. Adding\nsquares of quantities in different units does not produce a physical speed:\nthe value changes with camera height and resolution in a way that has no\nconsistent relationship to how fast the animal is moving, and its horizontal\nand vertical contributions are weighted by an arbitrary unit ratio.\n\nIt cannot be repaired in place without changing the meaning of a name that\nalready appears in five years of extracted data, so it is removed rather than\nrescaled, and the omission is recorded as an explicit output policy\n(\"invalid-mixed-units-omitted\") in the provenance stamp so downstream code can\ntell a file that never had it from one that does.\n\nvelocity_2d_px, velocity_2d_mm and velocity_3d_mm are untouched.\n\n- proc.py: drop the key from the feature dict and stop computing it, with a\n  comment at each site explaining why it is absent rather than missing\n- util.py: drop it from scalar_attributes; add the policy tag\n- test_compute_scalars: assert the key is absent and that requesting it raises\n  KeyError, and add exact assertions for velocity_2d_mm and velocity_3d_mm so\n  the surviving velocities are pinned\n\nAlso documents that convert_pxs_to_mm derives focal length from the nominal\nfield of view rather than a per-camera calibration, and that no CLI or config\npath currently exists to supply calibrated intrinsics.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_extract/extract/proc.py",
+      "moseq2_extract/util.py",
+      "tests/unit_tests/test_extract_proc.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/extract/proc.py::compute_scalars",
+      "moseq2_extract/util.py::convert_pxs_to_mm",
+      "moseq2_extract/util.py::scalar_attributes"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/5cc858626592ea2682260eae9911827c7c0ba551"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4",
+    "author": "AJ Mitchell",
+    "author_email": "ajmitchell@cheviot.lan",
+    "message": "Add nonzero velocity scalar regression\n",
+    "files": [
+      "tests/unit_tests/test_extract_proc.py"
+    ],
+    "changed_functions": [],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/f028801e9a6b54ffa63e22d9e10179ea7419ccc4"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "e7f585104ba25b66e5326c88c77a47e33db95635",
+    "author": "AJ Mitchell",
+    "author_email": "ajmitchell@cheviot.lan",
+    "message": "Preserve fractional pixel conversions\n",
+    "files": [
+      "moseq2_extract/util.py",
+      "tests/unit_tests/test_extract_proc.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/util.py::convert_pxs_to_mm"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/e7f585104ba25b66e5326c88c77a47e33db95635"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+    "author": "Claude Builder",
+    "author_email": "noreply@anthropic.com",
+    "message": "fix(roi): make plane_ransac hypothesis sampling deterministic\n\nplane_ransac drew its 3-point hypotheses from the global NumPy RNG with no\nseed, so the same depth image produced a different plane on every call. In R1\nvalidation this propagated all the way down: ROI pixels, extracted frames and\nframes_mask, half the scalars, PCA score arrays and finally the applied\nsyllable label arrays all differed between a primary run and its replay of the\nsame session with identical frozen inputs.\n\n- moseq2_extract/extract/roi.py: sample from a local\n  np.random.RandomState(0) instead of np.random.choice. The global RNG is\n  neither seeded nor consumed. Iteration count, scoring, tie-break, noise\n  tolerance, inlier ratio, inlier logic, the least-squares inlier refit and\n  ROI ranking are all unchanged.\n- moseq2_extract/util.py: EXTRACT_OUTPUT_POLICIES[\"roi_plane_fit\"] bumped from\n  \"lstsq-inlier-refit\" to \"lstsq-inlier-refit-deterministic-rng0\" so outputs\n  record which policy produced them and pre-fix data can be told apart.\n- tests/unit_tests/test_roi_determinism.py: synthetic-fixture qualification.\n  Repeated calls are bit-identical; results are unchanged under different\n  global RNG states; the global RNG state is not consumed; the masked variant\n  is deterministic; the plane is still a real fit (median residual bound); the\n  policy tag records determinism; and the source contains no np.random.seed or\n  np.random.choice.\n\nVerified 7/7 PASS on this branch and 6/7 FAIL on unmodified e7f5851, so the\ntests genuinely discriminate. Existing ROI tests pass (4/4), extract proc\ntests pass (11/11), and the full unit suite is unchanged at 36 tests with the\nsame 7 pre-existing environment errors before and after.\n\nNo scientific parameter, threshold, iteration count or ranking rule is changed.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\n",
+    "files": [
+      "moseq2_extract/extract/roi.py",
+      "moseq2_extract/util.py",
+      "tests/unit_tests/test_roi_determinism.py"
+    ],
+    "changed_functions": [
+      "moseq2_extract/extract/roi.py::plane_ransac"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/2c9cd86571bcc23ad6870e4da344e0f558f3f54c"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "e9f573185e2d7ed86a2de15089903a8294635c3c",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix changepoint smoothing bandwidth and missing scipy.stats import\n\n- get_changepoints called gauss_smooth(normed_df[i, :], sigma), passing\n  sigma positionally as win_length, so the Gaussian std was silently\n  hardcoded to the default 1.5 regardless of the sigma argument, while\n  the edge masking (6 * sigma) already treated sigma as the std. Pass\n  sig=sigma so the changepoint sigma parameter actually sets the\n  smoothing bandwidth (e.g. sigma=3 now gives std 3, not ~1.3).\n- util.py used scipy.stats.zscore in get_rps but only imported\n  scipy.signal, so get_rps(normalize=True) raised AttributeError unless\n  scipy.stats happened to be imported elsewhere first. Import scipy.stats.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_pca/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_pca/util.py::get_changepoints"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/e9f573185e2d7ed86a2de15089903a8294635c3c"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "ff3531632aaecbc045a42570db024c429235a914",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix temporal filter delay, stale-session timestamps, and fps edge cases\n\n- gaussian_kernel1d built points with np.arange(-n, n), which is even-length\n  and omits +n, so the kernel was asymmetric and a 'same'-mode convolution\n  shifted the signal by a full frame. Measured delay was +0.99946 frames for\n  every sigma tested; with arange(-n, n+1) it is 0. This affects the temporal\n  gaussian smoothing and detrending in clean_frames and the changepoint\n  smoothing. The uniform shift was mostly benign for smoothing, but detrending\n  subtracts a low-pass from the un-shifted original, so the phase error was\n  real there.\n\n- apply_pca_dask computed each session's timestamps with get_timestamps(f,\n  frames, fps), where `frames` was the leftover loop variable from the setup\n  loop and therefore always the LAST session's array. For any session without\n  stored timestamps the fallback built a default series from the wrong frame\n  count, misaligning that session's scores. Use the session's own scores.\n\n- The frame rate was recovered as round(1/mean(diff(timestamps))). A single\n  frame gives an empty diff (mean NaN) and constant timestamps give 0, so the\n  cast to int produced INT_MIN, which then corrupted insert_nans. Added\n  _fps_from_timestamps, which falls back to the passed-in fps, and used it at\n  both call sites.\n\n- apply_pca_dask hardcoded map_overlap depth=20 while train_pca_dask correctly\n  clamps it to the smallest chunk; a chunk smaller than 20 made train and\n  apply disagree at chunk boundaries. Clamp it the same way.\n\nNote: the missing mean-subtraction in the apply paths was investigated and\ndeliberately left alone. Scores are offset by a constant per PC, which the\nAR-HMM absorbs into its affine bias term, whitening removes outright, and the\ndifference-based changepoints cancel; the missing-data reconstruction paths\nare also internally consistent with the un-centered convention, so a partial\nchange there would introduce a bug rather than fix one.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_pca/pca/util.py",
+      "moseq2_pca/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_pca/pca/util.py::_fps_from_timestamps",
+      "moseq2_pca/pca/util.py::apply_pca_dask",
+      "moseq2_pca/pca/util.py::apply_pca_local",
+      "moseq2_pca/util.py::gaussian_kernel1d"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/ff3531632aaecbc045a42570db024c429235a914"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "d4e53b7784d37d5d12498d631aa4d1a29c715d5d",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Update changepoint tests that encoded the kernel and sigma bugs\n\ntest_gauss_smooth asserted 0.3194797971506902 for convolving a single\nsample with a normalized Gaussian. That literal is the kernel evaluated one\nsample OFF-CENTRE, a direct consequence of gaussian_kernel1d building an\neven-length asymmetric kernel with np.arange(-n, n). The correct answer is\nthe kernel peak, sig * 1/(sig*sqrt(2*pi)) = 0.39894228, which the fixed\nsymmetric kernel now returns (matching theory to 5 decimals). Assert the\nanalytic value, plus kernel symmetry and odd length.\n\ntest_get_changepoints asserted [[25], [27]], produced back when sigma was\npassed into gauss_smooth's win_length so the Gaussian std was pinned at the\n1.5 default regardless of sigma. Now that sigma genuinely sets the std,\nsigma=3 smooths substantially more and yields fewer changepoints. Assert the\ncontract (valid indices, correct shape, and that heavier smoothing never\nyields more changepoints) instead of brittle literals.\n\nMeasured on the bundled 900-frame test scores: sigma=1.3 (what the old\ndefault effectively did) gives 41 changepoints, sigma=3.0 gives 4. The\ndefault's effective smoothing therefore changed substantially when sigma\nstarted being honoured; this is called out in the PR.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "tests/unit_tests/test_util.py"
+    ],
+    "changed_functions": [],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/d4e53b7784d37d5d12498d631aa4d1a29c715d5d"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "e1fa3f8d2befdd90e1c1c281313c79010fae9d4e",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Restore historical changepoint smoothing by defaulting sigma to 1.3\n\nFixing sigma so it is actually honoured (previous commit) had a large\nunintended side effect on the DEFAULT behaviour. Because sigma used to be\npassed into gauss_smooth's `win_length` slot, the real std stayed at the 1.5\ndefault and the kernel was truncated, giving an effective std of ~1.3. The\nnominal defaults of 3 (function) and 3.5 (CLI) never took effect.\n\nNow that sigma sets the std, those nominal defaults over-smooth badly.\nMeasured on the bundled 900-frame test scores:\n\n    historical behaviour (sigma ignored)   -> 39 changepoints\n    honest sigma=3.0                       ->  4 changepoints\n    honest sigma=3.5 (the CLI default)     ->  0 changepoints\n    honest sigma=1.3                       -> 39 changepoints\n\nA 30-second recording yielding zero changepoints is not a tuning preference,\nit is a dead feature: mouse syllables last roughly 300-400 ms, so a handful\nof transitions per 30 s is not biologically plausible. Default both the\nfunction and the CLI to 1.3, which reproduces the smoothing this pipeline\nhas always applied while keeping the parameter honest for anyone who sets it\nexplicitly.\n\nChangepoint durations are the model-free reference that model selection is\nscored against, so preserving the validated behaviour is the conservative\nchoice; the alternative would silently change every kappa comparison.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_pca/cli.py",
+      "moseq2_pca/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_pca/cli.py::compute_changepoints",
+      "moseq2_pca/util.py::get_changepoints"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/e1fa3f8d2befdd90e1c1c281313c79010fae9d4e"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "f0d24d111bb359e6768462b6164bf579b323cbc8",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Address second external review: fps from median, sigma edge-mask, doc claim\n\nVerified on the pinned stack (py3.7, numpy 1.18.3, scipy 1.3.2).\n\n- _fps_from_timestamps used the MEAN inter-frame interval. A dropped frame\n  enlarges the mean, which lowers the estimated fps, which makes the gap look\n  less anomalous to insert_nans -- a dropped frame partly hiding itself. Use\n  the median of positive finite intervals (true 30fps with one drop now\n  reports 30, not 22).\n\n- get_changepoints applied the 6*sigma edge mask unconditionally. With\n  sigma=0, int(6*0)=0 makes the slice [:, -0:] == [:, 0:], wiping the whole\n  trace to NaN; sigma=None raised. Only mask edges when smoothing was applied.\n\n- Softened the sigma=1.3 default docstring: 1.3 approximately preserves the\n  historical changepoint CADENCE (39 vs 39 changepoints), it does not\n  reproduce the exact smoothing transform (the old kernel was asymmetric with\n  two central taps; curves differ by ~0.07 on a unit impulse). Recommend\n  recording the kernel version and regenerating rather than comparing across\n  the change.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_pca/pca/util.py",
+      "moseq2_pca/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_pca/pca/util.py::_fps_from_timestamps",
+      "moseq2_pca/util.py::get_changepoints"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/f0d24d111bb359e6768462b6164bf579b323cbc8"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Stamp pipeline provenance into PCA, scores and changepoint h5 files\n\nCompanion to the same change in moseq2-extract. Writes a JSON provenance\nrecord to metadata/pipeline in all three PCA outputs (the PCA file, the scores\nfile from both the local and dask apply paths, and the changepoints file):\n\n  - package name and version\n  - git commit of the installed package (best effort)\n  - write timestamp\n  - PCA_OUTPUT_POLICIES: semantic tags for each behaviour whose OUTPUT changed\n    (gaussian_kernel, changepoint_sigma_arg, changepoint_edge_mask,\n    fps_estimator, whitening)\n\nThis matters most for changepoints, whose duration distribution is the\nreference that kappa selection is scored against: a changepoint file produced\nbefore the kernel and sigma fixes is not comparable with one produced after,\nand previously nothing in the file said so.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_pca/helpers/wrappers.py",
+      "moseq2_pca/pca/util.py",
+      "moseq2_pca/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_pca/helpers/wrappers.py::train_pca_wrapper",
+      "moseq2_pca/pca/util.py::apply_pca_dask",
+      "moseq2_pca/pca/util.py::apply_pca_local",
+      "moseq2_pca/pca/util.py::get_changepoints_dask",
+      "moseq2_pca/util.py::_package_git_sha",
+      "moseq2_pca/util.py::get_pipeline_provenance",
+      "moseq2_pca/util.py::write_pipeline_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/efb6fcfa5d5af5bb4274540c371d0ddf96440b78"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-model",
+    "commit": "bf8ca260631a7c67b9e383aafefe83abd2d50a82",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix training split, session/label pairing, reproducibility, and kappa scan\n\nCritical:\n\n- get_training_data_splits took the SAME fraction from both ends of every\n  session, so --percent-split N trained on only the first N% of each\n  recording (discarding the middle entirely for N < 50) and, for N > 50,\n  overlapped the two windows so the reported \"validation\" likelihood was\n  computed largely on training frames. At N=20 on a 1000-frame session that\n  is 200 train / 200 val with 600 frames never used; at N=80 the two windows\n  share 600 frames. Split at a single boundary and validate the fraction.\n\n- get_current_model silently skipped any session whose group was \"n/a\" when\n  separate_trans was set. Saved labels come from model.states_list while\n  train_list is built from all training uuids, so a skipped session shifted\n  the label/uuid pairing for every session after it -- each animal was\n  assigned another animal's syllable sequence, with no warning. Add every\n  session, warn about missing groups, and assert the counts match.\n\nReproducibility:\n\n- Nothing seeded the sampler. Every Gibbs sweep, the AR and transition\n  resampling and the initialization drew from numpy's unseeded global RNG,\n  so re-running the identical command on identical inputs produced different\n  syllable labels and every downstream statistic was irreproducible. Added a\n  --seed option, seeded at the start of learn_model_wrapper, defaulted the\n  hold-out split to the same seed, and warned when no seed is given.\n\n- get_parameter_strings dropped --nlags, --whiten, --alpha, --gamma,\n  --var-name, --hold-out-seed, --noise-level and --percent-split, so every\n  model in a kappa scan was fit with the CLI defaults regardless of the\n  user's configuration, and a non-default var_name made the generated\n  commands fail. Forward them.\n\nStatistical validity:\n\n- whiten_all was fit over the training AND held-out sessions together, so\n  the held-out fold contributed to the mean and covariance it was later\n  scored under, optimistically biasing the held-out likelihood used to\n  compare kappas. Estimate the transform on training sessions only and apply\n  the stored transform to the rest.\n\n- regularize_for_stability assigned natural_hypparam[2] = C + lambda*I where\n  C is prior + data sufficient statistics, permanently folding the data into\n  the prior so the next resample double-counted it and that state's dynamics\n  prior stayed corrupted for the remainder of training. Regularize the prior\n  only.\n\n- export_dict['keys'] held every session in PCA order while labels follow\n  states_list (train_list) order; under --hold-out they differ in length and\n  order, so zipping them paired sessions with other animals' labels. 'keys'\n  now indexes the labels; the full list remains as 'all_keys'.\n\nAdds tests/unit_tests/test_modeling_correctness.py.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_model/cli.py",
+      "moseq2_model/helpers/data.py",
+      "moseq2_model/helpers/wrappers.py",
+      "moseq2_model/train/models.py",
+      "moseq2_model/train/util.py",
+      "moseq2_model/util.py",
+      "tests/unit_tests/test_modeling_correctness.py"
+    ],
+    "changed_functions": [
+      "moseq2_model/cli.py::modeling_parameters",
+      "moseq2_model/helpers/data.py::get_training_data_splits",
+      "moseq2_model/helpers/data.py::prepare_model_metadata",
+      "moseq2_model/helpers/wrappers.py::learn_model_wrapper",
+      "moseq2_model/train/models.py::ARHMM",
+      "moseq2_model/train/util.py::regularize_for_stability",
+      "moseq2_model/util.py::get_parameter_strings"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-model/commit/bf8ca260631a7c67b9e383aafefe83abd2d50a82"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-model",
+    "commit": "4215f63f422ff40237db77d7c0de9cf990e14302",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Restore contiguity/dtype guarantee in training-only whitening\n\nThe whitening reimplementation reproduced whiten_all's math but dropped its\nfinal `contig = partial(np.require, dtype=np.float64, requirements=\"C\")` step.\nnp.linalg.solve on a transposed array returns an F-contiguous result, and\nfloat32 PC scores stayed float32 instead of being upcast to float64 as\nupstream does. Verified: C_CONTIGUOUS=False, and float32 input survived as\nfloat32.\n\nFitting an ARHMM on F-contiguous data did NOT crash in the pinned stack, so\nthis is a latent deviation rather than an observed failure, but there is no\nreason to diverge from upstream memory layout and dtype semantics.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_model/helpers/data.py"
+    ],
+    "changed_functions": [
+      "moseq2_model/helpers/data.py::prepare_model_metadata"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-model/commit/4215f63f422ff40237db77d7c0de9cf990e14302"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-model",
+    "commit": "6e542e3f1db125202d42b59f390c922281e64f39",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Stamp pipeline provenance into saved model files\n\nCompanion to the same change in moseq2-extract and moseq2-pca. Adds a\n\"pipeline_provenance\" entry to the exported model dict:\n\n  - package name and version\n  - git commit of the installed package (best effort)\n  - write timestamp\n  - MODEL_OUTPUT_POLICIES: semantic tags for each behaviour whose OUTPUT\n    changed (sampler_seeding, training_split, whitening, keys_semantics,\n    separate_trans_sessions, ar_regularization)\n\nkeys_semantics is the one that most needs recording. export_dict['keys'] was\nchanged from the full session list to train_list so that it indexes labels;\na model file written before that change carries the OLD meaning under the same\nkey name, and a consumer cannot otherwise tell which convention it is reading.\nCombined with sampler_seeding, this also distinguishes a reproducible seeded\nfit from an unseeded one.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_model/helpers/wrappers.py",
+      "moseq2_model/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_model/helpers/wrappers.py::learn_model_wrapper",
+      "moseq2_model/util.py::_package_git_sha",
+      "moseq2_model/util.py::get_pipeline_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-model/commit/6e542e3f1db125202d42b59f390c922281e64f39"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "83e9cadebf1dbd0822c87750217c39ba1d59e3ac",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Guard statistics against divide-by-zero and fix entropy normalization\n\n- ztest_vect: a syllable with zero bootstrap variance in both groups gave\n  -|dmu|/0 -> norm.cdf(-inf) = 0, i.e. a spuriously significant p=0 (or NaN\n  when the means were also equal). Guard the division and report p=1 when\n  the pooled std is 0, since a constant syllable carries no evidence of a\n  difference.\n- normalize_usages: sum of usages of 0 (e.g. an empty group) divided by\n  zero; return zeros instead.\n- entropy_rate: the default normalize=\"row\" matched none of the branches\n  (\"bigram\"/\"rows\"/\"columns\"), leaving the transition matrix unnormalized;\n  the intended row-normalization is \"rows\".\n- transition_entropy: with the default tm_smoothing=0, a syllable that is\n  never a transition target produced a zero column and 0/0 = NaN that\n  propagated into the entropy; guard the column-sum division.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/info/util.py",
+      "moseq2_viz/model/stat.py",
+      "moseq2_viz/model/util.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/info/util.py::entropy_rate",
+      "moseq2_viz/info/util.py::transition_entropy",
+      "moseq2_viz/model/stat.py::ztest_vect",
+      "moseq2_viz/model/util.py::normalize_usages"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/83e9cadebf1dbd0822c87750217c39ba1d59e3ac"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "645415411f3119e62b59fe79e26df504d23bbb1c",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix incorrect p-values, missing-data handling, and area units\n\nStatistical correctness:\n\n- mann_whitney compared the wrong sessions. It pivoted EVERY group in the\n  dataframe and then split rows positionally with array_split using the two\n  requested groups' sizes. Since the normal workflow builds one stats_df over\n  all groups, other groups' sessions were pulled into the comparison, and\n  swapping the group arguments changed the answer. Verified: with a third\n  group present it returned p=0.0054 where the correct value is p=0.0131.\n  Select the two groups explicitly with .loc, as ttest/ztest already do.\n\n- Dunn's post-hoc p-values were \"corrected\" across group pairs instead of\n  across syllables (apply(..., axis=1)). For a two-group experiment that\n  passes multipletests a length-1 array per syllable, so the p-values came\n  back completely uncorrected while appearing corrected. Correct across\n  syllables, where the ~max_syllable comparison burden actually is.\n\n- get_session_mean_df replaced every missing (session, syllable) entry with\n  0. For usage that is right, but the same function feeds duration, velocity,\n  height and distance into all four tests, where 0 is not a measurement --\n  it is a session that never performed the syllable. Verified this inverts\n  results: with both groups truly at 50mm and expression rates of 4/10 vs\n  10/10, zero-filling reports p=0.003 while the complete-case answer is\n  p=0.51. Zero-fill now applies only to count statistics (COUNT_STATISTICS);\n  physical scalars stay NaN and the tests drop them.\n\n- ttest used Student's assumption of equal variance; groups routinely differ\n  in size and variance. Use Welch's (equal_var=False) plus nan_policy='omit'.\n\n- run_kruskal still needs a complete matrix for its permutation ranking, so\n  it keeps zero-filling but now warns explicitly when a non-count statistic\n  has missing observations, instead of silently biasing the result.\n\n- bootstrap_me used the unseeded global RNG, so z-test p-values changed\n  between runs. Seed it so results are reproducible.\n\nUnits and compatibility:\n\n- area_mm multiplied a pixel count (px^2) by the mean LINEAR mm/px factor,\n  leaving the result in px*mm and under-reporting area by that factor. Use\n  the product of the x and y factors so the result is genuinely mm^2.\n\n- np.object was removed in numpy 1.24; get_syllable_statistics and\n  sort_batch_results raised AttributeError on modern numpy. Use object.\n\nAdds tests/unit_tests/test_model_stat_correctness.py covering the group\nselection, missing-observation, and correction-axis behaviour.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/model/stat.py",
+      "moseq2_viz/model/util.py",
+      "moseq2_viz/scalars/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/model/stat.py::bootstrap_me",
+      "moseq2_viz/model/stat.py::compute_pvalues_for_group_pairs",
+      "moseq2_viz/model/stat.py::get_session_mean_df",
+      "moseq2_viz/model/stat.py::mann_whitney",
+      "moseq2_viz/model/stat.py::run_kruskal",
+      "moseq2_viz/model/stat.py::ttest",
+      "moseq2_viz/model/util.py::get_syllable_statistics",
+      "moseq2_viz/model/util.py::sort_batch_results",
+      "moseq2_viz/scalars/util.py::convert_legacy_scalars"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/645415411f3119e62b59fe79e26df504d23bbb1c"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "8ef5b049eeaf78cecc9bad539529e3daf126ca27",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix difference-graph legend colors contradicting the plot\n\nThe difference transition graph draws blue for a positive (up-regulated)\nweight and red for a negative one, both for edges and node outlines, but the\nmanually built legend labelled red as \"Up-regulated\" and blue as\n\"Down-regulated\". Every difference figure therefore described itself\nbackwards, and disagreed with the interactive transition graph in\nmoseq2-app, which uses blue for up-regulated. Swap the legend colors to\nmatch what is drawn (also fixes the \"transistion\" typo).\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/model/trans_graph.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/model/trans_graph.py::compute_and_graph_grouped_TMs"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/8ef5b049eeaf78cecc9bad539529e3daf126ca27"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "68ca6a34055987ff22f8651b4dca2aa254380c87",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Address second external review: z-test, transitions, coverage, KW, merge\n\nVerified on the pinned stack (py3.7, numpy 1.18.3, scipy 1.3.2). Distinguishes\nregressions in our own patches from pre-existing upstream bugs.\n\nOur regression:\n- ztest_vect returned p=1 for ALL zero-pooled-std cases, including two\n  constant-but-DIFFERENT means, hiding perfect all-or-nothing separation.\n  Return p=0 when the constant means differ, p=1 only when they are equal.\n\nPre-existing upstream bugs (confirmed by diff against dattalab/release):\n- get_transition_matrix built bigrams from the change-location states only,\n  dropping the first transition of every session ([0,0,1,1] gave zero 0->1\n  transitions). Added get_state_runs (keeps the initial state) and use it for\n  transition counting; get_transitions is left unchanged for its other callers.\n- get_num_syllables_for_coverage returned a zero-based index used by callers as\n  an exclusive count, so the syllable that crosses the coverage threshold was\n  excluded (and a single dominant syllable yielded zero kept syllables). +1.\n- Difference-graph node sizes/colors took the first len(nodes) usage values\n  instead of indexing by the actual (possibly sparse) node ids, so thresholded\n  nodes were drawn with unrelated syllables' usages. Index by graph node.\n- merge_models defaulted to cost_function='ar_norm' but only handled 'ar_mat'\n  (UnboundLocalError), and wrote to a misspelled 'are_mat' key (KeyError).\n  Accept 'ar_norm', validate the argument, and write to 'ar_mat'.\n- get_best_fit reused the median-match keys for the mean-match values, so the\n  reported \"median match\" numbers were actually the mean-match numbers. Give\n  the mean results their own keys.\n\nBehaviour change:\n- run_kruskal now RAISES for a non-count statistic with missing observations\n  instead of warning and zero-filling (which silently tests expression-rate\n  differences while reporting them as value differences). Pass\n  allow_missing_fill=True to override. Prefer t-test/Mann-Whitney/z-test.\n\nAdds regression tests for the z-test, transition-count, coverage and KW cases.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/model/stat.py",
+      "moseq2_viz/model/trans_graph.py",
+      "moseq2_viz/model/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/model/stat.py::run_kruskal",
+      "moseq2_viz/model/stat.py::ztest_vect",
+      "moseq2_viz/model/trans_graph.py::get_state_runs",
+      "moseq2_viz/model/trans_graph.py::get_transition_matrix",
+      "moseq2_viz/model/trans_graph.py::make_difference_graphs",
+      "moseq2_viz/model/util.py::get_best_fit",
+      "moseq2_viz/model/util.py::get_num_syllables_for_coverage",
+      "moseq2_viz/model/util.py::merge_models"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/68ca6a34055987ff22f8651b4dca2aa254380c87"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Use pinhole projection for pixel-to-mm conversion; fix self-mirroring test\n\nMirrors the same correction in moseq2-extract; the two implementations must\nagree or scalars computed at extraction and re-derived in viz will diverge.\n\nconvert_pxs_to_mm used the small-angle approximation\nresolution / (2 * deg2rad(fov/2)) instead of the pinhole relation\nresolution / (2 * tan(deg2rad(fov/2))). At 512x424 the pinhole focal lengths\n(361.6, 367.2) sit within ~2% of the Kinect2 factory intrinsics (~368); the\nsmall-angle values (415.5, 404.9) are 10-13% high, underestimating every\nmillimetre displacement by that amount.\n\nAlso rewrites test_convert_pxs_to_mm. It previously recomputed the production\nformula inside the test body and asserted the two agreed, so it would have\npassed for ANY focal-length formula -- it pinned nothing and would not have\ncaught this bug. It now asserts independently derived expected coordinates,\nand a new test checks the implied focal lengths against the camera's\nfactory-calibrated intrinsics.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/scalars/util.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/scalars/util.py::convert_pxs_to_mm"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "b2ad7e71dbae0da5e2d5e8575d7e9476c95cd2da",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Add provenance readers and a mixed-pipeline guard\n\nConsumer side of the version stamping written by moseq2-extract and\nmoseq2-pca. Adds to moseq2_viz.util:\n\n  - read_pipeline_provenance(path): returns the JSON provenance record from an\n    h5, or None for a file produced before stamping existed\n  - describe_provenance(record): short human-readable summary\n  - assert_consistent_provenance(paths): warns when a set of files was not all\n    produced by the same pipeline, distinguishing two cases -- files with NO\n    provenance (predate stamping, may have different numerical behaviour) and\n    files whose policy tags disagree (definitely incompatible)\n\nassert_consistent_provenance warns rather than raises so it can be called\ndefensively without breaking existing workflows. It returns False when the set\nis not uniform, so a caller can escalate.\n\nThe unstamped case is the one that matters in practice: it catches combining\ndata extracted before these fixes with data regenerated after them, which is\notherwise silent and produces numbers on different scales.\n\nAdds TestPipelineProvenance covering roundtrip, the unstamped-legacy hazard,\ndisagreeing policy tags, and the matching-files case passing silently.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/util.py::assert_consistent_provenance",
+      "moseq2_viz/util.py::describe_provenance",
+      "moseq2_viz/util.py::read_pipeline_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/b2ad7e71dbae0da5e2d5e8575d7e9476c95cd2da"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "62ec4d579dffe0712e2e5b7f8531a029b3a04f00",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Enforce pipeline provenance at the pooling boundaries; drop velocity_3d_px\n\nTwo related changes, both about pooled sessions silently disagreeing.\n\nProvenance enforcement. Version stamping already recorded which pipeline\nproduced each h5, but nothing acted on it, so a half-reprocessed dataset --\nsome sessions extracted with the old code, some with the new -- concatenated\nwithout complaint. That is the case the stamps exist to catch: the numbers are\non different scales and nothing about the resulting dataframe looks wrong.\nenforce_consistent_provenance now gates the two places where per-session files\nbecome one dataset (scalars_to_dataframe and get_scalar_map):\n\n  - conflicting output policies between stamped files -> ProvenanceError,\n    naming every disagreeing policy key, both values, and the files on each\n    side, so the user knows which sessions to reprocess\n  - stamped mixed with unstamped -> ProvenanceError, listing both sets\n  - all unstamped (a wholly pre-stamping dataset) -> warning, not an error\n  - all stamped and agreeing -> silent\n\nA policy present in some files and absent in others counts as a conflict and\nis reported as '<absent>'. allow_mixed_provenance=True overrides the errors but\nstill reports the full mismatch as a warning stating the results should not be\ntrusted; ProvenanceError subclasses ValueError so existing handlers still work.\n\nvelocity_3d_px. Matching the removal in moseq2-extract: it combined\npixels-per-frame x/y with millimetres-per-frame z, so it was never a physical\nspeed. Legacy h5 files on disk still contain it, so rather than only stopping\nits production, DEPRECATED_SCALARS / check_scalar_is_usable /\ndrop_deprecated_scalars make it fail closed -- asking for it raises with the\nreason, and loading legacy data drops it with a warning instead of feeding a\nmixed-unit column into an analysis. The file on disk is left untouched.\n\nThe three test column lists that expected velocity_3d_px are updated, and\ntest_scalars_to_dataframe's stale metadata column ordering is corrected; it\nnow passes for the first time.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/scalars/util.py::check_scalar_is_usable",
+      "moseq2_viz/scalars/util.py::convert_legacy_scalars",
+      "moseq2_viz/scalars/util.py::convert_pxs_to_mm",
+      "moseq2_viz/scalars/util.py::drop_deprecated_scalars",
+      "moseq2_viz/scalars/util.py::generate_empty_feature_dict",
+      "moseq2_viz/scalars/util.py::get_scalar_map",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_format_provenance_conflicts",
+      "moseq2_viz/util.py::_provenance_policy_conflicts",
+      "moseq2_viz/util.py::_report",
+      "moseq2_viz/util.py::enforce_consistent_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/62ec4d579dffe0712e2e5b7f8531a029b3a04f00"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "32fe617db2cfd160070c85bed1ae0dfc19d797d1",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Compare required scalar policies and group provenance by package\n\nFollow-up to the provenance gate, closing three gaps.\n\nRequired policy keys. The gate compared whatever policies happened to be\npresent, so a policy that no file declared was never checked and its agreement\nwas assumed rather than shown. SCALAR_POOLING_POLICIES now names the seven\nextraction policies that change scalar values -- scalar_px_to_mm, area_units,\nbackground_dropout, roi_plane_fit, hampel_filter, depth_range_detection and\nthe velocity_3d_px treatment -- and both scalar pooling boundaries pass it.\nA required key that no stamped file declares is reported as a warning saying\ncompatibility was established only for the policies actually recorded. The key\nnames are duplicated from moseq2-extract rather than imported, so viz does not\ntake a runtime dependency on extract to read a list of strings.\n\nGrouping by package. Comparison was key-by-key across all records, which is\ncorrect for a set of extractions but wrong the moment a PCA or model record\njoins them: those declare entirely disjoint policy keys, so every key would\nread as absent-on-one-side and conflict unconditionally. Records are now\ngrouped by package and compared within a group; a stamped/unstamped mix is\nstill an error across all of them.\n\nPCA and model coverage. provenance_from_model reads the record moseq2-model\nwrites into its pickled result (it is not an h5, so read_pipeline_provenance\ncannot reach it), and scalars_to_dataframe compares the PC scores against the\nmodel when a model is being joined on. enforce_consistent_provenance takes a\n`records` argument for callers holding provenance that does not live in a file.\n\nTests: each of the seven required policies is flipped individually and must be\ncaught on its own; identical policies with differing git SHAs and versions must\nstill pass, so a documentation-only commit does not invalidate compatible data;\ndisjoint packages must not conflict while two files of the same package still\ndo. Also adds coverage that convert_legacy_scalars(force=True) lands on the\npinhole scale and matches extract to 1e-12, and that the summarising helpers\nwork on a dataframe that never had velocity_3d_px.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/scalars/util.py::get_scalar_map",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_provenance_policy_conflicts",
+      "moseq2_viz/util.py::enforce_consistent_provenance",
+      "moseq2_viz/util.py::provenance_from_model"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/32fe617db2cfd160070c85bed1ae0dfc19d797d1"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+    "author": "AJ Mitchell",
+    "author_email": "ajmitchell@cheviot.lan",
+    "message": "Fix scalar deprecation and provenance enforcement\n",
+    "files": [
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/scalars/util.py::check_scalar_is_usable",
+      "moseq2_viz/scalars/util.py::compute_all_pdf_data",
+      "moseq2_viz/scalars/util.py::compute_mean_syll_scalar",
+      "moseq2_viz/scalars/util.py::drop_deprecated_scalars",
+      "moseq2_viz/scalars/util.py::get_scalar_triggered_average",
+      "moseq2_viz/scalars/util.py::process_scalars",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_provenance_policy_conflicts",
+      "moseq2_viz/util.py::assert_consistent_provenance",
+      "moseq2_viz/util.py::describe_provenance",
+      "moseq2_viz/util.py::enforce_consistent_provenance",
+      "moseq2_viz/util.py::provenance_from_model",
+      "moseq2_viz/util.py::read_pipeline_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "b80192dc20353bf77c36610f315543b57afa908c",
+    "author": "AJ Mitchell",
+    "author_email": "ajmitchell@cheviot.lan",
+    "message": "Harden provenance and scalar boundaries\n",
+    "files": [
+      "moseq2_viz/model/embed.py",
+      "moseq2_viz/model/util.py",
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "moseq2_viz/viz.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "changed_functions": [
+      "moseq2_viz/model/embed.py::run_2d_scalar_embedding",
+      "moseq2_viz/model/util.py::compute_behavioral_statistics",
+      "moseq2_viz/scalars/util.py::check_scalar_is_usable",
+      "moseq2_viz/scalars/util.py::convert_pxs_to_mm",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_json_mapping_from_h5",
+      "moseq2_viz/util.py::_provenance_candidates",
+      "moseq2_viz/util.py::_read_extraction_provenance",
+      "moseq2_viz/util.py::_read_flip_correction_policy",
+      "moseq2_viz/util.py::assert_consistent_provenance",
+      "moseq2_viz/util.py::check_scalar_is_usable",
+      "moseq2_viz/util.py::enforce_consistent_provenance",
+      "moseq2_viz/util.py::provenance_from_model",
+      "moseq2_viz/util.py::read_flip_correction_policy",
+      "moseq2_viz/util.py::read_pipeline_provenance",
+      "moseq2_viz/util.py::validate_scalar_dataframe",
+      "moseq2_viz/viz.py::position_plot",
+      "moseq2_viz/viz.py::scalar_plot"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/b80192dc20353bf77c36610f315543b57afa908c"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "61861c3382d993cbba7522985d970de5c0f92ef9",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix model auto-selection and extraction path derivation\n\nfind_progress() sorted candidate models ascending by mtime and then\nused models[0], selecting the OLDEST model while the message and intent\nsay \"latest generated model\". After a kappa scan (multiple .p files),\nthis silently pointed the whole analysis at the wrong model. Sort\nnewest-first so models[0] is the most recent.\n\nAlso fix get_extraction_progress() deriving the yaml path with\nreplace('mp4', 'yaml'), which rewrites any 'mp4' substring elsewhere in\nthe path; use the '.mp4' extension instead.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/gui/progress.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/gui/progress.py::find_progress",
+      "moseq2_app/gui/progress.py::get_extraction_progress"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/61861c3382d993cbba7522985d970de5c0f92ef9"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "313c9b5bf180fd2dbacbec071dba39b9c4472743",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix extraction QC validation correctness\n\nroi/validation.py runs the per-session quality-control checks that flag\nsessions for manual inspection. Several were incorrect:\n\n- count_frames_with_small_areas compared area to 2*std, ignoring the\n  mean, so the \"small area\" test was not a below-2-sigma outlier test at\n  all. It now flags frames below mean - 2*std, matching the docstring.\n- print_validation_results checked truthiness before the float branch,\n  so percentage flags (dropped_frames, stationary, missing, size_anomaly,\n  corrupted) printed \"flag raised\" with no value; the actual percentage\n  was never shown. Check the float case first.\n- check_timestamp_error_percentage divided the diff array in place, which\n  raises a dtype error on integer timestamp arrays. Divide out-of-place.\n- get_scalar_df derived h5/yaml paths with replace('mp4', ...); use the\n  '.mp4' extension so other 'mp4' substrings in the path are untouched.\n- count_nan_rows used the deprecated positional .any(1); use axis=1.\n- count_stationary_frames could return -1 when a session had no\n  stationary frames; clamp at 0.\n\nReplaces the brittle fixture literal in the small-area test with a\nfixture smoke check plus a deterministic synthetic test that pins the\nmean - 2*std semantics.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/roi/validation.py",
+      "tests/gui_tests/test_validation.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/roi/validation.py::check_timestamp_error_percentage",
+      "moseq2_app/roi/validation.py::count_frames_with_small_areas",
+      "moseq2_app/roi/validation.py::count_nan_rows",
+      "moseq2_app/roi/validation.py::count_stationary_frames",
+      "moseq2_app/roi/validation.py::get_scalar_df",
+      "moseq2_app/roi/validation.py::print_validation_results"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/313c9b5bf180fd2dbacbec071dba39b9c4472743"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "94b84918a3c6d4a228f1bc8a8b0e4808532dd841",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix train/test leakage in flip-classifier cross-validation\n\ntrain_classifier pre-fit PCA on the whole training set and wrapped the\nfitted transform in the pipeline before cross_val_score, so PCA had\nalready seen the held-out folds and the reported \"Held-out model\naccuracy\" was optimistically biased. Make PCA a normal pipeline stage so\ncross-validation refits it on each training fold, and the final model\nstill fits PCA on all frames. Removes the now-unused batch_apply_pca and\nthe pre-fit's last-third subsetting.\n\nAlso drop the erroneous 4x multiplier in the training-data memory print\n(frames is uint8; nbytes is already the true byte count).\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/flip/train.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/train.py::batch_apply_pca",
+      "moseq2_app/flip/train.py::create_training_dataset",
+      "moseq2_app/flip/train.py::train_classifier"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/94b84918a3c6d4a228f1bc8a8b0e4808532dd841"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Fix flip-classifier frame corruption, zero-filled scalars, and legend values\n\nFlip classifier (flip/widget.py) -- silent data corruption:\n\n- The angle correction used batch-relative indices against the whole-session\n  scalars/angle dataset: `f['scalars/angle'][flip_indices] += np.pi` where\n  flip_indices came from np.where() over a single batch. Only the first batch\n  starts at frame 0, so every later batch rotated the angle of the WRONG\n  frames. A 20-minute session at 30fps with the default chunk_size=4000 is 9\n  batches, so 8 of 9 corrupted unrelated frames. Map batch-relative positions\n  to absolute frame indices before writing.\n- Re-running reverted the correction. Rotating by 180 degrees and adding pi\n  are both their own inverses, and nothing recorded that the classifier had\n  run, so re-executing the notebook cell silently un-flipped the data. Write\n  a `flip_classifier_applied` attribute and skip sessions already corrected.\n- With chunk_overlap > 0 the overlapping frames were processed twice, undoing\n  their own correction. Classify the full batch (so median smoothing keeps\n  its context at chunk boundaries) but commit each frame exactly once.\n- gen_batch_sequence was called with len(frames)-1, so the final frame of\n  every session was never classified.\n\nStatistics (stat/controller.py):\n\n- fillna(0) filled every NaN, including the physical scalar means (duration,\n  velocity, height, distance) of syllables a session never performed. Zero is\n  not a measurement there, and those fake points feed the hypothesis tests.\n  Fill only count columns; leave scalars NaN so means and tests skip them.\n\nTransition graph legend (stat/view.py):\n\n- Edges are drawn at weight * 250 (or 400 for difference graphs) but the\n  legend recovered the probability by dividing by 200 (or 350), so every\n  reported \"P(transition)\" was inflated ~25% (~14% for difference graphs).\n  Both now use shared EDGE_WIDTH_SCALE / DIFF_EDGE_WIDTH_SCALE constants.\n- The difference legend selected down-regulated edges with `width < 0`, but\n  edge widths are built with abs(), so the list was always empty and\n  \"Min/Max Down-regulated P(transition)\" always displayed 0.0000. Classify\n  up/down using the signed edge weights instead.\n- get_ci_vect_vectorized used the unseeded global RNG, so plotted confidence\n  intervals changed on every re-render. Seed it, and drop NaN observations\n  rather than letting one poison the whole bootstrap.\n\nCrowd movies and index (viz/controller.py, gui/widgets.py):\n\n- The crowd-movie filename regex assumed every .mp4 in the directory matched;\n  a foreign file made exp.search() return None and crashed the labeler with\n  AttributeError. Skip non-matching files, allow syllable ids past 999, and\n  escape the literal dot.\n- A bare `except Exception` replaced a missing group heatmap with\n  np.zeros((50, 50)), which renders as a plausible uniform heatmap\n  indistinguishable from real data. Catch only KeyError/IndexError and skip\n  the panel so genuine errors surface.\n- update_clicked discarded the result of df.drop('filename'), so the column\n  leaked into the saved index yaml.\n\nAdds tests/gui_tests/test_stat_correctness.py.\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/flip/widget.py",
+      "moseq2_app/gui/widgets.py",
+      "moseq2_app/stat/controller.py",
+      "moseq2_app/stat/view.py",
+      "moseq2_app/viz/controller.py",
+      "tests/gui_tests/test_stat_correctness.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/gui/widgets.py::update_clicked",
+      "moseq2_app/stat/controller.py::fill_missing_syllable_stats",
+      "moseq2_app/stat/controller.py::interactive_stat_helper",
+      "moseq2_app/stat/controller.py::interactive_syll_stats_grapher",
+      "moseq2_app/stat/view.py::format_trans_graph_edges",
+      "moseq2_app/stat/view.py::get_ci_vect_vectorized",
+      "moseq2_app/stat/view.py::get_difference_legend_items",
+      "moseq2_app/stat/view.py::get_legend_items",
+      "moseq2_app/stat/view.py::get_minmax_tp",
+      "moseq2_app/stat/view.py::plot_interactive_transition_graph",
+      "moseq2_app/viz/controller.py::generate_crowd_movie_divs",
+      "moseq2_app/viz/controller.py::get_crowd_movie_paths"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/c85b9a224fb6ffec656e8c9231ba0af63d28dd2c"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "36d40e098a5c4629116b7a4e233573218345bd5d",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Address second external review: flip overlap/idempotency, dropped-frame metric\n\nVerified on the pinned stack (py3.7); flip logic checked by simulation, the\ntimestamp metric against the bundled fixture.\n\nFlip classifier (our regressions):\n- The trailing overlap of each non-final batch was committed by that (earlier)\n  batch, so the next batch's classification of those frames -- with the extra\n  future context that chunk_overlap exists to provide -- was discarded. Defer\n  committing the trailing overlap to the next batch, where the frames sit near\n  its start and gain that context.\n- A preview-movie write failure did `break`, but the file was still marked\n  flip_classifier_applied afterward, so a partially corrected session was\n  permanently skipped. Only mark complete when every frame committed, and on a\n  movie failure keep correcting frames without the (optional) preview.\n\nDropped-frames metric (pre-existing upstream):\n- check_timestamp_error_percentage measured average frame-rate error, not\n  dropped frames: a steady 28fps recording reported ~6.7% \"dropped\". Count\n  actual missing frames by expressing each gap in expected frame intervals\n  (steady non-nominal rate now reports 0). Test updated accordingly.\n\nKnown limitation not fixed here: an h5 corrected by a PRE-marker release has no\nflip_classifier_applied attribute, so a re-run would re-flip it. There is no\nreliable way to detect a prior correction; do not re-run the flip classifier on\nalready-processed data.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/flip/widget.py",
+      "moseq2_app/roi/validation.py",
+      "tests/gui_tests/test_validation.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/roi/validation.py::check_timestamp_error_percentage"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/36d40e098a5c4629116b7a4e233573218345bd5d"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "bd103a987a0eaba50986b5cd2f992c2fb727809b",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Record flip-classifier processing state in the h5 instead of a boolean flag\n\nApplying the flip classifier rewrites frames in place, and a 180 degree\nrotation is its own inverse, so a second application silently undoes the\nfirst. A boolean 'flip_classifier_applied' attribute only distinguished\n\"finished\" from \"never started\" -- it had no way to represent the case that\nactually happens, which is a long run interrupted partway through. Such a file\nlooked untouched, so re-running flipped the already-corrected frames back.\n\nSessions now carry a structured record at metadata/processing/flip_classifier\nwith one of three states:\n\n  in_progress  written and flushed before the first frame is touched, so it\n               survives the process being killed\n  complete     every frame was classified and committed\n  failed       the run raised, was interrupted (KeyboardInterrupt included), or\n               finished with frames left unclassified\n\nalongside the classifier's SHA-256 and path, the chunk/overlap/smoothing\nsettings, the frame path, frame counts, and start/finish timestamps -- enough\nto tell later whether two sessions were corrected the same way. Only a session\nwith no record at all is processed; anything else is skipped with a message\nsaying what state it is in and what to do about it. A corrupt or truncated\nrecord reads as 'failed' rather than as a pristine file.\n\nFiles written by the older code are still recognised: the boolean attribute is\nread as 'complete' and kept in sync on write, so an older moseq2-app install\nreading these files still sees a completed session as completed.\n\nAlso narrows a warning filter. The whole session loop ran under\nsimplefilter('ignore', UserWarning), which swallowed this function's own\ndiagnostics -- including the \"already applied, skipping\" message -- making a\nskipped session indistinguishable from a processed one. The suppression now\nwraps only the get_flips call it was there for.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/widget.py::_describe_flip_state",
+      "moseq2_app/flip/widget.py::_sha256",
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::make_record",
+      "moseq2_app/flip/widget.py::read_flip_record",
+      "moseq2_app/flip/widget.py::write_flip_record"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/bd103a987a0eaba50986b5cd2f992c2fb727809b"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "f7af95d75c3b289b8a438783fda93b79fdb031fb",
+    "author": "Claude",
+    "author_email": "noreply@anthropic.com",
+    "message": "Complete the flip processing record and refuse partially-corrected sessions\n\nFollow-up to the processing record, closing three gaps.\n\nHard refusal. A session left in_progress or failed by an earlier run was\nwarned about and skipped. Skipping is right for a completed session but wrong\nfor a partially corrected one: its frames are part rotated and part not, the\nfile does not record where the boundary was, and continuing past it quietly\nimplies the dataset is usable. check_flip_state now raises FlipProcessingError\nnaming the session, how far the previous run got, and the only two real\nremedies -- restore from backup or re-extract from raw. A completed session\nstill skips with a warning and the remaining sessions still run.\n\nFull record. The record now carries package, version and best-effort git SHA,\nthe classifier's filename alongside its path and SHA-256, and a snapshot plus\nhash of the extraction policies the correction was applied on top of, so two\nflip-corrected sessions can be compared without re-reading their extractions.\nThe extraction's own provenance is read and never written -- it describes how\nthe frames were produced, which is still true afterwards, and there is a test\nasserting it comes back byte-identical.\n\nPreview status. A preview-movie failure was nonfatal but invisible in the\nfile. preview_requested, preview_written and preview_error are now recorded,\nso a session whose frames are correct but whose movie is missing is\ndistinguishable from one where both succeeded.\n\nAlso documents that this does not provide atomic rollback. Frames are\nrewritten in place per batch, so an interrupted run does leave a partially\ncorrected file; what the record guarantees is that such a file is detected and\nrefused, not that it can be repaired.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Cu7ghdrZnrPYpvBkarLnpR\n",
+    "files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/widget.py::_app_version_and_sha",
+      "moseq2_app/flip/widget.py::_describe_flip_state",
+      "moseq2_app/flip/widget.py::_extraction_policy_snapshot",
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::check_flip_state",
+      "moseq2_app/flip/widget.py::make_record",
+      "moseq2_app/flip/widget.py::read_extraction_provenance"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/f7af95d75c3b289b8a438783fda93b79fdb031fb"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+    "author": "AJ Mitchell",
+    "author_email": "ajmitchell@cheviot.lan",
+    "message": "Make flip processing records crash-safe\n",
+    "files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::checkpoint",
+      "moseq2_app/flip/widget.py::read_flip_record",
+      "moseq2_app/flip/widget.py::write_flip_record"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/192921f1aff3ea58d3b1f268d71731ed222011d2"
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "e0b85201226d03e15944473a734f71417698c31e",
+    "author": "AJ Mitchell",
+    "author_email": "ajmitchell@cheviot.lan",
+    "message": "Enforce safe flip correction lifecycle\n",
+    "files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "changed_functions": [
+      "moseq2_app/flip/widget.py::_finalize_preview_pipe",
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::check_extraction_flip_precondition",
+      "moseq2_app/flip/widget.py::check_flip_state",
+      "moseq2_app/flip/widget.py::read_extraction_provenance",
+      "moseq2_app/flip/widget.py::read_flip_record",
+      "moseq2_app/flip/widget.py::write_flip_record"
+    ],
+    "url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/e0b85201226d03e15944473a734f71417698c31e"
+  }
+]

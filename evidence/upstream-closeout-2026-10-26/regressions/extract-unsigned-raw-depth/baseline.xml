@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.902" timestamp="2026-10-26T12:47:15.296433-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE3.extract-unsigned-raw-depth.test_regression" name="test_raw_depth_cli_default_is_unsigned" time="1.773"><failure message="AssertionError: assert 'i' == 'u'&#10;  &#10;  - u&#10;  + i">test_results/PATCH_PLAN_WAVE3/extract-unsigned-raw-depth/test_regression.py:11: in test_raw_depth_cli_default_is_unsigned
+    assert np.dtype(option.default).kind == "u"
+E   AssertionError: assert 'i' == 'u'
+E     
+E     - u
+E     + i</failure></testcase></testsuite></testsuites>

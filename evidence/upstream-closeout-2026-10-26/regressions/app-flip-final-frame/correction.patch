@@ -1,0 +1,71 @@
+commit 2ae035bd51e2736aa7e2ca82ef74fff1477b78a5
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:18 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:18 2026 -0400
+
+    fix: include the final frame in app flip correction
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: c85b9a224fb6ffec656e8c9231ba0af63d28dd2c
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/flip/widget.py b/moseq2_app/flip/widget.py
+index cac9acd..f921654 100644
+--- a/moseq2_app/flip/widget.py
++++ b/moseq2_app/flip/widget.py
+@@ -249,7 +249,7 @@ class FlipClassifierWidget:
+                     output_movie = path.replace('.h5', '_flipped.mp4')
+     
+                     frames = f[frame_path]
+-                    frame_batches = gen_batch_sequence(len(frames)-1, chunk_size, chunk_overlap)
++                    frame_batches = gen_batch_sequence(len(frames), chunk_size, chunk_overlap)
+     
+                     for batch in tqdm(frame_batches, desc=f'Adjusting flips: {key}', disable=not verbose):
+                         frame_batch = frames[batch]
+@@ -288,4 +288,4 @@ class FlipClassifierWidget:
+ 
+     @property
+     def training_data_path(self):
+-        return str(self.data_path.parent / 'flip-training-frame-ranges.p')
+\ No newline at end of file
++        return str(self.data_path.parent / 'flip-training-frame-ranges.p')
+diff --git a/tests/software/test_closeout_app_flip_final_frame.py b/tests/software/test_closeout_app_flip_final_frame.py
+new file mode 100644
+index 0000000..96f4a73
+--- /dev/null
++++ b/tests/software/test_closeout_app_flip_final_frame.py
+@@ -0,0 +1,31 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++@pytest.fixture
++def synthetic_flip_session(tmp_path, monkeypatch):
++    from moseq2_app.flip import widget
++    path = tmp_path / "synthetic.h5"
++    frames = np.zeros((12, 8, 8), dtype=np.uint8)
++    frames[:, 1:3, 2:5] = np.arange(1, 13)[:, None, None]
++    with h5py.File(path, "w") as f:
++        f["frames"] = frames
++        f["scalars/angle"] = np.zeros(12)
++        f.create_group("metadata/extraction")
++    monkeypatch.setattr(widget, "get_flips", lambda values, **kw: np.ones(len(values), dtype=bool))
++    subject = SimpleNamespace(sessions={"synthetic": path})
++    return widget, subject, path, frames
++
++
++def test_flip_processes_the_final_frame(synthetic_flip_session):
++    widget, subject, path, original = synthetic_flip_session
++    widget.FlipClassifierWidget.apply_flip_classifier(subject, "synthetic-unused", chunk_size=20,
++                                                       smoothing=1, verbose=False)
++    with h5py.File(path) as f:
++        np.testing.assert_array_equal(f["frames"][-1], np.rot90(original[-1], 2))
++        assert f["scalars/angle"][-1] == pytest.approx(np.pi)

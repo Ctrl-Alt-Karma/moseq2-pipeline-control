@@ -1,0 +1,62 @@
+commit 3eed4290850909b355fb8a29082bd1e8faa06daa
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:26 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:26 2026 -0400
+
+    fix: exclude unobserved values before bootstrapping confidence limits
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: c85b9a224fb6ffec656e8c9231ba0af63d28dd2c
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/stat/view.py b/moseq2_app/stat/view.py
+index 65c208e..7c21e51 100644
+--- a/moseq2_app/stat/view.py
++++ b/moseq2_app/stat/view.py
+@@ -70,6 +70,10 @@ def get_ci_vect_vectorized(x, n_boots=10000, n_samp=None, function=np.nanmean, p
+ 
+     if isinstance(x, pd.core.series.Series):
+         x = x.values
++    x = np.asarray(x)
++    x = x[~np.isnan(x)]
++    if len(x) == 0:
++        return np.array([np.nan, np.nan])
+     pct /= 2
+     n_vals = len(x)
+     if n_samp is None:
+@@ -1325,4 +1329,4 @@ def plot_dendrogram(index_file, model_path, syll_info_path, save_dir, max_syllab
+     # save the fig
+     makedirs(save_dir, exist_ok=True)
+     fig.savefig(join(save_dir, 'syllable_dendrogram.pdf'))
+-    fig.savefig(join(save_dir, 'syllable_dendrogram.png'))
+\ No newline at end of file
++    fig.savefig(join(save_dir, 'syllable_dendrogram.png'))
+diff --git a/tests/software/test_closeout_app_bootstrap_nans.py b/tests/software/test_closeout_app_bootstrap_nans.py
+new file mode 100644
+index 0000000..b4cfdf6
+--- /dev/null
++++ b/tests/software/test_closeout_app_bootstrap_nans.py
+@@ -0,0 +1,20 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++
++
++
++def test_missing_observations_do_not_poison_bootstrap_limits(monkeypatch):
++    from moseq2_app.stat.view import get_ci_vect_vectorized
++    monkeypatch.setattr(np.random, 'choice', np.random.RandomState(17).choice)
++    expected = get_ci_vect_vectorized(np.array([1., 2., 3.]), n_boots=200)
++    monkeypatch.setattr(np.random, 'choice', np.random.RandomState(17).choice)
++    actual = get_ci_vect_vectorized(np.array([1., np.nan, 2., 3.]), n_boots=200)
++    np.testing.assert_array_equal(actual, expected)
++    assert np.isnan(get_ci_vect_vectorized(np.array([np.nan]), n_boots=10)).all()

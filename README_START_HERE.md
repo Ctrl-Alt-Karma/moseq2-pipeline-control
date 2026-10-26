@@ -1,5 +1,15 @@
 # MoSeq2 Pipeline Control
 
+## Project closed by Owner — 2026-10-26
+
+**R1 SCIENTIFIC VALIDATION CLOSED BY OWNER BEFORE FINAL HUMAN QUALITATIVE GATE**
+
+`PASS_REAL_SESSION_PRODUCTION_VALIDATION` was NOT issued. This is not a
+scientific FAIL. Start with the [final handoff](ai/HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md)
+and [upstream knowledge dump](ai/MOSEQ2_UPSTREAM_HANDOFF_AND_PROJECT_CLOSEOUT_2026-10-26.md).
+All older task/continuation instructions are historical. No further MoSeq task
+is planned without explicit Owner reopening authorization.
+
 ## Purpose
 
 This repository is the durable project-control record for MoSeq pipeline repair,

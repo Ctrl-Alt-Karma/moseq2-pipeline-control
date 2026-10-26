@@ -1,0 +1,53 @@
+commit 616c6d193b730f862347e5877cbab5e335fa2baa
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:49 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:49 2026 -0400
+
+    fix: select the newest model path in progress discovery
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 61861c3382d993cbba7522985d970de5c0f92ef9
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/gui/progress.py b/moseq2_app/gui/progress.py
+index 3a469b7..bbc3718 100644
+--- a/moseq2_app/gui/progress.py
++++ b/moseq2_app/gui/progress.py
+@@ -286,7 +286,7 @@ def find_progress(base_progress):
+     models = glob(join(base_dir, '**/*.p'), recursive=True)
+ 
+     if len(models) > 1:
+-        models = sorted(models, key=os.path.getmtime)
++        models = sorted(models, key=os.path.getmtime, reverse=True)
+         print(f'More than 1 model found. Setting model path to latest generated model: {models[0]}')
+     # avoid models not found
+     if len(models) > 0:
+diff --git a/tests/software/test_closeout_app_latest_model.py b/tests/software/test_closeout_app_latest_model.py
+new file mode 100644
+index 0000000..b8ba5be
+--- /dev/null
++++ b/tests/software/test_closeout_app_latest_model.py
+@@ -0,0 +1,20 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++def test_progress_selects_the_newest_model_path(tmp_path):
++    import os
++    from moseq2_app.gui.progress import find_progress
++    old, new = tmp_path / "old.p", tmp_path / "new.p"
++    old.write_bytes(b"synthetic placeholder")
++    new.write_bytes(b"synthetic placeholder")
++    os.utime(old, (1000, 1000))
++    os.utime(new, (2000, 2000))
++    progress = dict(base_dir=str(tmp_path), config_file=str(tmp_path / "missing.yaml"),
++                    pca_dirname=str(tmp_path))
++    assert find_progress(progress)["model_path"] == str(new)

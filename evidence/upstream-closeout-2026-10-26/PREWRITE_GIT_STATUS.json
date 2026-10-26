@@ -1,0 +1,335 @@
+{
+  "scope": "Before the final control commit; all contribution branches clean. Original user checkout retained two pre-existing untracked items.",
+  "records": [
+    {
+      "label": "dattalab/moseq2-extract",
+      "head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "git_status_short": ""
+    },
+    {
+      "label": "dattalab/moseq2-pca",
+      "head": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "git_status_short": ""
+    },
+    {
+      "label": "dattalab/moseq2-model",
+      "head": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "git_status_short": ""
+    },
+    {
+      "label": "dattalab/moseq2-viz",
+      "head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "git_status_short": ""
+    },
+    {
+      "label": "dattalab/moseq2-app",
+      "head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "git_status_short": ""
+    },
+    {
+      "label": "dattalab/moseq2-test",
+      "head": "9e696dbbc3e36169366ec309656b87183524ff3d",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/moseq2-extract",
+      "head": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/moseq2-pca",
+      "head": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/moseq2-model",
+      "head": "6e542e3f1db125202d42b59f390c922281e64f39",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/moseq2-viz",
+      "head": "68ca6a34055987ff22f8651b4dca2aa254380c87",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/moseq2-app",
+      "head": "36d40e098a5c4629116b7a4e233573218345bd5d",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/moseq2-pipeline-control",
+      "head": "c1e3cab2780480c59e019765d0a810e7fc684604",
+      "git_status_short": ""
+    },
+    {
+      "label": "Ctrl-Alt-Karma/bridge",
+      "head": "a919e0ad170134fcce5ef56de14c1cf352130165",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-integer-coordinates",
+      "head": "b00699aad6320d29dc7a5bbb44668f035378d920",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-pinhole-geometry",
+      "head": "f9987793dc033196b9376ffd3fa3f79c55b99e0c",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-mixed-unit-velocity",
+      "head": "9674e130f0b27a17bd8d0280c6cd2d38e2e831d4",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-hampel-centroid",
+      "head": "6212b47b32fec47de4c63cb808b287a042d80144",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-hampel-angle",
+      "head": "69fae4f7e333227af3f688ccee4fc1678ea176a0",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-ransac-seed",
+      "head": "89e778a7a8f63c5f7ec243d8a5d521dc2e826333",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-ransac-failure",
+      "head": "050f5bcb6a806717cc93ea90392090100a5bb8e1",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-depth-byte-order",
+      "head": "4ac319b7772b4e62e3a8800525aaf9c3c8987311",
+      "git_status_short": ""
+    },
+    {
+      "label": "extract-unsigned-raw-depth",
+      "head": "2bbebcda4556d0c665ba80483cc2f2f006be84b2",
+      "git_status_short": ""
+    },
+    {
+      "label": "pca-symmetric-kernel",
+      "head": "d8f975fdadf8e58eea2cb3b86a7f26fcbcdd06af",
+      "git_status_short": ""
+    },
+    {
+      "label": "pca-changepoint-sigma",
+      "head": "c1622a232020686671061d3f4f69cdee8d834970",
+      "git_status_short": ""
+    },
+    {
+      "label": "pca-disabled-smoothing",
+      "head": "62b50277d3d1d9d9b350eff274c732ff0184d7ce",
+      "git_status_short": ""
+    },
+    {
+      "label": "pca-session-timestamps",
+      "head": "24eb72e75d022340f6cf96f6d820d72f7547d502",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-integer-coordinates",
+      "head": "31021b517a0e857343c6d37d18a45ea8696c4cca",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-pinhole-geometry",
+      "head": "d588667ed06008faf622a3e0398d273e84ff09e2",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-high-state-ranks",
+      "head": "bbc70097f5a2c650dc6ccaeb070e2c6c8d3db79a",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-coverage-count",
+      "head": "2361167d74c65589ab91c9f7ef2a6ac0103c33d9",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-first-transition",
+      "head": "ac381ddc2aacebf951c9f2df7e5f50fdea938b9d",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-pairwise-groups",
+      "head": "37cf1671cc57c0776124426d800bdaaa1c5ba10a",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-dunn-correction",
+      "head": "6b48bbe33895e08610c69e0c7496cfad658dd57a",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-constant-ztest",
+      "head": "7308cbf71eb011ae2905b92dcaba17b8bc7151ac",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-empty-usages",
+      "head": "0b20df4c1a5e6e04d9902c3bc245209d52e4de63",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-entropy-default",
+      "head": "1251cfe2474cfe21b461525dcb12f074b0855787",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-metadata-order",
+      "head": "448f18b34f7b3c57d92a85d0f3544ca52062b1ff",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-graph-legend",
+      "head": "e156173cc3ca3c1b787f06948d5f57fd83a7857a",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-merge-models",
+      "head": "767c6869d80c66b6f2464b1b4b758482a8456a73",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-best-fit-summary",
+      "head": "c813d9c1b18b711a4ec5a71fd4521f9a2e5940c3",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-legacy-area",
+      "head": "d611143a12ccd955706ea476fe7d482abde25394",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-sparse-nodes",
+      "head": "05f5e58c47e91e1ada2a340550b5e1584ae0ea98",
+      "git_status_short": ""
+    },
+    {
+      "label": "viz-legacy-keys",
+      "head": "2aadf69c3753315b58e900150f04d482b5ece0a2",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-flip-frame-index",
+      "head": "c3d4a083de1c8a9b219b0607ef868c32176cc98e",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-flip-final-frame",
+      "head": "2ae035bd51e2736aa7e2ca82ef74fff1477b78a5",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-flip-overlap",
+      "head": "40ed4a22c405e0e6eb37a6526846339b981a389b",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-flip-lifecycle",
+      "head": "6a01d1caaa11e0f2705b2af46117a8a2a55b16e5",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-preview-finalization",
+      "head": "76de73e268bd1684fee75cdc2f5ac8d31eb1b363",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-qc-percentages",
+      "head": "5bdbcf3d637124734b1afdd7bb260fac801cd3c7",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-index-columns",
+      "head": "b8f048344686193b7623308c67742d72fca74849",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-latest-model",
+      "head": "616c6d193b730f862347e5877cbab5e335fa2baa",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-qc-stationary",
+      "head": "4bfe8d656145dc0000171372e6c475b6683c2b0b",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-qc-integer-timestamps",
+      "head": "993a697ef8034b98443e7d4d18476c9579963f61",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-qc-small-area",
+      "head": "dfefd76c8354cabbd5ef7d5eaf5f38f0f8f77da1",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-sidecar-paths",
+      "head": "b5ca7d0cded025d33fddc4ae5f073c758fac4335",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-cv-pca-leakage",
+      "head": "3691c8b3861835ad5149726c31dee1aac7c9d92f",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-transition-legend",
+      "head": "820b3fad0ca364d9c4749d5ea4c53ebd5dbeee59",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-foreign-movies",
+      "head": "8b151a00c664badab09eaedaac883a19646c7f32",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-bootstrap-nans",
+      "head": "3eed4290850909b355fb8a29082bd1e8faa06daa",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-memory-display",
+      "head": "9593b6d6e4e5e60abc0865386c22283f9ccb1103",
+      "git_status_short": ""
+    },
+    {
+      "label": "model-training-split",
+      "head": "c098468bb83dc0e796eff9b298bda3bc4af90d61",
+      "git_status_short": ""
+    },
+    {
+      "label": "model-scan-parameters",
+      "head": "48833663688c5a56743e751239581ca296a65bb3",
+      "git_status_short": ""
+    },
+    {
+      "label": "model-export-identity",
+      "head": "6b7357cb522712d8e3fd8c4e0e0d41a6a48a35d2",
+      "git_status_short": ""
+    },
+    {
+      "label": "app-preview-exit",
+      "head": "b15995f14f449432e7c5e4bacca1504320bbcd87",
+      "git_status_short": ""
+    },
+    {
+      "label": "original-user-checkout",
+      "head": "034b94e46ada97650c714f7882596e3f4f2fb48b",
+      "git_status_short": "?? LOCKED_464159_K200_LONG_CHAIN_CONVERGENCE_SENTINEL_R1_FABLE_REVIEW.zip\n?? bridge-retirement-canon-flush-v3-r1/"
+    },
+    {
+      "label": "control-closeout",
+      "head": "c1e3cab2780480c59e019765d0a810e7fc684604",
+      "git_status_short": "M README_START_HERE.md\n M ai/CURRENT_STATE.md\n M ai/DECISIONS.md\n M ai/HANDOFF_CURRENT.md\n M ai/OPEN_QUESTIONS.md\n M ai/REVIEW_LOG.md\n M ai/RISK_REGISTER.md\n M ai/TASK_SPEC.md\n?? .gitattributes\n?? ai/HANDOFF_2026-10-26_MOSEQ2_PROJECT_CLOSEOUT_R1.md\n?? ai/MOSEQ2_UPSTREAM_HANDOFF_AND_PROJECT_CLOSEOUT_2026-10-26.md\n?? evidence/upstream-closeout-2026-10-26/"
+    }
+  ]
+}

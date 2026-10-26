@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.032" timestamp="2026-10-26T12:50:13.372203-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE4.viz-merge-models.test_regression" name="test_default_model_merge_preserves_state_parameter_alignment" time="0.746"><failure message="UnboundLocalError: cannot access local variable 'mapping' where it is not associated with a value">test_results/PATCH_PLAN_WAVE4/viz-merge-models/test_regression.py:20: in test_default_model_merge_preserves_state_parameter_alignment
+    result = util.merge_models("synthetic-unused", force_merge=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/ajm/moseq2-closeout-software-tests-20261026/venv/lib/python3.12/site-packages/moseq2_viz/model/util.py:159: in merge_models
+    mapping[-5] = -5
+    ^^^^^^^
+E   UnboundLocalError: cannot access local variable 'mapping' where it is not associated with a value</failure></testcase></testsuite></testsuites>

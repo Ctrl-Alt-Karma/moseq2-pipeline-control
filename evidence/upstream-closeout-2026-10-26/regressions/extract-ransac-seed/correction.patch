@@ -1,0 +1,84 @@
+commit 89e778a7a8f63c5f7ec243d8a5d521dc2e826333
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:26 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:26 2026 -0400
+
+    fix: give plane RANSAC a local reproducible random generator
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 2c9cd86571bcc23ad6870e4da344e0f558f3f54c
+    
+    Co-authored-by: Claude Builder <noreply@anthropic.com>
+
+diff --git a/moseq2_extract/extract/roi.py b/moseq2_extract/extract/roi.py
+index 5191aa8..b73f683 100644
+--- a/moseq2_extract/extract/roi.py
++++ b/moseq2_extract/extract/roi.py
+@@ -47,6 +47,7 @@ def plane_ransac(
+     in_ratio=0.1,
+     progress_bar=False,
+     mask=None,
++    seed=0,
+     **kwargs,
+ ):
+     """
+@@ -60,6 +61,8 @@ def plane_ransac(
+     in_ratio (float): fraction of points required to consider a plane fit good
+     progress_bar (bool): display progress bar
+     mask (numpy.ndarray): boolean mask to find region to use
++    seed (int or None): local hypothesis-sampling seed; defaults to reproducible 0.
++        None draws fresh entropy without consuming NumPy's global RNG.
+     kwargs (dict): dictionary containing extra keyword arguments from moseq2_extract.proc.get_roi()
+ 
+     Returns:
+@@ -92,6 +95,7 @@ def plane_ransac(
+     )
+     coords = coords.T
+ 
++    rng = np.random.RandomState(seed)
+     best_dist = np.inf
+     best_num = 0
+ 
+@@ -99,7 +103,7 @@ def plane_ransac(
+ 
+     for _ in tqdm(range(iters), disable=not progress_bar, desc="Finding plane"):
+ 
+-        sel = coords[np.random.choice(coords.shape[0], 3, replace=True)]
++        sel = coords[rng.choice(coords.shape[0], 3, replace=True)]
+         tmp_plane = plane_fit3(sel)
+ 
+         if np.all(np.isnan(tmp_plane)):
+diff --git a/tests/unit_tests/test_closeout_extract_ransac_seed.py b/tests/unit_tests/test_closeout_extract_ransac_seed.py
+new file mode 100644
+index 0000000..e055928
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_ransac_seed.py
+@@ -0,0 +1,26 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pytest
++
++
++def _floor():
++    y, x = np.mgrid[:30, :40]
++    return 700 + .3 * x - .2 * y + np.random.RandomState(3).normal(0, 2, (30, 40))
++
++
++def test_ransac_repeated_calls_are_exact():
++    from moseq2_extract.extract.roi import plane_ransac
++    first = plane_ransac(_floor(), iters=30)
++    second = plane_ransac(_floor(), iters=30)
++    for a, b in zip(first, second):
++        np.testing.assert_array_equal(a, b)
++
++
++def test_ransac_does_not_consume_global_rng():
++    from moseq2_extract.extract.roi import plane_ransac
++    np.random.seed(84)
++    before = np.random.get_state()
++    plane_ransac(_floor(), iters=30)
++    after = np.random.get_state()
++    assert before[0] == after[0] and before[2:] == after[2:]
++    np.testing.assert_array_equal(before[1], after[1])

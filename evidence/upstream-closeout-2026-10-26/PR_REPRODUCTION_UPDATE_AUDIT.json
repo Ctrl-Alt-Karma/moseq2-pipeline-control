@@ -1,0 +1,517 @@
+{
+  "count": 51,
+  "purpose": "Make published commands match outside-checkout installed-wheel qualification; source/test outcomes unchanged.",
+  "provider_recovery": "One HTTP502 was reconciled by reading the current body before an idempotent continuation; concurrent maintainer edits would fail closed.",
+  "changes": [
+    {
+      "id": "extract-integer-coordinates",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/182",
+      "updated_at": "2026-10-26T17:57:01Z",
+      "body_sha256": "ff5bae3ed4ced68fa200bb3585fa90cd0edbeec5680c7a67e9033f57f02d3b1d",
+      "live_rules_checked_at": "2026-10-26T17:57:02.908095+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-pinhole-geometry",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/183",
+      "updated_at": "2026-10-26T17:57:05Z",
+      "body_sha256": "74001f30dbbface3debc9d43e385042eff4a845ef80ab7de13e36bef32627107",
+      "live_rules_checked_at": "2026-10-26T17:57:06.644814+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-mixed-unit-velocity",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/184",
+      "updated_at": "2026-10-26T17:57:09Z",
+      "body_sha256": "2fce3c0bfb08f752b92a0f73ebef9ed24855ee185f99d57cedc6e4458c3f7c0a",
+      "live_rules_checked_at": "2026-10-26T17:57:11.804120+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-hampel-centroid",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/185",
+      "updated_at": "2026-10-26T17:57:13Z",
+      "body_sha256": "2dd5be5f26ca28b6b93bcf61d7c0dce0c0de70e7b6c6307d5e70e876155fc183",
+      "live_rules_checked_at": "2026-10-26T17:57:14.700537+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-hampel-angle",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/186",
+      "updated_at": "2026-10-26T17:57:16Z",
+      "body_sha256": "ccb2c47f35f9d450772193f9716c686f89a1f731ff27eddd6f81a7b85a0f1f35",
+      "live_rules_checked_at": "2026-10-26T17:57:18.444281+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-ransac-seed",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/187",
+      "updated_at": "2026-10-26T17:57:19Z",
+      "body_sha256": "3c1e5d07a8348ecd61ababb647541c135dd3cc5b4b657e0980743dd2cc31065c",
+      "live_rules_checked_at": "2026-10-26T17:57:21.789439+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-ransac-failure",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/188",
+      "updated_at": "2026-10-26T17:57:23Z",
+      "body_sha256": "995ac8935494ef97ca14641f5802e309b15618a8a70c46537c429ebc0138d5f7",
+      "live_rules_checked_at": "2026-10-26T17:57:25.247127+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-depth-byte-order",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/189",
+      "updated_at": "2026-10-26T17:57:26Z",
+      "body_sha256": "fd4aac7ead1590987ce46dd3b388bfb7c8e837411e495ef7de9f0b881fa4e41b",
+      "live_rules_checked_at": "2026-10-26T17:57:28.248676+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "extract-unsigned-raw-depth",
+      "url": "https://github.com/dattalab/moseq2-extract/pull/190",
+      "updated_at": "2026-10-26T17:57:29Z",
+      "body_sha256": "56d32384279452f9da837f2f5bafa80cd309d8fe86f8258143a88a2cf4dc1c0a",
+      "live_rules_checked_at": "2026-10-26T17:57:31.730449+00:00",
+      "target_head": "d1b0e75d0a696d071d4d158ab2b16787f52890df",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "pca-symmetric-kernel",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/133",
+      "updated_at": "2026-10-26T17:57:38Z",
+      "body_sha256": "06273dd61bf28911c901ebbc5be0ce09ec8da6c00bb7b7aea9b8b712fa69ce81",
+      "live_rules_checked_at": "2026-10-26T17:57:35.155925+00:00",
+      "target_head": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "pca-changepoint-sigma",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/134",
+      "updated_at": "2026-10-26T17:57:41Z",
+      "body_sha256": "5988efa9102cbbb1e6747a8233e71e01e48645ff3e1610bc626111bf1c3f9e4c",
+      "live_rules_checked_at": "2026-10-26T17:57:43.418342+00:00",
+      "target_head": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "pca-disabled-smoothing",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/135",
+      "updated_at": "2026-10-26T17:57:45Z",
+      "body_sha256": "31611a9b421fe2ec7a1e9c7da8704e91ecb9585dd41d0ce88ff7d7670d907360",
+      "live_rules_checked_at": "2026-10-26T17:57:46.996560+00:00",
+      "target_head": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "pca-session-timestamps",
+      "url": "https://github.com/dattalab/moseq2-pca/pull/136",
+      "updated_at": "2026-10-26T17:57:48Z",
+      "body_sha256": "8315c47a99638bb17bc6a86e4a1efaeaf3023b8acaf0cad8d0828fa18e8d29d7",
+      "live_rules_checked_at": "2026-10-26T17:57:50.224895+00:00",
+      "target_head": "e2dcce0c318681fe7625fb3b91849ecffb2f3d9c",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-integer-coordinates",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/190",
+      "updated_at": "2026-10-26T17:57:51Z",
+      "body_sha256": "18121ae9a7c815d8f56dd1ab61c38d2a731df4e7f0019fea34d03b4b1e266edc",
+      "live_rules_checked_at": "2026-10-26T17:57:53.867062+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-pinhole-geometry",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/191",
+      "updated_at": "2026-10-26T17:57:56Z",
+      "body_sha256": "d1c0499ed7f6349d30e09311e823436b949d64558988d0247c4de8bd8ae2e454",
+      "live_rules_checked_at": "2026-10-26T17:57:56.530075+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-high-state-ranks",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/192",
+      "updated_at": "2026-10-26T17:58:12Z",
+      "body_sha256": "acca055a876bec39a45a1629e2db422217c6eb7a3a42f89407e884b876899c84",
+      "live_rules_checked_at": "2026-10-26T18:00:00.530282+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-coverage-count",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/193",
+      "updated_at": "2026-10-26T18:00:00Z",
+      "body_sha256": "78aff2d955d313ce4f224fc971c71bb2068f27be2be133d38afde8c44dba6ee8",
+      "live_rules_checked_at": "2026-10-26T18:00:02.107269+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-first-transition",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/194",
+      "updated_at": "2026-10-26T18:00:02Z",
+      "body_sha256": "48c52bc293c4ba8003ec8287ec16a3341790cba77605c9e30c7b258792554b41",
+      "live_rules_checked_at": "2026-10-26T18:00:04.914046+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-pairwise-groups",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/195",
+      "updated_at": "2026-10-26T18:00:05Z",
+      "body_sha256": "f63c3840ea257050b61cd291c64bd684026b09c107b422415347a1d49d598925",
+      "live_rules_checked_at": "2026-10-26T18:00:07.613508+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-dunn-correction",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/196",
+      "updated_at": "2026-10-26T18:00:17Z",
+      "body_sha256": "3c6824728d9a4d422ec948581c07e246b05b2ece67267542ba948a1c90569a7e",
+      "live_rules_checked_at": "2026-10-26T18:00:10.364138+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-constant-ztest",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/197",
+      "updated_at": "2026-10-26T18:00:21Z",
+      "body_sha256": "77e9a446099031bec2304e15109bbc069d2368b32e35021db7812327a6e3de80",
+      "live_rules_checked_at": "2026-10-26T18:00:23.272154+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-empty-usages",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/198",
+      "updated_at": "2026-10-26T18:00:25Z",
+      "body_sha256": "2aab020f34960be468f75078e4527e0ab9c0c5e717e95fee793509e93b089763",
+      "live_rules_checked_at": "2026-10-26T18:00:26.557756+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-entropy-default",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/199",
+      "updated_at": "2026-10-26T18:00:29Z",
+      "body_sha256": "98151156caa8755c3b3929879f3405697e84de7b089a79a52736e4f547ce56d7",
+      "live_rules_checked_at": "2026-10-26T18:00:30.381132+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-metadata-order",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/200",
+      "updated_at": "2026-10-26T18:00:33Z",
+      "body_sha256": "298a67fa4f0d175f1c1dbba5cc14e7c8e511c834d7bef2a6d0c5834a5f044ba4",
+      "live_rules_checked_at": "2026-10-26T18:00:35.385489+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-graph-legend",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/201",
+      "updated_at": "2026-10-26T18:00:37Z",
+      "body_sha256": "52f28e9f85128146ed3565d5a83a5d12d1f3b502e12e534fb4a633dd82f081a4",
+      "live_rules_checked_at": "2026-10-26T18:00:39.368091+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-merge-models",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/202",
+      "updated_at": "2026-10-26T18:00:41Z",
+      "body_sha256": "f6a7afae83dd6291a71cb346d585137ce0afd07285e99d54918e748b660caf81",
+      "live_rules_checked_at": "2026-10-26T18:00:42.593663+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-best-fit-summary",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/203",
+      "updated_at": "2026-10-26T18:00:46Z",
+      "body_sha256": "6294e34aa4cb0a3f540acf8ba3cf5b4c8e16de1c74fc9100fa175519896ca1ad",
+      "live_rules_checked_at": "2026-10-26T18:00:47.043110+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-legacy-area",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/204",
+      "updated_at": "2026-10-26T18:00:50Z",
+      "body_sha256": "453a71cd2a8884cf39df7de34ab5152c3ba65d4debc38a9b0d014a11150cc16d",
+      "live_rules_checked_at": "2026-10-26T18:00:51.955481+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-sparse-nodes",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/205",
+      "updated_at": "2026-10-26T18:00:58Z",
+      "body_sha256": "cb591a1af2c78883a14799a5c3ee58aea2a16c75da99d8b5f6ea9dc4ab66e3ec",
+      "live_rules_checked_at": "2026-10-26T18:00:56.627741+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "viz-legacy-keys",
+      "url": "https://github.com/dattalab/moseq2-viz/pull/206",
+      "updated_at": "2026-10-26T18:01:02Z",
+      "body_sha256": "ea0a9ec84f60143f2c9453402aa68cfefc551f083fd63fdeeb77027b85e4c55e",
+      "live_rules_checked_at": "2026-10-26T18:01:04.221730+00:00",
+      "target_head": "5b52b176fbfa4fb1a6a7a69f48e7c37ac2730ba8",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-flip-frame-index",
+      "url": "https://github.com/dattalab/moseq2-app/pull/292",
+      "updated_at": "2026-10-26T18:01:07Z",
+      "body_sha256": "18505d80c53af0085055bb38c58d653bf9a74a439d899c951ab5d11dcf16f3d5",
+      "live_rules_checked_at": "2026-10-26T18:01:09.515291+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-flip-final-frame",
+      "url": "https://github.com/dattalab/moseq2-app/pull/293",
+      "updated_at": "2026-10-26T18:01:11Z",
+      "body_sha256": "853032cab1609c4e0f207d7b0d8ad6cc57e87bc4536792f55dd52a1a4bdb308b",
+      "live_rules_checked_at": "2026-10-26T18:01:12.933156+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-flip-overlap",
+      "url": "https://github.com/dattalab/moseq2-app/pull/294",
+      "updated_at": "2026-10-26T18:01:13Z",
+      "body_sha256": "b2688980585fd22511475dab2458e49099cc73aa515a35f8c6db1a5326acf459",
+      "live_rules_checked_at": "2026-10-26T18:01:15.973318+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-flip-lifecycle",
+      "url": "https://github.com/dattalab/moseq2-app/pull/295",
+      "updated_at": "2026-10-26T18:01:17Z",
+      "body_sha256": "592edf443f63235ca799e47f1fcbb304d757b9aa2b9304a0da59e2905035c762",
+      "live_rules_checked_at": "2026-10-26T18:01:18.896052+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-preview-finalization",
+      "url": "https://github.com/dattalab/moseq2-app/pull/296",
+      "updated_at": "2026-10-26T18:01:20Z",
+      "body_sha256": "de6ede5db0336dfadf2f3ff26f97ad1a19a1a0a5dedf08fac99cb9cac14ec9ed",
+      "live_rules_checked_at": "2026-10-26T18:01:22.226353+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-qc-percentages",
+      "url": "https://github.com/dattalab/moseq2-app/pull/297",
+      "updated_at": "2026-10-26T18:01:23Z",
+      "body_sha256": "2dbc99cb76f71351f0c8c35d086e00cb59a68fd676cb39f35df3810063930f41",
+      "live_rules_checked_at": "2026-10-26T18:01:25.115718+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-index-columns",
+      "url": "https://github.com/dattalab/moseq2-app/pull/298",
+      "updated_at": "2026-10-26T18:01:26Z",
+      "body_sha256": "301f2a61b05ab727557271e698ff6bfbb8ef5a779a085e83bf89a96c241ef798",
+      "live_rules_checked_at": "2026-10-26T18:01:28.191583+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-latest-model",
+      "url": "https://github.com/dattalab/moseq2-app/pull/299",
+      "updated_at": "2026-10-26T18:01:29Z",
+      "body_sha256": "01c545050a303dbc12237bb9a5ee831b6104a87e27a76471e2b49c43d9473d77",
+      "live_rules_checked_at": "2026-10-26T18:01:31.065482+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-qc-stationary",
+      "url": "https://github.com/dattalab/moseq2-app/pull/300",
+      "updated_at": "2026-10-26T18:01:32Z",
+      "body_sha256": "b57f0ea2f38cc3196d3c392cf0e3501acc86f5a5923a6087b12e81a839a5eb7b",
+      "live_rules_checked_at": "2026-10-26T18:01:34.198667+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-qc-integer-timestamps",
+      "url": "https://github.com/dattalab/moseq2-app/pull/301",
+      "updated_at": "2026-10-26T18:01:34Z",
+      "body_sha256": "88390451f87cc2e9e37ca385f5941bc16256f59cce2f4711722e1d4602b3dfd2",
+      "live_rules_checked_at": "2026-10-26T18:01:36.970480+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-qc-small-area",
+      "url": "https://github.com/dattalab/moseq2-app/pull/302",
+      "updated_at": "2026-10-26T18:01:37Z",
+      "body_sha256": "ca4cf35d6a7310b9bcddc1e97df8644889c17af27a7f0fc970829ff69e010d97",
+      "live_rules_checked_at": "2026-10-26T18:01:39.894433+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-sidecar-paths",
+      "url": "https://github.com/dattalab/moseq2-app/pull/303",
+      "updated_at": "2026-10-26T18:01:40Z",
+      "body_sha256": "829382144fdaab701015e302e98dce18c6220299f0963d53dc8efe2d913ef540",
+      "live_rules_checked_at": "2026-10-26T18:01:42.811603+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-cv-pca-leakage",
+      "url": "https://github.com/dattalab/moseq2-app/pull/304",
+      "updated_at": "2026-10-26T18:01:43Z",
+      "body_sha256": "262beb8414dea05e144eb83eef5a3609f466d55a36b4f6902338fa8f21892768",
+      "live_rules_checked_at": "2026-10-26T18:01:45.689141+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-transition-legend",
+      "url": "https://github.com/dattalab/moseq2-app/pull/305",
+      "updated_at": "2026-10-26T18:01:46Z",
+      "body_sha256": "7b601bf191690f20d197557ea82d7aa8daed8cd11716dcf55421511ce0936939",
+      "live_rules_checked_at": "2026-10-26T18:01:48.825112+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-foreign-movies",
+      "url": "https://github.com/dattalab/moseq2-app/pull/306",
+      "updated_at": "2026-10-26T18:01:49Z",
+      "body_sha256": "6771022f0eb5936150c451f62cf1cf53053a4ebddd528ab2c112781ffa6794af",
+      "live_rules_checked_at": "2026-10-26T18:01:51.871246+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-bootstrap-nans",
+      "url": "https://github.com/dattalab/moseq2-app/pull/307",
+      "updated_at": "2026-10-26T18:01:52Z",
+      "body_sha256": "af0d8f967263e119f0333d17e9648dc69c247c2ad1df59bae2118d0de2aaf511",
+      "live_rules_checked_at": "2026-10-26T18:01:54.766497+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-memory-display",
+      "url": "https://github.com/dattalab/moseq2-app/pull/308",
+      "updated_at": "2026-10-26T18:01:55Z",
+      "body_sha256": "82ca635756b88f762e648a1dffa98a57818cffbac5f5ebc17a52a4e12d334517",
+      "live_rules_checked_at": "2026-10-26T18:01:57.866426+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "model-training-split",
+      "url": "https://github.com/dattalab/moseq2-model/pull/102",
+      "updated_at": "2026-10-26T18:02:02Z",
+      "body_sha256": "c3e2c6b8258cc87cd506af5e56e806e0ffb754671ac406510fdb9215d876e919",
+      "live_rules_checked_at": "2026-10-26T18:02:00.801846+00:00",
+      "target_head": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "model-scan-parameters",
+      "url": "https://github.com/dattalab/moseq2-model/pull/103",
+      "updated_at": "2026-10-26T18:02:06Z",
+      "body_sha256": "f6e7a0d187aa7376f82309af4729562bb4fdac7609d2cb74445651acc33512d6",
+      "live_rules_checked_at": "2026-10-26T18:02:08.808262+00:00",
+      "target_head": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "model-export-identity",
+      "url": "https://github.com/dattalab/moseq2-model/pull/105",
+      "updated_at": "2026-10-26T18:02:10Z",
+      "body_sha256": "f7c7e50bedf9acc6f3097b3d3aecb2e9eea8d4265496af94252939f8f67a5dd5",
+      "live_rules_checked_at": "2026-10-26T18:02:12.483076+00:00",
+      "target_head": "ed1fb9bff59db377eb3b45d996b3195ff0f93637",
+      "active_rules": [],
+      "rulesets": []
+    },
+    {
+      "id": "app-preview-exit",
+      "url": "https://github.com/dattalab/moseq2-app/pull/310",
+      "updated_at": "2026-10-26T18:02:14Z",
+      "body_sha256": "083eed2ff1aa070235763764c836b1239d017a59739f7a8adf2a0e21bbb1de26",
+      "live_rules_checked_at": "2026-10-26T18:02:16.682349+00:00",
+      "target_head": "eefa3d5c15e21adef6e9ede343f2705f37d3e47b",
+      "active_rules": [],
+      "rulesets": []
+    }
+  ]
+}

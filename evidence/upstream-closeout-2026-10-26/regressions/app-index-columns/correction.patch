@@ -1,0 +1,77 @@
+commit b8f048344686193b7623308c67742d72fca74849
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:44 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:44 2026 -0400
+
+    fix: do not serialize the display-only filename column into the index
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: c85b9a224fb6ffec656e8c9231ba0af63d28dd2c
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_app/gui/widgets.py b/moseq2_app/gui/widgets.py
+index bc0f407..3770bb6 100644
+--- a/moseq2_app/gui/widgets.py
++++ b/moseq2_app/gui/widgets.py
+@@ -94,7 +94,7 @@ class GroupSettingWidgets:
+         meta_cols = pd.DataFrame(meta).columns
+ 
+         latest_df = self.qgrid_widget.get_changed_df()
+-        self.df.drop('filename', axis=1)
++        self.df = self.df.drop('filename', axis=1, errors='ignore')
+         self.df.update(latest_df)
+ 
+         updated_index = {'files': list(self.df.drop(meta_cols, axis=1).to_dict(orient='index').values()),
+@@ -113,4 +113,4 @@ class GroupSettingWidgets:
+         b (ipywidgets.Button click): callback from button when user clicks the button.
+         Returns:
+         """
+-        clear_output()
+\ No newline at end of file
++        clear_output()
+diff --git a/tests/extract_modeling/test_10_groups.py b/tests/extract_modeling/test_10_groups.py
+index eb795de..09839ce 100644
+--- a/tests/extract_modeling/test_10_groups.py
++++ b/tests/extract_modeling/test_10_groups.py
+@@ -200,10 +200,6 @@ def test_the_save_button_tracks_unsaved_changes(scratch_index):
+     )
+ 
+ 
+-@pytest.mark.xfail(
+-    reason="update_clicked calls self.df.drop('filename', axis=1) and discards "
+-    "the result, so the column it meant to remove is written out with the rest"
+-)
+ def test_saving_does_not_add_a_key_to_the_index(scratch_index):
+     """9. The index should hold what it held, with the groups changed.
+ 
+diff --git a/tests/software/test_closeout_app_index_columns.py b/tests/software/test_closeout_app_index_columns.py
+new file mode 100644
+index 0000000..594c1fe
+--- /dev/null
++++ b/tests/software/test_closeout_app_index_columns.py
+@@ -0,0 +1,22 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++import h5py
++
++
++def test_index_save_does_not_persist_display_filename(monkeypatch):
++    from moseq2_app.gui import widgets
++    captured = {}
++    frame = pd.DataFrame({"uuid": ["synthetic"], "path": [["synthetic.h5", "synthetic.yaml"]],
++                          "group": ["default"], "filename": ["synthetic.h5"],
++                          "SessionName": ["synthetic"], "metadata": [{"SessionName": "synthetic"}]})
++    subject = SimpleNamespace(
++        index_dict={"files": [{"metadata": {"SessionName": "synthetic"}}], "pca_path": "synthetic-pca.h5"},
++        df=frame, qgrid_widget=SimpleNamespace(get_changed_df=lambda: frame.copy()),
++        index_filepath="synthetic-unused.yaml", update_index_button=SimpleNamespace())
++    monkeypatch.setattr(widgets, "_write_yaml", lambda value, path: captured.update(value))
++    widgets.GroupSettingWidgets.update_clicked(subject)
++    assert "filename" not in captured["files"][0]

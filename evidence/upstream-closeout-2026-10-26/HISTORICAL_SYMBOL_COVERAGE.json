@@ -1,0 +1,907 @@
+[
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "11d2691ab56f9972930663e712c06cecb01f2eb1",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/extract/roi.py::plane_fit_lstsq",
+      "moseq2_extract/extract/roi.py::plane_ransac"
+    ],
+    "original_files": [
+      "moseq2_extract/extract/roi.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-ransac-failure",
+      "extract-ransac-estimator-design"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/11d2691ab56f9972930663e712c06cecb01f2eb1",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "c5e45345dea28873b1cc883e76498dd945680494",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/extract/proc.py::get_bground_im_file"
+    ],
+    "original_files": [
+      "moseq2_extract/extract/proc.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-background-dropouts"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/c5e45345dea28873b1cc883e76498dd945680494",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "b4429f839637782312a7008e82977f5c4a0e2a14",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/helpers/wrappers.py::get_roi_wrapper",
+      "moseq2_extract/util.py::estimate_depth_range",
+      "moseq2_extract/util.py::plot_depth_range_diagnostic"
+    ],
+    "original_files": [
+      "moseq2_extract/helpers/wrappers.py",
+      "moseq2_extract/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-auto-floor-center",
+      "extract-floor-helper-opencv"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/b4429f839637782312a7008e82977f5c4a0e2a14",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "ec418d7a2f134dcd3e62883ce7317bb68197a20b",
+    "author": "Claude",
+    "original_changed_symbols": [],
+    "original_files": [
+      "tests/unit_tests/test_extract_roi.py"
+    ],
+    "reviewed_topic_ids": [
+      "nonvacuous-scalar-regression"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/ec418d7a2f134dcd3e62883ce7317bb68197a20b",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "93bf656c3fbdf4d976980a80f9dddaad99d8ffe1",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/cli.py::extract_options",
+      "moseq2_extract/extract/proc.py::compute_scalars",
+      "moseq2_extract/extract/proc.py::feature_hampel_filter",
+      "moseq2_extract/io/video.py::read_frames"
+    ],
+    "original_files": [
+      "moseq2_extract/cli.py",
+      "moseq2_extract/extract/proc.py",
+      "moseq2_extract/io/video.py",
+      "tests/unit_tests/test_scalar_correctness.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-hampel-centroid",
+      "extract-hampel-angle",
+      "extract-depth-byte-order",
+      "extract-unsigned-raw-depth",
+      "extract-area-mm",
+      "extract-ellipse-centroid-calibration"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/93bf656c3fbdf4d976980a80f9dddaad99d8ffe1",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "c75272683c68cb5695be8e99d4e89ceb7adcf42b",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/extract/roi.py::plane_ransac",
+      "moseq2_extract/util.py::estimate_depth_range"
+    ],
+    "original_files": [
+      "moseq2_extract/extract/roi.py",
+      "moseq2_extract/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-ransac-failure",
+      "extract-floor-helper-opencv"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/c75272683c68cb5695be8e99d4e89ceb7adcf42b",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/util.py::convert_pxs_to_mm"
+    ],
+    "original_files": [
+      "moseq2_extract/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-pinhole-geometry",
+      "extract-ellipse-centroid-calibration"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/c9faa1dc18e96c3ef59bf90aa640ff8c42eed6a9",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "424d643affb685e1cad145e3c7051b814d11265c",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/helpers/data.py::create_extract_h5",
+      "moseq2_extract/util.py::_package_git_sha",
+      "moseq2_extract/util.py::get_pipeline_provenance",
+      "moseq2_extract/util.py::write_pipeline_provenance"
+    ],
+    "original_files": [
+      "moseq2_extract/helpers/data.py",
+      "moseq2_extract/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-provenance-contract"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/424d643affb685e1cad145e3c7051b814d11265c",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "5cc858626592ea2682260eae9911827c7c0ba551",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_extract/extract/proc.py::compute_scalars",
+      "moseq2_extract/util.py::convert_pxs_to_mm",
+      "moseq2_extract/util.py::scalar_attributes"
+    ],
+    "original_files": [
+      "moseq2_extract/extract/proc.py",
+      "moseq2_extract/util.py",
+      "tests/unit_tests/test_extract_proc.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-mixed-unit-velocity",
+      "extract-provenance-contract"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/5cc858626592ea2682260eae9911827c7c0ba551",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "f028801e9a6b54ffa63e22d9e10179ea7419ccc4",
+    "author": "AJ Mitchell",
+    "original_changed_symbols": [],
+    "original_files": [
+      "tests/unit_tests/test_extract_proc.py"
+    ],
+    "reviewed_topic_ids": [
+      "nonvacuous-scalar-regression"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/f028801e9a6b54ffa63e22d9e10179ea7419ccc4",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "e7f585104ba25b66e5326c88c77a47e33db95635",
+    "author": "AJ Mitchell",
+    "original_changed_symbols": [
+      "moseq2_extract/util.py::convert_pxs_to_mm"
+    ],
+    "original_files": [
+      "moseq2_extract/util.py",
+      "tests/unit_tests/test_extract_proc.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-integer-coordinates"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/e7f585104ba25b66e5326c88c77a47e33db95635",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-extract",
+    "commit": "2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+    "author": "Claude Builder",
+    "original_changed_symbols": [
+      "moseq2_extract/extract/roi.py::plane_ransac"
+    ],
+    "original_files": [
+      "moseq2_extract/extract/roi.py",
+      "moseq2_extract/util.py",
+      "tests/unit_tests/test_roi_determinism.py"
+    ],
+    "reviewed_topic_ids": [
+      "extract-ransac-seed"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-extract/commit/2c9cd86571bcc23ad6870e4da344e0f558f3f54c",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "e9f573185e2d7ed86a2de15089903a8294635c3c",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_pca/util.py::get_changepoints"
+    ],
+    "original_files": [
+      "moseq2_pca/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "pca-changepoint-sigma",
+      "pca-old-scipy-import"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/e9f573185e2d7ed86a2de15089903a8294635c3c",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "ff3531632aaecbc045a42570db024c429235a914",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_pca/pca/util.py::_fps_from_timestamps",
+      "moseq2_pca/pca/util.py::apply_pca_dask",
+      "moseq2_pca/pca/util.py::apply_pca_local",
+      "moseq2_pca/util.py::gaussian_kernel1d"
+    ],
+    "original_files": [
+      "moseq2_pca/pca/util.py",
+      "moseq2_pca/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "pca-symmetric-kernel",
+      "pca-session-timestamps",
+      "pca-short-chunk-overlap",
+      "pca-frame-rate-estimation"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/ff3531632aaecbc045a42570db024c429235a914",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "d4e53b7784d37d5d12498d631aa4d1a29c715d5d",
+    "author": "Claude",
+    "original_changed_symbols": [],
+    "original_files": [
+      "tests/unit_tests/test_util.py"
+    ],
+    "reviewed_topic_ids": [
+      "pca-kernel-regression-fixture"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/d4e53b7784d37d5d12498d631aa4d1a29c715d5d",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "e1fa3f8d2befdd90e1c1c281313c79010fae9d4e",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_pca/cli.py::compute_changepoints",
+      "moseq2_pca/util.py::get_changepoints"
+    ],
+    "original_files": [
+      "moseq2_pca/cli.py",
+      "moseq2_pca/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "pca-sigma-1p3-retune"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/e1fa3f8d2befdd90e1c1c281313c79010fae9d4e",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "f0d24d111bb359e6768462b6164bf579b323cbc8",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_pca/pca/util.py::_fps_from_timestamps",
+      "moseq2_pca/util.py::get_changepoints"
+    ],
+    "original_files": [
+      "moseq2_pca/pca/util.py",
+      "moseq2_pca/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "pca-disabled-smoothing",
+      "pca-frame-rate-estimation"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/f0d24d111bb359e6768462b6164bf579b323cbc8",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-pca",
+    "commit": "efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_pca/helpers/wrappers.py::train_pca_wrapper",
+      "moseq2_pca/pca/util.py::apply_pca_dask",
+      "moseq2_pca/pca/util.py::apply_pca_local",
+      "moseq2_pca/pca/util.py::get_changepoints_dask",
+      "moseq2_pca/util.py::_package_git_sha",
+      "moseq2_pca/util.py::get_pipeline_provenance",
+      "moseq2_pca/util.py::write_pipeline_provenance"
+    ],
+    "original_files": [
+      "moseq2_pca/helpers/wrappers.py",
+      "moseq2_pca/pca/util.py",
+      "moseq2_pca/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "pca-provenance-stamps"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-pca/commit/efb6fcfa5d5af5bb4274540c371d0ddf96440b78",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-model",
+    "commit": "bf8ca260631a7c67b9e383aafefe83abd2d50a82",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_model/cli.py::modeling_parameters",
+      "moseq2_model/helpers/data.py::get_training_data_splits",
+      "moseq2_model/helpers/data.py::prepare_model_metadata",
+      "moseq2_model/helpers/wrappers.py::learn_model_wrapper",
+      "moseq2_model/train/models.py::ARHMM",
+      "moseq2_model/train/util.py::regularize_for_stability",
+      "moseq2_model/util.py::get_parameter_strings"
+    ],
+    "original_files": [
+      "moseq2_model/cli.py",
+      "moseq2_model/helpers/data.py",
+      "moseq2_model/helpers/wrappers.py",
+      "moseq2_model/train/models.py",
+      "moseq2_model/train/util.py",
+      "moseq2_model/util.py",
+      "tests/unit_tests/test_modeling_correctness.py"
+    ],
+    "reviewed_topic_ids": [
+      "model-training-split",
+      "model-scan-parameters",
+      "model-export-identity",
+      "model-heldout-whitening",
+      "model-legacy-prior-stability",
+      "model-legacy-seed-cli"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-model/commit/bf8ca260631a7c67b9e383aafefe83abd2d50a82",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-model",
+    "commit": "4215f63f422ff40237db77d7c0de9cf990e14302",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_model/helpers/data.py::prepare_model_metadata"
+    ],
+    "original_files": [
+      "moseq2_model/helpers/data.py"
+    ],
+    "reviewed_topic_ids": [
+      "model-legacy-float64-layout"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-model/commit/4215f63f422ff40237db77d7c0de9cf990e14302",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-model",
+    "commit": "6e542e3f1db125202d42b59f390c922281e64f39",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_model/helpers/wrappers.py::learn_model_wrapper",
+      "moseq2_model/util.py::_package_git_sha",
+      "moseq2_model/util.py::get_pipeline_provenance"
+    ],
+    "original_files": [
+      "moseq2_model/helpers/wrappers.py",
+      "moseq2_model/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "model-provenance-and-kappa-governance"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-model/commit/6e542e3f1db125202d42b59f390c922281e64f39",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "83e9cadebf1dbd0822c87750217c39ba1d59e3ac",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/info/util.py::entropy_rate",
+      "moseq2_viz/info/util.py::transition_entropy",
+      "moseq2_viz/model/stat.py::ztest_vect",
+      "moseq2_viz/model/util.py::normalize_usages"
+    ],
+    "original_files": [
+      "moseq2_viz/info/util.py",
+      "moseq2_viz/model/stat.py",
+      "moseq2_viz/model/util.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-constant-ztest",
+      "viz-empty-usages",
+      "viz-entropy-default",
+      "viz-no-event-transition-entropy"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/83e9cadebf1dbd0822c87750217c39ba1d59e3ac",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "645415411f3119e62b59fe79e26df504d23bbb1c",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/model/stat.py::bootstrap_me",
+      "moseq2_viz/model/stat.py::compute_pvalues_for_group_pairs",
+      "moseq2_viz/model/stat.py::get_session_mean_df",
+      "moseq2_viz/model/stat.py::mann_whitney",
+      "moseq2_viz/model/stat.py::run_kruskal",
+      "moseq2_viz/model/stat.py::ttest",
+      "moseq2_viz/model/util.py::get_syllable_statistics",
+      "moseq2_viz/model/util.py::sort_batch_results",
+      "moseq2_viz/scalars/util.py::convert_legacy_scalars"
+    ],
+    "original_files": [
+      "moseq2_viz/model/stat.py",
+      "moseq2_viz/model/util.py",
+      "moseq2_viz/scalars/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-pairwise-groups",
+      "viz-dunn-correction",
+      "viz-legacy-area",
+      "viz-legacy-keys",
+      "viz-missing-scalar-observations",
+      "viz-numpy-object",
+      "viz-statistical-test-choice",
+      "viz-bootstrap-rng-policy"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/645415411f3119e62b59fe79e26df504d23bbb1c",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "8ef5b049eeaf78cecc9bad539529e3daf126ca27",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/model/trans_graph.py::compute_and_graph_grouped_TMs"
+    ],
+    "original_files": [
+      "moseq2_viz/model/trans_graph.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-graph-legend"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/8ef5b049eeaf78cecc9bad539529e3daf126ca27",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "68ca6a34055987ff22f8651b4dca2aa254380c87",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/model/stat.py::run_kruskal",
+      "moseq2_viz/model/stat.py::ztest_vect",
+      "moseq2_viz/model/trans_graph.py::get_state_runs",
+      "moseq2_viz/model/trans_graph.py::get_transition_matrix",
+      "moseq2_viz/model/trans_graph.py::make_difference_graphs",
+      "moseq2_viz/model/util.py::get_best_fit",
+      "moseq2_viz/model/util.py::get_num_syllables_for_coverage",
+      "moseq2_viz/model/util.py::merge_models"
+    ],
+    "original_files": [
+      "moseq2_viz/model/stat.py",
+      "moseq2_viz/model/trans_graph.py",
+      "moseq2_viz/model/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-high-state-ranks",
+      "viz-coverage-count",
+      "viz-first-transition",
+      "viz-constant-ztest",
+      "viz-merge-models",
+      "viz-best-fit-summary",
+      "viz-sparse-nodes"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/68ca6a34055987ff22f8651b4dca2aa254380c87",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/scalars/util.py::convert_pxs_to_mm"
+    ],
+    "original_files": [
+      "moseq2_viz/scalars/util.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-pinhole-geometry",
+      "viz-duplicated-conversion-design"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/3e02d2dbc8062fc6cc0e9d765030ba9b40f28d7d",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "b2ad7e71dbae0da5e2d5e8575d7e9476c95cd2da",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/util.py::assert_consistent_provenance",
+      "moseq2_viz/util.py::describe_provenance",
+      "moseq2_viz/util.py::read_pipeline_provenance"
+    ],
+    "original_files": [
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-fork-provenance-readers"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/b2ad7e71dbae0da5e2d5e8575d7e9476c95cd2da",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "62ec4d579dffe0712e2e5b7f8531a029b3a04f00",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/scalars/util.py::check_scalar_is_usable",
+      "moseq2_viz/scalars/util.py::convert_legacy_scalars",
+      "moseq2_viz/scalars/util.py::convert_pxs_to_mm",
+      "moseq2_viz/scalars/util.py::drop_deprecated_scalars",
+      "moseq2_viz/scalars/util.py::generate_empty_feature_dict",
+      "moseq2_viz/scalars/util.py::get_scalar_map",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_format_provenance_conflicts",
+      "moseq2_viz/util.py::_provenance_policy_conflicts",
+      "moseq2_viz/util.py::_report",
+      "moseq2_viz/util.py::enforce_consistent_provenance"
+    ],
+    "original_files": [
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-invalid-mixed-unit-scalar",
+      "viz-fork-provenance-readers",
+      "viz-mapping-preserving-deprecation"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/62ec4d579dffe0712e2e5b7f8531a029b3a04f00",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "32fe617db2cfd160070c85bed1ae0dfc19d797d1",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_viz/scalars/util.py::get_scalar_map",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_provenance_policy_conflicts",
+      "moseq2_viz/util.py::enforce_consistent_provenance",
+      "moseq2_viz/util.py::provenance_from_model"
+    ],
+    "original_files": [
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-fork-provenance-readers"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/32fe617db2cfd160070c85bed1ae0dfc19d797d1",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+    "author": "AJ Mitchell",
+    "original_changed_symbols": [
+      "moseq2_viz/scalars/util.py::check_scalar_is_usable",
+      "moseq2_viz/scalars/util.py::compute_all_pdf_data",
+      "moseq2_viz/scalars/util.py::compute_mean_syll_scalar",
+      "moseq2_viz/scalars/util.py::drop_deprecated_scalars",
+      "moseq2_viz/scalars/util.py::get_scalar_triggered_average",
+      "moseq2_viz/scalars/util.py::process_scalars",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_provenance_policy_conflicts",
+      "moseq2_viz/util.py::assert_consistent_provenance",
+      "moseq2_viz/util.py::describe_provenance",
+      "moseq2_viz/util.py::enforce_consistent_provenance",
+      "moseq2_viz/util.py::provenance_from_model",
+      "moseq2_viz/util.py::read_pipeline_provenance"
+    ],
+    "original_files": [
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "tests/unit_tests/test_model_stat_correctness.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-invalid-mixed-unit-scalar",
+      "viz-fork-provenance-readers",
+      "viz-mapping-preserving-deprecation",
+      "viz-cross-package-contract-tests"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/fc2d3298943275f9c44b95ea0a1a1b0af3ffe45e",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-viz",
+    "commit": "b80192dc20353bf77c36610f315543b57afa908c",
+    "author": "AJ Mitchell",
+    "original_changed_symbols": [
+      "moseq2_viz/model/embed.py::run_2d_scalar_embedding",
+      "moseq2_viz/model/util.py::compute_behavioral_statistics",
+      "moseq2_viz/scalars/util.py::check_scalar_is_usable",
+      "moseq2_viz/scalars/util.py::convert_pxs_to_mm",
+      "moseq2_viz/scalars/util.py::scalars_to_dataframe",
+      "moseq2_viz/util.py::_json_mapping_from_h5",
+      "moseq2_viz/util.py::_provenance_candidates",
+      "moseq2_viz/util.py::_read_extraction_provenance",
+      "moseq2_viz/util.py::_read_flip_correction_policy",
+      "moseq2_viz/util.py::assert_consistent_provenance",
+      "moseq2_viz/util.py::check_scalar_is_usable",
+      "moseq2_viz/util.py::enforce_consistent_provenance",
+      "moseq2_viz/util.py::provenance_from_model",
+      "moseq2_viz/util.py::read_flip_correction_policy",
+      "moseq2_viz/util.py::read_pipeline_provenance",
+      "moseq2_viz/util.py::validate_scalar_dataframe",
+      "moseq2_viz/viz.py::position_plot",
+      "moseq2_viz/viz.py::scalar_plot"
+    ],
+    "original_files": [
+      "moseq2_viz/model/embed.py",
+      "moseq2_viz/model/util.py",
+      "moseq2_viz/scalars/util.py",
+      "moseq2_viz/util.py",
+      "moseq2_viz/viz.py",
+      "tests/unit_tests/test_provenance.py",
+      "tests/unit_tests/test_scalar_utils.py"
+    ],
+    "reviewed_topic_ids": [
+      "viz-integer-coordinates",
+      "viz-metadata-order",
+      "viz-invalid-mixed-unit-scalar",
+      "viz-fork-provenance-readers",
+      "viz-cross-package-contract-tests",
+      "viz-duplicated-conversion-design"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-viz/commit/b80192dc20353bf77c36610f315543b57afa908c",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "61861c3382d993cbba7522985d970de5c0f92ef9",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/gui/progress.py::find_progress",
+      "moseq2_app/gui/progress.py::get_extraction_progress"
+    ],
+    "original_files": [
+      "moseq2_app/gui/progress.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-latest-model",
+      "app-sidecar-paths"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/61861c3382d993cbba7522985d970de5c0f92ef9",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "313c9b5bf180fd2dbacbec071dba39b9c4472743",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/roi/validation.py::check_timestamp_error_percentage",
+      "moseq2_app/roi/validation.py::count_frames_with_small_areas",
+      "moseq2_app/roi/validation.py::count_nan_rows",
+      "moseq2_app/roi/validation.py::count_stationary_frames",
+      "moseq2_app/roi/validation.py::get_scalar_df",
+      "moseq2_app/roi/validation.py::print_validation_results"
+    ],
+    "original_files": [
+      "moseq2_app/roi/validation.py",
+      "tests/gui_tests/test_validation.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-qc-percentages",
+      "app-qc-stationary",
+      "app-qc-integer-timestamps",
+      "app-qc-small-area",
+      "app-sidecar-paths",
+      "app-pandas-any-axis"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/313c9b5bf180fd2dbacbec071dba39b9c4472743",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "94b84918a3c6d4a228f1bc8a8b0e4808532dd841",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/flip/train.py::batch_apply_pca",
+      "moseq2_app/flip/train.py::create_training_dataset",
+      "moseq2_app/flip/train.py::train_classifier"
+    ],
+    "original_files": [
+      "moseq2_app/flip/train.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-cv-pca-leakage",
+      "app-memory-display"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/94b84918a3c6d4a228f1bc8a8b0e4808532dd841",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/gui/widgets.py::update_clicked",
+      "moseq2_app/stat/controller.py::fill_missing_syllable_stats",
+      "moseq2_app/stat/controller.py::interactive_stat_helper",
+      "moseq2_app/stat/controller.py::interactive_syll_stats_grapher",
+      "moseq2_app/stat/view.py::format_trans_graph_edges",
+      "moseq2_app/stat/view.py::get_ci_vect_vectorized",
+      "moseq2_app/stat/view.py::get_difference_legend_items",
+      "moseq2_app/stat/view.py::get_legend_items",
+      "moseq2_app/stat/view.py::get_minmax_tp",
+      "moseq2_app/stat/view.py::plot_interactive_transition_graph",
+      "moseq2_app/viz/controller.py::generate_crowd_movie_divs",
+      "moseq2_app/viz/controller.py::get_crowd_movie_paths"
+    ],
+    "original_files": [
+      "moseq2_app/flip/widget.py",
+      "moseq2_app/gui/widgets.py",
+      "moseq2_app/stat/controller.py",
+      "moseq2_app/stat/view.py",
+      "moseq2_app/viz/controller.py",
+      "tests/gui_tests/test_stat_correctness.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-flip-frame-index",
+      "app-flip-final-frame",
+      "app-flip-overlap",
+      "app-flip-lifecycle",
+      "app-index-columns",
+      "app-transition-legend",
+      "app-foreign-movies",
+      "app-bootstrap-nans",
+      "viz-missing-scalar-observations",
+      "app-missing-heatmap",
+      "viz-bootstrap-rng-policy"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/c85b9a224fb6ffec656e8c9231ba0af63d28dd2c",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "36d40e098a5c4629116b7a4e233573218345bd5d",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/roi/validation.py::check_timestamp_error_percentage"
+    ],
+    "original_files": [
+      "moseq2_app/flip/widget.py",
+      "moseq2_app/roi/validation.py",
+      "tests/gui_tests/test_validation.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-flip-overlap",
+      "app-preview-exit",
+      "app-frame-drop-estimand"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/36d40e098a5c4629116b7a4e233573218345bd5d",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "bd103a987a0eaba50986b5cd2f992c2fb727809b",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/flip/widget.py::_describe_flip_state",
+      "moseq2_app/flip/widget.py::_sha256",
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::make_record",
+      "moseq2_app/flip/widget.py::read_flip_record",
+      "moseq2_app/flip/widget.py::write_flip_record"
+    ],
+    "original_files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-flip-lifecycle",
+      "app-journal-sentinel-custody"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/bd103a987a0eaba50986b5cd2f992c2fb727809b",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "f7af95d75c3b289b8a438783fda93b79fdb031fb",
+    "author": "Claude",
+    "original_changed_symbols": [
+      "moseq2_app/flip/widget.py::_app_version_and_sha",
+      "moseq2_app/flip/widget.py::_describe_flip_state",
+      "moseq2_app/flip/widget.py::_extraction_policy_snapshot",
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::check_flip_state",
+      "moseq2_app/flip/widget.py::make_record",
+      "moseq2_app/flip/widget.py::read_extraction_provenance"
+    ],
+    "original_files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-journal-sentinel-custody",
+      "app-extraction-app-flip-policy"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/f7af95d75c3b289b8a438783fda93b79fdb031fb",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "192921f1aff3ea58d3b1f268d71731ed222011d2",
+    "author": "AJ Mitchell",
+    "original_changed_symbols": [
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::checkpoint",
+      "moseq2_app/flip/widget.py::read_flip_record",
+      "moseq2_app/flip/widget.py::write_flip_record"
+    ],
+    "original_files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-flip-lifecycle",
+      "app-journal-sentinel-custody",
+      "app-fault-model-evidence"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/192921f1aff3ea58d3b1f268d71731ed222011d2",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  },
+  {
+    "repository": "Ctrl-Alt-Karma/moseq2-app",
+    "commit": "e0b85201226d03e15944473a734f71417698c31e",
+    "author": "AJ Mitchell",
+    "original_changed_symbols": [
+      "moseq2_app/flip/widget.py::_finalize_preview_pipe",
+      "moseq2_app/flip/widget.py::apply_flip_classifier",
+      "moseq2_app/flip/widget.py::check_extraction_flip_precondition",
+      "moseq2_app/flip/widget.py::check_flip_state",
+      "moseq2_app/flip/widget.py::read_extraction_provenance",
+      "moseq2_app/flip/widget.py::read_flip_record",
+      "moseq2_app/flip/widget.py::write_flip_record"
+    ],
+    "original_files": [
+      "moseq2_app/flip/widget.py",
+      "tests/controller_tests/test_flip_record.py"
+    ],
+    "reviewed_topic_ids": [
+      "app-flip-lifecycle",
+      "app-preview-finalization",
+      "app-preview-exit",
+      "app-journal-sentinel-custody",
+      "app-extraction-app-flip-policy",
+      "app-fault-model-evidence"
+    ],
+    "historical_url": "https://github.com/Ctrl-Alt-Karma/moseq2-app/commit/e0b85201226d03e15944473a734f71417698c31e",
+    "coverage_scope": "Every listed symbol reviewed in the topic context; topic status does not automatically confer proof on an entire commit."
+  }
+]

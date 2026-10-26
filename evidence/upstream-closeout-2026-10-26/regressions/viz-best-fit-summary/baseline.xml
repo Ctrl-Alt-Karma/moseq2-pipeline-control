@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.017" timestamp="2026-10-26T12:50:07.384914-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE4.viz-best-fit-summary.test_regression" name="test_best_fit_does_not_overwrite_median_summary_with_mean" time="0.737"><failure message="assert np.float64(0....6666666666666) == 0.0 ± 1.0e-12&#10;  &#10;  comparison failed&#10;  Obtained: 0.26666666666666666&#10;  Expected: 0.0 ± 1.0e-12">test_results/PATCH_PLAN_WAVE4/viz-best-fit-summary/test_regression.py:21: in test_best_fit_does_not_overwrite_median_summary_with_mean
+    assert info["duration distances median"]["synthetic-a"] == pytest.approx(0.)
+E   assert np.float64(0....6666666666666) == 0.0 ± 1.0e-12
+E     
+E     comparison failed
+E     Obtained: 0.26666666666666666
+E     Expected: 0.0 ± 1.0e-12</failure></testcase></testsuite></testsuites>

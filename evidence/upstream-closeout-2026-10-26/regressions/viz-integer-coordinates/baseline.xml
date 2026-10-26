@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.001" timestamp="2026-10-26T13:03:10.396660-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE5_CORRECTIONS.viz-integer-coordinates.test_regression" name="test_integer_coordinates_preserve_fractional_millimetres" time="0.713"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 4 / 4 (100%)&#10;Mismatch at indices:&#10; [0, 0]: 1 (ACTUAL), 1.6199130280845166 (DESIRED)&#10; [0, 1]: 1 (ACTUAL), 1.6624261125245987 (DESIRED)&#10; [1, 0]: 3 (ACTUAL), 3.2398260561690333 (DESIRED)&#10; [1, 1]: 3 (ACTUAL), 3.3248522250491974 (DESIRED)&#10;Max absolute difference among violations: 0.66242611&#10;Max relative difference among violations: 0.39846951&#10; ACTUAL: array([[1, 1],&#10;       [3, 3]])&#10; DESIRED: array([[1.619913, 1.662426],&#10;       [3.239826, 3.324852]])">test_results/PATCH_PLAN_WAVE5_CORRECTIONS/viz-integer-coordinates/test_regression.py:11: in test_integer_coordinates_preserve_fractional_millimetres
+    np.testing.assert_allclose(actual, convert_pxs_to_mm(coords.astype(float)))
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 4 / 4 (100%)
+E   Mismatch at indices:
+E    [0, 0]: 1 (ACTUAL), 1.6199130280845166 (DESIRED)
+E    [0, 1]: 1 (ACTUAL), 1.6624261125245987 (DESIRED)
+E    [1, 0]: 3 (ACTUAL), 3.2398260561690333 (DESIRED)
+E    [1, 1]: 3 (ACTUAL), 3.3248522250491974 (DESIRED)
+E   Max absolute difference among violations: 0.66242611
+E   Max relative difference among violations: 0.39846951
+E    ACTUAL: array([[1, 1],
+E          [3, 3]])
+E    DESIRED: array([[1.619913, 1.662426],
+E          [3.239826, 3.324852]])</failure></testcase></testsuite></testsuites>

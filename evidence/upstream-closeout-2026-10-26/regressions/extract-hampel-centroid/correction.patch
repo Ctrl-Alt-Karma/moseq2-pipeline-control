@@ -1,0 +1,62 @@
+commit 6212b47b32fec47de4c63cb808b287a042d80144
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:13:18 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:13:18 2026 -0400
+
+    fix: make centroid Hampel filtering translation invariant
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 93bf656c3fbdf4d976980a80f9dddaad99d8ffe1
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_extract/extract/proc.py b/moseq2_extract/extract/proc.py
+index b4d7b70..1e6ef1b 100644
+--- a/moseq2_extract/extract/proc.py
++++ b/moseq2_extract/extract/proc.py
+@@ -648,12 +648,12 @@ def feature_hampel_filter(features, centroid_hampel_span=None, centroid_hampel_s
+                                   (((centroid_hampel_span // 2, centroid_hampel_span // 2)),
+                                    (0, 0)),
+                                   'constant', constant_values = np.nan)
+-        for i in range(1):
++        for i in range(2):
+             vws = strided_app(padded_centroids[:, i], centroid_hampel_span, 1)
+             med = np.nanmedian(vws, axis=1)
+             mad = np.nanmedian(np.abs(vws - med[:, None]), axis=1)
+             vals = np.abs(features['centroid'][:, i] - med)
+-            fill_idx = np.where(vals > med + centroid_hampel_sig * mad)[0]
++            fill_idx = np.where(vals > centroid_hampel_sig * 1.4826 * mad)[0]
+             features['centroid'][fill_idx, i] = med[fill_idx]
+ 
+         padded_orientation = np.pad(features['orientation'],
+@@ -727,4 +727,4 @@ def model_smoother(features, ll=None, clips=(-300, -125)):
+         for k, v in features.items():
+             features[k][i] = (1 - smoother) * v[i + 1] + smoother * v[i]
+ 
+-    return features
+\ No newline at end of file
++    return features
+diff --git a/tests/unit_tests/test_closeout_extract_hampel_centroid.py b/tests/unit_tests/test_closeout_extract_hampel_centroid.py
+new file mode 100644
+index 0000000..f0b5877
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_extract_hampel_centroid.py
+@@ -0,0 +1,16 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pytest
++
++
++@pytest.mark.parametrize("axis", [0, 1])
++def test_hampel_centroid_filter_is_translation_invariant(axis):
++    from moseq2_extract.extract.proc import feature_hampel_filter
++    x = np.random.RandomState(7).normal(0, .3, (101, 2))
++    x[50, axis] = 12
++    near = feature_hampel_filter({"centroid": x.copy(), "orientation": np.zeros(101)},
++                                centroid_hampel_span=5, centroid_hampel_sig=3, angle_hampel_span=0)["centroid"]
++    far = feature_hampel_filter({"centroid": x.copy() + 200, "orientation": np.zeros(101)},
++                               centroid_hampel_span=5, centroid_hampel_sig=3, angle_hampel_span=0)["centroid"]
++    np.testing.assert_allclose(near, far - 200, atol=1e-12)
++    assert abs(near[50, axis]) < 2

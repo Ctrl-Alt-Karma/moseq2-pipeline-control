@@ -1,5 +1,33 @@
 # Review Log
 
+## 2026-10-26 — final upstream sweep and Owner termination
+
+The [final crosswalk](../evidence/upstream-closeout-2026-10-26/FINDING_CROSSWALK.md)
+reconciles all 40 nonmerge repair commits and the seeded/F-01–F-15 findings into
+91 topic rows: 51 submitted PR_READY changes, six ISSUE_ONLY_CONFIRMED reports,
+four ALREADY_UPSTREAM, nine UNCONFIRMED_HANDOFF, five OBSOLETE_OR_SUPERSEDED,
+fifteen PROJECT_CONTROL_ONLY and one REJECTED inference. These seven classes
+belong to this reconciliation; they do not overwrite the historical adjudication
+or pending-independent-verification markers below.
+
+Installed-wheel generated regressions establish red/green Builder software
+evidence, not independent scientific certification or full-stack equivalence.
+Every final changed packaged source matches its qualified wheel. App #291's
+20 expanded strict-xfail cases have three matches, two related-but-distinct cases
+and fifteen nonmatches; the seventeen nonmatches were not adopted as tasks.
+No upstream merge was performed.
+
+D-057 records the already-accepted area_mm upstream contribution/workflow.
+D-058 indexes the accepted transport and review-tool verifier results without
+pretending this Builder reexecuted those substantive conclusions. D-059 records
+Owner termination before human Tier-A / Tier-D review. Final production-validation
+PASS was never issued and this absence is not scientific FAIL.
+
+The earlier transport lessons remain standing project practice: authoritative
+rule/protocol/conformance artifacts travel together, and every manifested
+payload member is present or explicitly excluded. No old artifact, seal,
+scientific threshold or historical reviewer verdict was regenerated for tidiness.
+
 ## 2026-08-13 — final-kappa closeout and project lessons
 
 ### Final-kappa disposition

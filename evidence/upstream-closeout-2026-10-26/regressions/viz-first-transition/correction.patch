@@ -1,0 +1,62 @@
+commit ac381ddc2aacebf951c9f2df7e5f50fdea938b9d
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:16 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:16 2026 -0400
+
+    fix: count the first observed state transition
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 68ca6a34055987ff22f8651b4dca2aa254380c87
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/model/trans_graph.py b/moseq2_viz/model/trans_graph.py
+index 9a5d769..caf07f9 100644
+--- a/moseq2_viz/model/trans_graph.py
++++ b/moseq2_viz/model/trans_graph.py
+@@ -194,7 +194,8 @@ def get_transition_matrix(labels, max_syllable=100, normalize='bigram',
+ 
+         for v in tqdm(labels, disable=disable_output, desc='Computing bigram transition probabilities'):
+             # Get syllable transitions
+-            transitions = get_transitions(v)[0]
++            arr = np.asarray(v)
++            transitions = arr[np.r_[True, arr[1:] != arr[:-1]]] if arr.size else arr
+ 
+             trans_mat = n_gram_transition_matrix(transitions, n=2, max_label=max_syllable)
+             init_matrix.append(trans_mat)
+@@ -206,7 +207,8 @@ def get_transition_matrix(labels, max_syllable=100, normalize='bigram',
+         all_mats = []
+         for v in tqdm(labels, disable=disable_output, desc='Computing bigram transition probabilities'):
+             # Get syllable transitions
+-            transitions = get_transitions(v)[0]
++            arr = np.asarray(v)
++            transitions = arr[np.r_[True, arr[1:] != arr[:-1]]] if arr.size else arr
+ 
+             trans_mat = n_gram_transition_matrix(transitions, n=2, max_label=max_syllable) + smoothing
+ 
+@@ -673,4 +675,4 @@ def graph_transition_matrix(trans_mats, usages=None, groups=None,
+     for a in np.array(ax).flat:
+         a.axis('off')
+ 
+-    return fig, ax, pos
+\ No newline at end of file
++    return fig, ax, pos
+diff --git a/tests/unit_tests/test_closeout_viz_first_transition.py b/tests/unit_tests/test_closeout_viz_first_transition.py
+new file mode 100644
+index 0000000..5396876
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_first_transition.py
+@@ -0,0 +1,11 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pandas as pd
++import pytest
++
++
++def test_transition_matrix_counts_initial_transition():
++    from moseq2_viz.model.trans_graph import get_transition_matrix
++    actual = get_transition_matrix([np.array([0, 0, 1, 1, 0, 0])], max_syllable=2,
++                                   normalize=None, combine=True, smoothing=0)
++    np.testing.assert_array_equal(actual, [[0, 1], [1, 0]])

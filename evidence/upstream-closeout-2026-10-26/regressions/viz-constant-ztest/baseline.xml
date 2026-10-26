@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.905" timestamp="2026-10-26T12:37:52.546817-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE1.viz-constant-ztest.test_regression" name="test_ztest_equal_constants_are_not_nan" time="0.639"><failure message="AssertionError: &#10;Arrays are not equal&#10;&#10;nan location mismatch:&#10; ACTUAL: array([nan, nan])&#10; DESIRED: array([1., 1.])">test_results/PATCH_PLAN_WAVE1/viz-constant-ztest/test_regression.py:9: in test_ztest_equal_constants_are_not_nan
+    np.testing.assert_array_equal(ztest_vect(np.zeros((20, 2)), np.zeros((20, 2))), [1., 1.])
+E   AssertionError: 
+E   Arrays are not equal
+E   
+E   nan location mismatch:
+E    ACTUAL: array([nan, nan])
+E    DESIRED: array([1., 1.])</failure></testcase></testsuite></testsuites>

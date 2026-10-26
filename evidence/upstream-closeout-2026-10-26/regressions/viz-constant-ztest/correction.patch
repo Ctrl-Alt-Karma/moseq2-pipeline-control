@@ -1,0 +1,45 @@
+commit 7308cbf71eb011ae2905b92dcaba17b8bc7151ac
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:14:30 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:14:30 2026 -0400
+
+    fix: handle equal and unequal zero-variance z-test inputs
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 83e9cadebf1dbd0822c87750217c39ba1d59e3ac, 68ca6a34055987ff22f8651b4dca2aa254380c87
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/model/stat.py b/moseq2_viz/model/stat.py
+index 222b4d2..c4964fc 100644
+--- a/moseq2_viz/model/stat.py
++++ b/moseq2_viz/model/stat.py
+@@ -66,7 +66,10 @@ def ztest_vect(d1, d2):
+     std1 = d1.std(0)
+     std2 = d2.std(0)
+     std = np.sqrt(std1 ** 2 + std2 ** 2)
+-    return np.minimum(1.0, 2 * stats.norm.cdf(-np.abs(mu1 - mu2) / std))
++    delta = np.abs(mu1 - mu2)
++    z = np.divide(delta, std, out=np.zeros_like(delta, dtype=float), where=std > 0)
++    p = np.minimum(1.0, 2 * stats.norm.cdf(-z))
++    return np.where((std == 0) & (delta > 0), 0.0, p)
+ 
+ 
+ def bootstrap_group_means(df, group1, group2, statistic="usage", max_syllable=40):
+diff --git a/tests/unit_tests/test_closeout_viz_constant_ztest.py b/tests/unit_tests/test_closeout_viz_constant_ztest.py
+new file mode 100644
+index 0000000..d3241c0
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_constant_ztest.py
+@@ -0,0 +1,9 @@
++"""Focused current-upstream regression; generated arrays only."""
++import numpy as np
++import pandas as pd
++import pytest
++
++
++def test_ztest_equal_constants_are_not_nan():
++    from moseq2_viz.model.stat import ztest_vect
++    np.testing.assert_array_equal(ztest_vect(np.zeros((20, 2)), np.zeros((20, 2))), [1., 1.])

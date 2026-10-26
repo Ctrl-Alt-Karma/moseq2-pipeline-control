@@ -1,0 +1,64 @@
+commit c098468bb83dc0e796eff9b298bda3bc4af90d61
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:16:34 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:16:34 2026 -0400
+
+    fix: split validation data from the requested training boundary
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: bf8ca260631a7c67b9e383aafefe83abd2d50a82
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_model/helpers/data.py b/moseq2_model/helpers/data.py
+index 60c8f9d..789acc0 100644
+--- a/moseq2_model/helpers/data.py
++++ b/moseq2_model/helpers/data.py
+@@ -256,6 +256,9 @@ def get_training_data_splits(split_frac, data_dict):
+     validation_data (OrderedDict): the split percentage of the validation data
+     """
+ 
++    if not 0 < split_frac < 1:
++        raise ValueError('split_frac must be strictly between 0 and 1')
++
+     training_data = OrderedDict()
+     validation_data = OrderedDict()
+ 
+@@ -263,7 +266,7 @@ def get_training_data_splits(split_frac, data_dict):
+         # Splitting data by test set
+         training_X, testing_X = (
+             v[: int(len(v) * split_frac)],
+-            v[-int(len(v) * split_frac) :],
++            v[int(len(v) * split_frac) :],
+         )
+ 
+         # Setting training data key-value pair
+diff --git a/tests/unit_tests/test_closeout_model_training_split.py b/tests/unit_tests/test_closeout_model_training_split.py
+new file mode 100644
+index 0000000..292c8d9
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_model_training_split.py
+@@ -0,0 +1,21 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++
++
++@pytest.mark.parametrize("fraction", [.2, .8])
++def test_training_split_partitions_every_input_row(fraction):
++    from moseq2_model.helpers.data import get_training_data_splits
++    data = OrderedDict([("synthetic", np.arange(100)[:, None])])
++    train, validation = get_training_data_splits(fraction, data)
++    np.testing.assert_array_equal(np.concatenate([train["synthetic"], validation["synthetic"]]), data["synthetic"])
++    assert len(train["synthetic"]) == int(100 * fraction)
++
++
++@pytest.mark.parametrize("fraction", [0, 1, -.1, 1.1])
++def test_training_split_rejects_degenerate_fractions(fraction):
++    from moseq2_model.helpers.data import get_training_data_splits
++    with pytest.raises(ValueError):
++        get_training_data_splits(fraction, {"synthetic": np.arange(10)[:, None]})

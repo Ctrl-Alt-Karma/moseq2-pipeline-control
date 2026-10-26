@@ -1,0 +1,17 @@
+[
+  {
+    "path": "validation/protocols/R1_FINAL_SEAL_R1.json",
+    "original_git_blob": "5de59c6a5446cec5ec05faf62b53e91a5a672580",
+    "canonical_git_bytes_sha256": "ac0cde7d0f65fe6e74116c7d9b4fa69764b651194ddbfb45a9394dde3e7254e2"
+  },
+  {
+    "path": "validation/protocols/R1_FINAL_SEAL_ADDENDUM_R1.json",
+    "original_git_blob": "6ddf37a2fc753d909c5af044d07cfa8e74bbf30e",
+    "canonical_git_bytes_sha256": "437e1f5cd7a38d7d07ea605a5b553fdd9f98502a209d7b3a4d71a94f978c94a9"
+  },
+  {
+    "path": "validation/protocols/REAL_SESSION_PRODUCTION_VALIDATION_PROTOCOL_V4_R1.md",
+    "original_git_blob": "526164f4035764794a2e138116855a134e15ba9b",
+    "canonical_git_bytes_sha256": "e105ee3067e39e5d5ebd17809494236ef2bc82d493fbc22791fc53ff65375e39"
+  }
+]

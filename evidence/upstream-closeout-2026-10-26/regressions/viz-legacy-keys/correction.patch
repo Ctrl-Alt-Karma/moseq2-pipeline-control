@@ -1,0 +1,60 @@
+commit 2aadf69c3753315b58e900150f04d482b5ece0a2
+Author:     AJ Mitchell <ajmitchell@cheviot.lan>
+AuthorDate: Mon Oct 26 13:15:07 2026 -0400
+Commit:     AJ Mitchell <ajmitchell@cheviot.lan>
+CommitDate: Mon Oct 26 13:15:07 2026 -0400
+
+    fix: read legacy scalar mappings without eager array defaults
+    
+    Current-upstream synthetic regression: red at base, green with this focused correction.
+    
+    Historical-Repair: 645415411f3119e62b59fe79e26df504d23bbb1c
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+diff --git a/moseq2_viz/scalars/util.py b/moseq2_viz/scalars/util.py
+index 1e800f3..81cc1c1 100644
+--- a/moseq2_viz/scalars/util.py
++++ b/moseq2_viz/scalars/util.py
+@@ -156,7 +156,7 @@ def convert_legacy_scalars(old_features, force: bool = False, true_depth: float
+     copy_keys = ('width', 'length', 'area')
+     for key in copy_keys:
+         # first try to grab _px key, then default to old version name
+-        features[f'{key}_px'] = get(f'{key}_px', old_features, old_features[key])
++        features[f'{key}_px'] = old_features[f'{key}_px'] if f'{key}_px' in old_features else old_features[key]
+ 
+     if 'height_ave_mm' in old_features.keys():
+         features['height_ave_mm'] = old_features['height_ave_mm']
+@@ -688,4 +688,4 @@ def compute_syllable_position_heatmaps(scalar_df, syllable_key='labels (usage so
+     filtered_df = scalar_df[scalar_df[syllable_key].isin(syllables)]
+     hists = filtered_df.groupby(['group', 'uuid', 'SessionName', 'SubjectName', syllable_key]).apply(_compute_histogram)
+ 
+-    return hists
+\ No newline at end of file
++    return hists
+diff --git a/tests/unit_tests/test_closeout_viz_legacy_keys.py b/tests/unit_tests/test_closeout_viz_legacy_keys.py
+new file mode 100644
+index 0000000..5a7711f
+--- /dev/null
++++ b/tests/unit_tests/test_closeout_viz_legacy_keys.py
+@@ -0,0 +1,20 @@
++"""Focused upstream regression; synthetic fixtures only."""
++from types import SimpleNamespace
++from collections import OrderedDict
++import numpy as np
++import pytest
++import pandas as pd
++
++
++
++
++
++@pytest.mark.parametrize('pixel_keys', [False, True])
++def test_legacy_conversion_accepts_multirow_scalar_mappings(pixel_keys):
++    from moseq2_viz.scalars.util import convert_legacy_scalars
++    values = {key: np.ones(3) for key in ['centroid_x', 'centroid_y', 'height_ave', 'angle']}
++    for key in ['width', 'length', 'area']:
++        values[key + ('_px' if pixel_keys else '')] = np.array([3., 4., 5.])
++    result = convert_legacy_scalars(values, force=True)
++    for key in ['width', 'length', 'area']:
++        np.testing.assert_array_equal(result[key + '_px'], [3., 4., 5.])

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.019" timestamp="2026-10-26T13:03:04.497373-04:00" hostname="AJMLaptop"><testcase classname="test_results.PATCH_PLAN_WAVE5_CORRECTIONS.viz-legacy-area.test_regression" name="test_legacy_area_scales_quadratically_with_depth" time="0.735"><failure message="AssertionError: &#10;Not equal to tolerance rtol=1e-07, atol=0&#10;&#10;Mismatched elements: 1 / 1 (100%)&#10;Mismatch at index:&#10; [0]: 292.58705754946806 (ACTUAL), 585.1741150989361 (DESIRED)&#10;Max absolute difference among violations: 292.58705755&#10;Max relative difference among violations: 0.5&#10; ACTUAL: array([292.587058])&#10; DESIRED: array([585.174115])">test_results/PATCH_PLAN_WAVE5_CORRECTIONS/viz-legacy-area/test_regression.py:18: in test_legacy_area_scales_quadratically_with_depth
+    np.testing.assert_allclose(b['area_mm'], 4 * a['area_mm'])
+E   AssertionError: 
+E   Not equal to tolerance rtol=1e-07, atol=0
+E   
+E   Mismatched elements: 1 / 1 (100%)
+E   Mismatch at index:
+E    [0]: 292.58705754946806 (ACTUAL), 585.1741150989361 (DESIRED)
+E   Max absolute difference among violations: 292.58705755
+E   Max relative difference among violations: 0.5
+E    ACTUAL: array([292.587058])
+E    DESIRED: array([585.174115])</failure></testcase></testsuite></testsuites>
